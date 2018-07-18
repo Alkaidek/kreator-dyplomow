@@ -20,6 +20,15 @@
       <div class="bcg" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
         <img src="../../assets/img/3.png" />
       </div>
+      <div class="bcg" (click)="takeBcg('#fff9b6' , 1, 15, 15, 15, 0)">
+        <img src="../../assets/img/1.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#cefff5', 2, 20, 20, 20, 30)">
+        <img src="../../assets/img/2.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
+        <img src="../../assets/img/3.png" />
+      </div>
     </div>
   </div>
   <div id="fontContainter">
@@ -39,19 +48,55 @@
     <p>Dla kogo:</p>
     <input class="input" [value]="forWho" (input)="forWho = $event.target.value">
     <p>Za co:</p>
-    <input class="input" [value]="forWhat" (input)="forWhat = $event.target.value">
+    <textarea class="input" [value]="forWhat" (input)="forWhat = $event.target.value"> </textarea>
     <p>Stopka</p>
     <input class="input" [value]="footer" (input)="footer = $event.target.value">
   </div>
   <div id="detailsContainer">
     <h1>Dopracuj detale</h1>
     <br />
-    <p>Górny margines: </p>
-    <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider">
-    <p>Lewy margines: </p>
-    <input type="range" min="0" max="50" [value]="marginLeft" (input)="marginLeft = $event.target.value" class="slider">
-    <p>Prawy margines: </p>
-    <input type="range" min="0" max="50" [value]="marginRight" (input)="marginRight = $event.target.value" class="slider">
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Górny margines: </p>
+        <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
+      </div>
+      <div class="inputRight">
+        <p>Dolny margines: </p>
+        <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
+      </div>
+    </div>
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Lewy margines: </p>
+        <input type="range" min="0" max="50" [value]="marginLeft" (input)="marginLeft = $event.target.value" class="slider50">
+      </div>
+      <div class="inputRight">
+        <p>Prawy margines: </p>
+        <input type="range" min="0" max="50" [value]="marginRight" (input)="marginRight = $event.target.value" class="slider50">
+      </div>
+    </div>
+    <p>Wielkość czcionki główna: </p>
+    <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="slider" step="10">
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Wielkość czcionki  dla kogo: </p>
+        <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="slider50" step="10">
+      </div>
+      <div class="inputRight">
+        <p>Wielkość czcionki  za co: </p>
+        <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="slider50" step="10">
+      </div>
+    </div>
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Wielkość czcionki  podpis:</p>
+        <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="slider50" step="10">
+      </div>
+      <div class="inputRight">
+        <p>Wielkość czcionki  stopka: </p>
+        <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="slider50" step="10">
+      </div>
+    </div>
     <br/>
     <button (click)="setPadding()"> Zastosuj</button>
   </div>
@@ -60,32 +105,34 @@
 <div id="view">
   <div id="toPdf100">
     <img src="../../assets/img/{{imgSrc}}.png" id="imgPdf100"/>
-    <div id="pdfFor" [style]="">
-      <p class="largeTxt" id="largeTxt">
-        Dyplom dla:
+    <div id="pdfFor" >
+      <p id="pdfTxt">
+        <s id="largeTxt">
+          Dyplom dla:
+        </s>
         <br/>
         <br/>
         <s id="sFor">
           {{forWho}}
         </s>
         <br/>
-        <s>
+        <s id="txtForWhat">
           <br/>
           {{forWhat}}
         </s>
       </p>
       <div class="signature" id="sign">
-        <p class="left">
+        <p id="left">
         Dyrektor
         <br/>
         ................
         </p>
-        <p class="right">
+        <p id="right">
           Wychowawca
           <br/>
           .......................
         </p>
-        <p class="smallTxt">{{footer}}</p>
+        <p id="smallTxt">{{footer}}</p>
       </div>
     </div>
   </div>

@@ -72,8 +72,12 @@ $font3: 'Allura'
   box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
   transition: 0.3s
 
+.bcg
+  transform: scale(0.8,0.8)
+
+
 .bcg:hover, .fnt:hover
-  transform: scale(1.1,1.1)
+  transform: scale(0.99,0.99)
   box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
 
 img
@@ -130,17 +134,17 @@ h1
 @media (max-width: 1200px)
   h1
     font-size: 100%
-  .left, .right
+  #left, #right
     font-size: 80%
-  .smallTxt
+  #smallTxt
     font-size: 55%
 
 @media (max-height: 800px)
   h1
     font-size: 100%
-  .left, .right
+  #left, #right
     font-size: 80%
-  .smallTxt
+  #smallTxt
     font-size: 55%
 
 .input, .input:focus
@@ -157,24 +161,26 @@ h1
   box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
   border: 1px solid #ccc
 
-.sFor
+#sFor
   font-weight: bold
-  font-size: 100%
+  font-size: 250%
+
+#txtForWhat
+  font-size: 200%
 
 s
   text-decoration: none
   font-weight: normal
-  font-size: 90%
 
-.right, .left
+#right, #left
   width: 50%
   font-size: 150%
 
-.left
+#left
   float: left
   text-align: left
 
-.right
+#right
   float: right
   text-align: right
 
@@ -185,14 +191,14 @@ s
   position: absolute
   bottom: 0%
 
-.smallTxt
+#smallTxt
   font-weight: lighter
   font-size: 120%
 
-.largeTxt
+#largeTxt
   font-size: 300%
 
-.slider
+.slider, .slider50
   -webkit-appearance: none
   width: 60%
   height: 25px
@@ -203,10 +209,31 @@ s
   transition: opacity .2s
   margin-top: 1%
 
-.slider:hover
+.inputContainer
+  width: 100%
+  height: 90px
+
+.inputLeft, .inputRight
+  display: inline-block
+  float: left
+  width: 30%
+
+.inputLeft
+  margin-left: 20%
+  text-align: left
+
+.slider50
+  width: 95%
+  margin-left: 0px
+
+.inputRight input
+  float: right
+  margin-right: 0px
+
+.slider:hover, .slider50:hover
   opacity: 1
 
-.slider::-webkit-slider-thumb
+.slider::-webkit-slider-thumb, .slider50::-webkit-slider-thumb
   -webkit-appearance: none
   appearance: none
   width: 25px
@@ -215,7 +242,7 @@ s
   cursor: pointer
   border-radius: 0px
 
-.slider::-moz-range-thumb
+.slider::-moz-range-thumb, .slider50::-moz-range-thumb
   appearance: none
   -moz-appearance: none
   width: 25px
@@ -225,16 +252,17 @@ s
   border-radius: 0px
 
 ::-webkit-scrollbar
-  width: 20px
+  width: 10px
 
 ::-webkit-scrollbar-track
   box-shadow: inset 0 0 5px grey
-  border-radius: 10px
+  border-radius: 0px
 
 
 ::-webkit-scrollbar-thumb
-  background: red
-  border-radius: 10px
+  background: #3aaaff
+  border-radius: 0px
 
 ::-webkit-scrollbar-thumb:hover
-  background: #b30000
+  background: #216c9e
+

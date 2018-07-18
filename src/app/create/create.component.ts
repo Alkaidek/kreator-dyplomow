@@ -16,6 +16,8 @@ export class CreateComponent implements OnInit {
   paddingTop = 0;
   marginLeft = 15;
   marginRight = 15;
+  arrayFontSize = [300, 150, 250, 120, 200]
+  bottom = 0;
 
   ngOnInit() {
   }
@@ -42,7 +44,15 @@ export class CreateComponent implements OnInit {
   setPadding() {
     document.getElementById('pdfFor').style.marginLeft =  this.marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = this.marginRight + '%';
-    document.getElementById('largeTxt').style.paddingTop = this.paddingTop + '%';
+    document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
+    document.getElementById('sign').style.bottom = this.bottom + 'px';
+    //txt
+    document.getElementById('smallTxt').style.fontSize =  this.arrayFontSize[3] + '%';
+    document.getElementById('largeTxt').style.fontSize = this.arrayFontSize[0] + '%';
+    document.getElementById('left').style.fontSize = this.arrayFontSize[1] + '%';
+    document.getElementById('right').style.fontSize = this.arrayFontSize[1] + '%';
+    document.getElementById('sFor').style.fontSize = this.arrayFontSize[2] + '%';
+    document.getElementById('txtForWhat').style.fontSize = this.arrayFontSize[4] + '%';
 
   }
 }
