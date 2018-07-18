@@ -18,6 +18,8 @@ export class CreateComponent implements OnInit {
   marginRight = 15;
   arrayFontSize = [300, 150, 250, 120, 200]
   bottom = 0;
+  fontColor;
+  arrayFontName = ['smallTxt', 'largeTxt', 'left', 'right', 'sFor', 'txtForWhat'];
 
   ngOnInit() {
   }
@@ -53,6 +55,8 @@ export class CreateComponent implements OnInit {
     document.getElementById('right').style.fontSize = this.arrayFontSize[1] + '%';
     document.getElementById('sFor').style.fontSize = this.arrayFontSize[2] + '%';
     document.getElementById('txtForWhat').style.fontSize = this.arrayFontSize[4] + '%';
-
+    for ( let i = 0; i < this.arrayFontName.length; i++ ) {
+      document.getElementById(this.arrayFontName[i]).style.color = this.fontColor;
+    }
   }
 }
