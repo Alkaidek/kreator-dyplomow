@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
+import {getLocaleMonthNames} from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -12,7 +13,7 @@ export class CreateComponent implements OnInit {
   forWho = '';
   forWhat = '';
   imgSrc = '0';
-  footer = 'Kielce, dnia 17.07.2018r.';
+  footer = 'Kielce, dnia ';
   paddingTop = 0;
   marginLeft = 15;
   marginRight = 15;
@@ -23,6 +24,17 @@ export class CreateComponent implements OnInit {
   pdfFormat;
 
   ngOnInit() {
+    const date = new Date();
+    let day = '' + date.getDate();
+    const month = date.getMonth() + 1;
+    let monthStr = '';
+    if ( date.getDate() < 10) {
+      day = '0' + day;
+    }
+    if ( (date.getMonth() )  < 10) {
+      monthStr = '0' + month;
+    }
+    this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
     document.getElementById('toPdf100').style.background = n;
@@ -41,11 +53,11 @@ export class CreateComponent implements OnInit {
     if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
       this.pdfFormat = 'a4';
     } else {
-      this.pdfFormat = 'a5';
+      this.pdfFormat = 'a4';
     }
     console.log(document.getElementById('create').offsetWidth);
     console.log(document.getElementById('create').offsetHeight);
-    const elementToPrint = document.getElementById('toPdf100');
+    const elementToPrint = document.getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', this.pdfFormat);
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
@@ -66,5 +78,9 @@ export class CreateComponent implements OnInit {
     for ( let i = 0; i < this.arrayFontName.length; i++ ) {
       document.getElementById(this.arrayFontName[i]).style.color = this.fontColor;
     }
+  }
+  getWandH() {
+    console.log(document.getElementById('toPdf100').offsetWidth);
+    console.log(document.getElementById('toPdf100').offsetHeight);
   }
 }

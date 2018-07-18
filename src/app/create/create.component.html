@@ -1,5 +1,41 @@
+<div id="viewFix">
+  <div id="toPdf100Fix">
+    <img src="../../assets/img/{{imgSrc}}.png" id="imgPdf100Fix"/>
+    <div id="pdfForFix" >
+      <p id="pdfTxtFix">
+        <s id="largeTxtFix">
+          Dyplom dla:
+        </s>
+        <br/>
+        <br/>
+        <s id="sFor">
+        </s>
+        <br/>
+        <s id="txtForWhat">
+          <br/>
+          {{forWhat}}
+        </s>
+      </p>
+      <div class="signature" id="sign">
+        <p id="left">
+          Dyrektor
+          <br/>
+          ................
+        </p>
+        <p id="right">
+          Wychowawca
+          <br/>
+          .......................
+        </p>
+        <p id="smallTxt">{{footer}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div id="create" xmlns="">
-  <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
+   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll">

@@ -9,12 +9,20 @@ $font3: 'Allura'
   min-height: 100%
   height: 100%
 
-#view
+#view, #viewFix
   width: 50%
   text-align: center
   font-family: Arial
   position: fixed
   margin: auto
+
+#viewFix
+  min-height: 100%
+  height: 100%
+  width: 50%
+  margin-left: 25%
+  background-color: red
+  z-index: -15
 
 #imgPdf
   position: absolute
@@ -30,18 +38,34 @@ $font3: 'Allura'
   position: absolute
   left: 0px
   top: 0px
-  margin-left: 22%
-  width: 66%
-  height: 90%
+  margin-left: 5%
+  width: 595px
+  height: 842px
   margin-top: 5%
 
 #toPdf100
-  margin-left: 22%
-  width: 66%
-  height: 90%
+  margin-left: 5%
+  width: 595px
+  height: 842px
   margin-top: 5%
   background-color: #ffbdc6
   font-weight: bold
+
+#imgPdf100Fix
+  position: absolute
+  left: 0px
+  top: 0px
+  width: 595px
+  height: 842px
+  margin-left: 15%
+
+#toPdf100Fix
+  width: 595px
+  height: 842px
+  margin-left: 15%
+  background-color: #ffbdc6
+  font-weight: bold
+
 
 #create
   max-width: 50%
@@ -213,7 +237,7 @@ s
 
 .slider, .slider50, input[type=color]
   -webkit-appearance: none
-  width: 60%
+  width: 80%
   height: 25px
   background: #d3d3d3
   outline: none
@@ -229,11 +253,11 @@ s
 .inputLeft, .inputRight
   display: inline-block
   float: left
-  width: 30%
+  width: 40%
   text-align: center
 
 .inputLeft
-  margin-left: 20%
+  margin-left: 10%
 
 .slider50
   width: 95%
