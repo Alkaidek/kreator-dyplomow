@@ -1,0 +1,185 @@
+$margin: 6.66666666667%
+$font1: 'Abril Fatface'
+$font2: 'Aladin'
+$font3: 'Allura'
+
+#create, #view
+  display: inline-block
+  float: left
+  min-height: 100%
+  height: 100%
+
+#view
+  width: 40%
+  text-align: center
+  font-family: Arial
+  position: fixed
+
+#imgPdf
+  position: absolute
+  left: 0px
+  top: 0px
+  width: 50%
+  height: 55%
+  margin-left: 25%
+  margin-right: 25%
+  margin-top: 25%
+
+#imgPdf100
+  position: absolute
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+
+#toPdf100
+  width: 100%
+  background-color: red
+  height: 100%
+  font-weight: bold
+
+#create
+  width: 60%
+  padding-top: 1%
+
+#toPdf
+  width: 50%
+  background-color: red
+  height: 55%
+  margin-left: 25%
+  margin-right: 25%
+  margin-top: 25%
+  font-weight: bold
+
+#pdfFor
+  margin-left: 15%
+  margin-right: 15%
+  padding-top: 15%
+  overflow: hidden
+  white-space: pre-wrap
+  height: 84%
+  position: relative
+
+.bcg, .fnt
+  text-align: center
+  display: inline-block
+  float: left
+  height: 90%
+  max-height: 60%
+  width: 19%
+  margin-left: $margin
+  margin-right: $margin
+  border: black 1px solid
+  box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
+  transition: 0.3s
+
+.bcg:hover, .fnt:hover
+  transform: scale(1.2,1.2)
+  box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
+
+img
+  width: 100%
+  height: 100%
+
+#bcg1
+  background: #fff9b6
+
+#bcg2
+  background-color: #cefff5
+
+#bcg3
+  background-color: #fbdfff
+
+#font1
+  font-family: $font1
+
+#font1
+  font-family: $font2
+
+#font3
+  font-family: $font3
+
+#bcgContainter, #txtContainter, #fontContainter
+  background-color: #f1ffff
+  text-align: center
+
+#bcgContainter
+  height: 55%
+
+#fontContainter
+  height: 30%
+
+#txtContainter
+  padding-bottom: 5%
+
+#font1, #font2, #font3
+  height: 30%
+  background-color: white
+
+h1
+  font-size: 200%
+
+@media (max-width: 1200px)
+  h1
+    font-size: 100%
+  .left, .right
+    font-size: 80%
+  .smallTxt
+    font-size: 55%
+
+@media (max-height: 800px)
+  h1
+    font-size: 100%
+  .left, .right
+    font-size: 80%
+  .smallTxt
+    font-size: 55%
+
+.input, .input:focus
+  width: 30%
+  padding: 12px
+  border: 1px solid #ccc
+  border-radius: 10px
+  resize: vertical
+  transition: 0.3s
+  box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
+  text-align: center
+
+.input:focus
+  box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
+  border: 1px solid #ccc
+
+.sFor
+  font-weight: bold
+  font-size: 100%
+
+s
+  text-decoration: none
+  font-weight: normal
+  font-size: 90%
+
+.right, .left
+  width: 50%
+  font-size: 150%
+
+.left
+  float: left
+  text-align: left
+
+.right
+  float: right
+  text-align: right
+
+.signature
+  float: bottom
+  height: 25%
+  width: 100%
+  position: absolute
+  bottom: 0px
+
+.smallTxt
+  font-weight: lighter
+  font-size: 120%
+
+.largeTxt
+  font-size: 300%

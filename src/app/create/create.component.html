@@ -1,0 +1,71 @@
+<div id="create" xmlns="">
+  <div id="bcgContainter">
+    <h1>Wybierz tło dyplomu</h1>
+    <div class="bcg" id="bcg1" (click)="takeBcg('#fff9b6' , 1, 15, 15, 15, 0)">
+      <img src="../../assets/img/1.png" />
+    </div>
+    <div class="bcg" id="bcg2" (click)="takeBcg('#cefff5', 2, 20, 20, 20, 30)">
+      <img src="../../assets/img/2.png" />
+    </div>
+    <div class="bcg" id="bcg3" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
+      <img src="../../assets/img/3.png" />
+    </div>
+  </div>
+  <div id="fontContainter">
+    <h1>Wybierz czcionkę</h1>
+    <div class="fnt" id="font1" (click)="takeFont('Abril Fatface')">
+      <h1>Dyplom</h1>
+    </div>
+    <div class="fnt" id="font2" (click)="takeFont('Aladin')">
+      <h1>Dyplom</h1>
+    </div>
+    <div class="fnt" id="font3" (click)="takeFont('Allura')">
+      <h1>Dyplom</h1>
+    </div>
+  </div>
+  <div id="txtContainter">
+    <h1>Wpisz dane</h1>
+    <p>Dla kogo:</p>
+    <input class="input" [value]="forWho" (input)="forWho = $event.target.value">
+    <p>Za co:</p>
+    <input class="input" [value]="forWhat" (input)="forWhat = $event.target.value">
+    <p>Stopka</p>
+    <input class="input" [value]="footer" (input)="footer = $event.target.value">
+  </div>
+  <button (click)="generatePdf()">Generuj Dyplomik! tutut</button>
+</div>
+<div id="view">
+  <div id="toPdf100">
+    <img src="../../assets/img/{{imgSrc}}.png" id="imgPdf100"/>
+    <div id="pdfFor">
+      <p class="largeTxt">
+        Dyplom dla:
+        <br/>
+        <br/>
+        <s id="sFor">
+          {{forWho}}
+        </s>
+        <br/>
+        <s>
+          <br/>
+          {{forWhat}}
+        </s>
+      </p>
+      <div class="signature" id="sign">
+        <p class="left">
+        Dyrektor
+        <br/>
+        ................
+        </p>
+        <p class="right">
+          Wychowawca
+          <br/>
+          .......................
+        </p>
+        <p class="smallTxt">{{footer}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
