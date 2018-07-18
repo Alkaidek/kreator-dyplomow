@@ -38,7 +38,7 @@ export class CreateComponent implements OnInit {
   }
   generatePdf() {
     const elementToPrint = document.getElementById('toPdf100');
-    const pdf = new jsPDF('p', 'pt', 'a4');
+    const pdf = new jsPDF('pc', 'pc', 'a4');
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
     });
