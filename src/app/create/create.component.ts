@@ -20,6 +20,7 @@ export class CreateComponent implements OnInit {
   bottom = 0;
   fontColor;
   arrayFontName = ['smallTxt', 'largeTxt', 'left', 'right', 'sFor', 'txtForWhat'];
+  pdfFormat;
 
   ngOnInit() {
   }
@@ -37,8 +38,15 @@ export class CreateComponent implements OnInit {
     document.getElementById('toPdf100').style.fontFamily = n;
   }
   generatePdf() {
+    if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
+      this.pdfFormat = 'a4';
+    } else {
+      this.pdfFormat = 'a5';
+    }
+    console.log(document.getElementById('create').offsetWidth);
+    console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100');
-    const pdf = new jsPDF('pc', 'pc', 'a4');
+    const pdf = new jsPDF('p', 'pt', this.pdfFormat);
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
     });

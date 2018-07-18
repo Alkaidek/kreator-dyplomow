@@ -10,12 +10,11 @@ $font3: 'Allura'
   height: 100%
 
 #view
-  width: 40%
+  width: 50%
   text-align: center
   font-family: Arial
   position: fixed
-  overflow-y: scroll
-  overflow-x: scroll
+  margin: auto
 
 #imgPdf
   position: absolute
@@ -31,17 +30,21 @@ $font3: 'Allura'
   position: absolute
   left: 0px
   top: 0px
-  width: 595px
-  height: 842px
+  margin-left: 22%
+  width: 66%
+  height: 90%
+  margin-top: 5%
 
 #toPdf100
-  width: 595px
-  height: 842px
+  margin-left: 22%
+  width: 66%
+  height: 90%
+  margin-top: 5%
   background-color: #ffbdc6
   font-weight: bold
 
 #create
-  width: 60%
+  max-width: 50%
   padding-top: 1%
 
 #toPdf
@@ -135,13 +138,19 @@ img
 h1
   font-size: 200%
 
-@media (max-width: 1200px)
+@media (max-width: 1210px)
   h1
     font-size: 100%
   #left, #right
     font-size: 80%
   #smallTxt
     font-size: 55%
+  .inputContainer
+    font-size: 70%
+  .inputLeft
+    display: none
+  p
+    font-size: 70%
 
 @media (max-height: 800px)
   h1
@@ -292,6 +301,5 @@ button:hover
   position: fixed
   z-index: 5
   bottom: 0px
-  margin-left: 15%
+  margin-left: 10%
   margin-bottom: 0px
-
