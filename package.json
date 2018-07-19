@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "angular-firebase": "^1.1.4",
+    "angularfire2": "5.0.0-rc.9",
     "core-js": "^2.5.4",
     "jspdf": "^1.4.1",
     "rxjs": "^6.0.0",

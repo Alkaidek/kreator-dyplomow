@@ -1,6 +1,6 @@
 <div id="viewFix">
   <div id="toPdf100Fix">
-    <img src="../../assets/img/{{imgSrc}}.png" id="imgPdf100Fix"/>
+    <img src="../../assets/img/{{imgSrcFix}}.png" id="imgPdf100Fix"/>
     <div id="pdfForFix" >
       <p id="pdfTxtFix">
         <s id="largeTxtFix">
@@ -40,32 +40,8 @@
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll">
-      <div class="bcg" id="bcg1" (click)="takeBcg('#fff9b6' , 1, 15, 15, 15, 0)">
-        <img src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" id="bcg2" (click)="takeBcg('#cefff5', 2, 20, 20, 20, 30)">
-        <img src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" id="bcg3" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
-        <img src="../../assets/img/3.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fff9b6' , 1, 15, 15, 15, 0)">
-        <img src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#cefff5', 2, 20, 20, 20, 30)">
-        <img src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
-        <img src="../../assets/img/3.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fff9b6' , 1, 15, 15, 15, 0)">
-        <img src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#cefff5', 2, 20, 20, 20, 30)">
-        <img src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fbdfff', 3, 15, 15, 20, 0)">
-        <img src="../../assets/img/3.png" />
+      <div *ngFor = "let bcg of bcgTemp; index as i" class="bcg" id="bcg{{ i+1 }}" (click)="takeBcg('#fff9b6' , i, 15, 15, 15, 0)">
+        <img id="img{{i}}" src="{{bcg}}" />
       </div>
     </div>
   </div>
@@ -143,7 +119,7 @@
 </div>
 <div id="view">
   <div id="toPdf100">
-    <img src="../../assets/img/{{imgSrc}}.png" id="imgPdf100"/>
+    <img src="{{imgSrc}}" id="imgPdf100"/>
     <div id="pdfFor" >
       <p id="pdfTxt">
         <s id="largeTxt">

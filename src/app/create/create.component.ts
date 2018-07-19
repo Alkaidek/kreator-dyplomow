@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {getLocaleMonthNames} from '@angular/common';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 @Component({
   selector: 'app-create',
@@ -9,10 +10,23 @@ import {getLocaleMonthNames} from '@angular/common';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  bcgTemp: any;
+  tmpImg: any;
+  constructor(db: AngularFireDatabase ) {
+    db.list('/bcgTemplate').valueChanges().subscribe(bcgTemp => {
+      this.bcgTemp = bcgTemp;
+      console.log(this.bcgTemp);
+      for ( let n = 0; n < 2; n++) {
+        console.log('dsadsa dsada das' + this.bcgTemp[n]);
+        this.tmpImg = document.getElementById('img' + n ) as HTMLImageElement;
+        this.tmpImg.src = this.bcgTemp[n];
+      }
+    });
+  }
   forWho = '';
   forWhat = '';
-  imgSrc = '0';
+  imgSrc = '../../assets/img/0.png';
+  imgSrcFix = '0';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
   marginLeft = 15;
@@ -35,10 +49,12 @@ export class CreateComponent implements OnInit {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
+    //alert('Małe tła wypełniane z firebase, tło #toPdf100Fix z plików assets/img!!!!');
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
     document.getElementById('toPdf100').style.background = n;
-    this.imgSrc = '' + imgSrc;
+    this.imgSrc = this.bcgTemp[imgSrc];
+    this.imgSrcFix = '' + (imgSrc + 1);
     document.getElementById('pdfFor').style.marginLeft =  marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = marginRight + '%';
     document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
