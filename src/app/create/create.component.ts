@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
-import {getLocaleMonthNames} from '@angular/common';
 import {AngularFireDatabase} from 'angularfire2/database';
 
 @Component({
@@ -11,22 +10,23 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class CreateComponent implements OnInit {
 
   bcgTemp: any;
-  tmpImg: any;
+  template: any;
+  database: AngularFireDatabase;
+  imgPath = document.getElementById('imgPdf100Fix') as HTMLImageElement;
   constructor(db: AngularFireDatabase ) {
-    db.list('/bcgTemplate').valueChanges().subscribe(bcgTemp => {
+    db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
       console.log(this.bcgTemp);
-      for ( let n = 0; n < 2; n++) {
-        console.log('dsadsa dsada das' + this.bcgTemp[n]);
-        this.tmpImg = document.getElementById('img' + n ) as HTMLImageElement;
-        this.tmpImg.src = this.bcgTemp[n];
+      for ( let n = 0; n < bcgTemp.length; n++) {
+        console.log('Data: ' + n + ' : ' + this.bcgTemp[n]);
+        this.imgPath.src = this.bcgTemp[n];
       }
     });
   }
   forWho = '';
   forWhat = '';
   imgSrc = '../../assets/img/0.png';
-  imgSrcFix = '0';
+  imgSrcFix = '1';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
   marginLeft = 15;
@@ -53,7 +53,7 @@ export class CreateComponent implements OnInit {
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
     document.getElementById('toPdf100').style.background = n;
-    this.imgSrc = this.bcgTemp[imgSrc];
+    this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = '' + (imgSrc + 1);
     document.getElementById('pdfFor').style.marginLeft =  marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = marginRight + '%';
@@ -71,6 +71,7 @@ export class CreateComponent implements OnInit {
   takeFont(n) {
     document.getElementById('toPdf100').style.fontFamily = n;
     document.getElementById('toPdf100Fix').style.fontFamily = n;
+    //const base64 = toDataUrl();
   }
   generatePdf() {
     //if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
@@ -81,9 +82,18 @@ export class CreateComponent implements OnInit {
     console.log(document.getElementById('create').offsetWidth);
     console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
-    const pdf = new jsPDF('p', 'pt', 'a4');
+    const pdf = new jsPDF('p', 'pt', 'a4', true);
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
+    });
+  }
+  getDate(n) {
+    this.database.list('/template').valueChanges().subscribe(template => {
+      this.template = template;
+      console.log(this.template);
+      for ( let h = 0; h < template.length; h++) {
+        console.log('Data: ' + h + ' : ' + this.bcgTemp[h]);
+      }
     });
   }
   setPadding() {
@@ -94,8 +104,8 @@ export class CreateComponent implements OnInit {
     //txt
     document.getElementById('smallTxt').style.fontSize =  this.arrayFontSize[3] + '%';
     document.getElementById('largeTxt').style.fontSize = this.arrayFontSize[0] + '%';
-    document.getElementById('left').style.fontSize = this.arrayFontSize[1] + '%';
-    document.getElementById('right').style.fontSize = this.arrayFontSize[1] + '%';
+    document.getElementById('left').style.fontSize = (this.arrayFontSize[1] - 30) + '%';
+    document.getElementById('right').style.fontSize = (this.arrayFontSize[1] - 30) + '%';
     document.getElementById('sFor').style.fontSize = this.arrayFontSize[2] + '%';
     document.getElementById('txtForWhat').style.fontSize = this.arrayFontSize[4] + '%';
     for ( let i = 0; i < this.arrayFontName.length; i++ ) {

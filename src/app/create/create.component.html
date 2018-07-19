@@ -40,8 +40,32 @@
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll">
-      <div *ngFor = "let bcg of bcgTemp; index as i" class="bcg" id="bcg{{ i+1 }}" (click)="takeBcg('#fff9b6' , i, 15, 15, 15, 0)">
-        <img id="img{{i}}" src="{{bcg}}" />
+      <div class="bcg" id="bcg1" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
+        <img id="img0" src="../../assets/img/1.png" />
+      </div>
+      <div class="bcg" id="bcg2" (click)="takeBcg('#cefff5',1, 20, 20, 20, 30)">
+        <img id="img1" src="../../assets/img/2.png" />
+      </div>
+      <div class="bcg" id="bcg3" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
+        <img id="img2" src="../../assets/img/3.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
+        <img id="img3" src="../../assets/img/1.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#cefff5', 1, 20, 20, 20, 30)">
+        <img src="../../assets/img/2.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
+        <img src="../../assets/img/3.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
+        <img src="../../assets/img/1.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#cefff5', 1, 20, 20, 20, 30)">
+        <img src="../../assets/img/2.png" />
+      </div>
+      <div class="bcg" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
+        <img src="../../assets/img/3.png" />
       </div>
     </div>
   </div>
@@ -119,7 +143,7 @@
 </div>
 <div id="view">
   <div id="toPdf100">
-    <img src="{{imgSrc}}" id="imgPdf100"/>
+    <img src="../../assets/img/{{imgSrcFix}}.png" id="imgPdf100"/>
     <div id="pdfFor" >
       <p id="pdfTxt">
         <s id="largeTxt">
