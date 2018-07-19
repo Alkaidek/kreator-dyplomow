@@ -43,22 +43,29 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfFor').style.marginRight = marginRight + '%';
     document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
     document.getElementById('sign').style.bottom = bottom + 'px';
+    //ukryty pdf
+    document.getElementById('toPdf100Fix').style.background = n;
+    document.getElementById('pdfForFix').style.marginLeft =  marginLeft + '%';
+    document.getElementById('pdfForFix').style.marginRight = marginRight + '%';
+    document.getElementById('pdfForFix').style.paddingTop = paddingTop + '%';
+    document.getElementById('signFix').style.bottom = bottom + 'px';
     this.marginRight = marginRight;
     this.marginLeft = marginLeft;
   }
   takeFont(n) {
     document.getElementById('toPdf100').style.fontFamily = n;
+    document.getElementById('toPdf100Fix').style.fontFamily = n;
   }
   generatePdf() {
-    if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
-      this.pdfFormat = 'a4';
-    } else {
-      this.pdfFormat = 'a4';
-    }
+    //if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
+    //  this.pdfFormat = 'a4';
+    //} else {
+    //  this.pdfFormat = 'a4';
+    //}
     console.log(document.getElementById('create').offsetWidth);
     console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
-    const pdf = new jsPDF('p', 'pt', this.pdfFormat);
+    const pdf = new jsPDF('p', 'pt', 'a4');
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
     });
@@ -78,6 +85,23 @@ export class CreateComponent implements OnInit {
     for ( let i = 0; i < this.arrayFontName.length; i++ ) {
       document.getElementById(this.arrayFontName[i]).style.color = this.fontColor;
     }
+  }
+  setPaddingFix() {
+    document.getElementById('pdfForFix').style.marginLeft =  this.marginLeft + '%';
+    document.getElementById('pdfForFix').style.marginRight = this.marginRight + '%';
+    document.getElementById('pdfTxtFix').style.paddingTop = this.paddingTop + '%';
+    document.getElementById('signFix').style.bottom = this.bottom + 'px';
+    //txt
+    document.getElementById('smallTxtFix').style.fontSize =  this.arrayFontSize[3] + '%';
+    document.getElementById('largeTxtFix').style.fontSize = this.arrayFontSize[0] + '%';
+    document.getElementById('leftFix').style.fontSize = this.arrayFontSize[1] + '%';
+    document.getElementById('rightFix').style.fontSize = this.arrayFontSize[1] + '%';
+    document.getElementById('sForFix').style.fontSize = this.arrayFontSize[2] + '%';
+    document.getElementById('txtForWhatFix').style.fontSize = this.arrayFontSize[4] + '%';
+    for ( let i = 0; i < this.arrayFontName.length; i++ ) {
+      document.getElementById(this.arrayFontName[i] + 'Fix').style.color = this.fontColor;
+    }
+    this.setPadding();
   }
   getWandH() {
     console.log(document.getElementById('toPdf100').offsetWidth);

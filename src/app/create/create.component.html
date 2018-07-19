@@ -8,26 +8,27 @@
         </s>
         <br/>
         <br/>
-        <s id="sFor">
+        <s id="sForFix">
+          {{forWho}}
         </s>
         <br/>
-        <s id="txtForWhat">
+        <s id="txtForWhatFix">
           <br/>
           {{forWhat}}
         </s>
       </p>
-      <div class="signature" id="sign">
-        <p id="left">
+      <div class="signature" id="signFix">
+        <p id="leftFix">
           Dyrektor
           <br/>
           ................
         </p>
-        <p id="right">
+        <p id="rightFix">
           Wychowawca
           <br/>
           .......................
         </p>
-        <p id="smallTxt">{{footer}}</p>
+        <p id="smallTxtFix">{{footer}}</p>
       </div>
     </div>
   </div>
@@ -137,7 +138,7 @@
     <p>Kolor czcionki:</p>
     <input type="color" id="colorPicker" [value]="fontColor" (input)="fontColor = $event.target.value" >
     <br/>
-    <button (click)="setPadding()"> Zastosuj</button>
+    <button (click)="setPaddingFix()"> Zastosuj</button>
   </div>
 </div>
 <div id="view">
