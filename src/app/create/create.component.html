@@ -1,6 +1,6 @@
 <div id="viewFix">
   <div id="toPdf100Fix">
-    <img src="../../assets/img/{{imgSrcFix}}.png" id="imgPdf100Fix"/>
+    <img src="{{base64}}" id="imgPdf100Fix"/>
     <div id="pdfForFix" >
       <p id="pdfTxtFix">
         <s id="largeTxtFix">
@@ -32,9 +32,8 @@
       </div>
     </div>
   </div>
+  <canvas id="imgCanvas"> </canvas>
 </div>
-
-
 <div id="create" xmlns="">
    <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
   <div id="bcgContainter">

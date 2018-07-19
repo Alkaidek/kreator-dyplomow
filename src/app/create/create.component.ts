@@ -12,17 +12,17 @@ export class CreateComponent implements OnInit {
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
-  imgPath = document.getElementById('imgPdf100Fix') as HTMLImageElement;
   constructor(db: AngularFireDatabase ) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
       console.log(this.bcgTemp);
       for ( let n = 0; n < bcgTemp.length; n++) {
         console.log('Data: ' + n + ' : ' + this.bcgTemp[n]);
-        this.imgPath.src = this.bcgTemp[n];
       }
     });
   }
+  base64Tmp = '';
+  base64 = '../../assets/img/3.png';
   forWho = '';
   forWhat = '';
   imgSrc = '../../assets/img/0.png';
@@ -52,6 +52,7 @@ export class CreateComponent implements OnInit {
     //alert('Małe tła wypełniane z firebase, tło #toPdf100Fix z plików assets/img!!!!');
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
+    this.base64Tmp = imgSrc;
     document.getElementById('toPdf100').style.background = n;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = '' + (imgSrc + 1);
@@ -60,6 +61,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
     document.getElementById('sign').style.bottom = bottom + 'px';
     //ukryty pdf
+    this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
     document.getElementById('toPdf100Fix').style.background = n;
     document.getElementById('pdfForFix').style.marginLeft =  marginLeft + '%';
     document.getElementById('pdfForFix').style.marginRight = marginRight + '%';
@@ -71,14 +73,18 @@ export class CreateComponent implements OnInit {
   takeFont(n) {
     document.getElementById('toPdf100').style.fontFamily = n;
     document.getElementById('toPdf100Fix').style.fontFamily = n;
-    //const base64 = toDataUrl();
+
+  }
+  doItPlease() {
+    const can = document.getElementById('imgCanvas') as HTMLCanvasElement;
+    const img = document.getElementById('imgPdf100Fix') as HTMLImageElement;
+    const ctx = can.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const encodedBase = can.toDataURL();
+    this.base64 = encodedBase;
   }
   generatePdf() {
-    //if (document.getElementById('create').offsetWidth > 900 ||  document.getElementById('create').offsetHeight > 950) {
-    //  this.pdfFormat = 'a4';
-    //} else {
-    //  this.pdfFormat = 'a4';
-    //}
+    this.base64 = this.bcgTemp[this.base64Tmp];
     console.log(document.getElementById('create').offsetWidth);
     console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
