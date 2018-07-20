@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create',
@@ -8,7 +9,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
   styleUrls: ['./create.component.sass']
 })
 export class CreateComponent implements OnInit {
-
+  public isCollapsed = [true, true, true, true, true];
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
@@ -83,16 +84,7 @@ export class CreateComponent implements OnInit {
     const encodedBase = can.toDataURL();
     this.base64 = encodedBase;
   }
-  getBase64formUrl() {
-    const canvas = document.getElementById('imgCanvas') as HTMLCanvasElement  ;
-    const img = document.getElementById('imgPdf100Fix') as HTMLImageElement;
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL('img/png');
-    return dataURL.replace('/^data:image/\(png|jpg);base64,/', '');
-  }
+
   getDataFromDatabase() {
     this.db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
@@ -100,9 +92,6 @@ export class CreateComponent implements OnInit {
     });
   }
   generatePdf() {
-    this.setPaddingFix();
-    //console.log(document.getElementById('create').offsetWidth);
-    //console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
     pdf.internal.scaleFactor = 1;
@@ -125,14 +114,12 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfFor').style.marginRight = this.marginRight + '%';
     document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
     document.getElementById('sign').style.bottom = this.bottom + 'px';
-    //txt
   }
   setPaddingFix() {
     document.getElementById('pdfForFix').style.marginLeft =  this.marginLeft + '%';
     document.getElementById('pdfForFix').style.marginRight = this.marginRight + '%';
     document.getElementById('pdfTxtFix').style.paddingTop = this.paddingTop + '%';
     document.getElementById('signFix').style.bottom = this.bottom + 'px';
-    //txt
     this.setPadding();
   }
   getWandH() {
