@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
     });
   }
   base64Tmp = '';
-  base64 = '../../assets/img/3.png';
+  base64 = '';
   forWho = '';
   forWhat = '';
   imgSrc = '../../assets/img/0.png';
@@ -49,7 +49,6 @@ export class CreateComponent implements OnInit {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
-    //alert('Małe tła wypełniane z firebase, tło #toPdf100Fix z plików assets/img!!!!');
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
     this.base64Tmp = imgSrc;
@@ -83,10 +82,20 @@ export class CreateComponent implements OnInit {
     const encodedBase = can.toDataURL();
     this.base64 = encodedBase;
   }
+  getBase64formUrl() {
+    const canvas = document.getElementById('imgCanvas') as HTMLCanvasElement  ;
+    const img = document.getElementById('imgPdf100Fix') as HTMLImageElement;
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const dataURL = canvas.toDataURL('img/png');
+    return dataURL.replace('/^data:image/\(png|jpg);base64,/', '');
+  }
   generatePdf() {
     this.base64 = this.bcgTemp[this.base64Tmp];
-    console.log(document.getElementById('create').offsetWidth);
-    console.log(document.getElementById('create').offsetHeight);
+    //console.log(document.getElementById('create').offsetWidth);
+    //console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
     pdf.addHTML(elementToPrint, () => {
