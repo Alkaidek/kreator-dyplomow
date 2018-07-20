@@ -12,26 +12,26 @@ export class CreateComponent implements OnInit {
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
-  constructor(db: AngularFireDatabase ) {
+  constructor(private db: AngularFireDatabase ) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
-      console.log(this.bcgTemp);
-      for ( let n = 0; n < bcgTemp.length; n++) {
-        console.log('Data: ' + n + ' : ' + this.bcgTemp[n]);
-      }
     });
   }
   base64Tmp = '';
   base64 = '';
   forWho = '';
   forWhat = '';
+  sign1 = 'Dyrektor';
+  sign2 = 'Wychowawca';
+  title = 'Dyplom';
   imgSrc = '../../assets/img/0.png';
-  imgSrcFix = '1';
+  imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
   marginLeft = 15;
   marginRight = 15;
-  arrayFontSize = [300, 150, 250, 120, 200]
+  arrayFontSize = [300, 150, 250, 120, 200];
+  arrayFontColor = ['black', 'black', 'black', 'black', 'black'];
   bottom = 0;
   fontColor;
   arrayFontName = ['smallTxt', 'largeTxt', 'left', 'right', 'sFor', 'txtForWhat'];
@@ -54,7 +54,8 @@ export class CreateComponent implements OnInit {
     this.base64Tmp = imgSrc;
     document.getElementById('toPdf100').style.background = n;
     this.imgSrc = '' + (imgSrc + 1);
-    this.imgSrcFix = '' + (imgSrc + 1);
+    this.imgSrcFix = this.bcgTemp[imgSrc];
+    console.log(this.bcgTemp[imgSrc]);
     document.getElementById('pdfFor').style.marginLeft =  marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = marginRight + '%';
     document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
@@ -92,14 +93,22 @@ export class CreateComponent implements OnInit {
     const dataURL = canvas.toDataURL('img/png');
     return dataURL.replace('/^data:image/\(png|jpg);base64,/', '');
   }
+  getDataFromDatabase() {
+    this.db.list('/base64').valueChanges().subscribe(bcgTemp => {
+      this.bcgTemp = bcgTemp;
+      console.log(this.bcgTemp);
+    });
+  }
   generatePdf() {
-    this.base64 = this.bcgTemp[this.base64Tmp];
+    this.setPaddingFix();
     //console.log(document.getElementById('create').offsetWidth);
     //console.log(document.getElementById('create').offsetHeight);
     const elementToPrint = document.getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
+    pdf.internal.scaleFactor = 1;
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
+      pdf.autoPrint();
     });
   }
   getDate(n) {
@@ -117,15 +126,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
     document.getElementById('sign').style.bottom = this.bottom + 'px';
     //txt
-    document.getElementById('smallTxt').style.fontSize =  this.arrayFontSize[3] + '%';
-    document.getElementById('largeTxt').style.fontSize = this.arrayFontSize[0] + '%';
-    document.getElementById('left').style.fontSize = (this.arrayFontSize[1] - 30) + '%';
-    document.getElementById('right').style.fontSize = (this.arrayFontSize[1] - 30) + '%';
-    document.getElementById('sFor').style.fontSize = this.arrayFontSize[2] + '%';
-    document.getElementById('txtForWhat').style.fontSize = this.arrayFontSize[4] + '%';
-    for ( let i = 0; i < this.arrayFontName.length; i++ ) {
-      document.getElementById(this.arrayFontName[i]).style.color = this.fontColor;
-    }
   }
   setPaddingFix() {
     document.getElementById('pdfForFix').style.marginLeft =  this.marginLeft + '%';
@@ -133,15 +133,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfTxtFix').style.paddingTop = this.paddingTop + '%';
     document.getElementById('signFix').style.bottom = this.bottom + 'px';
     //txt
-    document.getElementById('smallTxtFix').style.fontSize =  this.arrayFontSize[3] + '%';
-    document.getElementById('largeTxtFix').style.fontSize = this.arrayFontSize[0] + '%';
-    document.getElementById('leftFix').style.fontSize = this.arrayFontSize[1] + '%';
-    document.getElementById('rightFix').style.fontSize = this.arrayFontSize[1] + '%';
-    document.getElementById('sForFix').style.fontSize = this.arrayFontSize[2] + '%';
-    document.getElementById('txtForWhatFix').style.fontSize = this.arrayFontSize[4] + '%';
-    for ( let i = 0; i < this.arrayFontName.length; i++ ) {
-      document.getElementById(this.arrayFontName[i] + 'Fix').style.color = this.fontColor;
-    }
     this.setPadding();
   }
   getWandH() {

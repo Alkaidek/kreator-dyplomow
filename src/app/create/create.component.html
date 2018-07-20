@@ -1,70 +1,48 @@
 <div id="viewFix">
   <div id="toPdf100Fix">
-    <img src="{{base64}}" id="imgPdf100Fix"/>
+    <img src="{{imgSrcFix}}" id="imgPdf100Fix"/>
     <div id="pdfForFix" >
       <p id="pdfTxtFix">
-        <s id="largeTxtFix">
-          Dyplom dla:
+        <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" >
+          {{title}}
         </s>
         <br/>
         <br/>
-        <s id="sForFix">
+        <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
           {{forWho}}
         </s>
         <br/>
-        <s id="txtForWhatFix">
+        <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
           <br/>
           {{forWhat}}
         </s>
       </p>
-      <div class="signature" id="signFix">
+      <div class="signature" id="signFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
         <p id="leftFix">
-          Dyrektor
+          {{sign1}}
           <br/>
           ................
         </p>
-        <p id="rightFix">
-          Wychowawca
+        <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
           <br/>
           .......................
         </p>
-        <p id="smallTxtFix">{{footer}}</p>
+        <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
       </div>
     </div>
   </div>
   <canvas id="imgCanvas"> </canvas>
 </div>
 <div id="create" xmlns="">
-   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
+  <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll">
-      <div class="bcg" id="bcg1" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
-        <img id="img0" src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" id="bcg2" (click)="takeBcg('#cefff5',1, 20, 20, 20, 30)">
-        <img id="img1" src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" id="bcg3" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
-        <img id="img2" src="../../assets/img/3.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
-        <img id="img3" src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#cefff5', 1, 20, 20, 20, 30)">
-        <img src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
-        <img src="../../assets/img/3.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fff9b6' , 0, 15, 15, 15, 0)">
-        <img src="../../assets/img/1.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#cefff5', 1, 20, 20, 20, 30)">
-        <img src="../../assets/img/2.png" />
-      </div>
-      <div class="bcg" (click)="takeBcg('#fbdfff', 2, 15, 15, 20, 0)">
-        <img src="../../assets/img/3.png" />
+      <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i, 15, 15, 15, 0)">
+        <img id="img{{i}}" src="{{tmp}}" />
       </div>
     </div>
   </div>
@@ -82,16 +60,47 @@
   </div>
   <div id="txtContainter">
     <h1>Wpisz dane</h1>
-    <p>Dla kogo:</p>
-    <input class="input" [value]="forWho" (input)="forWho = $event.target.value">
+    <p>Nazwa: </p>
+    <!-- 0 -->
+    <input class="input" [value]="title" (input)="title = $event.target.value">
+    <br />
+    <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
+    <br />
+    <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" >
+    <p>Dla kogo: </p>
+    <!-- 2 -->
+    <textarea class="input" [value]="forWho" (input)="forWho = $event.target.value"> </textarea>
+    <br />
+    <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
+    <br />
+    <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" >
     <p>Za co:</p>
+    <!-- 4 -->
     <textarea class="input" [value]="forWhat" (input)="forWhat = $event.target.value"> </textarea>
+    <br />
+    <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10">
+    <br />
+    <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" >
     <p>Stopka</p>
+    <!-- 3 -->
     <input class="input" [value]="footer" (input)="footer = $event.target.value">
+    <br />
+    <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10">
+    <br />
+    <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" >
+    <p>Podpisy:</p>
+    <!-- 1 -->
+    <input class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value">
+    <input class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value">
+    <br />
+    <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10">
+    <br />
+    <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" >
   </div>
   <div id="detailsContainer">
     <h1>Dopracuj detale</h1>
     <br />
+    <button (click)="setPaddingFix()"> Zastosuj</button>
     <div class="inputContainer">
       <div class="inputLeft">
         <p>Górny margines: </p>
@@ -142,35 +151,37 @@
 </div>
 <div id="view">
   <div id="toPdf100">
-    <img src="../../assets/img/{{imgSrcFix}}.png" id="imgPdf100"/>
+    <img src="{{imgSrcFix}}" id="imgPdf100"/>
     <div id="pdfFor" >
       <p id="pdfTxt">
-        <s id="largeTxt">
-          Dyplom dla:
+        <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
+          {{title}}
         </s>
         <br/>
         <br/>
-        <s id="sFor">
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
           {{forWho}}
         </s>
         <br/>
-        <s id="txtForWhat">
+        <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
           <br/>
           {{forWhat}}
         </s>
       </p>
       <div class="signature" id="sign">
-        <p id="left">
-        Dyrektor
+        <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+        {{sign1}}
         <br/>
         ................
         </p>
-        <p id="right">
-          Wychowawca
+        <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
           <br/>
           .......................
         </p>
-        <p id="smallTxt">{{footer}}</p>
+        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
       </div>
     </div>
   </div>

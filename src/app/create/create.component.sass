@@ -10,6 +10,7 @@ $font3: 'Allura'
   height: 100%
 
 #create
+  width: 60%
   max-width: 60%
   padding-top: 1%
 
@@ -27,7 +28,7 @@ $font3: 'Allura'
   min-height: 100%
   height: 100%
   width: 50%
-  margin-left: 25%
+  margin-left: 50%
   background-color: red
   z-index: 15
   opacity: 1
@@ -199,6 +200,8 @@ h1
   transition: 0.3s
   box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
   text-align: center
+  margin-left: 2px
+  margin-right: 2px
 
 .input:focus
   box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
@@ -244,7 +247,7 @@ s
 #largeTxt, #largeTxtFix
   font-size: 300%
 
-.slider, .slider50, input[type=color]
+.slider, .slider50, input[type=color], .sliderInput
   -webkit-appearance: none
   width: 80%
   height: 25px
@@ -272,14 +275,18 @@ s
   width: 95%
   margin-left: 0px
 
+.sliderInput
+  margin-left: 0px
+  width: 35%
+
 .inputRight input
   float: right
   margin-right: 0px
 
-.slider:hover, .slider50:hover, input[type=color]:hover
+.slider:hover, .slider50:hover, input[type=color]:hover, .sliderInput:hover
   opacity: 1
 
-.slider::-webkit-slider-thumb, .slider50::-webkit-slider-thumb
+.slider::-webkit-slider-thumb, .slider50::-webkit-slider-thumb, .sliderInput::-webkit-slider-thumb
   -webkit-appearance: none
   appearance: none
   width: 25px
@@ -288,7 +295,7 @@ s
   cursor: pointer
   border-radius: 0px
 
-.slider::-moz-range-thumb, .slider50::-moz-range-thumb
+.slider::-moz-range-thumb, .slider50::-moz-range-thumb, .sliderInput::-moz-range-thumb
   appearance: none
   -moz-appearance: none
   width: 25px
@@ -345,3 +352,6 @@ button:hover
 
 #colorPicker
   width: 30%
+
+input[type=color]
+  width: 35%
