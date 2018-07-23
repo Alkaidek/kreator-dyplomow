@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FirebaseListObservable} from 'angularfire2/database-deprecated';
 
 @Component({
   selector: 'app-create',
@@ -13,11 +14,15 @@ export class CreateComponent implements OnInit {
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
+  firebase: FirebaseListObservable<any[]>;
   constructor(private db: AngularFireDatabase ) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
+    //db.list('/template').remove(this.schoolNr + '' + this.name);
   }
+  schoolNr = '29';
+  name = 'MateuszB';
   base64Tmp = '';
   base64 = '';
   forWho = '';
@@ -32,11 +37,51 @@ export class CreateComponent implements OnInit {
   marginLeft = 15;
   marginRight = 15;
   arrayFontSize = [300, 150, 250, 120, 200];
+  arrayFontName = ['title', 'forWho', 'forWhat', 'footer', 'sign1', 'sign2'];
+  arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right'];
+  arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
   arrayFontColor = ['black', 'black', 'black', 'black', 'black'];
   bottom = 0;
   fontColor;
-  arrayFontName = ['smallTxt', 'largeTxt', 'left', 'right', 'sFor', 'txtForWhat'];
   pdfFormat;
+  postsWithArray = [
+    {
+      nameOfTemplate: '',
+      paddingTop: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      bottom: 0,
+      forWho: '',
+      forWhat: '',
+      sign1: '',
+      sign2: '',
+      title: '',
+      footer: '',
+      arrayFontSize: [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      arrayFontColor: [
+        'black',
+        'black',
+        'black',
+        'black',
+        'black'
+      ],
+      arrayFontFamili: [
+        'Arial',
+        'Arial',
+        'Arial',
+        'Arial',
+        'Arial',
+        'Arial'
+      ],
+      img: ''
+    }
+  ];
 
   ngOnInit() {
     const date = new Date();
@@ -99,6 +144,7 @@ export class CreateComponent implements OnInit {
       pdf.save('generaterdDiploma.pdf');
       pdf.autoPrint();
     });
+    this.createArrayToSend(0);
   }
   getDate(n) {
     this.database.list('/template').valueChanges().subscribe(template => {
@@ -125,5 +171,47 @@ export class CreateComponent implements OnInit {
   getWandH() {
     console.log(document.getElementById('toPdf100').offsetWidth);
     console.log(document.getElementById('toPdf100').offsetHeight);
+  }
+  createArrayToSend(n) {
+    this.postsWithArray[n].nameOfTemplate = 'abc';
+    this.postsWithArray[n].paddingTop = this.paddingTop;
+    this.postsWithArray[n].marginLeft = this.marginLeft;
+    this.postsWithArray[n].marginRight = this.marginRight;
+    this.postsWithArray[n].bottom = this.bottom;
+    this.postsWithArray[n].forWho = this.forWho;
+    this.postsWithArray[n].forWhat = this.forWhat;
+    this.postsWithArray[n].sign1 = this.sign1;
+    this.postsWithArray[n].sign2 = this.sign2;
+    this.postsWithArray[n].title = this.title;
+    this.postsWithArray[n].footer = this.footer;
+    for (let i = 0; i < this.arrayFontSize.length; i++ ) {
+      this.postsWithArray[n].arrayFontSize[i] = this.arrayFontSize[i];
+    }
+    for (let i = 0; i < this.arrayFontColor.length; i++ ) {
+      this.postsWithArray[n].arrayFontColor[i] = this.arrayFontColor[i];
+    }
+    for (let i = 0; i < this.arrayFontFamili.length; i++ ) {
+      this.postsWithArray[n].arrayFontFamili[i] = this.arrayFontFamili[i];
+    }
+    this.postsWithArray[n].img = this.base64Tmp;
+    console.log(this.postsWithArray);
+    let length = 0;
+    this.db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
+      this.template = template;
+      console.log(this.template);
+      length = this.template.length;
+    });
+    setTimeout( () => {
+      this.db.database.ref('/template').child(this.schoolNr + '' + this.name).child('' +  length ).set(this.postsWithArray[0]);
+      alert('Twój szoblon został zapisany! Otrzył on równiez unikatowy numer który nalezy zapamiętać: ' + length);
+    }, 2000 );
+  }
+  takeFontForEle(font, element) {
+    document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
+    document.getElementById(this.arrayFontNameId[element] + 'Fix').style.fontFamily = font;
+    this.arrayFontFamili[element] = font;
+    if (element === 4) {
+      this.takeFontForEle(font, 5);
+    }
   }
 }

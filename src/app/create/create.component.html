@@ -47,21 +47,9 @@
       </div>
     </div>
   </div>
-  <div id="fontContainter">
-    <h1>Wybierz czcionkę</h1>
-    <div class="fnt" id="font1" (click)="takeFont('Abril Fatface')">
-      <h1>Dyplom</h1>
-    </div>
-    <div class="fnt" id="font2" (click)="takeFont('Aladin')">
-      <h1>Dyplom</h1>
-    </div>
-    <div class="fnt" id="font3" (click)="takeFont('Allura')">
-      <h1>Dyplom</h1>
-    </div>
-  </div>
   <div id="txtContainter">
     <h1>Wpisz dane</h1>
-    <p>Nazwa: </p>
+    <p><b>Nazwa: </b></p>
     <!-- 0 -->
     <input class="input" [value]="title" (input)="title = $event.target.value" >
     <p>
@@ -76,10 +64,22 @@
           <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
           <br />
           <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 0)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 0)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 0)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p>Dla kogo: </p>
+    <p><b>Dla kogo: </b></p>
     <!-- 2 -->
     <textarea class="input" [value]="forWho" (input)="forWho = $event.target.value"> </textarea>
     <p>
@@ -94,10 +94,22 @@
           <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
           <br />
           <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 1)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 1)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 1)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p>Za co:</p>
+    <p><b>Za co:</b></p>
     <!-- 4 -->
     <textarea class="input" [value]="forWhat" (input)="forWhat = $event.target.value"> </textarea>
     <p>
@@ -112,10 +124,22 @@
           <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10">
           <br />
           <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 2)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 2)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 2)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p>Stopka</p>
+    <p><b>Stopka</b></p>
     <!-- 3 -->
     <input class="input" [value]="footer" (input)="footer = $event.target.value">
     <p>
@@ -130,10 +154,22 @@
           <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10">
           <br />
           <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 3)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 3)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 3)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p>Podpisy:</p>
+    <p><b>Podpisy:</b></p>
     <!-- 1 -->
     <input class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value">
     <input class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value">
@@ -149,8 +185,32 @@
           <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10">
           <br />
           <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 4)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 4)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 4)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div id="fontContainter">
+    <h1>Wybierz czcionkę</h1>
+    <div class="fnt" id="font1" (click)="takeFont('Abril Fatface')">
+      <h1>Dyplom</h1>
+    </div>
+    <div class="fnt" id="font2" (click)="takeFont('Aladin')">
+      <h1>Dyplom</h1>
+    </div>
+    <div class="fnt" id="font3" (click)="takeFont('Allura')">
+      <h1>Dyplom</h1>
     </div>
   </div>
   <div id="detailsContainer">
