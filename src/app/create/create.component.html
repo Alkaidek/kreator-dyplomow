@@ -37,8 +37,12 @@
     </div>
   </div>
 </div>
+<!--
+  <img id="logoContainer" src="../../assets/img/logoDYPLOMACOR2.png" />
+-->
 <div id="create" xmlns="">
   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
+  <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll">
@@ -46,6 +50,14 @@
         <img id="img{{i}}" src="{{tmp}}"  />
       </div>
     </div>
+  </div>
+  <div id="bcgContainter2" [style.display]="bool">
+    <h1>Wybierz swój szablon</h1>
+    <select id="selectTemplate">
+      <option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</option>
+    </select>
+    <br/>
+    <button (click)="setUserData()">Zatwierdz!</button>
   </div>
   <div id="txtContainter">
     <h1>Wpisz dane</h1>

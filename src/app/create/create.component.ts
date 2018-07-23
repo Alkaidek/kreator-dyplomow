@@ -14,16 +14,26 @@ export class CreateComponent implements OnInit {
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
-  firebase: FirebaseListObservable<any[]>;
+  length: Number;
+  bool = 'block';
   constructor(private db: AngularFireDatabase ) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
+    db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
+      this.template = template;
+      console.log(this.template);
+      this.length = this.template.length;
+      if ( this.length === 0) {
+        this.bool = 'none';
+      }
+    });
     //db.list('/template').remove(this.schoolNr + '' + this.name);
   }
+  lastValue = 1;
   schoolNr = '29';
   name = 'MateuszB';
-  base64Tmp = '';
+  base64Tmp = '1';
   base64 = '';
   forWho = '';
   forWhat = '';
@@ -51,34 +61,9 @@ export class CreateComponent implements OnInit {
       marginLeft: 0,
       marginRight: 0,
       bottom: 0,
-      forWho: '',
-      forWhat: '',
-      sign1: '',
-      sign2: '',
-      title: '',
-      footer: '',
-      arrayFontSize: [
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      arrayFontColor: [
-        'black',
-        'black',
-        'black',
-        'black',
-        'black'
-      ],
-      arrayFontFamili: [
-        'Arial',
-        'Arial',
-        'Arial',
-        'Arial',
-        'Arial',
-        'Arial'
-      ],
+      arrayFontSize: [0, 0, 0, 0, 0],
+      arrayFontColor: ['black', 'black', 'black', 'black', 'black'],
+      arrayFontFamili: ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'],
       img: ''
     }
   ];
@@ -97,11 +82,18 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
   }
   takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
+    console.log('ten sie podnosi: ' + imgSrc);
+    console.log('a ten opada: ' + this.lastValue);
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
+    this.lastValue = imgSrc;
+    document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
+    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 2px solid';
     this.base64Tmp = imgSrc;
     document.getElementById('toPdf100').style.background = n;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
-    console.log(this.bcgTemp[imgSrc]);
+    //console.log(this.bcgTemp[imgSrc]);
     document.getElementById('pdfFor').style.marginLeft =  marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = marginRight + '%';
     document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
@@ -144,7 +136,6 @@ export class CreateComponent implements OnInit {
       pdf.save('generaterdDiploma.pdf');
       pdf.autoPrint();
     });
-    this.createArrayToSend(0);
   }
   getDate(n) {
     this.database.list('/template').valueChanges().subscribe(template => {
@@ -173,17 +164,21 @@ export class CreateComponent implements OnInit {
     console.log(document.getElementById('toPdf100').offsetHeight);
   }
   createArrayToSend(n) {
-    this.postsWithArray[n].nameOfTemplate = 'abc';
+    const date = new Date();
+    let day = '' + date.getDate();
+    const month = date.getMonth() + 1;
+    let monthStr = '';
+    if ( date.getDate() < 10) {
+      day = '0' + day;
+    }
+    if ( (date.getMonth() )  < 10) {
+      monthStr = '0' + month;
+    }
+    this.postsWithArray[n].nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  date.getHours() + ':' + date.getMinutes();
     this.postsWithArray[n].paddingTop = this.paddingTop;
     this.postsWithArray[n].marginLeft = this.marginLeft;
     this.postsWithArray[n].marginRight = this.marginRight;
     this.postsWithArray[n].bottom = this.bottom;
-    this.postsWithArray[n].forWho = this.forWho;
-    this.postsWithArray[n].forWhat = this.forWhat;
-    this.postsWithArray[n].sign1 = this.sign1;
-    this.postsWithArray[n].sign2 = this.sign2;
-    this.postsWithArray[n].title = this.title;
-    this.postsWithArray[n].footer = this.footer;
     for (let i = 0; i < this.arrayFontSize.length; i++ ) {
       this.postsWithArray[n].arrayFontSize[i] = this.arrayFontSize[i];
     }
@@ -195,15 +190,13 @@ export class CreateComponent implements OnInit {
     }
     this.postsWithArray[n].img = this.base64Tmp;
     console.log(this.postsWithArray);
-    let length = 0;
-    this.db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
-      this.template = template;
-      console.log(this.template);
-      length = this.template.length;
-    });
-    setTimeout( () => {
-      this.db.database.ref('/template').child(this.schoolNr + '' + this.name).child('' +  length ).set(this.postsWithArray[0]);
-      alert('Twój szoblon został zapisany! Otrzył on równiez unikatowy numer który nalezy zapamiętać: ' + length);
+        setTimeout( () => {
+      this.db.database
+        .ref('/template')
+        .child(this.schoolNr + '' + this.name)
+        .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  date.getHours() + ':' + date.getMinutes() )
+        .set(this.postsWithArray[0]);
+      alert('Twój szoblon został zapisany! Otrzył on równiez unikatowy numer, który nalezy zapamiętać: ' + this.length);
     }, 2000 );
   }
   takeFontForEle(font, element) {
@@ -212,6 +205,27 @@ export class CreateComponent implements OnInit {
     this.arrayFontFamili[element] = font;
     if (element === 4) {
       this.takeFontForEle(font, 5);
+    }
+  }
+  setUserData() {
+    const select = document.getElementById('selectTemplate') as HTMLSelectElement;
+    console.log(select.selectedIndex);
+    this.paddingTop = this.template[select.selectedIndex].paddingTop;
+    this.marginLeft = this.template[select.selectedIndex].marginLeft;
+    this.marginRight = this.template[select.selectedIndex].marginRight;
+    this.bottom = this.template[select.selectedIndex].bottom;
+    this.setPaddingFix();
+    this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex].img];
+    for (let i = 0; i < this.template[select.selectedIndex].arrayFontSize.length; i++ ) {
+      console.log(' ' + this.template[select.selectedIndex].arrayFontSize[i]);
+      this.arrayFontSize[i] = this.template[select.selectedIndex].arrayFontSize[i];
+    }
+    for (let i = 0; i < this.template[select.selectedIndex].arrayFontColor.length; i++ ) {
+      this.arrayFontColor[i] =  this.template[select.selectedIndex].arrayFontColor[i];
+    }
+    for (let i = 0; i < this.template[select.selectedIndex].arrayFontFamili.length; i++ ) {
+      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
     }
   }
 }

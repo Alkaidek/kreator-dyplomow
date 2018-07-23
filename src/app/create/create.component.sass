@@ -1,7 +1,9 @@
-$margin: 6.66666666667%
+$margin: 9.16666666667%
 $font1: 'Abril Fatface'
 $font2: 'Aladin'
 $font3: 'Allura'
+$blue: #3aaaff
+$baseCol: #007bff
 
 #create, #view
   display: inline-block
@@ -32,6 +34,16 @@ $font3: 'Allura'
   background-color: blue
   z-index: -15
   opacity: 0
+
+#logoContainer
+  background: #00489a
+  position: fixed
+  z-index: 15
+  max-width: 10%
+  background-repeat: no-repeat
+  max-height: 5%
+  margin-right: 0px
+  right: 0px
 
 #imgPdf
   position: absolute
@@ -97,7 +109,7 @@ $font3: 'Allura'
   display: inline-block
   float: left
   height: 100%
-  width: 19%
+  width: 15%
   margin-left: $margin
   margin-right: $margin
   border: black 1px solid
@@ -152,12 +164,15 @@ img
   background-color: #f1ffff
   border: none
 
-#bcgContainter, #txtContainter, #fontContainter, #detailsContainer
+#bcgContainter, #txtContainter, #fontContainter, #detailsContainer, #bcgContainter2
   background-color: #f1ffff
   text-align: center
 
 #bcgContainter
   height: 30%
+  padding-bottom: 5%
+
+#bcgContainter2
   padding-bottom: 5%
 
 .scroll
@@ -189,8 +204,6 @@ h1
     font-size: 70%
   .inputLeft
     display: none
-  p
-    font-size: 70%
 
 @media (max-width: 1660px)
   #toPdf100
@@ -198,7 +211,7 @@ h1
 
 @media (max-height: 800px)
   h1
-    font-size: 100%
+    font-size: 180%
   #left, #right, #rightFix, #leftFix
     font-size: 80%
   #smallTxt
@@ -304,7 +317,7 @@ s
   appearance: none
   width: 25px
   height: 25px
-  background: #3aaaff
+  background: $baseCol
   cursor: pointer
   border-radius: 0px
 
@@ -313,7 +326,7 @@ s
   -moz-appearance: none
   width: 25px
   height: 25px
-  background: #3aaaff
+  background: $baseCol
   cursor: pointer
   border-radius: 0px
 
@@ -326,7 +339,7 @@ s
 
 
 ::-webkit-scrollbar-thumb
-  background: #3aaaff
+  background: $baseCol
   border-radius: 0px
 
 ::-webkit-scrollbar-thumb:hover
@@ -337,7 +350,7 @@ button
   transition: all .7s
   border-radius: 0px
   border: white 1px solid
-  background-color: #3aaaff
+  background-color: $baseCol
   color: white
   width: 30%
   height: 30px
@@ -346,22 +359,32 @@ button
   font-weight: bold
 
 button:hover
-  border: #3aaaff 1px solid
+  border: $baseCol 1px solid
   background-color: white
-  color: #3aaaff
+  color: $baseCol
 
-#btnGeneratePdf
+#btnGeneratePdf, #btnAddTemplate
   position: fixed
   z-index: 5
   bottom: 0px
   margin-left: 15%
   margin-bottom: 0px
-  background-color: #42cc2e
+  background-color: #28a745
 
-#btnGeneratePdf:hover
-  border: #42cc2e 1px solid
-  color:  #42cc2e
+#btnAddTemplate
+  width: 15%
+  margin-left: 45%
+  background-color: #ffc107
+
+
+#btnGeneratePdf:hover, #btnAddTemplate:hover
+  border: #28a745  1px solid
+  color:  #28a745
   background-color: white
+
+#btnAddTemplate:hover
+  border: #ffc107 1px solid
+  color:  #ffc107
 
 #colorPicker
   width: 30%
@@ -369,4 +392,34 @@ button:hover
 input[type=color]
   width: 35%
 
+.pdfTxtSmall
+  font-size: 30%
+
+//select
+select#selectTemplate
+  -webkit-appearance: button
+  -webkit-border-radius: 2px
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+  -webkit-padding-end: 20px
+  -webkit-padding-start: 2px
+  -webkit-user-select: none
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5)
+  background-position: 97% center
+  background-repeat: no-repeat
+  border: 1px solid #AAA
+  color: #555
+  font-size: inherit
+  margin: 20px
+  overflow: hidden
+  padding: 5px 10px
+  text-overflow: ellipsis
+  white-space: nowrap
+  width: 300px
+  -moz-appearance: button
+  -moz-border-radius: 2px
+  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1)
+  -moz-padding-end: 20px
+  -moz-padding-start: 2px
+  -moz-user-select: none
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -moz-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5)
 
