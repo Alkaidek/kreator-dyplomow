@@ -168,13 +168,21 @@ export class CreateComponent implements OnInit {
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
     let monthStr = '';
+    let hours = '' + date.getHours();
+    let min = '' + date.getMinutes();
     if ( date.getDate() < 10) {
       day = '0' + day;
     }
     if ( (date.getMonth() )  < 10) {
       monthStr = '0' + month;
     }
-    this.postsWithArray[n].nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  date.getHours() + ':' + date.getMinutes();
+    if ( (date.getHours() )  < 10) {
+      hours = '0' + hours;
+    }
+    if ( (date.getMinutes() )  < 10) {
+      min = '0' + min;
+    }
+    this.postsWithArray[n].nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
     this.postsWithArray[n].paddingTop = this.paddingTop;
     this.postsWithArray[n].marginLeft = this.marginLeft;
     this.postsWithArray[n].marginRight = this.marginRight;
@@ -197,7 +205,7 @@ export class CreateComponent implements OnInit {
         .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  date.getHours() + ':' + date.getMinutes() )
         .set(this.postsWithArray[0]);
       alert('Twój szoblon został zapisany! Otrzył on równiez unikatowy numer, który nalezy zapamiętać: ' + this.length);
-    }, 2000 );
+    }, 500 );
   }
   takeFontForEle(font, element) {
     document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
