@@ -3,6 +3,7 @@ import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FirebaseListObservable} from 'angularfire2/database-deprecated';
+import {checkDateInRange} from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-tools';
 
 @Component({
   selector: 'app-create',
@@ -46,16 +47,14 @@ export class CreateComponent implements OnInit {
   imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
-  marginLeft = 15;
-  marginRight = 15;
+  marginLeft = 0;
+  marginRight = 0;
+  bottom = 0;
   arrayFontSize = [300, 150, 250, 120, 200];
   arrayFontName = ['title', 'forWho', 'forWhat', 'footer', 'sign1', 'sign2'];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right'];
   arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
   arrayFontColor = ['black', 'black', 'black', 'black', 'black'];
-  bottom = 0;
-  fontColor;
-  pdfFormat;
   postsWithArray = [
     {
       nameOfTemplate: '',
@@ -68,6 +67,7 @@ export class CreateComponent implements OnInit {
       arrayFontFamili: ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'],
       img: ''
     }
+
   ];
 
   ngOnInit() {
@@ -83,32 +83,46 @@ export class CreateComponent implements OnInit {
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
   }
-  takeBcg(n, imgSrc, marginLeft, marginRight, paddingTop, bottom) {
+  takeBcg(n, imgSrc) {
     console.log('ten sie podnosi: ' + imgSrc);
     console.log('a ten opada: ' + this.lastValue);
     document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
     this.lastValue = imgSrc;
     document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
     document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
     document.getElementById('toPdf100').style.background = n;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
-    //console.log(this.bcgTemp[imgSrc]);
-    document.getElementById('pdfFor').style.marginLeft =  marginLeft + '%';
-    document.getElementById('pdfFor').style.marginRight = marginRight + '%';
-    document.getElementById('pdfFor').style.paddingTop = paddingTop + '%';
-    document.getElementById('sign').style.bottom = bottom + 'px';
-    //ukryty pdf
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
-    document.getElementById('toPdf100Fix').style.background = n;
-    document.getElementById('pdfForFix').style.marginLeft =  marginLeft + '%';
-    document.getElementById('pdfForFix').style.marginRight = marginRight + '%';
-    document.getElementById('pdfForFix').style.paddingTop = paddingTop + '%';
-    document.getElementById('signFix').style.bottom = bottom + 'px';
-    this.marginRight = marginRight;
-    this.marginLeft = marginLeft;
+    switch( imgSrc ) {
+      case 0:
+        this.paddingTop = 10;
+        this.marginLeft = 5;
+        this.marginRight = 5;
+        this.bottom = 0;
+        break;
+      case 1:
+        this.paddingTop = 25;
+        this.marginLeft = 16;
+        this.marginRight = 16;
+        this.bottom = 24;
+        break;
+      case 2:
+        this.paddingTop = 22;
+        this.marginLeft = 15;
+        this.marginRight = 15;
+        this.bottom = 0;
+        break;
+      case 3:
+        this.paddingTop = 7;
+        this.marginLeft = 7;
+        this.marginRight = 7;
+        this.bottom = 0;
+    }
   }
   takeFont(n) {
     document.getElementById('toPdf100').style.fontFamily = n;
@@ -250,6 +264,10 @@ export class CreateComponent implements OnInit {
       }
       this.arrayScroll[i] = this.arrayScroll[i] - 3;
     }
+    //console.log( this.arrayScroll[0] + '< = 1?' );
+    if ( this.arrayScroll[0] <= 1 ) {
+      btn2.disabled = true;
+    }
   }
   moveRight() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -257,13 +275,18 @@ export class CreateComponent implements OnInit {
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
         btn2.disabled = false;
-        if ( (this.arrayScroll[0] + 3) < (this.bcgTemp.length + 1 )) {
+        if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
           document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
         }
       } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
         btn.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
+      console.log('hej to ja: ' + this.arrayScroll[i]);
+    }
+    //console.log('wieksze?: ' + this.arrayScroll[2] + '>=' + this.bcgTemp.length  );
+    if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
+      btn.disabled = true;
     }
   }
   showMore(n) {

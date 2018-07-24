@@ -1,9 +1,9 @@
 <div id="viewFix">
-  <div id="toPdf100Fix">
+  <div id="toPdf100Fix" >
     <img src="{{imgSrcFix}}" id="imgPdf100Fix"/>
 
 
-    <div id="pdfForFix" >
+    <div id="pdfForFix" [style.padding-top]="paddingTop + '%'" [style.margin-left]="marginLeft + '%'" [style.margin-right]="marginRight + '%'">
       <p id="pdfTxtFix">
         <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
           {{title}}
@@ -19,7 +19,7 @@
           {{forWhat}}
         </s>
       </p>
-      <div class="signature" id="signFix">
+      <div class="signature" id="signFix" [style.bottom]="bottom + 'px'">
         <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
           <br/>
@@ -48,7 +48,7 @@
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
     <div class="scroll" id="scrollable">
-      <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i, 15, 15, 15, 0)">
+      <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i)">
         <img id="img{{i}}" src="{{tmp}}"  />
       </div>
     </div>
@@ -246,7 +246,34 @@
   <br />
   <br />
 
-  <div id="fontContainter">
+  <div id="detailsContainer">
+    <h1>Dopracuj detale</h1>
+    <br />
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Górny margines: {{paddingTop}}</p>
+        <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
+      </div>
+      <div class="inputRight">
+        <p>Dolny margines: {{bottom}}</p>
+        <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
+      </div>
+    </div>
+    <div class="inputContainer">
+      <div class="inputLeft">
+        <p>Lewy margines: {{marginLeft}}</p>
+        <input type="range" min="0" max="15" [value]="marginLeft" (input)="marginLeft = $event.target.value" class="slider50">
+      </div>
+      <div class="inputRight">
+        <p>Prawy margines: {{marginRight}}</p>
+        <input type="range" min="0" max="15" [value]="marginRight" (input)="marginRight = $event.target.value" class="slider50">
+      </div>
+    </div>
+    <!--<button (click)="setPaddingFix()"> Zastosuj</button>-->
+  </div>
+
+
+  <div id="fontContainter" [style.display]="'none'">
     <h1>Wybierz czcionkę</h1>
     <div class="fnt" id="font1" (click)="takeFont('Abril Fatface')">
       <h1>Dyplom</h1>
@@ -258,63 +285,13 @@
       <h1>Dyplom</h1>
     </div>
   </div>
-  <div id="detailsContainer">
-    <h1>Dopracuj detale</h1>
-    <br />
-    <button (click)="setPaddingFix()"> Zastosuj</button>
-    <div class="inputContainer">
-      <div class="inputLeft">
-        <p>Górny margines: </p>
-        <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
-      </div>
-      <div class="inputRight">
-        <p>Dolny margines: </p>
-        <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
-      </div>
-    </div>
-    <div class="inputContainer">
-      <div class="inputLeft">
-        <p>Lewy margines: </p>
-        <input type="range" min="0" max="50" [value]="marginLeft" (input)="marginLeft = $event.target.value" class="slider50">
-      </div>
-      <div class="inputRight">
-        <p>Prawy margines: </p>
-        <input type="range" min="0" max="50" [value]="marginRight" (input)="marginRight = $event.target.value" class="slider50">
-      </div>
-    </div>
-    <p>Wielkość czcionki główna: </p>
-    <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="slider" step="10">
-    <div class="inputContainer">
-      <div class="inputLeft">
-        <p>Wielkość czcionki  dla kogo: </p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="slider50" step="10">
-      </div>
-      <div class="inputRight">
-        <p>Wielkość czcionki  za co: </p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="slider50" step="10">
-      </div>
-    </div>
-    <div class="inputContainer">
-      <div class="inputLeft">
-        <p>Wielkość czcionki  podpis:</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="slider50" step="10">
-      </div>
-      <div class="inputRight">
-        <p>Wielkość czcionki  stopka: </p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="slider50" step="10">
-      </div>
-    </div>
-    <p>Kolor czcionki:</p>
-    <input type="color" id="colorPicker" [value]="fontColor" (input)="fontColor = $event.target.value" >
-    <br/>
-    <button (click)="setPaddingFix()"> Zastosuj</button>
-  </div>
 </div>
+
 <div id="view" class="rotateInDownRight">
-  <div id="toPdf100">
+    <div id="toPdf100">
     <img src="{{imgSrcFix}}" id="imgPdf100"/>
 
-    <div id="pdfFor" >
+    <div id="pdfFor" [style.padding-top]="paddingTop + '%'" [style.margin-left]="marginLeft + '%'" [style.margin-right]="marginRight + '%'">
       <p id="pdfTxt">
         <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
           {{title}}
@@ -330,7 +307,7 @@
           {{forWhat}}
         </s>
       </p>
-      <div class="signature" id="sign">
+      <div class="signature" id="sign" [style.bottom]="bottom + 'px'">
         <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
         {{sign1}}
         <br/>
