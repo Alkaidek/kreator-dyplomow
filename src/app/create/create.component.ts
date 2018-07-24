@@ -30,6 +30,7 @@ export class CreateComponent implements OnInit {
     });
     //db.list('/template').remove(this.schoolNr + '' + this.name);
   }
+  arrayScroll = [1, 2, 3];
   lastValue = 1;
   schoolNr = '29';
   name = 'MateuszB';
@@ -234,6 +235,34 @@ export class CreateComponent implements OnInit {
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontFamili.length; i++ ) {
       document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
       document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+    }
+  }
+  moveLeft() {
+    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
+        document.getElementById('bcg' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
+        btn.disabled = false;
+      } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
+        btn2.disabled = true;
+      }
+      this.arrayScroll[i] = this.arrayScroll[i] - 3;
+    }
+  }
+  moveRight() {
+    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
+        btn2.disabled = false;
+        if ( (this.arrayScroll[0] + 3) < (this.bcgTemp.length + 1 )) {
+          document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
+        }
+      } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
+        btn.disabled = true;
+      }
+      this.arrayScroll[i] = this.arrayScroll[i] + 3;
     }
   }
 }

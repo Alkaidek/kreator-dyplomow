@@ -40,17 +40,20 @@
 <!--
   <img id="logoContainer" src="../../assets/img/logoDYPLOMACOR2.png" />
   -->
+
 <img id="podglad" src="../../assets/img/podglad.png" />
 <div id="create" xmlns="">
   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
   <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
   <div id="bcgContainter">
     <h1>Wybierz tło dyplomu</h1>
-    <div class="scroll">
+    <div class="scroll" id="scrollable">
       <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i, 15, 15, 15, 0)">
         <img id="img{{i}}" src="{{tmp}}"  />
       </div>
     </div>
+    <button id="leftDirect" class="btnDirect" (click)="moveLeft()"><</button>
+    <button id="rightDirect" class="btnDirect" (click)="moveRight()">></button>
   </div>
   <div id="bcgContainter2" [style.display]="bool">
     <h1>Wybierz swój szablon</h1>

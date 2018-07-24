@@ -1,4 +1,5 @@
 $margin: 9.16666666667%
+$newmargin: 3.05555555556%
 $font1: 'Abril Fatface'
 $font2: 'Aladin'
 $font3: 'Allura'
@@ -108,7 +109,7 @@ $baseCol: #007bff
   text-align: center
   display: inline-block
   float: left
-  height: 100%
+  max-height: 100%
   width: 15%
   margin-left: $margin
   margin-right: $margin
@@ -127,6 +128,11 @@ $baseCol: #007bff
 
 .bcg
   transform: scale(0.8,0.8)
+  max-width: 5%
+  margin-left: $newmargin
+  margin-right: $newmargin
+  margin-bottom: 0.2%
+
 
 .fnt
   transform: scale(0.8,0.8)
@@ -164,15 +170,12 @@ img
 
 #bcg1
   background: #fff9b6
-  margin-bottom: 2%
 
 #bcg2
   background-color: #cefff5
-  margin-bottom: 2%
 
 #bcg3
   background-color: #fbdfff
-  margin-bottom: 2%
 
 #font1, .fnt1
   font-family: $font1
@@ -192,15 +195,25 @@ img
   text-align: center
 
 #bcgContainter
-  height: 30%
+  min-height: 30%
   padding-bottom: 5%
 
 #bcgContainter2
   padding-bottom: 5%
 
 .scroll
-  overflow-y: scroll
-  height: 90%
+  overflow-x: hidden
+  max-height: 90%
+  overflow-y: hidden
+  width: 300%
+
+button:disabled
+  background-color: #fbdfff
+
+.btnDirect
+  width: 30px
+  height: 30px
+  border-radius: 50%
 
 #fontContainter
   height: 25%
