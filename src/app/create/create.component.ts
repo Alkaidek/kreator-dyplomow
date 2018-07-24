@@ -11,6 +11,7 @@ import {FirebaseListObservable} from 'angularfire2/database-deprecated';
 })
 export class CreateComponent implements OnInit {
   public isCollapsed = [true, true, true, true, true];
+  auth = 'block';
   bcgTemp: any;
   template: any;
   database: AngularFireDatabase;
@@ -89,7 +90,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
     this.lastValue = imgSrc;
     document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
-    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 2px solid';
+    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
     document.getElementById('toPdf100').style.background = n;
     this.imgSrc = '' + (imgSrc + 1);
@@ -263,6 +264,15 @@ export class CreateComponent implements OnInit {
         btn.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
+    }
+  }
+  showMore(n) {
+    if ( this.isCollapsed[n]) {
+      document.getElementById('card' + n).style.display = 'inline-block';
+      this.isCollapsed[n] = false;
+    } else {
+      document.getElementById('card' + n).style.display = 'none';
+      this.isCollapsed[n] = true;
     }
   }
 }
