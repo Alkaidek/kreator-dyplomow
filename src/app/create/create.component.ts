@@ -6,9 +6,14 @@ import {FirebaseListObservable} from 'angularfire2/database-deprecated';
 import {checkDateInRange} from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-tools';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.sass']
+  selector:
+    'app-create',
+  templateUrl:
+    './create.component.html',
+  styleUrls:
+    [
+      './create.component.sass'
+    ]
 })
 export class CreateComponent implements OnInit {
   public isCollapsed =
@@ -42,7 +47,6 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
       console.log(this.coordinatesTemplate);
     });
-    //db.list('/template').remove(this.schoolNr + '' + this.name);
   }
   arrayScroll = [1, 2, 3];
   lastValue = 1;
@@ -55,7 +59,6 @@ export class CreateComponent implements OnInit {
   sign1 = 'Dyrektor \n ................';
   sign2 = 'Wychowawca \n .......................';
   title = 'Dyplom';
-  arrayDot = ['................', '.......................']
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
@@ -204,36 +207,66 @@ export class CreateComponent implements OnInit {
 
   }
   generatePdf() {
-    const elementToPrint = document.getElementById('toPdf100Fix');
+    const elementToPrint = document
+      .getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
-    pdf.internal.scaleFactor = 1;
-    pdf.addHTML(elementToPrint, () => {
-      pdf.save('generaterdDiploma.pdf');
-      pdf.autoPrint();
+    pdf
+      .internal.scaleFactor = 1;
+    pdf
+      .addHTML(elementToPrint, () => {
+      pdf
+        .save('generaterdDiploma.pdf');
+      pdf
+        .autoPrint();
     });
   }
   setPadding() {
-    document.getElementById('pdfFor').style.marginLeft =  this.marginLeft + '%';
-    document.getElementById('pdfFor').style.marginRight = this.marginRight + '%';
-    document.getElementById('sign').style.bottom = this.bottom + 'px';
+    document
+      .getElementById('pdfFor')
+      .style
+      .marginLeft =  this.marginLeft + '%';
+    document
+      .getElementById('pdfFor')
+      .style
+      .marginRight = this.marginRight + '%';
+    document.getElementById('sign')
+      .style
+      .bottom = this.bottom + 'px';
   }
   setPaddingFix() {
-    document.getElementById('pdfForFix').style.marginLeft =  this.marginLeft + '%';
-    document.getElementById('pdfForFix').style.marginRight = this.marginRight + '%';
-    document.getElementById('signFix').style.bottom = this.bottom + 'px';
+    document
+      .getElementById('pdfForFix')
+      .style
+      .marginLeft =  this.marginLeft + '%';
+    document
+      .getElementById('pdfForFix')
+      .style
+      .marginRight = this.marginRight + '%';
+    document
+      .getElementById('signFix')
+      .style
+      .bottom = this.bottom + 'px';
     this.setPadding();
   }
   getWandH() {
-    console.log(document.getElementById('toPdf100').offsetWidth);
-    console.log(document.getElementById('toPdf100').offsetHeight);
+    console
+      .log(document.getElementById('toPdf100')
+        .offsetWidth);
+    console
+      .log(document.getElementById('toPdf100')
+        .offsetHeight);
   }
   createArrayToSend(n) {
     const date = new Date();
-    let day = '' + date.getDate();
-    const month = date.getMonth() + 1;
+    let day = '' + date
+      .getDate();
+    const month = date
+      .getMonth() + 1;
     let monthStr = '';
-    let hours = '' + date.getHours();
-    let min = '' + date.getMinutes();
+    let hours = '' + date
+      .getHours();
+    let min = '' + date
+      .getMinutes();
     if ( date.getDate() < 10) {
       day = '0' + day;
     }
@@ -246,34 +279,51 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
-    this.postsWithArray[n].nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
-    this.postsWithArray[n].paddingTop = this.paddingTop;
-    this.postsWithArray[n].marginLeft = this.marginLeft;
-    this.postsWithArray[n].marginRight = this.marginRight;
-    this.postsWithArray[n].bottom = this.bottom;
+    this.postsWithArray[n]
+      .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
+    this.postsWithArray[n]
+      .paddingTop = this.paddingTop;
+    this.postsWithArray[n]
+      .marginLeft = this.marginLeft;
+    this.postsWithArray[n]
+      .marginRight = this.marginRight;
+    this.postsWithArray[n]
+      .bottom = this.bottom;
     for (let i = 0; i < this.arrayFontSize.length; i++ ) {
-      this.postsWithArray[n].arrayFontSize[i] = this.arrayFontSize[i];
+      this.postsWithArray[n]
+        .arrayFontSize[i] = this.arrayFontSize[i];
     }
     for (let i = 0; i < this.arrayFontColor.length; i++ ) {
-      this.postsWithArray[n].arrayFontColor[i] = this.arrayFontColor[i];
+      this.postsWithArray[n]
+        .arrayFontColor[i] = this.arrayFontColor[i];
     }
     for (let i = 0; i < this.arrayFontFamili.length; i++ ) {
-      this.postsWithArray[n].arrayFontFamili[i] = this.arrayFontFamili[i];
+      this.postsWithArray[n]
+        .arrayFontFamili[i] = this.arrayFontFamili[i];
     }
-    this.postsWithArray[n].img = this.base64Tmp;
-    console.log(this.postsWithArray);
+    this.postsWithArray[n]
+      .img = this.base64Tmp;
+    console
+      .log(this.postsWithArray);
         setTimeout( () => {
       this.db.database
         .ref('/template')
         .child(this.schoolNr + '' + this.name)
-        .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  date.getHours() + ':' + date.getMinutes() )
+        .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min )
         .set(this.postsWithArray[0]);
       alert('Twój szoblon został zapisany! Otrzył on równiez unikatowy numer, który nalezy zapamiętać: ' + this.length);
-    }, 500 );
+    },
+          500 );
   }
   takeFontForEle(font, element) {
-    document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'Fix').style.fontFamily = font;
+    document
+      .getElementById(this.arrayFontNameId[element])
+      .style
+      .fontFamily = font;
+    document
+      .getElementById(this.arrayFontNameId[element] + 'Fix')
+      .style
+      .fontFamily = font;
     this.arrayFontFamili[element] = font;
     if (element === 4) {
       this.takeFontForEle(font, 5);
@@ -282,58 +332,84 @@ export class CreateComponent implements OnInit {
   setUserData() {
     const select = document.getElementById('selectTemplate') as HTMLSelectElement;
     console.log(select.selectedIndex);
-    this.paddingTop = this.template[select.selectedIndex].paddingTop;
-    this.marginLeft = this.template[select.selectedIndex].marginLeft;
-    this.marginRight = this.template[select.selectedIndex].marginRight;
-    this.bottom = this.template[select.selectedIndex].bottom;
+    this.paddingTop = this.template[select.selectedIndex]
+      .paddingTop;
+    this.marginLeft = this.template[select.selectedIndex]
+      .marginLeft;
+    this.marginRight = this.template[select.selectedIndex]
+      .marginRight;
+    this.bottom = this.template[select.selectedIndex]
+      .bottom;
     this.setPaddingFix();
-    this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex].img];
+    this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex]
+      .img];
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontSize.length; i++ ) {
       console.log(' ' + this.template[select.selectedIndex].arrayFontSize[i]);
-      this.arrayFontSize[i] = this.template[select.selectedIndex].arrayFontSize[i];
+      this.arrayFontSize[i] = this.template[select.selectedIndex]
+        .arrayFontSize[i];
     }
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontColor.length; i++ ) {
       this.arrayFontColor[i] =  this.template[select.selectedIndex].arrayFontColor[i];
     }
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontFamili.length; i++ ) {
-      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
-      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      document
+        .getElementById(this.arrayFontNameId[i])
+        .style
+        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      document
+        .getElementById(this.arrayFontNameId[i] + 'Fix')
+        .style
+        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
     }
   }
   moveLeft() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+    const btn =  document
+      .getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('leftDirect') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
-        document.getElementById('bcg' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
-        btn.disabled = false;
+        document
+          .getElementById('bcg' + (this.arrayScroll[i] - 3))
+          .style
+          .display = 'inline-block';
+        btn
+          .disabled = false;
       } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
-        btn2.disabled = true;
+        btn2
+          .disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] - 3;
     }
     //console.log( this.arrayScroll[0] + '< = 1?' );
     if ( this.arrayScroll[0] <= 1 ) {
-      btn2.disabled = true;
+      btn2
+        .disabled = true;
     }
   }
   moveRight() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+    const btn =  document
+      .getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('leftDirect') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
-        btn2.disabled = false;
+        btn2
+          .disabled = false;
         if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
           document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
         }
       } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
-        btn.disabled = true;
+        btn
+          .disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
-      console.log('hej to ja: ' + this.arrayScroll[i]);
+      console
+        .log('hej to ja: ' + this.arrayScroll[i]);
     }
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
-      btn.disabled = true;
+      btn
+        .disabled = true;
     }
   }
   showMore(n) {
