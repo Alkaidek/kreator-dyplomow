@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FirebaseListObservable} from 'angularfire2/database-deprecated';
-import {checkDateInRange} from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-tools';
+
 
 @Component({
   selector:
@@ -414,10 +412,14 @@ export class CreateComponent implements OnInit {
   }
   showMore(n) {
     if ( this.isCollapsed[n]) {
+      document.getElementById('card' + n).style.animationName = 'show';
       document.getElementById('card' + n).style.display = 'inline-block';
       this.isCollapsed[n] = false;
     } else {
+      //document.getElementById('card' + n).style.display = 'none';
+      document.getElementById('card' + n).style.animationName = 'hide';
       document.getElementById('card' + n).style.display = 'none';
+      document.getElementById('card' + n).style.display = 'inline-block';
       this.isCollapsed[n] = true;
     }
   }

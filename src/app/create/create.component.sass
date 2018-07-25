@@ -160,12 +160,23 @@ $MACgreen: #00a650
   animation-duration: .5s
   animation-iteration-count: 1
   animation-timing-function: linear
+  animation-fill-mode: forwards
 
 @keyframes show
   0%
+    margin-left: 30%
     opacity: 0
   100%
+    margin-left: 0%
     opacity: 1
+
+@keyframes hide
+  0%
+    margin-left: 0%
+    opacity: 1
+  100%
+    margin-left: 30%
+    opacity: 0
 
 #viewFix
   min-height: 100%
@@ -510,6 +521,24 @@ s
   transition: opacity .2s
   margin-top: 1%
   margin-bottom: 10px
+
+.sliderInput
+  animation-name: show
+  animation-duration: .5s
+  animation-delay: .3s
+  animation-iteration-count: 1
+  animation-timing-function: linear
+  animation-fill-mode: forwards
+  opacity: 0
+
+input[type=color]
+  animation-name: show
+  animation-duration: .5s
+  animation-delay: .15s
+  animation-iteration-count: 1
+  animation-timing-function: linear
+  animation-fill-mode: forwards
+  opacity: 0
 
 .inputContainer
   width: 100%

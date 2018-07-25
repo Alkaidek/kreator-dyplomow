@@ -37,11 +37,9 @@
       <div class="signature" id="signFix" [style.bottom]="bottom + 'px'">
         <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
-          <br/>
         </p>
         <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
-          <br/>
         </p>
         <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] - 20 + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}
@@ -91,9 +89,9 @@
         <div >
           <div class="card" id="card0">
             <div class="card-body">
-              <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
+              <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card00">
               <br />
-              <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" >
+              <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
               <br />
               <div class="fontCont">
                 <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 0)">
@@ -127,9 +125,9 @@
         <div class="card" id="card1">
             <div class="card-body">
               <br />
-              <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()">
+              <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card11">
               <br />
-              <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" >
+              <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
               <br />
               <div class="fontCont">
                 <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 1)">
@@ -162,9 +160,9 @@
         <div class="card" id="card2">
             <div class="card-body">
               <br />
-              <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10">
+              <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10" id="card22">
               <br />
-              <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" >
+              <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
               <br />
               <div class="fontCont">
                 <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 2)">
@@ -196,9 +194,9 @@
       <div class="rightCont">
         <div class="card" id="card3">
             <div class="card-body">
-              <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10">
+              <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10" id="card33">
               <br />
-              <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" >
+              <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
               <br />
               <div class="fontCont">
                 <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 3)">
@@ -233,9 +231,9 @@
             <div class="card-body">
               <br />
               <br />
-              <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10">
+              <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10" id="card44">
               <br />
-              <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" >
+              <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
               <br />
               <div class="fontCont">
                 <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 4)">
@@ -317,11 +315,9 @@
       <div class="signature" id="sign" [style.bottom]="bottom + 'px'">
         <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
-          <br/>
         </p>
         <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
-          <br/>
         </p>
         <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}
