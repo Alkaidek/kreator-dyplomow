@@ -38,12 +38,10 @@
         <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
           <br/>
-          {{arrayDot[0]}}
         </p>
         <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
           <br/>
-          {{arrayDot[1]}}
         </p>
         <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] - 20 + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}
@@ -226,8 +224,8 @@
       <div class="leftCont">
         <p><b>Podpisy:</b></p>
         <!-- 1 -->
-        <input class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis">
-        <input class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis">
+        <textarea class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
+        <textarea class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
         <p>
           <button type="button" class="dataBtn" (click)="showMore(4)">
             Więcej opcji
@@ -237,6 +235,7 @@
       <div class="rightCont">
         <div class="card" id="card4">
             <div class="card-body">
+              <br />
               <br />
               <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10">
               <br />
@@ -260,7 +259,6 @@
   </div>
   <br />
   <br />
-
   <div id="detailsContainer">
     <h1>Dopracuj detale</h1>
     <br />
@@ -324,12 +322,10 @@
         <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
           <br/>
-          {{arrayDot[0]}}
         </p>
         <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
           <br/>
-          {{arrayDot[1]}}
         </p>
         <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}

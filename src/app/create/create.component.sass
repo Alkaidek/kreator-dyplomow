@@ -122,6 +122,8 @@ $MACgreen: #00a650
   animation-duration: 2s
   animation-delay: 4s
   -webkit-animation-delay: 4s
+  animation-fill-mode: backwards
+  -webkit-animation-fill-mode: backwards
 
 @-webkit-keyframes rotateInDownRight
   0%
@@ -155,7 +157,7 @@ $MACgreen: #00a650
   display: none
   width: 100%
   animation-name: show
-  animation-duration: 2s
+  animation-duration: .5s
   animation-iteration-count: 1
   animation-timing-function: linear
 
@@ -373,7 +375,7 @@ button:disabled, button:disabled:hover
   width: 30px
   height: 30px
   border-radius: 50%
-  transition: 0.7s
+  transition: 0.5s
   z-index: 10
 
 #leftDirect
@@ -394,7 +396,7 @@ button:disabled, button:disabled:hover
   min-width: 40%
 
 #txtContainter
-  min-height: 900px
+  min-height: 1000px
   height: 100%
 
 #font1, #font2, #font3
@@ -403,8 +405,8 @@ button:disabled, button:disabled:hover
   background-color: white
 
 textarea
-  min-height: 80px
-  max-height: 80px
+  min-height: 74px
+  max-height: 74px
   resize: none
 
 textarea:focus
@@ -444,7 +446,7 @@ h1
   border: 1px solid #ccc
   border-radius: 10px
   resize: vertical
-  transition: 0.8s
+  transition: .8s
   box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
   text-align: center
   margin-left: 5%

@@ -11,12 +11,18 @@ import {checkDateInRange} from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker
   styleUrls: ['./create.component.sass']
 })
 export class CreateComponent implements OnInit {
-  public isCollapsed = [true, true, true, true, true];
+  public isCollapsed =
+    [
+      true,
+      true,
+      true,
+      true,
+      true
+    ];
   auth = 'block';
   bcgTemp: any;
   template: any;
   coordinatesTemplate: any;
-  database: AngularFireDatabase;
   length: Number;
   bool = 'block';
   constructor(private db: AngularFireDatabase ) {
@@ -46,8 +52,8 @@ export class CreateComponent implements OnInit {
   base64 = '';
   forWho = '';
   forWhat = '';
-  sign1 = 'Dyrektor';
-  sign2 = 'Wychowawca';
+  sign1 = 'Dyrektor \n ................';
+  sign2 = 'Wychowawca \n .......................';
   title = 'Dyplom';
   arrayDot = ['................', '.......................']
   imgSrc = '../../assets/img/0.png';
@@ -57,11 +63,40 @@ export class CreateComponent implements OnInit {
   marginLeft = 0;
   marginRight = 0;
   bottom = 0;
-  arrayFontSize = [300, 150, 250, 120, 200];
-  arrayFontName = ['title', 'forWho', 'forWhat', 'footer', 'sign1', 'sign2'];
-  arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right'];
-  arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
-  arrayFontColor = ['black', 'black', 'black', 'black', 'black'];
+  arrayFontSize =
+    [
+      300,
+      150,
+      250,
+      120,
+      200
+    ];
+  arrayFontNameId =
+    [
+      'largeTxt',
+      'sFor',
+      'txtForWhat',
+      'smallTxt',
+      'left',
+      'right'
+    ];
+  arrayFontFamili =
+    [
+      'Arial',
+      'Arial',
+      'Arial',
+      'Arial',
+      'Arial',
+      'Arial'
+    ];
+  arrayFontColor =
+    [
+      'black',
+      'black',
+      'black',
+      'black',
+      'black'
+    ];
   postsWithArray = [
     {
       nameOfTemplate: '',
@@ -69,9 +104,31 @@ export class CreateComponent implements OnInit {
       marginLeft: 0,
       marginRight: 0,
       bottom: 0,
-      arrayFontSize: [0, 0, 0, 0, 0],
-      arrayFontColor: ['black', 'black', 'black', 'black', 'black'],
-      arrayFontFamili: ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'],
+      arrayFontSize:
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+      arrayFontColor:
+        [
+          'black',
+          'black',
+          'black',
+          'black',
+          'black'
+        ],
+      arrayFontFamili:
+        [
+          'Arial',
+          'Arial',
+          'Arial',
+          'Arial',
+          'Arial',
+          'Arial'
+        ],
       img: ''
     }
 
@@ -91,17 +148,39 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
   }
   takeBcg(n, imgSrc) {
-    console.log('ten sie podnosi: ' + imgSrc);
+    console.log(
+      'ten sie podnosi: ' + imgSrc
+    );
     console.log('a ten opada: ' + this.lastValue);
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
+    document.getElementById(
+      'bcg' + (this.lastValue + 1) )
+      .style
+      .transform = 'scale(0.8,0.8)';
+    document.getElementById(
+      'bcg' + (this.lastValue + 1) )
+      .style
+      .webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById(
+      'bcg' + (this.lastValue + 1) )
+      .style
+      .border = 'black 1px solid';
     this.lastValue = imgSrc;
-    document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
-    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
+    document.getElementById(
+      'bcg' + (imgSrc + 1))
+      .style
+      .transform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'bcg' + (this.lastValue + 1) )
+      .style
+      .webkitTransform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'bcg' + (imgSrc + 1))
+      .style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
-    document.getElementById('toPdf100').style.background = n;
+    document.getElementById(
+      'toPdf100')
+      .style
+      .background = n;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
@@ -124,21 +203,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('toPdf100Fix').style.fontFamily = n;
 
   }
-  doItPlease() {
-    const can = document.getElementById('imgCanvas') as HTMLCanvasElement;
-    const img = document.getElementById('imgPdf100Fix') as HTMLImageElement;
-    const ctx = can.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const encodedBase = can.toDataURL();
-    this.base64 = encodedBase;
-  }
-
-  getDataFromDatabase() {
-    this.db.list('/base64').valueChanges().subscribe(bcgTemp => {
-      this.bcgTemp = bcgTemp;
-      console.log(this.bcgTemp);
-    });
-  }
   generatePdf() {
     const elementToPrint = document.getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
@@ -146,15 +210,6 @@ export class CreateComponent implements OnInit {
     pdf.addHTML(elementToPrint, () => {
       pdf.save('generaterdDiploma.pdf');
       pdf.autoPrint();
-    });
-  }
-  getDate(n) {
-    this.database.list('/template').valueChanges().subscribe(template => {
-      this.template = template;
-      console.log(this.template);
-      for ( let h = 0; h < template.length; h++) {
-        console.log('Data: ' + h + ' : ' + this.bcgTemp[h]);
-      }
     });
   }
   setPadding() {
