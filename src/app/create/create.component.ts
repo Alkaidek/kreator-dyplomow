@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit {
     });
     db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
       this.template = template;
+      this.template.reverse();
       console.log(this.template);
       this.length = this.template.length;
       if ( this.length === 0) {
@@ -98,7 +99,7 @@ export class CreateComponent implements OnInit {
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
-    switch( imgSrc ) {
+    switch ( imgSrc ) {
       case 0:
         this.paddingTop = 10;
         this.marginLeft = 5;
@@ -121,6 +122,12 @@ export class CreateComponent implements OnInit {
         this.paddingTop = 7;
         this.marginLeft = 7;
         this.marginRight = 7;
+        this.bottom = 0;
+        break;
+      default:
+        this.paddingTop = 10;
+        this.marginLeft = 5;
+        this.marginRight = 5;
         this.bottom = 0;
     }
   }
@@ -165,7 +172,7 @@ export class CreateComponent implements OnInit {
   setPadding() {
     document.getElementById('pdfFor').style.marginLeft =  this.marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = this.marginRight + '%';
-    document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
+    //document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
     document.getElementById('sign').style.bottom = this.bottom + 'px';
   }
   setPaddingFix() {
