@@ -209,7 +209,8 @@ export class CreateComponent implements OnInit {
       .getElementById('toPdf100Fix');
     const pdf = new jsPDF('p', 'pt', 'a4', true);
     pdf
-      .internal.scaleFactor = 1;
+      .internal
+      .scaleFactor = 1;
     pdf
       .addHTML(elementToPrint, () => {
       pdf
@@ -341,6 +342,7 @@ export class CreateComponent implements OnInit {
     this.setPaddingFix();
     this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex]
       .img];
+    this.base64Tmp = this.template[select.selectedIndex].img;
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontSize.length; i++ ) {
       console.log(' ' + this.template[select.selectedIndex].arrayFontSize[i]);
       this.arrayFontSize[i] = this.template[select.selectedIndex]
@@ -416,7 +418,6 @@ export class CreateComponent implements OnInit {
       document.getElementById('card' + n).style.display = 'inline-block';
       this.isCollapsed[n] = false;
     } else {
-      //document.getElementById('card' + n).style.display = 'none';
       document.getElementById('card' + n).style.animationName = 'hide';
       document.getElementById('card' + n).style.display = 'none';
       document.getElementById('card' + n).style.display = 'inline-block';
