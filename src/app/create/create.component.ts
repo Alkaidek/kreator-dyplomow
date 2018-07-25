@@ -15,6 +15,7 @@ export class CreateComponent implements OnInit {
   auth = 'block';
   bcgTemp: any;
   template: any;
+  coordinatesTemplate: any;
   database: AngularFireDatabase;
   length: Number;
   bool = 'block';
@@ -30,6 +31,10 @@ export class CreateComponent implements OnInit {
       if ( this.length === 0) {
         this.bool = 'none';
       }
+    });
+    db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
+      this.coordinatesTemplate = coordinatesTemplate;
+      console.log(this.coordinatesTemplate);
     });
     //db.list('/template').remove(this.schoolNr + '' + this.name);
   }
@@ -100,29 +105,11 @@ export class CreateComponent implements OnInit {
     this.imgSrcFix = this.bcgTemp[imgSrc];
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
     switch ( imgSrc ) {
-      case 0:
-        this.paddingTop = 10;
-        this.marginLeft = 5;
-        this.marginRight = 5;
-        this.bottom = 0;
-        break;
-      case 1:
-        this.paddingTop = 25;
-        this.marginLeft = 16;
-        this.marginRight = 16;
-        this.bottom = 24;
-        break;
-      case 2:
-        this.paddingTop = 22;
-        this.marginLeft = 15;
-        this.marginRight = 15;
-        this.bottom = 0;
-        break;
-      case 3:
-        this.paddingTop = 7;
-        this.marginLeft = 7;
-        this.marginRight = 7;
-        this.bottom = 0;
+      case imgSrc:
+        this.paddingTop = this.coordinatesTemplate[imgSrc][0];
+        this.marginLeft = this.coordinatesTemplate[imgSrc][1];
+        this.marginRight = this.coordinatesTemplate[imgSrc][2];
+        this.bottom = this.coordinatesTemplate[imgSrc][3];
         break;
       default:
         this.paddingTop = 10;
@@ -291,7 +278,6 @@ export class CreateComponent implements OnInit {
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
       console.log('hej to ja: ' + this.arrayScroll[i]);
     }
-    //console.log('wieksze?: ' + this.arrayScroll[2] + '>=' + this.bcgTemp.length  );
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
       btn.disabled = true;
     }

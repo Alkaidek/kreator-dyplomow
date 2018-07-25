@@ -13,12 +13,11 @@ $MACgreen: #00a650
   display: inline-block
   float: left
   min-height: 100%
-  height: 100%
 
 .curtain
   color: white
-  max-width: 60%
-  width: 60%
+  max-width: 100%
+  width: 100%
   min-height: 100%
   background-color: $MACblue
   position: fixed
@@ -38,9 +37,8 @@ $MACgreen: #00a650
   animation-duration: 3s
   animation-delay: 0s
   animation-iteration-count: 1
-  opacity: 0
-  transform: scale(0,0)
   animation-timing-function: linear
+  animation-fill-mode: forwards
 
 .curtain span
   font-size: 200%
@@ -92,14 +90,17 @@ $MACgreen: #00a650
     opacity: 1
   75%
     opacity: 1
-  100%
+  99%
     opacity: 0
     transform: scale(1,1)
+  100%
+    transform: scale(0,0)
 
 #create
   width: 60%
   max-width: 60%
   padding-top: 1%
+  border-right: $MACblue 3px solid
 
 #view, #viewFix
   width: 50%
@@ -112,12 +113,15 @@ $MACgreen: #00a650
   width: 40%
   background-color: white
   z-index: 10
+  height: 100%
 
 .rotateInDownRight
   -webkit-animation-name: rotateInDownRight
   animation-name: rotateInDownRight
   -webkit-animation-duration: 2s
   animation-duration: 2s
+  animation-delay: 4s
+  -webkit-animation-delay: 4s
   -webkit-animation-fill-mode: both
   animation-fill-mode: both
 
@@ -306,7 +310,7 @@ img
   z-index: 15
   animation-name: example
   animation-duration: 8s
-  animation-delay: 2s
+  animation-delay: 6s
   animation-iteration-count: 1
   opacity: 0
   animation-timing-function: linear
@@ -402,9 +406,11 @@ button:disabled, button:disabled:hover
 textarea
   min-height: 80px
   max-height: 80px
-
-textarea
   resize: none
+
+textarea:focus
+  border: 1px solid #ccc
+  border-radius: 0px
 
 h1
   font-size: 200%
