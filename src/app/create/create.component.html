@@ -20,21 +20,17 @@
 <div id="viewFix">
   <div id="toPdf100Fix" >
     <img src="{{imgSrcFix}}" id="imgPdf100Fix"/>
-
-
     <div id="pdfForFix" [style.padding-top]="paddingTop + '%'" [style.margin-left]="marginLeft + '%'" [style.margin-right]="marginRight + '%'">
       <p id="pdfTxtFix">
         <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
           {{title}}
         </s>
         <br/>
-        <br/>
         <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
           {{forWho}}
         </s>
         <br/>
         <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
-          <br/>
           {{forWhat}}
         </s>
       </p>
@@ -42,12 +38,12 @@
         <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
           <br/>
-          ................
+          {{arrayDot[0]}}
         </p>
         <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
           <br/>
-          .......................
+          {{arrayDot[1]}}
         </p>
         <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] - 20 + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}
@@ -60,7 +56,7 @@
   <img id="logoContainer" src="../../assets/img/logoDYPLOMACOR2.png" />
   -->
 
-<img id="podglad" src="../../assets/img/podglad.png" />
+<img id="podglad" src="../../assets/img/podglad2.png" />
 <div id="create" xmlns="" [style.display]="auth">
   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplomik!</button>
   <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
@@ -316,26 +312,24 @@
           {{title}}
         </s>
         <br/>
-        <br/>
         <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
           {{forWho}}
         </s>
         <br/>
         <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
-          <br/>
           {{forWhat}}
         </s>
       </p>
       <div class="signature" id="sign" [style.bottom]="bottom + 'px'">
         <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
-        {{sign1}}
-        <br/>
-        ................
+          {{sign1}}
+          <br/>
+          {{arrayDot[0]}}
         </p>
         <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign2}}
           <br/>
-          .......................
+          {{arrayDot[1]}}
         </p>
         <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
           {{footer}}

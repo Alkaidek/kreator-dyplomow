@@ -49,6 +49,7 @@ export class CreateComponent implements OnInit {
   sign1 = 'Dyrektor';
   sign2 = 'Wychowawca';
   title = 'Dyplom';
+  arrayDot = ['................', '.......................']
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
@@ -159,13 +160,11 @@ export class CreateComponent implements OnInit {
   setPadding() {
     document.getElementById('pdfFor').style.marginLeft =  this.marginLeft + '%';
     document.getElementById('pdfFor').style.marginRight = this.marginRight + '%';
-    //document.getElementById('pdfTxt').style.paddingTop = this.paddingTop + '%';
     document.getElementById('sign').style.bottom = this.bottom + 'px';
   }
   setPaddingFix() {
     document.getElementById('pdfForFix').style.marginLeft =  this.marginLeft + '%';
     document.getElementById('pdfForFix').style.marginRight = this.marginRight + '%';
-    document.getElementById('pdfTxtFix').style.paddingTop = this.paddingTop + '%';
     document.getElementById('signFix').style.bottom = this.bottom + 'px';
     this.setPadding();
   }
