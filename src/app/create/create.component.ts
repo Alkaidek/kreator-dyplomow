@@ -214,7 +214,7 @@ export class CreateComponent implements OnInit {
     pdf
       .addHTML(elementToPrint, () => {
       pdf
-        .save('generaterdDiploma.pdf');
+        .save('wygenerowany dyplom.pdf');
       pdf
         .autoPrint();
     });
@@ -246,14 +246,6 @@ export class CreateComponent implements OnInit {
       .style
       .bottom = this.bottom + 'px';
     this.setPadding();
-  }
-  getWandH() {
-    console
-      .log(document.getElementById('toPdf100')
-        .offsetWidth);
-    console
-      .log(document.getElementById('toPdf100')
-        .offsetHeight);
   }
   createArrayToSend(n) {
     const date = new Date();
@@ -360,6 +352,7 @@ export class CreateComponent implements OnInit {
         .getElementById(this.arrayFontNameId[i] + 'Fix')
         .style
         .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      this.arrayFontFamili[i] = this.template[select.selectedIndex].arrayFontFamili[i];
     }
   }
   moveLeft() {
@@ -381,7 +374,6 @@ export class CreateComponent implements OnInit {
       }
       this.arrayScroll[i] = this.arrayScroll[i] - 3;
     }
-    //console.log( this.arrayScroll[0] + '< = 1?' );
     if ( this.arrayScroll[0] <= 1 ) {
       btn2
         .disabled = true;

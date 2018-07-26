@@ -576,6 +576,17 @@ input[type=color]
   background: $MACblue
   cursor: pointer
   border-radius: 0px
+  transition: .3s
+  -webkit-transition: .3s
+  transition-duration: .3s
+
+.sliderInput::-webkit-slider-thumb:hover
+  transform: rotate(360deg)
+  border-radius: 50%
+
+.sliderInput::-moz-range-thumb:hover
+  transform: rotate(360deg)
+  border-radius: 50%
 
 .slider::-moz-range-thumb, .slider50::-moz-range-thumb, .sliderInput::-moz-range-thumb
   appearance: none
@@ -585,6 +596,9 @@ input[type=color]
   background: $MACblue
   cursor: pointer
   border-radius: 0px
+  transition: .3s
+  -webkit-transition: .3s
+  transition-duration: .3s
 
 ::-webkit-scrollbar
   width: 10px
