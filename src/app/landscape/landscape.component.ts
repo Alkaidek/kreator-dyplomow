@@ -2,18 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
 
-
 @Component({
-  selector:
-    'app-create',
-  templateUrl:
-    './create.component.html',
-  styleUrls:
-    [
-      './create.component.sass'
-    ]
+  selector: 'app-landscape',
+  templateUrl: './landscape.component.html',
+  styleUrls: ['./landscape.component.sass']
 })
-export class CreateComponent implements OnInit {
+export class LandscapeComponent implements OnInit {
   public isCollapsed =
     [
       false,
@@ -62,8 +56,8 @@ export class CreateComponent implements OnInit {
   imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
-  marginLeft = [0, 0, 0, 0];
-  marginRight = [0, 0, 0, 0];
+  marginLeft = 0;
+  marginRight = 0;
   bottom = 0;
   arrayFontSize =
     [
@@ -80,12 +74,10 @@ export class CreateComponent implements OnInit {
       'txtForWhat',
       'smallTxt',
       'left',
-      'right',
-      'center'
+      'right'
     ];
   arrayFontFamili =
     [
-      'Arial',
       'Arial',
       'Arial',
       'Arial',
@@ -95,7 +87,6 @@ export class CreateComponent implements OnInit {
     ];
   arrayFontColor =
     [
-      'black',
       'black',
       'black',
       'black',
@@ -115,12 +106,10 @@ export class CreateComponent implements OnInit {
           0,
           0,
           0,
-          0,
           0
         ],
       arrayFontColor:
         [
-          'black',
           'black',
           'black',
           'black',
@@ -134,17 +123,12 @@ export class CreateComponent implements OnInit {
           'Arial',
           'Arial',
           'Arial',
-          'Arial',
           'Arial'
         ],
       img: ''
     }
-    ];
-  rotate = 0;
-  imgWidth = 10;
-  imgHeight = 10;
-  imgTop = 0;
-  imgLeft = 0;
+
+  ];
 
   ngOnInit() {
     const date = new Date();
@@ -199,14 +183,14 @@ export class CreateComponent implements OnInit {
     switch ( imgSrc ) {
       case imgSrc:
         this.paddingTop = this.coordinatesTemplate[imgSrc][0];
-        this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
-        this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
+        this.marginLeft = this.coordinatesTemplate[imgSrc][1];
+        this.marginRight = this.coordinatesTemplate[imgSrc][2];
         this.bottom = this.coordinatesTemplate[imgSrc][3];
         break;
       default:
         this.paddingTop = 10;
-        this.marginLeft[3] = 5;
-        this.marginRight[3] = 5;
+        this.marginLeft = 5;
+        this.marginRight = 5;
         this.bottom = 0;
     }
   }
@@ -223,28 +207,28 @@ export class CreateComponent implements OnInit {
   }
   generatePdf() {
     const elementToPrint = document
-      .getElementById('toPdf100Fix');
-    const pdf = new jsPDF('p', 'pt', 'a4', true);
+      .getElementById('toPdf100');
+    const pdf = new jsPDF('l', 'pt', 'a4', true);
     pdf
       .internal
       .scaleFactor = 1;
     pdf
       .addHTML(elementToPrint, () => {
-      pdf
-        .save('wygenerowany dyplom.pdf');
-      pdf
-        .autoPrint();
-    });
+        pdf
+          .save('wygenerowany dyplom.pdf');
+        pdf
+          .autoPrint();
+      });
   }
   setPadding() {
     document
       .getElementById('pdfFor')
       .style
-      .marginLeft =  this.marginLeft[3] + '%';
+      .marginLeft =  this.marginLeft + '%';
     document
       .getElementById('pdfFor')
       .style
-      .marginRight = this.marginRight[3] + '%';
+      .marginRight = this.marginRight + '%';
     document.getElementById('sign')
       .style
       .bottom = this.bottom + 'px';
@@ -253,11 +237,11 @@ export class CreateComponent implements OnInit {
     document
       .getElementById('pdfForFix')
       .style
-      .marginLeft =  this.marginLeft[3] + '%';
+      .marginLeft =  this.marginLeft + '%';
     document
       .getElementById('pdfForFix')
       .style
-      .marginRight = this.marginRight[3] + '%';
+      .marginRight = this.marginRight + '%';
     document
       .getElementById('signFix')
       .style
@@ -292,9 +276,9 @@ export class CreateComponent implements OnInit {
     this.postsWithArray[n]
       .paddingTop = this.paddingTop;
     this.postsWithArray[n]
-      .marginLeft[3] = this.marginLeft;
+      .marginLeft = this.marginLeft;
     this.postsWithArray[n]
-      .marginRight[3] = this.marginRight;
+      .marginRight = this.marginRight;
     this.postsWithArray[n]
       .bottom = this.bottom;
     for (let i = 0; i < this.arrayFontSize.length; i++ ) {
@@ -313,15 +297,15 @@ export class CreateComponent implements OnInit {
       .img = this.base64Tmp;
     console
       .log(this.postsWithArray);
-        setTimeout( () => {
-      this.db.database
-        .ref('/template')
-        .child(this.schoolNr + '' + this.name)
-        .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min )
-        .set(this.postsWithArray[0]);
-      alert('Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );
-    },
-          500 );
+    setTimeout( () => {
+        this.db.database
+          .ref('/template')
+          .child(this.schoolNr + '' + this.name)
+          .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min )
+          .set(this.postsWithArray[0]);
+        alert('Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );
+      },
+      500 );
   }
   takeFontForEle(font, element) {
     document
@@ -335,7 +319,6 @@ export class CreateComponent implements OnInit {
     this.arrayFontFamili[element] = font;
     if (element === 4) {
       this.takeFontForEle(font, 5);
-      this.takeFontForEle(font, 6);
     }
   }
   setUserData() {
@@ -343,9 +326,9 @@ export class CreateComponent implements OnInit {
     console.log(select.selectedIndex);
     this.paddingTop = this.template[select.selectedIndex]
       .paddingTop;
-    this.marginLeft[3] = this.template[select.selectedIndex]
+    this.marginLeft = this.template[select.selectedIndex]
       .marginLeft;
-    this.marginRight[3] = this.template[select.selectedIndex]
+    this.marginRight = this.template[select.selectedIndex]
       .marginRight;
     this.bottom = this.template[select.selectedIndex]
       .bottom;
@@ -432,22 +415,6 @@ export class CreateComponent implements OnInit {
       document.getElementById('card' + n).style.display = 'none';
       document.getElementById('card' + n).style.display = 'inline-block';
       this.isCollapsed[n] = true;
-    }
-  }
-
-  onSelectFile(event: any) { // called each time file input changes
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader() as any;
-      console.log('1');
-      reader.onload = (event2: any) => {
-        console.log('2');
-        const img = document.getElementById('imgToChange') as HTMLImageElement;
-        const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
-        img.src = event2.target.result;
-        img2.src = event2.target.result;
-      }
-      console.log('3');
-      reader.readAsDataURL(event.target.files[0]);
     }
   }
 }

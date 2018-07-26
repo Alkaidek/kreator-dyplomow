@@ -1,0 +1,338 @@
+<!--
+<div class="curtain">
+  <img src="../../assets/img/macLogo2.png" /> <br/>
+  <span>K</span>
+  <span>R</span>
+  <span>E</span>
+  <span>A</span>
+  <span>T</span>
+  <span>O</span>
+  <span>R</span>
+  <span style='margin-left: 20px'></span>
+  <span>D</span>
+  <span>Y</span>
+  <span>P</span>
+  <span>L</span>
+  <span>O</span>
+  <span>M</span>
+  <span>Ó</span>
+  <span>W</span>
+</div>
+<div id="viewFix">
+  <div id="toPdf100Fix" >
+    <img src="{{imgSrcFix}}" id="imgPdf100Fix"/>
+    <div id="pdfForFix" [style.padding-top]="paddingTop + '%'" [style.margin-left]="marginLeft + '%'" [style.margin-right]="marginRight + '%'">
+      <p id="pdfTxtFix">
+        <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
+          {{title}}
+        </s>
+        <br/>
+        <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
+          {{forWho}}
+        </s>
+        <br/>
+        <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
+          {{forWhat}}
+        </s>
+      </p>
+      <div class="signature" id="signFix" [style.bottom]="bottom + 'px'">
+        <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign1}}
+        </p>
+        <p id="centerFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign3}}
+        <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
+        </p>
+        <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] - 20 + '%'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<img id="podglad" src="../../assets/img/podglad2.png" />
+-->
+<div id="create" xmlns="" [style.display]="auth">
+
+  <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplom!</button>
+  <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
+
+<div id="bcgContainter">
+  <h1>Wybierz tło dyplomu</h1>
+  <div class="scroll" id="scrollable">
+    <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i)">
+      <img id="img{{i}}" src="{{tmp}}"  />
+    </div>
+  </div>
+  <button id="leftDirect" class="btnDirect" (click)="moveLeft()" disabled><</button>
+  <button id="rightDirect" class="btnDirect" (click)="moveRight()">></button>
+</div>
+  <!--
+  <div id="bcgContainter2" [style.display]="bool">
+  <h1>Wybierz swój szablon</h1>
+  <select id="selectTemplate">
+    <option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</option>
+  </select>
+  <br/>
+  <button (click)="setUserData()">Zatwierdz!</button>
+  </div>
+
+  <div id="txtContainter">
+  <h1>Wpisz dane</h1>
+
+  <div class="dataContainer">
+    <div class="leftCont">
+      <p><b>Nazwa: </b></p>
+
+      <input class="input" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa"> <br/>
+      <p>
+        <button type="button" class="dataBtn" (click)="showMore(0)">
+          Więcej opcji
+        </button>
+      </p>
+    </div>
+    <div class="rightCont">
+      <div >
+        <div class="card" id="card0">
+          <div class="card-body">
+            <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card00">
+            <br />
+            <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
+            <br />
+            <div class="fontCont">
+              <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 0)">
+                <h1>Dyplom</h1>
+              </div>
+              <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 0)">
+                <h1>Dyplom</h1>
+              </div>
+              <div class="fnt fnt3" (click)="takeFontForEle('Allura', 0)">
+                <h1>Dyplom</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dataContainer">
+    <div class="leftCont">
+      <p><b>Dla kogo: </b></p>
+
+      <textarea class="input" [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"> </textarea>
+      <p>
+        <button type="button" class="dataBtn" (click)="showMore(1)">
+          Więcej opcji
+        </button>
+      </p>
+    </div>
+    <div class="rightCont">
+      <div class="card" id="card1">
+        <div class="card-body">
+          <br />
+          <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card11">
+          <br />
+          <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111" style="background:">
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 1)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 1)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 1)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dataContainer">
+    <div class="leftCont">
+      <p><b>Za co:</b></p>
+
+      <textarea class="input" [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"> </textarea>
+      <p>
+        <button type="button" class="dataBtn" (click)="showMore(2)">
+          Więcej opcji
+        </button>
+      </p>
+    </div>
+    <div class="rightCont">
+      <div class="card" id="card2">
+        <div class="card-body">
+          <br />
+          <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10" id="card22">
+          <br />
+          <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 2)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 2)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 2)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dataContainer">
+    <div class="leftCont">
+      <p><b>Stopka</b></p>
+
+      <input class="input" [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka">
+      <p>
+        <button type="button" class="dataBtn" (click)="showMore(3)">
+          Więcej opcji
+        </button>
+      </p>
+    </div>
+    <div class="rightCont">
+      <div class="card" id="card3">
+        <div class="card-body">
+          <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10" id="card33">
+          <br />
+          <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 3)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 3)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 3)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dataContainer">
+    <div class="leftCont">
+      <p><b>Podpisy:</b></p>
+
+      <textarea class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
+      <textarea class="input signTxt" [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"> </textarea>
+      <textarea class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
+      <p>
+        <button type="button" class="dataBtn" (click)="showMore(4)">
+          Więcej opcji
+        </button>
+      </p>
+    </div>
+    <div class="rightCont">
+      <div class="card" id="card4">
+        <div class="card-body">
+          <br />
+          <br />
+          <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10" id="card44">
+          <br />
+          <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
+          <br />
+          <div class="fontCont">
+            <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 4)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 4)">
+              <h1>Dyplom</h1>
+            </div>
+            <div class="fnt fnt3" (click)="takeFontForEle('Allura', 4)">
+              <h1>Dyplom</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br />
+  <br />
+  <div id="detailsContainer">
+  <h1>Dopracuj detale</h1>
+  <br />
+  <div class="inputContainer">
+    <div class="inputLeft">
+      <p>Górny margines: {{paddingTop}}</p>
+      <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
+    </div>
+    <div class="inputRight">
+      <p>Dolny margines: {{bottom}}</p>
+      <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
+    </div>
+  </div>
+  <div class="inputContainer">
+    <div class="inputLeft">
+      <p>Lewy margines: {{marginLeft}}</p>
+      <input type="range" min="0" max="15" [value]="marginLeft" (input)="marginLeft = $event.target.value" class="slider50">
+    </div>
+    <div class="inputRight">
+      <p>Prawy margines: {{marginRight}}</p>
+      <input type="range" min="0" max="15" [value]="marginRight" (input)="marginRight = $event.target.value" class="slider50">
+    </div>
+  </div>
+  </div>
+
+  <div id="fontContainter" [style.display]="'none'">
+  <h1>Wybierz czcionkę</h1>
+  <div class="fnt" id="font1" (click)="takeFont('Abril Fatface')">
+    <h1>Dyplom</h1>
+  </div>
+  <div class="fnt" id="font2" (click)="takeFont('Aladin')">
+    <h1>Dyplom</h1>
+  </div>
+  <div class="fnt" id="font3" (click)="takeFont('Allura')">
+    <h1>Dyplom</h1>
+  </div>
+  </div>
+  -->
+</div>
+
+<div id="view">
+  <div id="toPdf100" class="rotateInDownRight" >
+    <img src="{{imgSrcFix}}" id="imgPdf100" style="background-size: cover"/>
+    <div id="pdfFor" [style.padding-top]="paddingTop + '%'" [style.margin-left]="marginLeft + '%'" [style.margin-right]="marginRight + '%'">
+      <p id="pdfTxt">
+        <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]">
+          {{title}}
+        </s>
+        <br/>
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
+          {{forWho}}
+        </s>
+        <br/>
+        <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
+          {{forWhat}}
+        </s>
+      </p>
+      <div class="signature" id="sign" [style.bottom]="bottom + 'px'">
+        <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign1}}
+        </p>
+        <p id="center" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign3}}
+        </p>
+        <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
+        </p>
+        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

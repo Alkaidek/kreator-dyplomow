@@ -10,9 +10,7 @@ $MACblue: #00489a
 $MACgreen: #00a650
 
 #create, #view
-  display: inline-block
   float: left
-  min-height: 100%
 
 .curtain
   color: white
@@ -97,23 +95,26 @@ $MACgreen: #00a650
     transform: scale(0,0)
 
 #create
-  width: 60%
-  max-width: 60%
+  width: 100%
+  max-width: 100%
+  height: 40%
+  max-height: 40%
   padding-top: 1%
-  border-right: $MACblue 3px solid
+  border: $MACblue 3px solid
 
 #view, #viewFix
-  width: 50%
+  width: 100%
   text-align: center
   font-family: Arial
-  position: fixed
   margin: auto
 
 #view
-  width: 40%
+  width: 100%
+  max-width: 100%
   background-color: white
   z-index: 10
-  height: 100%
+  height: 60%
+  border: $MACorange 3px solid
 
 .rotateInDownRight
   -webkit-animation-name: rotateInDownRight
@@ -210,19 +211,20 @@ $MACgreen: #00a650
 #imgPdf100
   position: absolute
   left: 0px
-  top: 0px
-  margin-left: 15%
-  width: 70%
-  height: 80%
-  margin-top: 10%
+  top: 40%
+  margin-left: 30%
+  width: 40%
+  height: 90%
+  margin-top: 1%
 
 #toPdf100
-  margin-left: 15%
-  width: 70%
-  height: 80%
-  margin-top: 10%
+  margin-left: 30%
+  width: 40%
+  height: 90%
+  margin-top: 1%
   background-color: #ff8913
   font-weight: bold
+  background-size: cover
 
 #imgPdf100Fix, #canvasPdf100Fix
   position: absolute
@@ -236,7 +238,6 @@ $MACgreen: #00a650
   width: 595px
   height: 842px
   margin-left: 15%
-  background-color: #ff8913
   font-weight: bold
 
 #toPdf
@@ -249,6 +250,8 @@ $MACgreen: #00a650
   font-weight: bold
 
 #pdfFor, #pdfForFix
+  margin-left: 15%
+  margin-right: 15%
   padding-top: 15%
   overflow: hidden
   white-space: pre-wrap
@@ -271,8 +274,8 @@ $MACgreen: #00a650
   float: left
   max-height: 100%
   width: 15%
-  margin-left: $margin
-  margin-right: $margin
+  margin-left: 0.1%
+  margin-right: 0.1%
   border: black 1px solid
   box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
   transition: 0.3s
@@ -294,11 +297,17 @@ $MACgreen: #00a650
 
 .bcg
   transform: scale(0.8,0.8)
-  max-width: 5%
-  margin-left: $newmargin
-  margin-right: $newmargin
+  max-height: 1%
+  height: 1%
+  width: 2%
+  max-width: 2%
+  background-size: cover
+  background-color: red
+  margin-left: 0.5%
+  margin-right: 0.5%
   margin-bottom: 0.2%
   cursor: zoom-in
+  transform: rotate(90deg)
 
 .fnt
   transform: scale(0.8,0.8)
@@ -306,6 +315,7 @@ $MACgreen: #00a650
 .bcg:hover, .fnt:hover
   transform: scale(0.99,0.99)
   box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
+  transform: rotate(90deg)
 
 img
   width: 100%
@@ -362,7 +372,7 @@ img
   text-align: center
 
 #bcgContainter
-  min-height: 30%
+  max-height: 30%
   padding-bottom: 5%
 
 #bcgContainter2
@@ -402,7 +412,7 @@ button:disabled, button:disabled:hover
   min-width: 40%
 
 #txtContainter
-  min-height: 1200px
+  min-height: 1000px
   height: 100%
 
 #font1, #font2, #font3
