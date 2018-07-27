@@ -22,6 +22,7 @@ export class CreateComponent implements OnInit {
       false,
       false
     ];
+  bcgDisplay = ['block', 'none', 'none'];
   auth = 'block';
   bcgTemp: any;
   template: any;
@@ -46,6 +47,7 @@ export class CreateComponent implements OnInit {
       console.log(this.coordinatesTemplate);
     });
   }
+  currentStep = 0;
   arrayScroll = [1, 2, 3];
   lastValue = 1;
   schoolNr = '29';
@@ -62,6 +64,8 @@ export class CreateComponent implements OnInit {
   imgSrcFix = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
+  paddingTopForWho = 10;
+  paddingTopForWhat = 20;
   marginLeft = [0, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
   bottom = 0;
@@ -105,9 +109,9 @@ export class CreateComponent implements OnInit {
   postsWithArray = [
     {
       nameOfTemplate: '',
-      paddingTop: 0,
-      marginLeft: 0,
-      marginRight: 0,
+      paddingTop: [0, 0, 0],
+      marginLeft: [0, 0, 0, 0],
+      marginRight: [0, 0, 0, 0],
       bottom: 0,
       arrayFontSize:
         [
@@ -199,12 +203,16 @@ export class CreateComponent implements OnInit {
     switch ( imgSrc ) {
       case imgSrc:
         this.paddingTop = this.coordinatesTemplate[imgSrc][0];
+        this.paddingTopForWho = this.coordinatesTemplate[imgSrc][0] + 10;
+        this.paddingTopForWhat = this.coordinatesTemplate[imgSrc][0] + 20;
         this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
         this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
         this.bottom = this.coordinatesTemplate[imgSrc][3];
         break;
       default:
         this.paddingTop = 10;
+        this.paddingTopForWho = 20;
+        this.paddingTopForWhat = 30;
         this.marginLeft[3] = 5;
         this.marginRight[3] = 5;
         this.bottom = 0;
@@ -237,32 +245,8 @@ export class CreateComponent implements OnInit {
     });
   }
   setPadding() {
-    document
-      .getElementById('pdfFor')
-      .style
-      .marginLeft =  this.marginLeft[3] + '%';
-    document
-      .getElementById('pdfFor')
-      .style
-      .marginRight = this.marginRight[3] + '%';
-    document.getElementById('sign')
-      .style
-      .bottom = this.bottom + 'px';
   }
   setPaddingFix() {
-    document
-      .getElementById('pdfForFix')
-      .style
-      .marginLeft =  this.marginLeft[3] + '%';
-    document
-      .getElementById('pdfForFix')
-      .style
-      .marginRight = this.marginRight[3] + '%';
-    document
-      .getElementById('signFix')
-      .style
-      .bottom = this.bottom + 'px';
-    this.setPadding();
   }
   createArrayToSend(n) {
     const date = new Date();
@@ -290,11 +274,27 @@ export class CreateComponent implements OnInit {
     this.postsWithArray[n]
       .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
     this.postsWithArray[n]
-      .paddingTop = this.paddingTop;
+      .paddingTop[0] = this.paddingTop;
     this.postsWithArray[n]
-      .marginLeft[3] = this.marginLeft;
+      .paddingTop[1] = this.paddingTopForWho;
     this.postsWithArray[n]
-      .marginRight[3] = this.marginRight;
+      .paddingTop[2] = this.paddingTopForWhat;
+    this.postsWithArray[n]
+      .marginLeft[0] = this.marginLeft[0];
+    this.postsWithArray[n]
+      .marginLeft[1] = this.marginLeft[1];
+    this.postsWithArray[n]
+      .marginLeft[2] = this.marginLeft[2];
+    this.postsWithArray[n]
+      .marginLeft[3] = this.marginLeft[3];
+    this.postsWithArray[n]
+      .marginRight[0] = this.marginRight[0];
+    this.postsWithArray[n]
+      .marginRight[1] = this.marginRight[1];
+    this.postsWithArray[n]
+      .marginRight[2] = this.marginRight[2];
+    this.postsWithArray[n]
+      .marginRight[3] = this.marginRight[3];
     this.postsWithArray[n]
       .bottom = this.bottom;
     for (let i = 0; i < this.arrayFontSize.length; i++ ) {
@@ -342,11 +342,27 @@ export class CreateComponent implements OnInit {
     const select = document.getElementById('selectTemplate') as HTMLSelectElement;
     console.log(select.selectedIndex);
     this.paddingTop = this.template[select.selectedIndex]
-      .paddingTop;
+      .paddingTop[0];
+    this.paddingTopForWho = this.template[select.selectedIndex]
+      .paddingTop[1];
+    this.paddingTopForWhat = this.template[select.selectedIndex]
+      .paddingTop[2];
+    this.marginLeft[0] = this.template[select.selectedIndex]
+      .marginLeft[0];
+    this.marginLeft[1] = this.template[select.selectedIndex]
+      .marginLeft[1];
+    this.marginLeft[2] = this.template[select.selectedIndex]
+      .marginLeft[2];
     this.marginLeft[3] = this.template[select.selectedIndex]
-      .marginLeft;
+      .marginLeft[3];
     this.marginRight[3] = this.template[select.selectedIndex]
-      .marginRight;
+      .marginRight[3];
+    this.marginRight[2] = this.template[select.selectedIndex]
+      .marginRight[2];
+    this.marginRight[1] = this.template[select.selectedIndex]
+      .marginRight[1];
+    this.marginRight[0] = this.template[select.selectedIndex]
+      .marginRight[0];
     this.bottom = this.template[select.selectedIndex]
       .bottom;
     this.setPaddingFix();
@@ -450,4 +466,49 @@ export class CreateComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
+  set0degress() {
+    this.rotate = 0;
+  }
+  resetImg() {
+    this.rotate = 0;
+    this.imgLeft = 0;
+    this.imgTop = 0;
+    this.imgWidth = 10;
+    this.imgHeight = 10;
+  }
+  right(n) {
+    const btn =  document
+      .getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('btnRight') as HTMLButtonElement;
+    this.bcgDisplay[n] = 'none';
+    this.bcgDisplay[n + 1] = 'block';
+    this.currentStep = this.currentStep + 1;
+    if (n === 0) {
+      this.bool = 'none';
+    }
+    btn
+      .disabled = false;
+    if (this.currentStep === 2) {
+      btn2.disabled = true;
+    }
+  }
+  left(n) {
+    const btn =  document
+      .getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('btnRight') as HTMLButtonElement;
+    this.bcgDisplay[n] = 'none';
+    this.bcgDisplay[n - 1] = 'block';
+    this.currentStep = this.currentStep  - 1;
+    if (n === 1) {
+      this.bool = 'block';
+    }
+    btn2
+      .disabled = false;
+    if (this.currentStep === 0){
+      btn.disabled = true;
+    }
+  }
 }
+

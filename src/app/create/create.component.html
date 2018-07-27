@@ -25,31 +25,33 @@
         <img src="{{imgSrcFix}}" id="imgPdf100Fix" />
 
         <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas> -->
-        <div id="pdfForFix" [style.padding-top]="paddingTop + '%'" >
-          <img id="imgToChange" src="../../assets/img/0.png" style="background-size: cover; position: absolute;"
+        <div id="pdfForFix">
+          <img id="imgToChange" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
                [style.transform]="'rotate('+rotate+'deg)'"
                [style.width]="imgWidth+'%'"
                [style.height]="imgHeight+'%'"
                [style.left]="imgLeft+'%'"
                [style.top]="imgTop+'%'"/>
-          <p id="pdfTxtFix" >
-            <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'">
-              {{title}}
-            </s>
-            <br/>
-          </p>
-          <div [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
-            <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]">
+          <div  style="z-index: 8;">
+            <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+              <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+                {{title}}
+              </s>
+              <br/>
+            </p>
+          </div>
+          <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+            <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
               {{forWho}}
             </s>
           </div>
-          <div [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
-            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]">
+          <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
               {{forWhat}}
             </s>
           </div>
 
-          <div class="signature" id="signFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;">
+          <div class="signature" id="signFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
             <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
               {{sign1}}
             </p>
@@ -71,40 +73,59 @@
 <div id="create" xmlns="" [style.display]="auth">
   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
-  <input type="file"  (change)="onSelectFile($event)">
-  <input type="range" min="-360" max="360" [value]="rotate" (input)="rotate = $event.target.value" class="slider50">
-  <input type="range" min="0" max="{{100-imgTop}}" [value]="imgWidth" (input)="imgWidth = $event.target.value" class="slider50" >
-  <input type="range" min="0" max="{{100-imgLeft}}" [value]="imgHeight" (input)="imgHeight = $event.target.value" class="slider50" >
-  <input type="range" min="0" max="{{100-imgHeight}}" [value]="imgTop" (input)="imgTop = $event.target.value" class="slider50" >
-  <input type="range" min="0" max="{{100-imgWidth}}" [value]="imgLeft" (input)="imgLeft = $event.target.value" class="slider50">
-  <div id="bcgContainter">
-    <h1>Wybierz tło dyplomu</h1>
-    <div class="scroll" id="scrollable">
+  <button id="btnLeft" class="btnStep" (click)="left(currentStep)" disabled ><</button>
+  <button id="btnRight" class="btnStep" (click)="right(currentStep)">></button>
+  <div [style.display]="bcgDisplay[2]" style="text-align: center">
+    <h1 class="fadeInTop">Dodaj swój obrazek</h1>
+    <label for="file-upload" class="button fadeInLeft">
+      <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
+      Dodaj Obrazek
+    </label>
+    <input id="file-upload" class="fadeInRight" type="file" (change)="onSelectFile($event)"/>
+    <input type="file" (change)="onSelectFile($event)">
+    <br />
+    <p><b class="fadeInRight">Obrót obrazka</b></p>
+    <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate" (input)="rotate = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"> <br />
+    <p><b class="fadeInRight">Szerokość obrazka</b></p>
+    <input type="range" min="0" max="{{100-imgLeft}}" [value]="imgWidth" (input)="imgWidth = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" ><br />
+    <p><b class="fadeInRight">Wysokość obrazka</b></p>
+    <input type="range" min="0" max="{{100-imgTop}}" [value]="imgHeight" (input)="imgHeight = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
+    <p><b class="fadeInRight">Lewy margines obrazka</b></p>
+    <input type="range" min="0" max="{{100-imgWidth}}" [value]="imgLeft" (input)="imgLeft = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
+    <p><b class="fadeInRight">Prawy margines obrazka</b></p>
+    <input type="range" min="0" max="{{100-imgHeight}}" [value]="imgTop" (input)="imgTop = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+    <br />
+    <button class="fadeInRight" (click)="set0degress()">Zresetuj Obrót</button> <br/>
+    <button class="fadeInLeft" (click)="resetImg()">Zresetuj Obrazek</button>
+  </div>
+  <div id="bcgContainter" [style.display]="bcgDisplay[0]">
+    <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
+    <div class="scroll fadeInTop" id="scrollable">
       <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i)">
         <img id="img{{i}}" src="{{tmp}}"  />
       </div>
     </div>
-    <button id="leftDirect" class="btnDirect" (click)="moveLeft()" disabled><</button>
-    <button id="rightDirect" class="btnDirect" (click)="moveRight()">></button>
+    <button id="leftDirect" class="btnDirect fadeInTop" (click)="moveLeft()" disabled><</button>
+    <button id="rightDirect" class="btnDirect fadeInTop" (click)="moveRight()">></button>
   </div>
   <div id="bcgContainter2" [style.display]="bool">
-    <h1>Wybierz swój szablon</h1>
-    <select id="selectTemplate">
+    <h1 class="fadeInTop fadeInTop">Wybierz swój szablon</h1>
+    <select id="selectTemplate" class="fadeInTop">
       <option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</option>
     </select>
     <br/>
-    <button (click)="setUserData()">Zatwierdz!</button>
+    <button class="fadeInTop" (click)="setUserData()">Zatwierdz!</button>
   </div>
-  <div id="txtContainter">
-    <h1>Wpisz dane</h1>
+  <div id="txtContainter" [style.display]="bcgDisplay[1]">
+    <h1 class="fadeInTop">Wpisz dane</h1>
 
     <div class="dataContainer">
       <div class="leftCont">
-        <p><b>Nazwa: </b></p>
+        <p><b class="fadeInLeft">Nazwa: </b></p>
         <!-- 0 -->
-        <input class="input" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa"> <br/>
+        <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa"> <br/>
         <p>
-          <button type="button" class="dataBtn" (click)="showMore(0)">
+          <button type="button" class="dataBtn fadeInLeft" (click)="showMore(0)">
             Więcej opcji
           </button>
         </p>
@@ -135,6 +156,9 @@
                 <div class="inputRight">
                   <input type="range" min="0" max="40" [value]="marginRight[0]" (input)="marginRight[0] = $event.target.value" class="slider50">
                 </div>
+                <div class="inputContainer">
+                  <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
+                </div>
               </div>
             </div>
           </div>
@@ -143,12 +167,12 @@
     </div>
 
     <div class="dataContainer">
-      <div class="leftCont">
-        <p><b>Dla kogo: </b></p>
+      <div class="leftCont ">
+        <p><b class="fadeInLeft">Dla kogo: </b></p>
         <!-- 2 -->
-        <textarea class="input" [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"> </textarea>
+        <textarea class="input fadeInLeft" [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"> </textarea>
         <p>
-          <button type="button" class="dataBtn" (click)="showMore(1)">
+          <button type="button" class="dataBtn fadeInLeft" (click)="showMore(1)">
             Więcej opcji
           </button>
         </p>
@@ -179,6 +203,9 @@
                 <div class="inputRight">
                   <input type="range" min="0" max="40" [value]="marginRight[1]" (input)="marginRight[1] = $event.target.value" class="slider50">
                 </div>
+                <div class="inputContainer">
+                  <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
+                </div>
               </div>
             </div>
           </div>
@@ -186,12 +213,12 @@
     </div>
 
     <div class="dataContainer">
-      <div class="leftCont">
-        <p><b>Za co:</b></p>
+      <div class="leftCont ">
+        <p><b class="fadeInLeft">Za co:</b></p>
         <!-- 4 -->
-        <textarea class="input" [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"> </textarea>
+        <textarea class="input fadeInLeft" [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"> </textarea>
         <p>
-          <button type="button" class="dataBtn" (click)="showMore(2)">
+          <button type="button" class="dataBtn fadeInLeft" (click)="showMore(2)">
             Więcej opcji
           </button>
         </p>
@@ -222,6 +249,9 @@
                 <div class="inputRight">
                   <input type="range" min="0" max="40" [value]="marginRight[2]" (input)="marginRight[2] = $event.target.value" class="slider50">
                 </div>
+                <div class="inputContainer">
+                    <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
+                </div>
               </div>
             </div>
           </div>
@@ -230,11 +260,11 @@
 
     <div class="dataContainer">
       <div class="leftCont">
-        <p><b>Stopka</b></p>
+        <p><b class="fadeInLeft">Stopka</b></p>
         <!-- 3 -->
-        <input class="input" [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka">
+        <input class="input fadeInLeft" [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka">
         <p>
-          <button type="button" class="dataBtn" (click)="showMore(3)">
+          <button type="button" class="dataBtn fadeInLeft" (click)="showMore(3)">
             Więcej opcji
           </button>
         </p>
@@ -257,20 +287,23 @@
                   <h1>Dyplom</h1>
                 </div>
               </div>
+              <div class="inputContainer">
+                <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">
+              </div>
             </div>
           </div>
       </div>
     </div>
 
     <div class="dataContainer">
-      <div class="leftCont">
-        <p><b>Podpisy:</b></p>
+      <div class="leftCont ">
+        <p><b class="fadeInLeft">Podpisy:</b></p>
         <!-- 1 -->
-        <textarea class="input signTxt" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
-        <textarea class="input signTxt" [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"> </textarea>
-        <textarea class="input signTxt" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
+        <textarea class="input signTxt fadeInLeft" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
+        <textarea class="input signTxt fadeInLeft" [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"> </textarea>
+        <textarea class="input signTxt fadeInLeft" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
         <p>
-          <button type="button" class="dataBtn" (click)="showMore(4)">
+          <button type="button" class="dataBtn fadeInLeft" (click)="showMore(4)">
             Więcej opcji
           </button>
         </p>
@@ -310,22 +343,23 @@
   </div>
   <br />
   <br />
-  <div id="detailsContainer">
-    <h1>Dopracuj detale</h1>
-    <br />
-    <div class="inputContainer">
-      <div class="inputLeft">
-        <p>Górny margines: {{paddingTop}}</p>
-        <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
-      </div>
-      <div class="inputRight">
-        <p>Dolny margines: {{bottom}}</p>
-        <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
-      </div>
-    </div>
-     <!--<button (click)="setPaddingFix()"> Zastosuj</button>-->
+  <!--
+<div id="detailsContainer">
+<h1>Dopracuj detale</h1>
+<br />
+<div class="inputContainer">
+  <div class="inputLeft">
+    <p>Górny margines: {{paddingTop}}</p>
+    <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
   </div>
-
+  <div class="inputRight">
+    <p>Dolny margines: {{bottom}}</p>
+    <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
+  </div>
+</div>
+<button (click)="setPaddingFix()"> Zastosuj</button>
+  </div>
+-->
 </div>
 
 <div id="view">
@@ -333,33 +367,33 @@
     <img src="{{imgSrcFix}}" id="imgPdf100" />
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
-    <div id="pdfFor" [style.padding-top]="paddingTop + '%'" >
+    <div id="pdfFor">
       <img id="imgToChange2" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate+'deg)'"
            [style.width]="imgWidth+'%'"
            [style.height]="imgHeight+'%'"
            [style.left]="imgLeft+'%'"
            [style.top]="imgTop+'%'"/>
-      <div  style="z-index: 14;">
-        <p id="pdfTxt" style="z-index: 14">
-          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 14">
+      <div  style="z-index: 8;">
+        <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]" style="z-index: 7">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
           {{forWho}}
         </s>
       </div>
-        <div [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'" >
-          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'" [style.color]="arrayFontColor[4]" style="z-index: 7">
+        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
             {{forWhat}}
           </s>
         </div>
 
-      <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7">
+      <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
           {{sign1}}
         </p>
