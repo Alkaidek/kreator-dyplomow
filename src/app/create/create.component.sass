@@ -10,7 +10,7 @@ $MACblue: #00489a
 $MACgreen: #00a650
 $MACred: #e6323d
 
-#create, #view
+#create, #view, #viewLandscape
   display: inline-block
   float: left
   min-height: 100%
@@ -103,14 +103,14 @@ $MACred: #e6323d
   padding-top: 1%
   border-right: $MACblue 3px solid
 
-#view, #viewFix
+#view, #viewFix, #viewLandscape
   width: 50%
   text-align: center
   font-family: Arial
   position: fixed
   margin: auto
 
-#view
+#view, #viewLandscape
   width: 40%
   background-color: white
   z-index: 10
@@ -236,7 +236,7 @@ $MACred: #e6323d
   margin-right: 25%
   margin-top: 25%
 
-#imgPdf100
+#imgPdf100, #imgPdf100landscape
   position: absolute
   left: 0px
   top: 0px
@@ -245,7 +245,7 @@ $MACred: #e6323d
   height: 80%
   margin-top: 10%
 
-#toPdf100
+#toPdf100, #toPdf100landscape
   margin-left: 15%
   width: 70%
   height: 80%
@@ -277,7 +277,7 @@ $MACred: #e6323d
   margin-top: 25%
   font-weight: bold
 
-#pdfFor, #pdfForFix
+#pdfFor, #pdfForFix, #pdfForlandscape
   padding-top: 15%
   overflow: hidden
   white-space: pre-wrap
@@ -456,7 +456,7 @@ h1
 @media (max-width: 1210px)
   h1
     font-size: 100%
-  #sign
+  #sign, #signLandscape
     font-size: 60%
   #smallTxt, #smallTxtFix
     font-size: 55%
@@ -472,7 +472,7 @@ h1
 @media (max-height: 800px)
   h1
     font-size: 180%
-  #left, #right, #rightFix, #leftFix, #center
+  #left, #right, #rightFix, #leftFix, #center, #leftLandscape
     font-size: 80%
   #smallTxt
     font-size: 55%
@@ -497,11 +497,11 @@ h1
   border: 1px solid #ccc
   border-radius: 0px
 
-#sFor, #sForFix
+#sFor, #sForFix, #sForLandscape
   font-weight: bold
   font-size: 250%
 
-#txtForWhat, #txtForWhatFix
+#txtForWhat, #txtForWhatFix, #txtForWhatLandscape
   font-size: 200%
 
 s
@@ -512,17 +512,22 @@ s
   width: 33.33333333%
   font-size: 120%
 
+#leftLandscape, #rightLandscape, #centerLandscape
+  width: 33.3333%
+  min-width: 33.3333%
+  float: left
+
 #leftFix, #rightFix, #centerFix
   font-size: 150%
 
-#left, #leftFix, #center, #centerFix
+#left, #leftFix, #center, #centerFix, #leftLandscape
   float: left
   text-align: left
 
-#centerFix, #center
+#centerFix, #center, #centerLandscape
   text-align: center
 
-#right, #rightFix
+#right, #rightFix, #rightLandscape
   float: right
   text-align: right
 
@@ -533,11 +538,11 @@ s
   position: absolute
   bottom: 0%
 
-#smallTxt, #smallTxtFix
+#smallTxt, #smallTxtFix, #smallTxtLandscape
   font-weight: lighter
   font-size: 120%
 
-#largeTxt, #largeTxtFix
+#largeTxt, #largeTxtFix, #largeTxtLandscape
   font-size: 300%
 
 .slider, .slider50, input[type=color], .sliderInput

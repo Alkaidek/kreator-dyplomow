@@ -47,6 +47,7 @@ export class CreateComponent implements OnInit {
       console.log(this.coordinatesTemplate);
     });
   }
+  landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
   lastValue = 1;
@@ -71,11 +72,11 @@ export class CreateComponent implements OnInit {
   bottom = 0;
   arrayFontSize =
     [
-      300,
-      110,
-      250,
-      110,
-      200
+      3,
+      1,
+      2,
+      1,
+      2
     ];
   arrayFontNameId =
     [
@@ -230,19 +231,35 @@ export class CreateComponent implements OnInit {
     this.imgSrcFix = pic;
   }
   generatePdf() {
-    const elementToPrint = document
-      .getElementById('toPdf100Fix');
-    const pdf = new jsPDF('p', 'pt', 'a4', true);
-    pdf
-      .internal
-      .scaleFactor = 1;
-    pdf
-      .addHTML(elementToPrint, () => {
+    if(this.landscape === 'inline-block') {
+      const elementToPrint = document
+        .getElementById('toPdf100landscape');
+      const pdf = new jsPDF('l', 'pt', 'a4', true);
       pdf
-        .save('wygenerowany dyplom.pdf');
+        .internal
+        .scaleFactor = 1;
       pdf
-        .autoPrint();
-    });
+        .addHTML(elementToPrint, () => {
+          pdf
+            .save('wygenerowany dyplom.pdf');
+          pdf
+            .autoPrint();
+        });
+    } else {
+      const elementToPrint = document
+        .getElementById('toPdf100Fix');
+      const pdf = new jsPDF('p', 'pt', 'a4', true);
+      pdf
+        .internal
+        .scaleFactor = 1;
+      pdf
+        .addHTML(elementToPrint, () => {
+          pdf
+            .save('wygenerowany dyplom.pdf');
+          pdf
+            .autoPrint();
+        });
+    }
   }
   setPadding() {
   }
@@ -459,8 +476,10 @@ export class CreateComponent implements OnInit {
         console.log('2');
         const img = document.getElementById('imgToChange') as HTMLImageElement;
         const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
+        const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
         img.src = event2.target.result;
         img2.src = event2.target.result;
+        img3.src = event2.target.result;
       }
       console.log('3');
       reader.readAsDataURL(event.target.files[0]);
@@ -506,8 +525,15 @@ export class CreateComponent implements OnInit {
     }
     btn2
       .disabled = false;
-    if (this.currentStep === 0){
+    if (this.currentStep === 0) {
       btn.disabled = true;
+    }
+  }
+  landscapeOff() {
+    if (this.landscape === 'inline-block') {
+      this.landscape = 'none';
+    } else {
+      this.landscape = 'inline-block';
     }
   }
 }

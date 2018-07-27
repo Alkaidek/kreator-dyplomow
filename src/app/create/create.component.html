@@ -34,34 +34,34 @@
                [style.top]="imgTop+'%'"/>
           <div  style="z-index: 8;">
             <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-              <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+              <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
                 {{title}}
               </s>
               <br/>
             </p>
           </div>
           <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-            <s id="sForFix" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+            <s id="sForFix" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
               {{forWho}}
             </s>
           </div>
           <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + '%'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
               {{forWhat}}
             </s>
           </div>
 
           <div class="signature" id="signFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-            <p id="leftFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+            <p id="leftFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
               {{sign1}}
             </p>
-            <p id="centerFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+            <p id="centerFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
               {{sign3}}
             </p>
-            <p id="rightFix" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+            <p id="rightFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
               {{sign2}}
             </p>
-            <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
+            <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
               {{footer}}
             </p>
           </div>
@@ -117,6 +117,8 @@
     </select>
     <br/>
     <button class="fadeInTop" (click)="setUserData()">Zatwierdz!</button>
+
+    <button (click)="landscapeOff()"></button>
   </div>
   <div id="txtContainter" [style.display]="bcgDisplay[1]">
     <h1 class="fadeInTop">Drugi krok!</h1>
@@ -128,7 +130,7 @@
         <!-- 0 -->
         <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa"> <br/>
         <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card00">
+        <input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">
         <p class="fadeInTop" >Kolor czcionki</p>
         <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
         <br />
@@ -173,7 +175,7 @@
         <textarea class="input fadeInLeft" [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"> </textarea>
         <br />
         <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="10" (click)="setPadding()" id="card11">
+        <input type="range" min="0.1" max="8" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card11">
         <br />
         <p class="fadeInTop">Kolor czcionki</p>
         <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
@@ -215,7 +217,7 @@
         <!-- 4 -->
         <textarea class="input fadeInLeft" [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"> </textarea> <br/>
         <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="10" id="card22">
+        <input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
         <br />
         <p class="fadeInTop">Kolor czcionki</p>
         <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
@@ -257,7 +259,7 @@
         <!-- 3 -->
         <input class="input fadeInLeft" [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka"> <br/>
         <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="10" id="card33">
+        <input type="range" min="0" max="3" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="0.1" id="card33">
         <br />
         <p class="fadeInTop" >Kolor czcionki</p>
         <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
@@ -303,7 +305,7 @@
         <textarea class="input signTxt fadeInLeft" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
         <br />
         <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-        <input type="range" min="0" max="400" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="10" id="card44">
+        <input type="range" min="0" max="3" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="0.1" id="card44">
         <br />
         <p class="fadeInTop">Kolor czcionki</p>
         <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
@@ -374,34 +376,85 @@
            [style.top]="imgTop+'%'"/>
       <div  style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + '%'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
       <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + '%'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
           {{forWho}}
         </s>
       </div>
         <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + '%'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
             {{forWhat}}
           </s>
         </div>
 
       <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="left" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+        <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign1}}
         </p>
-        <p id="center" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+        <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign3}}
         </p>
-        <p id="right" [style.font-size]="arrayFontSize[1] + '%'" [style.color]="arrayFontColor[1]">
+        <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign2}}
         </p>
-        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + '%'" [style.color]="arrayFontColor[3]">
+        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="viewLandscape" [style.display]="landscape">
+  <div id="toPdf100landscape" class="rotateInDownRight" style="width: 94%; height: 50%; background-color: red; margin-left: 3%; margin-top:25%">
+    <img src="{{imgSrcFix}}" id="imgPdf100landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%"/>
+
+    <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
+    <div id="pdfForlandscape">
+      <img id="imgToChange3" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0; "
+           [style.transform]="'rotate('+rotate+'deg)'"
+           [style.width]="imgWidth+'%'"
+           [style.height]="imgHeight+'%'"
+           [style.left]="imgLeft+'%'"
+           [style.top]="imgTop+'%'"/>
+      <div  style="z-index: 8;">
+        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+          <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+            {{title}}
+          </s>
+          <br/>
+        </p>
+      </div>
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+        <s id="sForLandscape" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+          {{forWho}}
+        </s>
+      </div>
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+        <s id="txtForWhatLandscape" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+          {{forWhat}}
+        </s>
+      </div>
+
+      <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+        <p id="leftLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign1}}
+        </p>
+        <p id="centerLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign3}}
+        </p>
+        <p id="rightLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
+        </p>
+        <p id="smallTxtLandscape" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
       </div>
