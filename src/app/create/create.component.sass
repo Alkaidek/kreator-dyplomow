@@ -8,6 +8,7 @@ $baseCol: #007bff
 $MACorange: #ff8913
 $MACblue: #00489a
 $MACgreen: #00a650
+$MACred: #e6323d
 
 #create, #view
   display: inline-block
@@ -310,11 +311,13 @@ $MACgreen: #00a650
   margin-left: 0px
   margin-right: 0
   font-size: 70%
+  margin-bottom: 40px
 
 .dataContainer
   min-width: 100%
   width: 100%
   display: block
+  height: 100%
 
 .fontCont
   width: 90%
@@ -549,9 +552,8 @@ s
   margin-bottom: 10px
 
 .sliderInput
-  animation-name: show
+  animation-name: fadeInLeft
   animation-duration: .5s
-  animation-delay: .3s
   animation-iteration-count: 1
   animation-timing-function: linear
   animation-fill-mode: forwards
@@ -559,9 +561,8 @@ s
 
 input[type=color]
   border: none
-  animation-name: show
+  animation-name: fadeInLeft
   animation-duration: .5s
-  animation-delay: .15s
   animation-iteration-count: 1
   animation-timing-function: linear
   animation-fill-mode: forwards
@@ -684,15 +685,20 @@ button:hover, .button:hover
 
 .btnStep
   position: fixed
-  width: 5%
+  width: 13%
   z-index: 13
+  background: $MACred
+
+.btnStep:hover
+  border: $MACred 1px solid
+  color: $MACred
 
 #btnLeft
   left: 0px
   float: left
 
 #btnRight
-  left: 54.77%
+  left: 46.77%
 
 #colorPicker
   width: 30%
