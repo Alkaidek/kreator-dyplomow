@@ -164,11 +164,12 @@ export class CreateComponent implements OnInit {
       img: ''
     }
     ];
-  rotate = 0;
-  imgWidth = 10;
-  imgHeight = 10;
-  imgTop = 0;
-  imgLeft = 0;
+  rotate = [0, 0, 0];
+  imgWidth = [30, 20, 10];
+  imgHeight = [30, 20, 10];
+  imgTop = [0, 0, 0];
+  imgLeft = [0, 0, 0];
+  currentImg = 0;
 
   ngOnInit() {
     const date = new Date();
@@ -527,28 +528,29 @@ export class CreateComponent implements OnInit {
       console.log('1');
       reader.onload = (event2: any) => {
         console.log('2');
-        const img = document.getElementById('imgToChange') as HTMLImageElement;
-        const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
-        const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
-        const img4 = document.getElementById('imgToChange4') as HTMLImageElement;
+        const img = document.getElementById('imgToChange' + this.currentImg) as HTMLImageElement;
+        const img2 = document.getElementById('imgToChange2' + this.currentImg ) as HTMLImageElement;
+        const img3 = document.getElementById('imgToChange3' + this.currentImg) as HTMLImageElement;
+        const img4 = document.getElementById('imgToChange4' + this.currentImg) as HTMLImageElement;
         img.src = event2.target.result;
         img2.src = event2.target.result;
         img3.src = event2.target.result;
         img4.src = event2.target.result;
+        this.currentImg = this.currentImg + 1;
       }
       console.log('3');
       reader.readAsDataURL(event.target.files[0]);
     }
   }
   set0degress() {
-    this.rotate = 0;
+    this.rotate[this.currentImg - 1] = 0;
   }
   resetImg() {
-    this.rotate = 0;
-    this.imgLeft = 0;
-    this.imgTop = 0;
-    this.imgWidth = 10;
-    this.imgHeight = 10;
+    this.rotate[this.currentImg - 1] = 0;
+    this.imgLeft[this.currentImg - 1] = 0;
+    this.imgTop[this.currentImg - 1] = 0;
+    this.imgWidth[this.currentImg - 1] = 10;
+    this.imgHeight[this.currentImg - 1] = 10;
   }
   right(n) {
     const btn =  document
