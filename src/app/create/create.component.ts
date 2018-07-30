@@ -111,6 +111,7 @@ export class CreateComponent implements OnInit {
   postsWithArray = [
     {
       nameOfTemplate: '',
+      landscape: '',
       paddingTop:
         [
         0,
@@ -306,6 +307,7 @@ export class CreateComponent implements OnInit {
       min = '0' + min;
     }
     this.postsWithArray[n].bcgColor = this.bcgColor;
+    this.postsWithArray[n].landscape = this.landscape;
     this.postsWithArray[n]
       .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
     this.postsWithArray[n]
@@ -386,6 +388,8 @@ export class CreateComponent implements OnInit {
     console.log(select.selectedIndex);
     this.bcgColor = this.template[select.selectedIndex]
       .bcgColor;
+    this.landscape = this.template[select.selectedIndex]
+      .landscape;
     this.paddingTop = this.template[select.selectedIndex]
       .paddingTop[0];
     this.paddingTopForWho = this.template[select.selectedIndex]
