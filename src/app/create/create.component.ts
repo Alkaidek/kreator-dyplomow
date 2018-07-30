@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
       false,
       false
     ];
-  bcgDisplay = ['block', 'none', 'none'];
+  bcgDisplay = ['block', 'none', 'none', 'none'];
   auth = 'block';
   bcgTemp: any;
   template: any;
@@ -112,6 +112,7 @@ export class CreateComponent implements OnInit {
     {
       nameOfTemplate: '',
       landscape: '',
+      scheme: '',
       paddingTop:
         [
         0,
@@ -170,7 +171,8 @@ export class CreateComponent implements OnInit {
   imgHeight = 10;
   imgTop = 0;
   imgLeft = 0;
-
+  scaleXbool = true;
+  scheme = 0;
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -185,6 +187,7 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
     document.getElementById('scheme30').style.transform = 'scale(1,1)';
     document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+    this.scheme = 30;
   }
   takeBcg(imgSrc) {
     console.log(
@@ -310,6 +313,7 @@ export class CreateComponent implements OnInit {
     this.postsWithArray[n].landscape = this.landscape;
     this.postsWithArray[n]
       .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
+    this.postsWithArray[n].scheme = '' + this.scheme;
     this.postsWithArray[n]
       .paddingTop[0] = this.paddingTop;
     this.postsWithArray[n]
@@ -390,6 +394,17 @@ export class CreateComponent implements OnInit {
       .bcgColor;
     this.landscape = this.template[select.selectedIndex]
       .landscape;
+    if (this.landscape === 'none') {
+      this.landscapeOff(2);
+    } else {
+      this.landscapeOff(1);
+    }
+    if ( this.template[select.selectedIndex]
+      .scheme === '30' ) {
+      this.setScheme(30);
+    } else {
+      this.setScheme(50);
+    }
     this.paddingTop = this.template[select.selectedIndex]
       .paddingTop[0];
     this.paddingTopForWho = this.template[select.selectedIndex]
@@ -512,17 +527,12 @@ export class CreateComponent implements OnInit {
         .disabled = true;
     }
   }
-  showMore(n) {
-    if ( this.isCollapsed[n]) {
-      document.getElementById('card' + n).style.animationName = 'show';
-      document.getElementById('card' + n).style.display = 'inline-block';
-      this.isCollapsed[n] = false;
-    } else {
-      document.getElementById('card' + n).style.animationName = 'hide';
-      document.getElementById('card' + n).style.display = 'none';
-      document.getElementById('card' + n).style.display = 'inline-block';
-      this.isCollapsed[n] = true;
-    }
+  showMore() {
+    const x = document.createElement('IMG');
+    x.setAttribute('src', '../../assets/img/icon3.png');
+    x.setAttribute('style', 'background-size: cover; position: absolute; z-index: 0;');
+    x.setAttribute('id', 'imgToChange2');
+    document.getElementById('pdfForlandscape').appendChild(x);
   }
 
   onSelectFile(event: any) { // called each time file input changes
@@ -567,7 +577,7 @@ export class CreateComponent implements OnInit {
     }
     btn
       .disabled = false;
-    if (this.currentStep === 2) {
+    if (this.currentStep === 3) {
       btn2.disabled = true;
     }
   }
@@ -588,14 +598,22 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
-  landscapeOff() {
-    if (this.landscape === 'inline-block') {
-      this.landscape = 'none';
-    } else {
-      this.landscape = 'inline-block';
-      const element = document.getElementById('toPdf100Landscape');
-      element.classList.remove('rotateInDownRight');
-    }
+  landscapeOff(n) {
+      if (n === 2) {
+        this.landscape = 'none';
+        document.getElementById('imgO2').style.filter = 'grayscale(0%)';
+        document.getElementById('imgO1').style.filter = 'grayscale(100%)';
+        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
+        document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+      } else {
+        this.landscape = 'inline-block';
+        const element = document.getElementById('toPdf100Landscape');
+        element.classList.remove('rotateInDownRight');
+        document.getElementById('imgO2').style.filter = 'grayscale(100%)';
+        document.getElementById('imgO1').style.filter = 'grayscale(0%)';
+        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
+        document.getElementById('imgO1').style.transform = 'scale(1, 1)';
+      }
   }
   setScheme(n) {
     if (n === 50) {
@@ -615,6 +633,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
+      this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
       document.getElementById('rightLandscape').style.width = n + '%';
@@ -632,6 +651,26 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
+      this.scheme = 30;
+    }
+  }
+  scaleX() {
+    const img = document.getElementById('imgToChange') as HTMLImageElement;
+    const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
+    const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
+    const img4 = document.getElementById('imgToChange4') as HTMLImageElement;
+    if ( this.scaleXbool ) {
+      img.style.transform = 'scaleX(-1)';
+      img2.style.transform = 'scaleX(-1)';
+      img3.style.transform = 'scaleX(-1)';
+      img4.style.transform = 'scaleX(-1)';
+      this.scaleXbool = false;
+    } else {
+      img.style.transform = 'scaleX(1)';
+      img2.style.transform = 'scaleX(1)';
+      img3.style.transform = 'scaleX(1)';
+      img4.style.transform = 'scaleX(1)';
+      this.scaleXbool = true;
     }
   }
 }

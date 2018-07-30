@@ -123,12 +123,13 @@
       </div>
     </div>
 <img id="podglad" src="../../assets/img/podglad2.png" />
+
 <div id="create" xmlns="" [style.display]="auth">
   <button id="btnGeneratePdf" (click)="generatePdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
   <button id="btnLeft" class="btnStep" (click)="left(currentStep)" disabled >< Poprzedni krok</button>
   <button id="btnRight" class="btnStep" (click)="right(currentStep)">Następny krok ></button>
-  <div [style.display]="bcgDisplay[2]" style="text-align: center">
+  <div [style.display]="bcgDisplay[3]" style="text-align: center">
     <h1 class="fadeInTop" style="font-weight: bold">Ostatni krok!</h1>
     <h1 class="fadeInTop">Dodaj swój obrazek</h1>
     <label for="file-upload" class="button fadeInLeft">
@@ -139,7 +140,7 @@
     <input type="file" (change)="onSelectFile($event)">
     <br />
     <p><b class="fadeInRight">Obrót obrazka</b></p>
-    <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate" (input)="rotate = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"> <br />
+    <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate" (input)="rotate = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45"> <br />
     <p><b class="fadeInRight">Szerokość obrazka</b></p>
     <input type="range" min="0" max="{{100-imgLeft}}" [value]="imgWidth" (input)="imgWidth = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" ><br />
     <p><b class="fadeInRight">Wysokość obrazka</b></p>
@@ -149,11 +150,31 @@
     <p><b class="fadeInRight">Prawy margines obrazka</b></p>
     <input type="range" min="0" max="{{100-imgHeight}}" [value]="imgTop" (input)="imgTop = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
     <br />
+    <!--<button class="fadeInRight" (click)="scaleX()">Odbij w poziomie</button> <br/> -->
     <button class="fadeInRight" (click)="set0degress()">Zresetuj Obrót</button> <br/>
     <button class="fadeInLeft" (click)="resetImg()">Zresetuj Obrazek</button>
   </div>
-  <div id="bcgContainter" [style.display]="bcgDisplay[0]">
-    <h1 class="fadeInTop" style="font-weight: bold">Pierwszy krok!</h1>
+
+  <div class="orientationBox" [style.display]="bcgDisplay[0]">
+    <h1><b>Pierwszy krok!</b></h1>
+    <h1>
+      Wybierz orientację dyplomu
+    </h1>
+    <div class="orientationImgBox">
+      <img id="imgO1" class="imgOrientation" src="../../assets/img/horiyontal.png" (click)="landscapeOff(1)"/>
+    </div>
+    <div class="orientationImgBox">
+      <img id="imgO2" class="imgOrientation" src="../../assets/img/horiyontal.png" (click)="landscapeOff(2)"/>
+    </div>
+    <br/>
+    <div>
+      <h1>Wybierz schemat</h1>
+      <img id="scheme30" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
+      <img id="scheme50" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+    </div>
+  </div>
+  <div id="bcgContainter" [style.display]="bcgDisplay[1]">
+    <h1 class="fadeInTop" style="font-weight: bold">Drugi krok!</h1>
     <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
     <div class="scroll fadeInTop" id="scrollable">
       <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg fadeInTop" id="bcg{{i + 1}}" (click)="takeBcg(i)">
@@ -164,11 +185,6 @@
     <button id="rightDirect" class="btnDirect fadeInTop" (click)="moveRight()">></button> <br/>
     <h1 class="fadeInTop">Kolor tła</h1>
     <input type="color" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 30%">
-    <br/>
-    <div>
-      <img id="scheme30" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
-      <img id="scheme50" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
-    </div>
   </div>
   <div id="bcgContainter2" [style.display]="bool">
     <h1 class="fadeInTop fadeInTop">Twoje zapisane szablony</h1>
@@ -180,8 +196,8 @@
 
     <button (click)="landscapeOff()">Landscape</button>
   </div>
-  <div id="txtContainter" [style.display]="bcgDisplay[1]">
-    <h1 class="fadeInTop" style="font-weight: bold">Drugi krok!</h1>
+  <div id="txtContainter" [style.display]="bcgDisplay[2]">
+    <h1 class="fadeInTop" style="font-weight: bold">Trzeci krok!</h1>
     <h1 class="fadeInTop">Wpisz dane</h1>
 
     <div class="dataContainer">
@@ -196,13 +212,13 @@
         <br />
         <p class="fadeInTop" >Czcionka</p>
         <div class="fontCont">
-          <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 0)">
+          <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 0)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 0)">
+          <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 0)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt3" (click)="takeFontForEle('Allura', 0)">
+          <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 0)">
             <h1>Dyplom</h1>
           </div>
         </div>
@@ -242,13 +258,13 @@
         <br />
         <p class="fadeInTop">Czcionka</p>
         <div class="fontCont">
-          <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 1)">
+          <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 1)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 1)">
+          <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 1)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt3" (click)="takeFontForEle('Allura', 1)">
+          <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 1)">
             <h1>Dyplom</h1>
           </div>
         </div>
@@ -284,13 +300,13 @@
         <br />
         <p class="fadeInTop">Czcionka</p>
         <div class="fontCont">
-          <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 2)">
+          <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 2)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 2)">
+          <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 2)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt3" (click)="takeFontForEle('Allura', 2)">
+          <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 2)">
             <h1>Dyplom</h1>
           </div>
         </div>
@@ -326,13 +342,13 @@
         <br />
         <p class="fadeInTop" >Czcionka</p>
         <div class="fontCont">
-          <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 3)">
+          <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 3)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 3)">
+          <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 3)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt3" (click)="takeFontForEle('Allura', 3)">
+          <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 3)">
             <h1>Dyplom</h1>
           </div>
         </div>
@@ -372,13 +388,13 @@
         <br />
         <p class="fadeInTop">Czcionka</p>
         <div class="fontCont">
-          <div class="fnt fnt1" (click)="takeFontForEle('Abril Fatface', 4)">
+          <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 4)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt2" (click)="takeFontForEle('Aladin', 4)">
+          <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 4)">
             <h1>Dyplom</h1>
           </div>
-          <div class="fnt fnt3" (click)="takeFontForEle('Allura', 4)">
+          <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 4)">
             <h1>Dyplom</h1>
           </div>
         </div>
