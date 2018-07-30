@@ -282,9 +282,9 @@
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.8.tgz#38a936b60b898a1ad0f3719543ff1a1031f60f8b"
 
-"@ng-bootstrap/ng-bootstrap@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-2.2.0.tgz#acd514e878a1412f39d50eff691095ecc0882bf3"
+"@ng-bootstrap/ng-bootstrap@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-2.2.1.tgz#8836b5de3ac154ded099e4b668a616b01d631e84"
 
 "@ngtools/webpack@6.0.8":
   version "6.0.8"

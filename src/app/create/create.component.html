@@ -21,8 +21,6 @@
 <div id="viewLandscapeFix">
   <div id="toPdf100LandscapeFix" class="" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100LandscapeFix"  />
-
-    <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfForLandscapeFix">
       <img id="imgToChange4" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0; "
            [style.transform]="'rotate('+rotate+'deg)'"
@@ -68,15 +66,9 @@
 
   </div>
 </div>
-
-
-    <!--<img src="{{imgSrcFix}}" style="background-size: cover; position: absolute;  width: 100px; height: 100px" />
-    <canvas id="canvasToBase64" width="100" height="100" style="background-size: cover; position: absolute; top: 120px; background:red" ></canvas>-->
     <div id="viewFix">
       <div id="toPdf100Fix" [style.background-color]="bcgColor">
         <img src="{{imgSrcFix}}" id="imgPdf100Fix" />
-
-        <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas> -->
         <div id="pdfForFix">
           <img id="imgToChange" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
                [style.transform]="'rotate('+rotate+'deg)'"
@@ -150,25 +142,24 @@
     <p><b class="fadeInRight">Prawy margines obrazka</b></p>
     <input type="range" min="0" max="{{100-imgHeight}}" [value]="imgTop" (input)="imgTop = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
     <br />
-    <!--<button class="fadeInRight" (click)="scaleX()">Odbij w poziomie</button> <br/> -->
     <button class="fadeInRight" (click)="set0degress()">Zresetuj Obrót</button> <br/>
     <button class="fadeInLeft" (click)="resetImg()">Zresetuj Obrazek</button>
   </div>
 
   <div class="orientationBox" [style.display]="bcgDisplay[0]">
-    <h1><b>Pierwszy krok!</b></h1>
-    <h1>
+    <h1 class="fadeInTop"><b>Pierwszy krok!</b></h1>
+    <h1 class="fadeInTop">
       Wybierz orientację dyplomu
     </h1>
-    <div class="orientationImgBox">
-      <img id="imgO1" class="imgOrientation" src="../../assets/img/horiyontal.png" (click)="landscapeOff(1)"/>
+    <div class="orientationImgBox fadeInTop">
+      <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(1)"/>
     </div>
     <div class="orientationImgBox">
-      <img id="imgO2" class="imgOrientation" src="../../assets/img/horiyontal.png" (click)="landscapeOff(2)"/>
+      <img id="imgO2" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(2)"/>
     </div>
     <br/>
     <div>
-      <h1>Wybierz schemat</h1>
+      <h1 class="fadeInTop">Wybierz schemat</h1>
       <img id="scheme30" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
       <img id="scheme50" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
     </div>
@@ -193,8 +184,6 @@
     </select>
     <br/>
     <button class="fadeInTop" (click)="setUserData()">Wczytaj szablon!</button>
-
-    <button (click)="landscapeOff()">Landscape</button>
   </div>
   <div id="txtContainter" [style.display]="bcgDisplay[2]">
     <h1 class="fadeInTop" style="font-weight: bold">Trzeci krok!</h1>

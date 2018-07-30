@@ -188,6 +188,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('scheme30').style.transform = 'scale(1,1)';
     document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
     this.scheme = 30;
+    this.landscapeOff(1);
   }
   takeBcg(imgSrc) {
     console.log(
@@ -549,7 +550,7 @@ export class CreateComponent implements OnInit {
         img2.src = event2.target.result;
         img3.src = event2.target.result;
         img4.src = event2.target.result;
-      }
+      };
       console.log('3');
       reader.readAsDataURL(event.target.files[0]);
     }
