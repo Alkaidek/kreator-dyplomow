@@ -18,6 +18,57 @@
   <span>W</span>
 </div>
 
+<div id="viewLandscapeFix" [style.display]="landscape">
+  <div id="toPdf100LandscapeFix" class="">
+    <img src="{{imgSrcFix}}" id="imgPdf100LandscapeFix"  />
+
+    <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
+    <div id="pdfForLandscapeFix">
+      <img id="imgToChange4" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0; "
+           [style.transform]="'rotate('+rotate+'deg)'"
+           [style.width]="imgWidth+'%'"
+           [style.height]="imgHeight+'%'"
+           [style.left]="imgLeft+'%'"
+           [style.top]="imgTop+'%'"/>
+      <div  style="z-index: 8;">
+        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+          <s id="largeTxtLandscapeFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+            {{title}}
+          </s>
+          <br/>
+        </p>
+      </div>
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+        <s id="sForLandscapeFix" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+          {{forWho}}
+        </s>
+      </div>
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+        <s id="txtForWhatLandscapeFix" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+          {{forWhat}}
+        </s>
+      </div>
+
+      <div class="signature" id="signLandscapeFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+        <p id="leftLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign1}}
+        </p>
+        <p id="centerLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign3}}
+        </p>
+        <p id="rightLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+          {{sign2}}
+        </p>
+        <p id="smallTxtLandscapeFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+          {{footer}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
     <!--<img src="{{imgSrcFix}}" style="background-size: cover; position: absolute;  width: 100px; height: 100px" />
     <canvas id="canvasToBase64" width="100" height="100" style="background-size: cover; position: absolute; top: 120px; background:red" ></canvas>-->
     <div id="viewFix">
@@ -414,8 +465,8 @@
 
 
 <div id="viewLandscape" [style.display]="landscape">
-  <div id="toPdf100landscape" class="rotateInDownRight" style="width: 94%; height: 50%; background-color: red; margin-left: 3%; margin-top:25%">
-    <img src="{{imgSrcFix}}" id="imgPdf100landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%"/>
+  <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; background-color: red; margin-left: 3%; margin-top:25%">
+    <img src="{{imgSrcFix}}" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%"/>
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfForlandscape">

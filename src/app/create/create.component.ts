@@ -73,9 +73,9 @@ export class CreateComponent implements OnInit {
   arrayFontSize =
     [
       3,
-      1,
+      0.9,
       2,
-      1,
+      0.8,
       2
     ];
   arrayFontNameId =
@@ -233,7 +233,7 @@ export class CreateComponent implements OnInit {
   generatePdf() {
     if(this.landscape === 'inline-block') {
       const elementToPrint = document
-        .getElementById('toPdf100landscape');
+        .getElementById('toPdf100LandscapeFix');
       const pdf = new jsPDF('l', 'pt', 'a4', true);
       pdf
         .internal
@@ -349,6 +349,14 @@ export class CreateComponent implements OnInit {
       .getElementById(this.arrayFontNameId[element] + 'Fix')
       .style
       .fontFamily = font;
+    document
+      .getElementById(this.arrayFontNameId[element] + 'LandscapeFix')
+      .style
+      .fontFamily = font;
+    document
+      .getElementById(this.arrayFontNameId[element] + 'Landscape')
+      .style
+      .fontFamily = font;
     this.arrayFontFamili[element] = font;
     if (element === 4) {
       this.takeFontForEle(font, 5);
@@ -401,6 +409,14 @@ export class CreateComponent implements OnInit {
         .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'Fix')
+        .style
+        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      document
+        .getElementById(this.arrayFontNameId[i] + 'LandscapeFix')
+        .style
+        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+      document
+        .getElementById(this.arrayFontNameId[i] + 'Landscape')
         .style
         .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
       this.arrayFontFamili[i] = this.template[select.selectedIndex].arrayFontFamili[i];
@@ -477,9 +493,11 @@ export class CreateComponent implements OnInit {
         const img = document.getElementById('imgToChange') as HTMLImageElement;
         const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
         const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
+        const img4 = document.getElementById('imgToChange4') as HTMLImageElement;
         img.src = event2.target.result;
         img2.src = event2.target.result;
         img3.src = event2.target.result;
+        img4.src = event2.target.result;
       }
       console.log('3');
       reader.readAsDataURL(event.target.files[0]);
@@ -534,6 +552,8 @@ export class CreateComponent implements OnInit {
       this.landscape = 'none';
     } else {
       this.landscape = 'inline-block';
+      const element = document.getElementById('toPdf100landscape');
+      element.classList.remove('rotateInDownRight');
     }
   }
 }

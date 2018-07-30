@@ -103,7 +103,7 @@ $MACred: #e6323d
   padding-top: 1%
   border-right: $MACblue 3px solid
 
-#view, #viewFix, #viewLandscape
+#view, #viewFix, #viewLandscape, #viewLandscapeFix
   width: 50%
   text-align: center
   font-family: Arial
@@ -207,14 +207,20 @@ $MACred: #e6323d
     opacity: 1
 
 
-#viewFix
+#viewFix, #viewLandscapeFix
   min-height: 100%
   height: 100%
   width: 50%
   margin-left: 50%
-  background-color: red
+  background-color: green
   z-index: -15
   opacity: 0
+
+#viewLandscapeFix
+  z-index: -15
+  opacity: 0
+  width: 100%
+  margin-left: 0%
 
 #logoContainer
   background: #00489a
@@ -236,7 +242,7 @@ $MACred: #e6323d
   margin-right: 25%
   margin-top: 25%
 
-#imgPdf100, #imgPdf100landscape
+#imgPdf100, #imgPdf100Landscape
   position: absolute
   left: 0px
   top: 0px
@@ -245,7 +251,7 @@ $MACred: #e6323d
   height: 80%
   margin-top: 10%
 
-#toPdf100, #toPdf100landscape
+#toPdf100, #toPdf100Landscape
   margin-left: 15%
   width: 70%
   height: 80%
@@ -253,7 +259,7 @@ $MACred: #e6323d
   background-color: #ff8913
   font-weight: bold
 
-#imgPdf100Fix, #canvasPdf100Fix
+#imgPdf100Fix, #canvasPdf100Fix, #imgPdf100LandscapeFix
   position: absolute
   left: 0px
   top: 0px
@@ -261,12 +267,23 @@ $MACred: #e6323d
   height: 842px
   margin-left: 15%
 
-#toPdf100Fix
+#imgPdf100LandscapeFix
+  width: 842px
+  height: 595px
+  margin-left: 0%
+
+#toPdf100Fix, #toPdf100LandscapeFix
   width: 595px
   height: 842px
   margin-left: 15%
   background-color: #ff8913
   font-weight: bold
+
+#toPdf100LandscapeFix
+  width: 842px
+  height: 595px
+  top: 0
+  margin-left: 0px
 
 #toPdf
   width: 50%
@@ -277,7 +294,7 @@ $MACred: #e6323d
   margin-top: 25%
   font-weight: bold
 
-#pdfFor, #pdfForFix, #pdfForlandscape
+#pdfFor, #pdfForFix, #pdfForlandscape, #pdfForLandscapeFix
   padding-top: 15%
   overflow: hidden
   white-space: pre-wrap
@@ -454,28 +471,8 @@ h1
   font-size: 200%
 
 @media (max-width: 1210px)
-  h1
-    font-size: 100%
-  #sign, #signLandscape
-    font-size: 60%
-  #smallTxt, #smallTxtFix
-    font-size: 55%
-  .inputContainer
-    font-size: 70%
   .inputLeft
     display: none
-
-@media (max-width: 1660px)
-  #toPdf100
-    font-size: 70%
-
-@media (max-height: 800px)
-  h1
-    font-size: 180%
-  #left, #right, #rightFix, #leftFix, #center, #leftLandscape
-    font-size: 80%
-  #smallTxt
-    font-size: 55%
 
 .input, .input:focus
   width: 90%
@@ -497,11 +494,11 @@ h1
   border: 1px solid #ccc
   border-radius: 0px
 
-#sFor, #sForFix, #sForLandscape
+#sFor, #sForFix, #sForLandscape, #sForLandscapeFix
   font-weight: bold
   font-size: 250%
 
-#txtForWhat, #txtForWhatFix, #txtForWhatLandscape
+#txtForWhat, #txtForWhatFix, #txtForWhatLandscape, #txtForWhatLandscapeFix
   font-size: 200%
 
 s
@@ -512,7 +509,7 @@ s
   width: 33.33333333%
   font-size: 120%
 
-#leftLandscape, #rightLandscape, #centerLandscape
+#leftLandscape, #rightLandscape, #centerLandscape, #leftLandscapeFix, #centerLandscapeFix, #rightLandscapeFix
   width: 33.3333%
   min-width: 33.3333%
   float: left
@@ -520,14 +517,14 @@ s
 #leftFix, #rightFix, #centerFix
   font-size: 150%
 
-#left, #leftFix, #center, #centerFix, #leftLandscape
+#left, #leftFix, #center, #centerFix, #leftLandscape, #leftLandscapeFix
   float: left
   text-align: left
 
-#centerFix, #center, #centerLandscape
+#centerFix, #center, #centerLandscape, #centerLandscapeFix
   text-align: center
 
-#right, #rightFix, #rightLandscape
+#right, #rightFix, #rightLandscape, #rightLandscapeFix
   float: right
   text-align: right
 
@@ -538,11 +535,11 @@ s
   position: absolute
   bottom: 0%
 
-#smallTxt, #smallTxtFix, #smallTxtLandscape
+#smallTxt, #smallTxtFix, #smallTxtLandscape, #smallTxtLandscapeFix
   font-weight: lighter
   font-size: 120%
 
-#largeTxt, #largeTxtFix, #largeTxtLandscape
+#largeTxt, #largeTxtFix, #largeTxtLandscape, #largeTxtLandscapeFix
   font-size: 300%
 
 .slider, .slider50, input[type=color], .sliderInput
