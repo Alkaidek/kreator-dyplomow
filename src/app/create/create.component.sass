@@ -347,6 +347,7 @@ $MACred: #e6323d
   margin-right: $newmargin
   margin-bottom: 0.2%
   cursor: zoom-in
+  display: none
 
 .fnt
   transform: scale(0.8,0.8)
@@ -385,12 +386,15 @@ img
 
 #bcg1
   background: #fff9b6
+  display: inline-block
 
 #bcg2
   background-color: #cefff5
+  display: inline-block
 
 #bcg3
   background-color: #fbdfff
+  display: inline-block
 
 #font1, .fnt1
   font-family: $font1
@@ -466,9 +470,6 @@ textarea
 textarea:focus
   border: 1px solid #ccc
   border-radius: 0px
-
-h1
-  font-size: 200%
 
 @media (max-width: 1210px)
   .inputLeft
@@ -748,5 +749,13 @@ input[type="file"]
   padding: 6px 12px
   cursor: pointer
 
+.schemeImg
+  width: 10%
+  transform: scale(0.9, 0.9)
+  margin: 10px 10px 10px 10px
+  transition: .5s
+  border: rgba(255,0,255,0.0) solid 3px
 
+.schemeImg:hover
+  transform: scale(1,1)
 

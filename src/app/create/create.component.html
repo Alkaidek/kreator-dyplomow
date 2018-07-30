@@ -19,7 +19,7 @@
 </div>
 
 <div id="viewLandscapeFix" [style.display]="landscape">
-  <div id="toPdf100LandscapeFix" class="">
+  <div id="toPdf100LandscapeFix" class="" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100LandscapeFix"  />
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
@@ -30,6 +30,7 @@
            [style.height]="imgHeight+'%'"
            [style.left]="imgLeft+'%'"
            [style.top]="imgTop+'%'"/>
+      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscapeFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -72,7 +73,7 @@
     <!--<img src="{{imgSrcFix}}" style="background-size: cover; position: absolute;  width: 100px; height: 100px" />
     <canvas id="canvasToBase64" width="100" height="100" style="background-size: cover; position: absolute; top: 120px; background:red" ></canvas>-->
     <div id="viewFix">
-      <div id="toPdf100Fix" >
+      <div id="toPdf100Fix" [style.background-color]="bcgColor">
         <img src="{{imgSrcFix}}" id="imgPdf100Fix" />
 
         <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas> -->
@@ -83,6 +84,7 @@
                [style.height]="imgHeight+'%'"
                [style.left]="imgLeft+'%'"
                [style.top]="imgTop+'%'"/>
+          <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
           <div  style="z-index: 8;">
             <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
               <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -127,7 +129,7 @@
   <button id="btnLeft" class="btnStep" (click)="left(currentStep)" disabled >< Poprzedni krok</button>
   <button id="btnRight" class="btnStep" (click)="right(currentStep)">Następny krok ></button>
   <div [style.display]="bcgDisplay[2]" style="text-align: center">
-    <h1 class="fadeInTop">Ostatni krok!</h1>
+    <h1 class="fadeInTop" style="font-weight: bold">Ostatni krok!</h1>
     <h1 class="fadeInTop">Dodaj swój obrazek</h1>
     <label for="file-upload" class="button fadeInLeft">
       <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
@@ -151,28 +153,35 @@
     <button class="fadeInLeft" (click)="resetImg()">Zresetuj Obrazek</button>
   </div>
   <div id="bcgContainter" [style.display]="bcgDisplay[0]">
-    <h1 class="fadeInTop">Pierwszy krok!</h1>
+    <h1 class="fadeInTop" style="font-weight: bold">Pierwszy krok!</h1>
     <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
     <div class="scroll fadeInTop" id="scrollable">
-      <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg" id="bcg{{i + 1}}" (click)="takeBcg('#fff9b6' , i)">
+      <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg fadeInTop" id="bcg{{i + 1}}" (click)="takeBcg(i)">
         <img id="img{{i}}" src="{{tmp}}"  />
       </div>
     </div>
     <button id="leftDirect" class="btnDirect fadeInTop" (click)="moveLeft()" disabled><</button>
-    <button id="rightDirect" class="btnDirect fadeInTop" (click)="moveRight()">></button>
+    <button id="rightDirect" class="btnDirect fadeInTop" (click)="moveRight()">></button> <br/>
+    <h1 class="fadeInTop">Kolor tła</h1>
+    <input type="color" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 30%">
+    <br/>
+    <div>
+      <img id="scheme30" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
+      <img id="scheme50" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+    </div>
   </div>
   <div id="bcgContainter2" [style.display]="bool">
-    <h1 class="fadeInTop fadeInTop">Wybierz swój szablon</h1>
+    <h1 class="fadeInTop fadeInTop">Twoje zapisane szablony</h1>
     <select id="selectTemplate" class="fadeInTop">
       <option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</option>
     </select>
     <br/>
-    <button class="fadeInTop" (click)="setUserData()">Zatwierdz!</button>
+    <button class="fadeInTop" (click)="setUserData()">Wczytaj szablon!</button>
 
-    <button (click)="landscapeOff()"></button>
+    <button (click)="landscapeOff()">Landscape</button>
   </div>
   <div id="txtContainter" [style.display]="bcgDisplay[1]">
-    <h1 class="fadeInTop">Drugi krok!</h1>
+    <h1 class="fadeInTop" style="font-weight: bold">Drugi krok!</h1>
     <h1 class="fadeInTop">Wpisz dane</h1>
 
     <div class="dataContainer">
@@ -414,7 +423,7 @@
 </div>
 
 <div id="view">
-    <div id="toPdf100" class="rotateInDownRight">
+    <div id="toPdf100" class="rotateInDownRight" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100" />
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
@@ -425,6 +434,7 @@
            [style.height]="imgHeight+'%'"
            [style.left]="imgLeft+'%'"
            [style.top]="imgTop+'%'"/>
+      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -465,7 +475,7 @@
 
 
 <div id="viewLandscape" [style.display]="landscape">
-  <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; background-color: red; margin-left: 3%; margin-top:25%">
+  <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%"/>
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
@@ -476,6 +486,7 @@
            [style.height]="imgHeight+'%'"
            [style.left]="imgLeft+'%'"
            [style.top]="imgTop+'%'"/>
+      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">

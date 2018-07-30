@@ -50,10 +50,11 @@ export class CreateComponent implements OnInit {
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
+  bcgColor = '#c2f2cf';
   lastValue = 1;
   schoolNr = '29';
   name = 'MateuszB';
-  base64Tmp = '1';
+  base64Tmp = '';
   base64 = '';
   forWho = '';
   forWhat = '';
@@ -110,10 +111,28 @@ export class CreateComponent implements OnInit {
   postsWithArray = [
     {
       nameOfTemplate: '',
-      paddingTop: [0, 0, 0],
-      marginLeft: [0, 0, 0, 0],
-      marginRight: [0, 0, 0, 0],
+      paddingTop:
+        [
+        0,
+        0,
+        0
+      ],
+      marginLeft:
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+      marginRight:
+        [
+          0,
+          0,
+          0,
+          0
+        ],
       bottom: 0,
+      bcgColor: '#c2f2cf',
       arrayFontSize:
         [
           0,
@@ -163,8 +182,10 @@ export class CreateComponent implements OnInit {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
+    document.getElementById('scheme30').style.transform = 'scale(1,1)';
+    document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
   }
-  takeBcg(n, imgSrc) {
+  takeBcg(imgSrc) {
     console.log(
       'ten sie podnosi: ' + imgSrc
     );
@@ -194,10 +215,6 @@ export class CreateComponent implements OnInit {
       'bcg' + (imgSrc + 1))
       .style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
-    document.getElementById(
-      'toPdf100')
-      .style
-      .background = n;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
@@ -231,7 +248,7 @@ export class CreateComponent implements OnInit {
     this.imgSrcFix = pic;
   }
   generatePdf() {
-    if(this.landscape === 'inline-block') {
+    if (this.landscape === 'inline-block') {
       const elementToPrint = document
         .getElementById('toPdf100LandscapeFix');
       const pdf = new jsPDF('l', 'pt', 'a4', true);
@@ -288,6 +305,7 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
+    this.postsWithArray[n].bcgColor = this.bcgColor;
     this.postsWithArray[n]
       .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
     this.postsWithArray[n]
@@ -366,6 +384,8 @@ export class CreateComponent implements OnInit {
   setUserData() {
     const select = document.getElementById('selectTemplate') as HTMLSelectElement;
     console.log(select.selectedIndex);
+    this.bcgColor = this.template[select.selectedIndex]
+      .bcgColor;
     this.paddingTop = this.template[select.selectedIndex]
       .paddingTop[0];
     this.paddingTopForWho = this.template[select.selectedIndex]
@@ -391,8 +411,12 @@ export class CreateComponent implements OnInit {
     this.bottom = this.template[select.selectedIndex]
       .bottom;
     this.setPaddingFix();
-    this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex]
-      .img];
+    if ( this.template[select.selectedIndex].img === '') {
+      this.imgSrcFix =  '../../assets/img/0.png';
+    } else {
+      this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex]
+        .img];
+    }
     this.base64Tmp = this.template[select.selectedIndex].img;
     for (let i = 0; i < this.template[select.selectedIndex].arrayFontSize.length; i++ ) {
       console.log(' ' + this.template[select.selectedIndex].arrayFontSize[i]);
@@ -433,6 +457,13 @@ export class CreateComponent implements OnInit {
           .getElementById('bcg' + (this.arrayScroll[i] - 3))
           .style
           .display = 'inline-block';
+        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
+          document
+            .getElementById('bcg' + (this.arrayScroll[i]))
+            .style
+            .display = 'none';
+        }
+
         btn
           .disabled = false;
       } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
@@ -457,6 +488,12 @@ export class CreateComponent implements OnInit {
           .disabled = false;
         if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
           document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
+          if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
+            document
+              .getElementById('bcg' + (this.arrayScroll[i] + 3))
+              .style
+              .display = 'inline-block';
+          }
         }
       } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
         btn
@@ -552,9 +589,45 @@ export class CreateComponent implements OnInit {
       this.landscape = 'none';
     } else {
       this.landscape = 'inline-block';
-      const element = document.getElementById('toPdf100landscape');
+      const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
     }
   }
+  setScheme(n) {
+    if (n === 50) {
+      document.getElementById('centerLandscape').style.display = 'none';
+      document.getElementById('rightLandscape').style.width = n + '%';
+      document.getElementById('leftLandscape').style.width = n + '%';
+      document.getElementById('centerLandscapeFix').style.display = 'none';
+      document.getElementById('rightLandscapeFix').style.width = n + '%';
+      document.getElementById('leftLandscapeFix').style.width = n + '%';
+      document.getElementById('centerFix').style.display = 'none';
+      document.getElementById('rightFix').style.width = n + '%';
+      document.getElementById('leftFix').style.width = n + '%';
+      document.getElementById('center').style.display = 'none';
+      document.getElementById('right').style.width = n + '%';
+      document.getElementById('left').style.width = n + '%';
+      document.getElementById('scheme' + n).style.transform = 'scale(1,1)';
+      document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
+      document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
+    } else {
+      document.getElementById('centerLandscape').style.display = 'inline-block';
+      document.getElementById('rightLandscape').style.width = n + '%';
+      document.getElementById('leftLandscape').style.width = n + '%';
+      document.getElementById('centerLandscapeFix').style.display = 'inline-block';
+      document.getElementById('rightLandscapeFix').style.width = n + '%';
+      document.getElementById('leftLandscapeFix').style.width = n + '%';
+      document.getElementById('centerFix').style.display = 'inline-block';
+      document.getElementById('rightFix').style.width = n + '%';
+      document.getElementById('leftFix').style.width = n + '%';
+      document.getElementById('center').style.display = 'inline-block';
+      document.getElementById('right').style.width = n + '%';
+      document.getElementById('left').style.width = n + '%';
+      document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
+      document.getElementById('scheme30').style.transform = 'scale(1,1)';
+      document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
+    }
+  }
 }
-
