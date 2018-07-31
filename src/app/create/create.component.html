@@ -214,208 +214,320 @@
         </button>
       </div>
       <ng-template matStepLabel>Czwarty krok</ng-template>
-      <div id="txtContainter" [style.display]="bcgDisplay[2]">
-        <h1 class="fadeInTop">Wpisz dane</h1>
-
-        <div class="dataContainer">
-          <div class="leftCont">
-            <!--<p><b class="fadeInLeft">Nazwa: </b></p>
-             0
-            <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa">-->
-            <mat-form-field class="example-full-width fadeInLeft">
-              <input matInput placeholder="Tytuł" [value]="title" (input)="title = $event.target.value">
-            </mat-form-field>
-            <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-            <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">-->
-            <mat-slider thumbLabel class="fadeInTop"  min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
-            <p class="fadeInTop" >Kolor czcionki</p>
-            <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
-            <br />
-            <p class="fadeInTop" >Czcionka</p>
-            <div class="fontCont">
-              <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 0)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 0)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 0)">
-                <h1>Dyplom</h1>
+      <div id="txtContainter">
+      <h1 class="fadeInTop">Wpisz dane</h1>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Tytuł
+            </mat-panel-title>
+            <mat-panel-description>
+              Ustaw właściwości pola 'Tytuł'
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="dataContainer" style="height: 320px">
+            <div class="leftCont">
+              <!--<p><b class="fadeInLeft">Nazwa: </b></p>
+               0
+              <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa">-->
+              <mat-form-field class="example-full-width fadeInLeft">
+                <input matInput placeholder="Tytuł" [value]="title" (input)="title = $event.target.value">
+              </mat-form-field>
+              <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+              <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">-->
+              <mat-slider thumbLabel class="fadeInTop"  min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <p class="fadeInTop" >Kolor czcionki</p>
+              <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
+              <br />
+              <p class="fadeInTop" >Czcionka</p>
+              <div class="fontCont">
+                <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 0)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 0)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 0)">
+                  <h1>Dyplom</h1>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="rightCont">
-            <div >
-              <div class="card" id="card0">
-                <div class="card-body">
-                  <div class="inputContainer">
+            <div class="rightCont">
+              <div >
+                <div class="card" id="card0">
+                  <div class="card-body">
                     <div class="inputContainer">
-                      <!--
-                      <br />
-                      <p class="fadeInTop" >Lewy margines</p>
-                      <input type="range" min="0" max="40" [value]="marginLeft[0]" (input)="marginLeft[0] = $event.target.value" class="slider" style="width: 80%">
-                      <p class="fadeInTop" >Prawy margines</p>
-                      <input type="range" min="0" max="40" [value]="marginRight[0]" (input)="marginRight[0] = $event.target.value" class="slider" style="width: 80%">
-                      <p class="fadeInTop" >Górny margines</p>
-                      <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
-                      -->
-                      <p class="fadeInTop">Lewy margines</p>
-                      <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
-                      <br/>
-                      <p class="fadeInTop">Prawy margines</p>
-                      <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
-                      <p class="fadeInTop" >Górny margines</p>
-                      <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTop" class="example-full-width"></mat-slider>
+                      <div class="inputContainer">
+                        <!--
+                        <br />
+                        <p class="fadeInTop" >Lewy margines</p>
+                        <input type="range" min="0" max="40" [value]="marginLeft[0]" (input)="marginLeft[0] = $event.target.value" class="slider" style="width: 80%">
+                        <p class="fadeInTop" >Prawy margines</p>
+                        <input type="range" min="0" max="40" [value]="marginRight[0]" (input)="marginRight[0] = $event.target.value" class="slider" style="width: 80%">
+                        <p class="fadeInTop" >Górny margines</p>
+                        <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
+                        -->
+                        <p class="fadeInTop">Lewy margines</p>
+                        <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
+                        <br/>
+                        <p class="fadeInTop">Prawy margines</p>
+                        <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
+                        <p class="fadeInTop" >Górny margines</p>
+                        <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTop" class="example-full-width"></mat-slider>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="dataContainer">
-          <div class="leftCont ">
-            <!--<p><b class="fadeInLeft">Dla kogo: </b></p>
-           2
-           <textarea class="input fadeInLeft textarea" > </textarea> -->
-            <mat-form-field class="example-full-width fadeInLeft">
-              <textarea matInput [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"></textarea>
-            </mat-form-field>
-            <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-            <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card11">
-            <br />-->
-            <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[2]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
-            <p class="fadeInTop">Kolor czcionki</p>
-            <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
-            <br />
-            <p class="fadeInTop">Czcionka</p>
-            <div class="fontCont">
-              <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 1)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 1)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 1)">
-                <h1>Dyplom</h1>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Dla kogo?
+            </mat-panel-title>
+            <mat-panel-description>
+              Ustaw właściwości pola 'Dla kogo?'
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="dataContainer"  style="height: 350px">
+            <div class="leftCont ">
+              <!--<p><b class="fadeInLeft">Dla kogo: </b></p>
+             2
+             <textarea class="input fadeInLeft textarea" > </textarea> -->
+              <mat-form-field class="example-full-width fadeInLeft">
+                <textarea matInput [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"></textarea>
+              </mat-form-field>
+              <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+              <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card11">
+              <br />-->
+              <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[2]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <p class="fadeInTop">Kolor czcionki</p>
+              <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
+              <br />
+              <p class="fadeInTop">Czcionka</p>
+              <div class="fontCont">
+                <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 1)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 1)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 1)">
+                  <h1>Dyplom</h1>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="rightCont">
-            <div class="card" id="card1">
-              <div class="card-body">
-                <div class="inputContainer">
-                  <!--
-                  <br/>
-                  <p class="fadeInTop" >Lewy margines</p>
-                    <input type="range" min="0" max="40" [value]="marginLeft[1]" (input)="marginLeft[1] = $event.target.value" class="slider50" style="width:80%">
-                  <p class="fadeInTop" >Prawy margines</p>
-                    <input type="range" min="0" max="40" [value]="marginRight[1]" (input)="marginRight[1] = $event.target.value" class="slider50" style="width:80%">
-                  <p class="fadeInTop" >Górny margines</p>
-                    <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
-                  -->
-                  <p class="fadeInTop">Lewy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
-                  <br/>
-                  <p class="fadeInTop">Prawy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
-                  <p class="fadeInTop" >Górny margines</p>
-                  <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
+            <div class="rightCont">
+              <div class="card" id="card1">
+                <div class="card-body">
+                  <div class="inputContainer">
+                    <!--
+                    <br/>
+                    <p class="fadeInTop" >Lewy margines</p>
+                      <input type="range" min="0" max="40" [value]="marginLeft[1]" (input)="marginLeft[1] = $event.target.value" class="slider50" style="width:80%">
+                    <p class="fadeInTop" >Prawy margines</p>
+                      <input type="range" min="0" max="40" [value]="marginRight[1]" (input)="marginRight[1] = $event.target.value" class="slider50" style="width:80%">
+                    <p class="fadeInTop" >Górny margines</p>
+                      <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
+                    -->
+                    <p class="fadeInTop">Lewy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
+                    <br/>
+                    <p class="fadeInTop">Prawy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Górny margines</p>
+                    <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="dataContainer">
-          <div class="leftCont ">
-            <!-- <p><b class="fadeInLeft">Za co:</b></p>
-             4
-            <textarea class="input fadeInLeft textarea" > </textarea> <br/>-->
-            <mat-form-field class="example-full-width">
-              <textarea matInput [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"></textarea>
-            </mat-form-field>
-            <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-            <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
-            <br />-->
-            <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[4]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
-            <p class="fadeInTop">Kolor czcionki</p>
-            <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
-            <br />
-            <p class="fadeInTop">Czcionka</p>
-            <div class="fontCont">
-              <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 2)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 2)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 2)">
-                <h1>Dyplom</h1>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Za co?
+            </mat-panel-title>
+            <mat-panel-description>
+              Ustaw właściwości pola 'Za co?'
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="dataContainer" style="height: 350px">
+            <div class="leftCont ">
+              <!-- <p><b class="fadeInLeft">Za co:</b></p>
+               4
+              <textarea class="input fadeInLeft textarea" > </textarea> <br/>-->
+              <mat-form-field class="example-full-width">
+                <textarea matInput [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"></textarea>
+              </mat-form-field>
+              <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+              <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
+              <br />-->
+              <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[4]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <p class="fadeInTop">Kolor czcionki</p>
+              <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
+              <br />
+              <p class="fadeInTop">Czcionka</p>
+              <div class="fontCont">
+                <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 2)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 2)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 2)">
+                  <h1>Dyplom</h1>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="rightCont">
-            <div class="card" id="card2">
-              <div class="card-body">
-                <br />
-                <div class="inputContainer">
-                  <!--
-                  <br/>
-                  <p class="fadeInTop" >Lewy margines</p>
-                  <input type="range" min="0" max="40" [value]="marginLeft[2]" (input)="marginLeft[2] = $event.target.value" class="slider" style="width:80%">
-                  <p class="fadeInTop" >Prawy margines</p>
-                  <input type="range" min="0" max="40" [value]="marginRight[2]" (input)="marginRight[2] = $event.target.value" class="slider"  style="width:80%">
-                  <p class="fadeInTop" >Górny margines</p>
-                  <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
-                  -->
-                  <p class="fadeInTop">Lewy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
-                  <br/>
-                  <p class="fadeInTop">Prawy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
-                  <p class="fadeInTop" >Górny margines</p>
-                  <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
+            <div class="rightCont">
+              <div class="card" id="card2">
+                <div class="card-body">
+                  <br />
+                  <div class="inputContainer">
+                    <!--
+                    <br/>
+                    <p class="fadeInTop" >Lewy margines</p>
+                    <input type="range" min="0" max="40" [value]="marginLeft[2]" (input)="marginLeft[2] = $event.target.value" class="slider" style="width:80%">
+                    <p class="fadeInTop" >Prawy margines</p>
+                    <input type="range" min="0" max="40" [value]="marginRight[2]" (input)="marginRight[2] = $event.target.value" class="slider"  style="width:80%">
+                    <p class="fadeInTop" >Górny margines</p>
+                    <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
+                    -->
+                    <p class="fadeInTop">Lewy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
+                    <br/>
+                    <p class="fadeInTop">Prawy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Górny margines</p>
+                    <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </mat-expansion-panel>
 
-        <div class="dataContainer">
-          <div class="leftCont">
-            <!--  <p><b class="fadeInLeft">Stopka</b></p>
-            3
-            <input class="input fadeInLeft" > <br/>-->
-            <mat-form-field class="example-full-width fadeInLeft">
-              <input matInput [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka">
-            </mat-form-field>
-            <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-            <!--<input type="range" min="0" max="3" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="0.1" id="card33">
-            <br /> -->
-            <mat-slider thumbLabel class="fadeInLeft"  min="0" max="3" [(value)]="arrayFontSize[3]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
-            <p class="fadeInTop" >Kolor czcionki</p>
-            <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
-            <br />
-            <p class="fadeInTop" >Czcionka</p>
-            <div class="fontCont">
-              <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 3)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 3)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 3)">
-                <h1>Dyplom</h1>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Podpisy
+            </mat-panel-title>
+            <mat-panel-description>
+              Ustaw właściwości pola 'Podpisy'
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="dataContainer" style="height: 500px">
+            <div class="leftCont ">
+              <!--<p><b class="fadeInLeft">Podpisy:</b></p>
+               1
+              <textarea class="input signTxt fadeInLeft textarea" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
+              <textarea class="input signTxt fadeInLeft textarea" [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"> </textarea>
+              <textarea class="input signTxt fadeInLeft textarea" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
+              <br /> -->
+              <form class="example-form">
+                <mat-form-field class="example-full-width fadeInLeft">
+                  <textarea matInput [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"></textarea>
+                </mat-form-field>
+                <mat-form-field class="example-full-width fadeInLeft">
+                  <textarea matInput [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"></textarea>
+                </mat-form-field>
+                <mat-form-field class="example-full-width fadeInLeft">
+                  <textarea matInput [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"></textarea>
+                </mat-form-field>
+              </form>
+              <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+              <!--<input type="range" min="0" max="3" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="0.1" id="card44">-->
+              <mat-slider thumbLabel class="fadeInLeft"  min="0" max="3" [(value)]="arrayFontSize[1]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <p class="fadeInTop">Kolor czcionki</p>
+              <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
+              <br />
+              <p class="fadeInTop">Czcionka</p>
+              <div class="fontCont">
+                <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 4)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 4)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 4)">
+                  <h1>Dyplom</h1>
+                </div>
               </div>
             </div>
-
+            <div class="rightCont">
+              <div class="card" id="card4">
+                <div class="card-body">
+                  <br />
+                  <div class="inputContainer">
+                    <p class="fadeInTop">Lewy margines</p>
+                    <!--<input type="range" min="0" max="40" [value]="marginLeft[3]" (input)="marginLeft[3] = $event.target.value" class="slider"  style="width: 80%">-->
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                    <br/>
+                    <p class="fadeInTop">Prawy margines</p>
+                    <!--<input type="range" min="0" max="40" [value]="marginRight[3]" (input)="marginRight[3] = $event.target.value" class="slider"  style="width: 80%">-->
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Dolny margines</p>
+                    <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="rightCont">
-            <div class="card" id="card3">
-              <div class="card-body">
-                <div class="inputContainer"><!--
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Stopka
+            </mat-panel-title>
+            <mat-panel-description>
+              Ustaw właściwości pola 'Stopka'
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="dataContainer" style="height: 320px">
+            <div class="leftCont">
+              <!--  <p><b class="fadeInLeft">Stopka</b></p>
+              3
+              <input class="input fadeInLeft" > <br/>-->
+              <mat-form-field class="example-full-width fadeInLeft">
+                <input matInput [value]="footer" (input)="footer = $event.target.value" placeholder="Stopka">
+              </mat-form-field>
+              <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+              <!--<input type="range" min="0" max="3" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="0.1" id="card33">
+              <br /> -->
+              <mat-slider thumbLabel class="fadeInLeft"  min="0" max="3" [(value)]="arrayFontSize[3]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <p class="fadeInTop" >Kolor czcionki</p>
+              <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
+              <br />
+              <p class="fadeInTop" >Czcionka</p>
+              <div class="fontCont">
+                <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 3)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 3)">
+                  <h1>Dyplom</h1>
+                </div>
+                <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 3)">
+                  <h1>Dyplom</h1>
+                </div>
+              </div>
+
+            </div>
+            <div class="rightCont">
+              <div class="card" id="card3">
+                <div class="card-body">
+                  <div class="inputContainer"><!--
                 <br />
                 <p class="fadeInTop">Lewy margines</p>
                 <input type="range" min="0" max="40" [value]="marginLeft[3]" (input)="marginLeft[3] = $event.target.value" class="slider"  style="width: 80%">
@@ -425,77 +537,22 @@
                 <p class="fadeInTop" >Dolny margines</p>
                 <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">
 -->
-                  <p class="fadeInTop">Lewy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
-                  <br/>
-                  <p class="fadeInTop">Prawy margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
-                  <p class="fadeInTop" >Dolny margines</p>
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop">Lewy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                    <br/>
+                    <p class="fadeInTop">Prawy margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Dolny margines</p>
+                    <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="dataContainer">
-          <div class="leftCont ">
-            <!--<p><b class="fadeInLeft">Podpisy:</b></p>
-             1
-            <textarea class="input signTxt fadeInLeft textarea" [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"> </textarea>
-            <textarea class="input signTxt fadeInLeft textarea" [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"> </textarea>
-            <textarea class="input signTxt fadeInLeft textarea" [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"> </textarea>
-            <br /> -->
-            <form class="example-form">
-              <mat-form-field class="example-full-width fadeInLeft">
-                <textarea matInput [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"></textarea>
-              </mat-form-field>
-              <mat-form-field class="example-full-width fadeInLeft">
-                <textarea matInput [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"></textarea>
-              </mat-form-field>
-              <mat-form-field class="example-full-width fadeInLeft">
-                <textarea matInput [value]="sign2" (input)="sign2 = $event.target.value" placeholder="Podpis"></textarea>
-              </mat-form-field>
-            </form>
-            <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
-            <!--<input type="range" min="0" max="3" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="0.1" id="card44">-->
-            <mat-slider thumbLabel class="fadeInLeft"  min="0" max="3" [(value)]="arrayFontSize[1]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
-            <p class="fadeInTop">Kolor czcionki</p>
-            <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
-            <br />
-            <p class="fadeInTop">Czcionka</p>
-            <div class="fontCont">
-              <div class="fnt fnt1 fadeInTop" (click)="takeFontForEle('Abril Fatface', 4)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt2 fadeInTop" (click)="takeFontForEle('Aladin', 4)">
-                <h1>Dyplom</h1>
-              </div>
-              <div class="fnt fnt3 fadeInTop" (click)="takeFontForEle('Allura', 4)">
-                <h1>Dyplom</h1>
-              </div>
-            </div>
-          </div>
-          <div class="rightCont">
-            <div class="card" id="card4">
-              <div class="card-body">
-                <br />
-                <div class="inputContainer">
-                  <p class="fadeInTop">Lewy margines</p>
-                  <!--<input type="range" min="0" max="40" [value]="marginLeft[3]" (input)="marginLeft[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
-                  <br/>
-                  <p class="fadeInTop">Prawy margines</p>
-                  <!--<input type="range" min="0" max="40" [value]="marginRight[3]" (input)="marginRight[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
-                  <p class="fadeInTop" >Dolny margines</p>
-                  <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
-                  <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </mat-expansion-panel>
+
+      </mat-accordion>
       </div>
     </mat-step>
     <mat-step>
@@ -525,12 +582,14 @@
         <p><b class="fadeInRight">Prawy margines obrazka</b></p>
         <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
         <br />
-        <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj Obrót</button> <br/>
-        <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()">Zresetuj Obrazek</button> <br /><br />
-        <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" style="width: 50%">
+        <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj obrót</button> <br/>
+        <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()">Zresetuj obrazek</button> <br /><br />
+        <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" style="width: 50%" >
           <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
-        </mat-select>
+        </mat-select> <br/><br />
+        <button id="rmvImg" mat-raised-button color="primary" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
       </div>
+      <a download="info.txt" id="downloadlink" style="display: none">Download</a>
     </mat-step>
   </mat-horizontal-stepper>
 

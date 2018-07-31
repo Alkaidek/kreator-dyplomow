@@ -6,9 +6,14 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-  imports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule],
+  imports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSnackBarModule,
+    MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule, MatBadgeModule, MatExpansionModule],
+  exports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSnackBarModule,
+    MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule, MatBadgeModule, MatExpansionModule],
 })
 export class MaterialModule { }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
-
+import {MatSnackBar} from '@angular/material';
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector:
@@ -24,7 +25,7 @@ export class CreateComponent implements OnInit {
   coordinatesTemplate: any;
   length: Number;
   bool = 'block';
-  constructor(private db: AngularFireDatabase ) {
+  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
@@ -185,7 +186,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       this.scheme = 30;
-      this.landscapeOff(1);
+      this.landscapeOff(2);
     }, 500);
   }
   takeBcg(imgSrc) {
@@ -353,15 +354,10 @@ export class CreateComponent implements OnInit {
       .img = this.base64Tmp;
     console
       .log(this.postsWithArray);
-        setTimeout( () => {
-      this.db.database
-        .ref('/template')
-        .child(this.schoolNr + '' + this.name)
-        .child('' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min )
-        .set(this.postsWithArray[0]);
-      alert('Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );
-    },
-          500 );
+    this.saveData();
+      //alert('Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );
+    const msg = 'Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
+      this.openSnackBar(msg,  'ok' );
   }
   takeFontForEle(font, element) {
     document
@@ -536,6 +532,8 @@ export class CreateComponent implements OnInit {
 
   onSelectFile(event: any) {
     this.add();
+    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+    rmvBtn.disabled = false;
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader() as any;
       console.log('1');
@@ -681,5 +679,37 @@ export class CreateComponent implements OnInit {
     this.imgTop.push(0);
     this.imgLeft.push(0);
     this.currImg = this.userImg.length - 1;
+  }
+  removeImg() {
+    this.imgHeight[this.currImg] = 0;
+    this.imgWidth[this.currImg] = 0;
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+
+  saveData() {
+    const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
+    fileSaver.saveAs(blob, 'template.json');
+  }
+  createFileToSave() {
+    const txt = '{"arrayFontColor" : [ "' + this.postsWithArray[0].arrayFontColor[0] + '", "' + this.postsWithArray[0].arrayFontColor[1] + '", "'
+      + this.postsWithArray[0].arrayFontColor[2] + '", "' + this.postsWithArray[0].arrayFontColor[3] + '", "' + this.postsWithArray[0].arrayFontColor[4] + '", "'
+      + this.postsWithArray[0].arrayFontColor[5] +
+      '"], "arrayFontFamili" : [ "' + this.postsWithArray[0].arrayFontFamili[0] + '", "' + this.postsWithArray[0].arrayFontFamili[1] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[2] + '", "' + this.postsWithArray[0].arrayFontFamili[3] + '", "' + this.postsWithArray[0].arrayFontFamili[4] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[5] + '"],' +
+      ' "arrayFontSize" : [' + this.postsWithArray[0].arrayFontSize[0] + ', ' + this.postsWithArray[0].arrayFontSize[1] + ', ' + this.postsWithArray[0].arrayFontSize[2] + ', '
+      + this.postsWithArray[0].arrayFontSize[3] + ', ' + this.postsWithArray[0].arrayFontSize[4] + ', ' + this.postsWithArray[0].arrayFontSize[5] + '], ' +
+      '"bottom" : "' + this.postsWithArray[0].bottom + '", "img" : ' + this.postsWithArray[0].img + ', ' +
+      '"marginLeft" : [ "' + this.postsWithArray[0].marginLeft[0] + '", "' + this.postsWithArray[0].marginLeft[1] + '", "'
+      + this.postsWithArray[0].marginLeft[2] + '", "' + this.postsWithArray[0].marginLeft[3] + '" ], ' +
+      '"marginRight" : [ "' + this.postsWithArray[0].marginRight[0] + '", "' + this.postsWithArray[0].marginRight[1] + '", "'
+      + this.postsWithArray[0].marginRight[2] + '", "' + this.postsWithArray[0].marginRight[3] + '" ], ' +
+      '"paddingTop" : [ "' + this.postsWithArray[0].paddingTop[0] + '", "' + this.postsWithArray[0].paddingTop[1] + '", "'
+      + this.postsWithArray[0].paddingTop[2] + '" ] }';
+    return txt;
   }
 }

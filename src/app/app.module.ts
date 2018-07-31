@@ -4,6 +4,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { LandscapeComponent } from './landscape/landscape.component';
