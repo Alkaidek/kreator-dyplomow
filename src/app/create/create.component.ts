@@ -14,14 +14,9 @@ import {AngularFireDatabase} from 'angularfire2/database';
     ]
 })
 export class CreateComponent implements OnInit {
-  public isCollapsed =
-    [
-      false,
-      false,
-      false,
-      false,
-      false
-    ];
+  userImg =
+    [];
+  currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
   bcgTemp: any;
@@ -167,11 +162,11 @@ export class CreateComponent implements OnInit {
       img: ''
     }
     ];
-  rotate = 0;
-  imgWidth = 10;
-  imgHeight = 10;
-  imgTop = 0;
-  imgLeft = 0;
+  rotate = [];
+  imgWidth = [];
+  imgHeight = [];
+  imgTop = [];
+  imgLeft = [];
   scaleXbool = true;
   scheme = 0;
   ngOnInit() {
@@ -539,16 +534,17 @@ export class CreateComponent implements OnInit {
     document.getElementById('pdfForlandscape').appendChild(x);
   }
 
-  onSelectFile(event: any) { // called each time file input changes
+  onSelectFile(event: any) {
+    this.add();
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader() as any;
       console.log('1');
       reader.onload = (event2: any) => {
         console.log('2');
-        const img = document.getElementById('imgToChange') as HTMLImageElement;
-        const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
-        const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
-        const img4 = document.getElementById('imgToChange4') as HTMLImageElement;
+        const img = document.getElementById('imgToChange' + (this.currImg )) as HTMLImageElement;
+        const img2 = document.getElementById('imgToChange2' + (this.currImg )) as HTMLImageElement;
+        const img3 = document.getElementById('imgToChange3' + (this.currImg )) as HTMLImageElement;
+        const img4 = document.getElementById('imgToChange4' + (this.currImg )) as HTMLImageElement;
         img.src = event2.target.result;
         img2.src = event2.target.result;
         img3.src = event2.target.result;
@@ -559,14 +555,14 @@ export class CreateComponent implements OnInit {
     }
   }
   set0degress() {
-    this.rotate = 0;
+    this.rotate[this.currImg] = 0;
   }
   resetImg() {
-    this.rotate = 0;
-    this.imgLeft = 0;
-    this.imgTop = 0;
-    this.imgWidth = 10;
-    this.imgHeight = 10;
+    this.rotate[this.currImg] = 0;
+    this.imgLeft[this.currImg] = 0;
+    this.imgTop[this.currImg] = 0;
+    this.imgWidth[this.currImg] = 10;
+    this.imgHeight[this.currImg] = 10;
   }
   right(n) {
     const btn =  document
@@ -676,5 +672,14 @@ export class CreateComponent implements OnInit {
       img4.style.transform = 'scaleX(1)';
       this.scaleXbool = true;
     }
+  }
+  add() {
+   this.userImg.push(this.userImg.length);
+    this.rotate.push(0);
+    this.imgWidth.push(10);
+    this.imgHeight.push(10);
+    this.imgTop.push(0);
+    this.imgLeft.push(0);
+    this.currImg = this.userImg.length - 1;
   }
 }
