@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
       false,
       false
     ];
-  bcgDisplay = ['block', 'none', 'none', 'none'];
+  bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
   bcgTemp: any;
   template: any;
@@ -47,6 +47,7 @@ export class CreateComponent implements OnInit {
       console.log(this.coordinatesTemplate);
     });
   }
+  selected = 0;
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
@@ -185,10 +186,12 @@ export class CreateComponent implements OnInit {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
-    document.getElementById('scheme30').style.transform = 'scale(1,1)';
-    document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
-    this.scheme = 30;
-    this.landscapeOff(1);
+    setTimeout( () => {
+      document.getElementById('scheme30').style.transform = 'scale(1,1)';
+      document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      this.scheme = 30;
+      this.landscapeOff(1);
+    }, 500);
   }
   takeBcg(imgSrc) {
     console.log(
@@ -390,80 +393,80 @@ export class CreateComponent implements OnInit {
   }
   setUserData() {
     const select = document.getElementById('selectTemplate') as HTMLSelectElement;
-    console.log(select.selectedIndex);
-    this.bcgColor = this.template[select.selectedIndex]
+    console.log(this.selected);
+    this.bcgColor = this.template[this.selected]
       .bcgColor;
-    this.landscape = this.template[select.selectedIndex]
+    this.landscape = this.template[this.selected]
       .landscape;
     if (this.landscape === 'none') {
       this.landscapeOff(2);
     } else {
       this.landscapeOff(1);
     }
-    if ( this.template[select.selectedIndex]
+    if ( this.template[this.selected]
       .scheme === '30' ) {
       this.setScheme(30);
     } else {
       this.setScheme(50);
     }
-    this.paddingTop = this.template[select.selectedIndex]
+    this.paddingTop = this.template[this.selected]
       .paddingTop[0];
-    this.paddingTopForWho = this.template[select.selectedIndex]
+    this.paddingTopForWho = this.template[this.selected]
       .paddingTop[1];
-    this.paddingTopForWhat = this.template[select.selectedIndex]
+    this.paddingTopForWhat = this.template[this.selected]
       .paddingTop[2];
-    this.marginLeft[0] = this.template[select.selectedIndex]
+    this.marginLeft[0] = this.template[this.selected]
       .marginLeft[0];
-    this.marginLeft[1] = this.template[select.selectedIndex]
+    this.marginLeft[1] = this.template[this.selected]
       .marginLeft[1];
-    this.marginLeft[2] = this.template[select.selectedIndex]
+    this.marginLeft[2] = this.template[this.selected]
       .marginLeft[2];
-    this.marginLeft[3] = this.template[select.selectedIndex]
+    this.marginLeft[3] = this.template[this.selected]
       .marginLeft[3];
-    this.marginRight[3] = this.template[select.selectedIndex]
+    this.marginRight[3] = this.template[this.selected]
       .marginRight[3];
-    this.marginRight[2] = this.template[select.selectedIndex]
+    this.marginRight[2] = this.template[this.selected]
       .marginRight[2];
-    this.marginRight[1] = this.template[select.selectedIndex]
+    this.marginRight[1] = this.template[this.selected]
       .marginRight[1];
-    this.marginRight[0] = this.template[select.selectedIndex]
+    this.marginRight[0] = this.template[this.selected]
       .marginRight[0];
-    this.bottom = this.template[select.selectedIndex]
+    this.bottom = this.template[this.selected]
       .bottom;
     this.setPaddingFix();
-    if ( this.template[select.selectedIndex].img === '') {
+    if ( this.template[this.selected].img === '') {
       this.imgSrcFix =  '../../assets/img/0.png';
     } else {
-      this.imgSrcFix = this.bcgTemp[this.template[select.selectedIndex]
+      this.imgSrcFix = this.bcgTemp[this.template[this.selected]
         .img];
     }
-    this.base64Tmp = this.template[select.selectedIndex].img;
-    for (let i = 0; i < this.template[select.selectedIndex].arrayFontSize.length; i++ ) {
-      console.log(' ' + this.template[select.selectedIndex].arrayFontSize[i]);
-      this.arrayFontSize[i] = this.template[select.selectedIndex]
+    this.base64Tmp = this.template[this.selected].img;
+    for (let i = 0; i < this.template[this.selected].arrayFontSize.length; i++ ) {
+      console.log(' ' + this.template[this.selected].arrayFontSize[i]);
+      this.arrayFontSize[i] = this.template[this.selected]
         .arrayFontSize[i];
     }
-    for (let i = 0; i < this.template[select.selectedIndex].arrayFontColor.length; i++ ) {
-      this.arrayFontColor[i] =  this.template[select.selectedIndex].arrayFontColor[i];
+    for (let i = 0; i < this.template[this.selected].arrayFontColor.length; i++ ) {
+      this.arrayFontColor[i] =  this.template[this.selected].arrayFontColor[i];
     }
-    for (let i = 0; i < this.template[select.selectedIndex].arrayFontFamili.length; i++ ) {
+    for (let i = 0; i < this.template[this.selected].arrayFontFamili.length; i++ ) {
       document
         .getElementById(this.arrayFontNameId[i])
         .style
-        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'Fix')
         .style
-        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'LandscapeFix')
         .style
-        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
+        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'Landscape')
         .style
-        .fontFamily =  this.template[select.selectedIndex].arrayFontFamili[i];
-      this.arrayFontFamili[i] = this.template[select.selectedIndex].arrayFontFamili[i];
+        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
+      this.arrayFontFamili[i] = this.template[this.selected].arrayFontFamili[i];
     }
   }
   moveLeft() {

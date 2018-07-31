@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"
+
 $margin: 9.16666666667%
 $newmargin: 3.05555555556%
 $font1: 'Abril Fatface'
@@ -432,24 +434,14 @@ img
   overflow-y: hidden
   width: 300%
 
-button:disabled, button:disabled:hover
+.button:disabled, .button:disabled:hover
   background-color: gray
   color: white
   border: white
   transform: rotate( 0deg )
 
-.btnDirect
-  width: 30px
-  height: 30px
-  border-radius: 50%
-  transition: 0.5s
-  z-index: 10
-
-#leftDirect
+//#leftDirect
   left: 10px
-
-.btnDirect:hover
-  transform: rotate( 360deg )
 
 #fontContainter
   height: 25%
@@ -468,12 +460,12 @@ button:disabled, button:disabled:hover
   margin-top: 2%
   background-color: white
 
-textarea
+.textarea
   min-height: 74px
   max-height: 74px
   resize: none
 
-textarea:focus
+.textarea:focus
   border: 1px solid #ccc
   border-radius: 0px
 
@@ -598,7 +590,7 @@ input[type=color]
   margin-left: 0px
   width: 80%
 
-.inputRight input
+.inputRight
   float: right
   margin-right: 0px
 
@@ -650,7 +642,7 @@ input[type=color]
 ::-webkit-scrollbar-thumb:hover
   background: #216c9e
 
-button, .button
+.button
   -webkit-transition: all .7s
   transition: all .7s
   border-radius: 0px
@@ -664,7 +656,7 @@ button, .button
   font-weight: bold
   text-align: center
 
-button:hover, .button:hover
+.button:hover
   border: $MACblue 1px solid
   background-color: white
   color: $MACblue
@@ -816,4 +808,27 @@ input[type="file"]
 
 #imgO2:hover
   transform: rotate(90deg) scale(1, 1)
+
+.btnDirect
+  width: 30px
+  height: 30px
+  border-radius: 50%
+  transition: 0.5s
+  z-index: 10
+
+.btnDirect:hover
+  transform: rotate( 360deg )
+
+.example-button-row
+  display: flex
+  align-items: center
+  justify-content: space-around
+
+.example-button-row button,
+.example-button-row a
+  margin-right: 8px
+
+.example-full-width
+  width: 80%
+
 
