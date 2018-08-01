@@ -17,12 +17,15 @@
   <span>Ó</span>
   <span>W</span>
 </div>
+<div id="spinner" style="z-index: 20; background-color: rgba(0,0,0, 0.7); width: 100%; height: 100%; position: fixed; padding-top: 15%; display: none">
+  <mat-spinner disabled style="width: 10%; margin-left: 45%"></mat-spinner>
+</div>
 
 <div id="viewLandscapeFix">
   <div id="toPdf100LandscapeFix" class="" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100LandscapeFix"  />
     <div id="pdfForLandscapeFix">
-      <img *ngFor="let usr of userImg" id="imgToChange4{{usr}}" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
+      <img *ngFor="let usr of userImg; let i = index" id="imgToChange3{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
@@ -70,7 +73,7 @@
       <div id="toPdf100Fix" [style.background-color]="bcgColor">
         <img src="{{imgSrcFix}}" id="imgPdf100Fix" />
         <div id="pdfForFix">
-          <img *ngFor="let usr of userImg" id="imgToChange{{usr}}" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
+          <img *ngFor="let usr of userImg; let i = index" id="imgToChange{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
                [style.transform]="'rotate('+rotate[usr]+'deg)'"
                [style.width]="imgWidth[usr]+'%'"
                [style.height]="imgHeight[usr]+'%'"
@@ -117,8 +120,15 @@
 <img id="podglad" src="../../assets/img/podglad2.png" />
 
 <div id="create" xmlns="" [style.display]="auth">
+  <div >
+    <label (click)="stepper.reset()" for="fileInput" id="fileInputLabel" class="button fadeInLeft" matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">
+      <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
+      Wczytaj szablon
+    </label>
+    <input class="fadeInRight" id="fileInput" type="file" accept='.json' (change)="onSelectFile($event)"/>
+  </div>
   <button id="btnGeneratePdf" class="button" (click)="generatePdf()">Generuj Dyplom!</button>
-  <button id="btnAddTemplate" class="button" (click)="createArrayToSend(0)">Dodaj Szaboln!</button>
+  <button id="btnAddTemplate" class="button" (click)="createArrayToSend(0)"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
   <!--<button id="btnLeft" class="btnStep button" (click)="left(currentStep)" disabled >< Poprzedni krok</button>
   <button id="btnRight" class="btnStep button" (click)="right(currentStep)">Następny krok ></button>-->
 
@@ -151,17 +161,15 @@
           <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
         </div>
       </div>
-      <div id="bcgContainter2" [style.display]="bool">
-        <h1 class="fadeInTop fadeInTop">Twoje zapisane szablony</h1>
-        <mat-form-field style="width: 50%">
+        <!--<mat-form-field style="width: 50%">
           <mat-select placeholder="Wybierz swój szablon" [(value)]="selected">
             <mat-option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</mat-option>
           </mat-select>
-        </mat-form-field>
-        <br />
+        </mat-form-field>-->
+
+        <br/>
         <!--<button class="fadeInTop button" (click)="setUserData()">Wczytaj szablon!</button>-->
-        <button class="fadeInTop" mat-raised-button color="primary" (click)="setUserData()">Wczytaj szablon!</button>
-      </div>
+ <!--       <button class="fadeInTop" mat-raised-button color="primary" (click)="setUserData()">Wczytaj szablon!</button>-->
     </mat-step>
     <mat-step>
       <div>
@@ -568,8 +576,7 @@
           <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
           Dodaj Obrazek
         </label>
-        <input id="file-upload" class="fadeInRight" type="file" (change)="onSelectFile($event)"/>
-        <input mat-raised-button type="file" (change)="onSelectFile($event)">
+        <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
         <br />
         <p><b class="fadeInRight">Obrót obrazka</b></p>
         <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45"> <br />
@@ -620,7 +627,7 @@
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfFor">
-      <img *ngFor="let usr of userImg" id="imgToChange2{{usr}}" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
+      <img *ngFor="let usr of userImg; let i = index" id="imgToChange2{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
@@ -672,7 +679,7 @@
 
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfForlandscape">
-      <img *ngFor="let usr of userImg" id="imgToChange3{{usr}}" src="../../assets/img/0.png" style="background-size: cover; position: absolute; z-index: 0;"
+      <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
@@ -716,3 +723,4 @@
 
   </div>
 </div>
+<p id="cont" style="font-size: 0vw; opacity: 0"></p>

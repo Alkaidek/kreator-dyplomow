@@ -17,6 +17,13 @@ import * as fileSaver from 'file-saver';
 export class CreateComponent implements OnInit {
   userImg =
     [];
+  userImgBase64 = [];
+  userImgBase64txt = '';
+  userImgRotatetxt = '';
+  userImgWidthtxt = '';
+  userImgHeighttxt = '';
+  userImgMarginLefttxt = '';
+  userImgMarginRigthtxt = '';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
@@ -29,7 +36,7 @@ export class CreateComponent implements OnInit {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
-    db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
+    /*db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
       this.template = template;
       this.template.reverse();
       console.log(this.template);
@@ -37,7 +44,7 @@ export class CreateComponent implements OnInit {
       if ( this.length === 0) {
         this.bool = 'none';
       }
-    });
+    });*/
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
       console.log(this.coordinatesTemplate);
@@ -282,10 +289,6 @@ export class CreateComponent implements OnInit {
         });
     }
   }
-  setPadding() {
-  }
-  setPaddingFix() {
-  }
   createArrayToSend(n) {
     const date = new Date();
     let day = '' + date
@@ -354,10 +357,11 @@ export class CreateComponent implements OnInit {
       .img = this.base64Tmp;
     console
       .log(this.postsWithArray);
-    this.saveData();
-      //alert('Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );
-    const msg = 'Twój szoblon został zapisany! Dodano go: ' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
-      this.openSnackBar(msg,  'ok' );
+      /*alert('Twój szoblon został zapisany! Dodano go: ' +
+      day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );*/
+    const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
+      this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
+    this.saveData( msg );
   }
   takeFontForEle(font, element) {
     document
@@ -382,83 +386,144 @@ export class CreateComponent implements OnInit {
       this.takeFontForEle(font, 6);
     }
   }
-  setUserData() {
-    const select = document.getElementById('selectTemplate') as HTMLSelectElement;
-    console.log(this.selected);
-    this.bcgColor = this.template[this.selected]
+  setUserData(template) {
+    this.resetSettings();
+    /*const select = document.getElementById('selectTemplate') as HTMLSelectElement;*/
+    this.bcgColor = template
       .bcgColor;
-    this.landscape = this.template[this.selected]
+    this.landscape = template
       .landscape;
     if (this.landscape === 'none') {
       this.landscapeOff(2);
     } else {
       this.landscapeOff(1);
     }
-    if ( this.template[this.selected]
+    if ( template
       .scheme === '30' ) {
       this.setScheme(30);
     } else {
       this.setScheme(50);
     }
-    this.paddingTop = this.template[this.selected]
+    this.paddingTop = template
       .paddingTop[0];
-    this.paddingTopForWho = this.template[this.selected]
+    this.paddingTopForWho = template
       .paddingTop[1];
-    this.paddingTopForWhat = this.template[this.selected]
+    this.paddingTopForWhat = template
       .paddingTop[2];
-    this.marginLeft[0] = this.template[this.selected]
+    this.marginLeft[0] = template
       .marginLeft[0];
-    this.marginLeft[1] = this.template[this.selected]
+    this.marginLeft[1] = template
       .marginLeft[1];
-    this.marginLeft[2] = this.template[this.selected]
+    this.marginLeft[2] = template
       .marginLeft[2];
-    this.marginLeft[3] = this.template[this.selected]
+    this.marginLeft[3] = template
       .marginLeft[3];
-    this.marginRight[3] = this.template[this.selected]
+    this.marginRight[3] = template
       .marginRight[3];
-    this.marginRight[2] = this.template[this.selected]
+    this.marginRight[2] = template
       .marginRight[2];
-    this.marginRight[1] = this.template[this.selected]
+    this.marginRight[1] = template
       .marginRight[1];
-    this.marginRight[0] = this.template[this.selected]
+    this.marginRight[0] = template
       .marginRight[0];
-    this.bottom = this.template[this.selected]
+    this.bottom = template
       .bottom;
-    this.setPaddingFix();
-    if ( this.template[this.selected].img === '') {
+    if ( template.img === '') {
       this.imgSrcFix =  '../../assets/img/0.png';
     } else {
-      this.imgSrcFix = this.bcgTemp[this.template[this.selected]
+      this.imgSrcFix = this.bcgTemp[template
         .img];
     }
-    this.base64Tmp = this.template[this.selected].img;
-    for (let i = 0; i < this.template[this.selected].arrayFontSize.length; i++ ) {
-      console.log(' ' + this.template[this.selected].arrayFontSize[i]);
-      this.arrayFontSize[i] = this.template[this.selected]
+    this.base64Tmp = template.img;
+    for (let i = 0; i < template.arrayFontSize.length; i++ ) {
+      console.log(' ' + template.arrayFontSize[i]);
+      this.arrayFontSize[i] = template
         .arrayFontSize[i];
     }
-    for (let i = 0; i < this.template[this.selected].arrayFontColor.length; i++ ) {
-      this.arrayFontColor[i] =  this.template[this.selected].arrayFontColor[i];
+    for (let i = 0; i < template.arrayFontColor.length; i++ ) {
+      this.arrayFontColor[i] =  template.arrayFontColor[i];
     }
-    for (let i = 0; i < this.template[this.selected].arrayFontFamili.length; i++ ) {
+    for (let i = 0; i < template.arrayFontFamili.length; i++ ) {
       document
         .getElementById(this.arrayFontNameId[i])
         .style
-        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
+        .fontFamily =  template.arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'Fix')
         .style
-        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
+        .fontFamily =  template.arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'LandscapeFix')
         .style
-        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
+        .fontFamily =  template.arrayFontFamili[i];
       document
         .getElementById(this.arrayFontNameId[i] + 'Landscape')
         .style
-        .fontFamily =  this.template[this.selected].arrayFontFamili[i];
-      this.arrayFontFamili[i] = this.template[this.selected].arrayFontFamili[i];
+        .fontFamily =  template.arrayFontFamili[i];
+      this.arrayFontFamili[i] = template.arrayFontFamili[i];
+      document.getElementById('spinner').style.display = 'none';
     }
+    this.title =  template.title.replace('NEWLINE', '\n' );
+    this.forWho =  template.forWho.replace('NEWLINE', '\n' );
+    this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
+    this.sign1 =  template.sign1.replace('NEWLINE', '\n' );
+    this.sign2 = template.sign2.replace('NEWLINE', '\n' );
+    this.sign3 = template.sign3.replace('NEWLINE', '\n' );
+    this.footer = template.footer.replace('NEWLINE', '\n' );
+    for ( let i = 0; i < template.userBcgBase64.length; i++) {
+      this.userImg.push(this.userImg.length);
+      this.rotate.push(template.userImgRotate[i]);
+      this.imgWidth.push(template.userImgWidth[i]);
+      this.imgHeight.push(template.userImgHeight[i]);
+      this.imgTop.push(template.userImgTop[i]);
+      this.imgLeft.push(template.userImgLeft[i]);
+      this.userImgBase64.push(template.userBcgBase64[i]);
+      this.currImg = this.userImg.length - 1;
+    }
+  }
+  resetSettings() {
+    this.bcgColor = '#c2f2cf';
+    this.landscape = '';
+    this.landscapeOff(2);
+    this.setScheme(30);
+    this.paddingTop = 0;
+    this.paddingTopForWho = 10;
+    this.paddingTopForWhat = 20;
+    this.marginLeft[0] = 0;
+    this.marginLeft[1] = 0;
+    this.marginLeft[2] = 0;
+    this.marginLeft[3] = 0;
+    this.marginRight[3] = 0;
+    this.marginRight[2] = 0;
+    this.marginRight[1] = 0;
+    this.marginRight[0] = 0;
+    this.bottom =  0;
+    this.imgSrcFix =  '../../assets/img/0.png';
+    this.base64Tmp = '';
+    this.arrayFontSize = [ 3, 0.9, 2, 0.8, 2];
+    this.arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+    this.arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
+    for (let i = 0; i < this.arrayFontFamili.length; i++ ) {
+      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  'Arial';
+      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  'Arial';
+      document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =   'Arial';
+      document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  'Arial';
+    }
+    this.title = 'Dyplom';
+    this.forWho =  '';
+    this.forWhat =  '';
+    this.sign1 =  'Dyrektor\n................';
+    this.sign2 = 'Wychowawca\n.......................';
+    this.sign3 = 'Katecheta\n  ..................';
+    this.footer = 'Kielce, dnia ';
+      this.userImg = [];
+      this.rotate = [];
+      this.imgWidth = [];
+      this.imgHeight = [];
+      this.imgTop = [];
+      this.imgLeft = [];
+      this.userImgBase64 = [];
+      this.currImg = -1;
   }
   moveLeft() {
     const btn =  document
@@ -528,29 +593,6 @@ export class CreateComponent implements OnInit {
     x.setAttribute('style', 'background-size: cover; position: absolute; z-index: 0;');
     x.setAttribute('id', 'imgToChange2');
     document.getElementById('pdfForlandscape').appendChild(x);
-  }
-
-  onSelectFile(event: any) {
-    this.add();
-    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
-    rmvBtn.disabled = false;
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader() as any;
-      console.log('1');
-      reader.onload = (event2: any) => {
-        console.log('2');
-        const img = document.getElementById('imgToChange' + (this.currImg )) as HTMLImageElement;
-        const img2 = document.getElementById('imgToChange2' + (this.currImg )) as HTMLImageElement;
-        const img3 = document.getElementById('imgToChange3' + (this.currImg )) as HTMLImageElement;
-        const img4 = document.getElementById('imgToChange4' + (this.currImg )) as HTMLImageElement;
-        img.src = event2.target.result;
-        img2.src = event2.target.result;
-        img3.src = event2.target.result;
-        img4.src = event2.target.result;
-      };
-      console.log('3');
-      reader.readAsDataURL(event.target.files[0]);
-    }
   }
   set0degress() {
     this.rotate[this.currImg] = 0;
@@ -673,12 +715,12 @@ export class CreateComponent implements OnInit {
   }
   add() {
    this.userImg.push(this.userImg.length);
-    this.rotate.push(0);
-    this.imgWidth.push(10);
-    this.imgHeight.push(10);
-    this.imgTop.push(0);
-    this.imgLeft.push(0);
-    this.currImg = this.userImg.length - 1;
+   this.rotate.push(0);
+   this.imgWidth.push(10);
+   this.imgHeight.push(10);
+   this.imgTop.push(0);
+   this.imgLeft.push(0);
+   this.currImg = this.userImg.length - 1;
   }
   removeImg() {
     this.imgHeight[this.currImg] = 0;
@@ -690,26 +732,146 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  saveData() {
+  saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    fileSaver.saveAs(blob, 'template.json');
+    fileSaver.saveAs(blob, 'template' + date + '.json');
   }
   createFileToSave() {
-    const txt = '{"arrayFontColor" : [ "' + this.postsWithArray[0].arrayFontColor[0] + '", "' + this.postsWithArray[0].arrayFontColor[1] + '", "'
-      + this.postsWithArray[0].arrayFontColor[2] + '", "' + this.postsWithArray[0].arrayFontColor[3] + '", "' + this.postsWithArray[0].arrayFontColor[4] + '", "'
-      + this.postsWithArray[0].arrayFontColor[5] +
-      '"], "arrayFontFamili" : [ "' + this.postsWithArray[0].arrayFontFamili[0] + '", "' + this.postsWithArray[0].arrayFontFamili[1] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[2] + '", "' + this.postsWithArray[0].arrayFontFamili[3] + '", "' + this.postsWithArray[0].arrayFontFamili[4] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[5] + '"],' +
-      ' "arrayFontSize" : [' + this.postsWithArray[0].arrayFontSize[0] + ', ' + this.postsWithArray[0].arrayFontSize[1] + ', ' + this.postsWithArray[0].arrayFontSize[2] + ', '
-      + this.postsWithArray[0].arrayFontSize[3] + ', ' + this.postsWithArray[0].arrayFontSize[4] + ', ' + this.postsWithArray[0].arrayFontSize[5] + '], ' +
-      '"bottom" : "' + this.postsWithArray[0].bottom + '", "img" : ' + this.postsWithArray[0].img + ', ' +
-      '"marginLeft" : [ "' + this.postsWithArray[0].marginLeft[0] + '", "' + this.postsWithArray[0].marginLeft[1] + '", "'
-      + this.postsWithArray[0].marginLeft[2] + '", "' + this.postsWithArray[0].marginLeft[3] + '" ], ' +
-      '"marginRight" : [ "' + this.postsWithArray[0].marginRight[0] + '", "' + this.postsWithArray[0].marginRight[1] + '", "'
-      + this.postsWithArray[0].marginRight[2] + '", "' + this.postsWithArray[0].marginRight[3] + '" ], ' +
-      '"paddingTop" : [ "' + this.postsWithArray[0].paddingTop[0] + '", "' + this.postsWithArray[0].paddingTop[1] + '", "'
-      + this.postsWithArray[0].paddingTop[2] + '" ] }';
+    for ( let i = 0; i < this.userImgBase64.length; i ++) {
+      if ( i !== this.userImgBase64.length - 1 ) {
+        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '", ';
+        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '", ';
+        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '", ';
+        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '", ';
+        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '", ';
+        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '", ';
+      } else {
+        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '" ';
+        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '" ';
+        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '" ';
+        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '" ';
+        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '" ';
+        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '" ';
+      }
+    }
+    const txt = '{"arrayFontColor" : [ "'
+      + this.postsWithArray[0].arrayFontColor[0] + '", "'
+      + this.postsWithArray[0].arrayFontColor[1] + '", "'
+      + this.postsWithArray[0].arrayFontColor[2] + '", "'
+      + this.postsWithArray[0].arrayFontColor[3] + '", "'
+      + this.postsWithArray[0].arrayFontColor[4] + '", "'
+      + this.postsWithArray[0].arrayFontColor[5]
+      + '"], "arrayFontFamili" : [ "'
+      + this.postsWithArray[0].arrayFontFamili[0] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[1] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[2] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[3] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[4] + '", "'
+      + this.postsWithArray[0].arrayFontFamili[5] + '"],'
+      + ' "arrayFontSize" : ['
+      + this.postsWithArray[0].arrayFontSize[0] + ', '
+      + this.postsWithArray[0].arrayFontSize[1] + ', '
+      + this.postsWithArray[0].arrayFontSize[2] + ', '
+      + this.postsWithArray[0].arrayFontSize[3] + ', '
+      + this.postsWithArray[0].arrayFontSize[4] + ', '
+      + this.postsWithArray[0].arrayFontSize[5] + '], '
+      + '"bottom" : "' + this.postsWithArray[0].bottom + '", '
+      + '"marginLeft" : [ "'
+      + this.postsWithArray[0].marginLeft[0] + '", "'
+      + this.postsWithArray[0].marginLeft[1] + '", "'
+      + this.postsWithArray[0].marginLeft[2] + '", "'
+      + this.postsWithArray[0].marginLeft[3] + '" ], '
+      + '"marginRight" : [ "'
+      + this.postsWithArray[0].marginRight[0] + '", "'
+      + this.postsWithArray[0].marginRight[1] + '", "'
+      + this.postsWithArray[0].marginRight[2] + '", "'
+      + this.postsWithArray[0].marginRight[3] + '" ], '
+      + '"paddingTop" : [ "'
+      + this.postsWithArray[0].paddingTop[0] + '", "'
+      + this.postsWithArray[0].paddingTop[1] + '", "'
+      + this.postsWithArray[0].paddingTop[2] + '" ], '
+      + '"img" : "'
+      + this.postsWithArray[0].img + '", '
+      + '"bcgColor" : "'
+      + this.postsWithArray[0].bcgColor + '", '
+      + '"landscape" : "'
+      + this.postsWithArray[0].landscape + '", '
+      + '"title" : "'
+      + this.title.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '", '
+      + '"forWho" : "'
+      + this.forWho.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"forWhat" : "'
+      + this.forWhat.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"sign1" : "'
+      + this.sign1.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"sign2" : "'
+      + this.sign2.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"sign3" : "'
+      + this.sign3.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"footer" : "'
+      + this.footer.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
+      + '"userBcgBase64" : [ '
+      + this.userImgBase64txt + '],'
+      + '"userImgRotate" : [ '
+      + this.userImgRotatetxt + '],'
+      + '"userImgWidth" : [ '
+      + this.userImgWidthtxt + '],'
+      + '"userImgHeight" : [ '
+      + this.userImgHeighttxt + '],'
+      + '"userImgLeft" : [ '
+      + this.userImgMarginLefttxt + '],'
+      + '"userImgTop" : [ '
+      + this.userImgMarginRigthtxt + '],'
+      + '"scheme" : "'
+      + this.postsWithArray[0].scheme
+      + '" }';
     return txt;
   }
+  onSelectFile(event) {
+    const reader = new FileReader();
+    reader.readAsText(event.target.files[0]);
+    let txt: any;
+    document.getElementById('spinner').style.display = 'inline-block';
+    reader.onload = function () {
+      txt = reader.result;
+    };
+    setTimeout( () => {
+      this.jsonToArray(txt);
+    }, 500);
+  }
+  fileUpload(event: any) {
+    this.add();
+    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+    rmvBtn.disabled = false;
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader() as any;
+      console.log('1');
+      reader.onload = (event2: any) => {
+        console.log('2');
+        this.userImgBase64.push(event2.target.result);
+      };
+      console.log('3');
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  jsonToArray(txt) {
+    const o = txt;
+    const obj = JSON.parse(o);
+    this.setUserData(obj);
+  }
+  /*onSelectFile2(eve2: any) {
+    if (eve2.target.files && eve2.target.files[0]) {
+      const reader = new FileReader() as any;
+      console.log('1');
+      reader.onload = (event2: any) => {
+        console.log('2');
+        console.log('siema' + event2.target.result);
+        this.jsonToArray(event2.target.result);
+
+      };
+      console.log('3');
+      reader.readAsDataURL(eve2.target.files[0]);
+    }
+  }*/
+
 }

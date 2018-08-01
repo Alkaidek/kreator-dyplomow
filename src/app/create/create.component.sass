@@ -433,11 +433,17 @@ img
   overflow-y: hidden
   width: 300%
 
-.button:disabled, .button:disabled:hover
+.button:disabled, .button:disabled:hover, .btnDisable
   background-color: gray
   color: white
   border: white
   transform: rotate( 0deg )
+  width: 30%
+  height: 30px
+  margin-top: 1%
+  margin-bottom: 1%
+  font-weight: bold
+  text-align: center
 
 //#leftDirect
   left: 10px
@@ -660,7 +666,7 @@ input[type=color]
   background-color: white
   color: $MACblue
 
-#btnGeneratePdf, #btnAddTemplate
+#btnGeneratePdf, #btnAddTemplate, #fileInputLabel
   position: fixed
   z-index: 14
   bottom: 0px
@@ -673,6 +679,15 @@ input[type=color]
   margin-left: 45%
   background-color: $MACorange
 
+#fileInputLabel
+  margin-left: 0px
+  width: 15%
+  background-color: $MACblue
+
+#fileInputLabel:hover
+  border: $MACblue 1px solid
+  background-color: white
+  color: $MACblue
 
 #btnGeneratePdf:hover, #btnAddTemplate:hover
   border: $MACgreen  1px solid
