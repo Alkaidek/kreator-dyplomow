@@ -112,64 +112,6 @@ export class CreateComponent implements OnInit {
       'black',
       'black'
     ];
-  postsWithArray = [
-    {
-      nameOfTemplate: '',
-      landscape: '',
-      scheme: '',
-      paddingTop:
-        [
-        0,
-        0,
-        0
-      ],
-      marginLeft:
-        [
-          0,
-          0,
-          0,
-          0
-        ],
-      marginRight:
-        [
-          0,
-          0,
-          0,
-          0
-        ],
-      bottom: 0,
-      bcgColor: '#c2f2cf',
-      arrayFontSize:
-        [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-      arrayFontColor:
-        [
-          'black',
-          'black',
-          'black',
-          'black',
-          'black',
-          'black'
-        ],
-      arrayFontFamili:
-        [
-          'Arial',
-          'Arial',
-          'Arial',
-          'Arial',
-          'Arial',
-          'Arial',
-          'Arial'
-        ],
-      img: ''
-    }
-    ];
   rotate = [];
   imgWidth = [];
   imgHeight = [];
@@ -312,53 +254,6 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
-    this.postsWithArray[n].bcgColor = this.bcgColor;
-    this.postsWithArray[n].landscape = this.landscape;
-    this.postsWithArray[n]
-      .nameOfTemplate = '' +   day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min;
-    this.postsWithArray[n].scheme = '' + this.scheme;
-    this.postsWithArray[n]
-      .paddingTop[0] = this.paddingTop;
-    this.postsWithArray[n]
-      .paddingTop[1] = this.paddingTopForWho;
-    this.postsWithArray[n]
-      .paddingTop[2] = this.paddingTopForWhat;
-    this.postsWithArray[n]
-      .marginLeft[0] = this.marginLeft[0];
-    this.postsWithArray[n]
-      .marginLeft[1] = this.marginLeft[1];
-    this.postsWithArray[n]
-      .marginLeft[2] = this.marginLeft[2];
-    this.postsWithArray[n]
-      .marginLeft[3] = this.marginLeft[3];
-    this.postsWithArray[n]
-      .marginRight[0] = this.marginRight[0];
-    this.postsWithArray[n]
-      .marginRight[1] = this.marginRight[1];
-    this.postsWithArray[n]
-      .marginRight[2] = this.marginRight[2];
-    this.postsWithArray[n]
-      .marginRight[3] = this.marginRight[3];
-    this.postsWithArray[n]
-      .bottom = this.bottom;
-    for (let i = 0; i < this.arrayFontSize.length; i++ ) {
-      this.postsWithArray[n]
-        .arrayFontSize[i] = this.arrayFontSize[i];
-    }
-    for (let i = 0; i < this.arrayFontColor.length; i++ ) {
-      this.postsWithArray[n]
-        .arrayFontColor[i] = this.arrayFontColor[i];
-    }
-    for (let i = 0; i < this.arrayFontFamili.length; i++ ) {
-      this.postsWithArray[n]
-        .arrayFontFamili[i] = this.arrayFontFamili[i];
-    }
-    this.postsWithArray[n]
-      .img = this.base64Tmp;
-    console
-      .log(this.postsWithArray);
-      /*alert('Twój szoblon został zapisany! Dodano go: ' +
-      day + ' ' + monthStr + ' ' + date.getFullYear() + ' ' +  hours + ':' + min );*/
     const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
       this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
@@ -470,15 +365,17 @@ export class CreateComponent implements OnInit {
     this.sign2 = template.sign2.replace('NEWLINE', '\n' );
     this.sign3 = template.sign3.replace('NEWLINE', '\n' );
     this.footer = template.footer.replace('NEWLINE', '\n' );
-    for ( let i = 0; i < template.userBcgBase64.length; i++) {
-      this.userImg.push(this.userImg.length);
-      this.rotate.push(template.userImgRotate[i]);
-      this.imgWidth.push(template.userImgWidth[i]);
-      this.imgHeight.push(template.userImgHeight[i]);
-      this.imgTop.push(template.userImgTop[i]);
-      this.imgLeft.push(template.userImgLeft[i]);
-      this.userImgBase64.push(template.userBcgBase64[i]);
-      this.currImg = this.userImg.length - 1;
+    if ( template.userBcgBase64.length > 0) {
+      for ( let i = 0; i < template.userBcgBase64.length; i++) {
+        this.userImg.push(this.userImg.length);
+        this.rotate.push(template.userImgRotate[i]);
+        this.imgWidth.push(template.userImgWidth[i]);
+        this.imgHeight.push(template.userImgHeight[i]);
+        this.imgTop.push(template.userImgTop[i]);
+        this.imgLeft.push(template.userImgLeft[i]);
+        this.userImgBase64.push(template.userBcgBase64[i]);
+        this.currImg = this.userImg.length - 1;
+      }
     }
   }
   resetSettings() {
@@ -755,47 +652,46 @@ export class CreateComponent implements OnInit {
       }
     }
     const txt = '{"arrayFontColor" : [ "'
-      + this.postsWithArray[0].arrayFontColor[0] + '", "'
-      + this.postsWithArray[0].arrayFontColor[1] + '", "'
-      + this.postsWithArray[0].arrayFontColor[2] + '", "'
-      + this.postsWithArray[0].arrayFontColor[3] + '", "'
-      + this.postsWithArray[0].arrayFontColor[4] + '", "'
-      + this.postsWithArray[0].arrayFontColor[5]
+      + this.arrayFontColor[0] + '", "'
+      + this.arrayFontColor[1] + '", "'
+      + this.arrayFontColor[2] + '", "'
+      + this.arrayFontColor[3] + '", "'
+      + this.arrayFontColor[4] + '", "'
+      + this.arrayFontColor[5]
       + '"], "arrayFontFamili" : [ "'
-      + this.postsWithArray[0].arrayFontFamili[0] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[1] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[2] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[3] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[4] + '", "'
-      + this.postsWithArray[0].arrayFontFamili[5] + '"],'
+      + this.arrayFontFamili[0] + '", "'
+      + this.arrayFontFamili[1] + '", "'
+      + this.arrayFontFamili[2] + '", "'
+      + this.arrayFontFamili[3] + '", "'
+      + this.arrayFontFamili[4] + '", "'
+      + this.arrayFontFamili[5] + '"],'
       + ' "arrayFontSize" : ['
-      + this.postsWithArray[0].arrayFontSize[0] + ', '
-      + this.postsWithArray[0].arrayFontSize[1] + ', '
-      + this.postsWithArray[0].arrayFontSize[2] + ', '
-      + this.postsWithArray[0].arrayFontSize[3] + ', '
-      + this.postsWithArray[0].arrayFontSize[4] + ', '
-      + this.postsWithArray[0].arrayFontSize[5] + '], '
-      + '"bottom" : "' + this.postsWithArray[0].bottom + '", '
+      + this.arrayFontSize[0] + ', '
+      + this.arrayFontSize[1] + ', '
+      + this.arrayFontSize[2] + ', '
+      + this.arrayFontSize[3] + ', '
+      + this.arrayFontSize[4] + '], '
+      + '"bottom" : "' + this.bottom + '", '
       + '"marginLeft" : [ "'
-      + this.postsWithArray[0].marginLeft[0] + '", "'
-      + this.postsWithArray[0].marginLeft[1] + '", "'
-      + this.postsWithArray[0].marginLeft[2] + '", "'
-      + this.postsWithArray[0].marginLeft[3] + '" ], '
+      + this.marginLeft[0] + '", "'
+      + this.marginLeft[1] + '", "'
+      + this.marginLeft[2] + '", "'
+      + this.marginLeft[3] + '" ], '
       + '"marginRight" : [ "'
-      + this.postsWithArray[0].marginRight[0] + '", "'
-      + this.postsWithArray[0].marginRight[1] + '", "'
-      + this.postsWithArray[0].marginRight[2] + '", "'
-      + this.postsWithArray[0].marginRight[3] + '" ], '
+      + this.marginRight[0] + '", "'
+      + this.marginRight[1] + '", "'
+      + this.marginRight[2] + '", "'
+      + this.marginRight[3] + '" ], '
       + '"paddingTop" : [ "'
-      + this.postsWithArray[0].paddingTop[0] + '", "'
-      + this.postsWithArray[0].paddingTop[1] + '", "'
-      + this.postsWithArray[0].paddingTop[2] + '" ], '
+      + this.paddingTop + '", "'
+      + this.paddingTopForWho + '", "'
+      + this.paddingTopForWhat + '" ], '
       + '"img" : "'
-      + this.postsWithArray[0].img + '", '
+      +  this.base64Tmp + '", '
       + '"bcgColor" : "'
-      + this.postsWithArray[0].bcgColor + '", '
+      + this.bcgColor + '", '
       + '"landscape" : "'
-      + this.postsWithArray[0].landscape + '", '
+      + this.landscape + '", '
       + '"title" : "'
       + this.title.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '", '
       + '"forWho" : "'
@@ -823,7 +719,7 @@ export class CreateComponent implements OnInit {
       + '"userImgTop" : [ '
       + this.userImgMarginRigthtxt + '],'
       + '"scheme" : "'
-      + this.postsWithArray[0].scheme
+      + this.scheme
       + '" }';
     return txt;
   }
