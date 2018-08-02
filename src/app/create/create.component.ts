@@ -139,6 +139,7 @@ export class CreateComponent implements OnInit {
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
       this.scheme = 30;
       this.landscapeOff(2);
     }, 500);
@@ -155,6 +156,10 @@ export class CreateComponent implements OnInit {
     document.getElementById(
       'bcg' + (this.lastValue + 1) )
       .style
+      .boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById(
+      'bcg' + (this.lastValue + 1) )
+      .style
       .webkitTransform = 'scale(0.8,0.8)';
     document.getElementById(
       'bcg' + (this.lastValue + 1) )
@@ -165,6 +170,10 @@ export class CreateComponent implements OnInit {
       'bcg' + (imgSrc + 1))
       .style
       .transform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'bcg' + (imgSrc + 1))
+      .style
+      .boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById(
       'bcg' + (this.lastValue + 1) )
       .style
@@ -207,15 +216,23 @@ export class CreateComponent implements OnInit {
       'frmBox' + (this.lastValueFrame + 1) )
       .style
       .border = 'black 1px solid';
+    document.getElementById(
+      'frmBox' + (this.lastValueFrame + 1) )
+      .style
+      .boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
     this.lastValueFrame = imgSrc;
     document.getElementById(
       'frmBox' + (imgSrc + 1))
       .style
       .transform = 'scale(0.99,0.99)';
     document.getElementById(
-      'frmBox' + (this.lastValueFrame + 1) )
+      'frmBox' + (imgSrc + 1) )
       .style
       .webkitTransform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'frmBox' + (imgSrc + 1) )
+      .style
+      .boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById(
       'frmBox' + (imgSrc + 1))
       .style.border = '#3aaaff 3px solid';
@@ -661,6 +678,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
       document.getElementById('sign3').style.display = 'none';
+      document.getElementById('scheme50').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
+      document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)'
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
@@ -680,6 +699,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('sign3').style.display = 'inline-block';
+      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
+      document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)'
       this.scheme = 30;
     }
   }
