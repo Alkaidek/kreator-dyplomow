@@ -1,26 +1,13 @@
 <div class="curtain">
-  <img src="../../assets/img/macLogo2.png" /> <br/>
-  <span>K</span>
-  <span>R</span>
-  <span>E</span>
-  <span>A</span>
-  <span>T</span>
-  <span>O</span>
-  <span>R</span>
+  <img src="../../assets/img/macLogo2.png" />
+  <br/>
+  <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
-  <span>D</span>
-  <span>Y</span>
-  <span>P</span>
-  <span>L</span>
-  <span>O</span>
-  <span>M</span>
-  <span>Ó</span>
-  <span>W</span>
+  <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
 </div>
 <div id="spinner" style="z-index: 20; background-color: rgba(0,0,0, 0.7); width: 100%; height: 100%; position: fixed; padding-top: 15%; display: none">
   <mat-spinner disabled style="width: 10%; margin-left: 45%"></mat-spinner>
 </div>
-
 <div id="viewLandscapeFix">
   <div id="toPdf100LandscapeFix" class="" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100LandscapeFix"  />
@@ -50,7 +37,6 @@
           {{forWhat}}
         </s>
       </div>
-
       <div class="signature" id="signLandscapeFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="leftLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign1}}
@@ -66,7 +52,6 @@
         </p>
       </div>
     </div>
-
   </div>
 </div>
     <div id="viewFix">
@@ -118,7 +103,6 @@
       </div>
     </div>
 <img id="podglad" src="../../assets/img/podglad2.png" />
-
 <div id="create" xmlns="" [style.display]="auth">
   <div >
     <label (click)="stepper.reset()" for="fileInput" id="fileInputLabel" class="button fadeInLeft" matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">
@@ -129,10 +113,6 @@
   </div>
   <button id="btnGeneratePdf" class="button" (click)="generatePdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" class="button" (click)="createArrayToSend(0)"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
-  <!--<button id="btnLeft" class="btnStep button" (click)="left(currentStep)" disabled >< Poprzedni krok</button>
-  <button id="btnRight" class="btnStep button" (click)="right(currentStep)">Następny krok ></button>-->
-
-
   <mat-horizontal-stepper linear="false" #stepper>
     <mat-step>
       <div>
@@ -166,7 +146,6 @@
             <mat-option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</mat-option>
           </mat-select>
         </mat-form-field>-->
-
         <br/>
         <!--<button class="fadeInTop button" (click)="setUserData()">Wczytaj szablon!</button>-->
  <!--       <button class="fadeInTop" mat-raised-button color="primary" (click)="setUserData()">Wczytaj szablon!</button>-->
@@ -210,7 +189,6 @@
         </button>
       </div>
       <ng-template matStepLabel>Trzeci krok</ng-template>
-
       <div id="frameContainter" [style.display]="bcgDisplay[1]">
         <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
         <div class="scroll fadeInTop">
@@ -227,7 +205,6 @@
         </button>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
       </div>
-
     </mat-step>
     <mat-step>
       <div>
@@ -278,7 +255,6 @@
                 </div>
               </div>
             </div>
-
             <div class="rightCont">
               <div >
                 <div class="card" id="card0">
@@ -309,7 +285,6 @@
             </div>
           </div>
         </mat-expansion-panel>
-
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -372,9 +347,7 @@
               </div>
             </div>
           </div>
-
         </mat-expansion-panel>
-
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -439,7 +412,6 @@
             </div>
           </div>
         </mat-expansion-panel>
-
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -616,28 +588,9 @@
       <a download="info.txt" id="downloadlink" style="display: none">Download</a>
     </mat-step>
   </mat-horizontal-stepper>
-
   <br />
   <br />
-  <!--
-<div id="detailsContainer">
-<h1>Dopracuj detale</h1>
-<br />
-<div class="inputContainer">
-  <div class="inputLeft">
-    <p>Górny margines: {{paddingTop}}</p>
-    <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50">
-  </div>
-  <div class="inputRight">
-    <p>Dolny margines: {{bottom}}</p>
-    <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider50">
-  </div>
 </div>
-<button (click)="setPaddingFix()"> Zastosuj</button>
-  </div>
--->
-</div>
-
 <div id="view">
     <div id="toPdf100" class="rotateInDownRight" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100" />
@@ -685,17 +638,12 @@
         </p>
       </div>
     </div>
-
   </div>
 </div>
-
-
 <div id="viewLandscape" [style.display]="landscape">
   <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:25%"/>
-
-    <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
-    <div id="pdfForlandscape">
+     <div id="pdfForlandscape">
       <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.width]="imgWidth[usr]+'%'"
@@ -721,7 +669,6 @@
           {{forWhat}}
         </s>
       </div>
-
       <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="leftLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign1}}
@@ -737,6 +684,5 @@
         </p>
       </div>
     </div>
-
   </div>
 </div>

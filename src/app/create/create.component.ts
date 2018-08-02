@@ -52,7 +52,6 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
-  selected = 0;
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
@@ -80,49 +79,15 @@ export class CreateComponent implements OnInit {
   marginLeft = [0, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
   bottom = 0;
-  arrayFontSize =
-    [
-      3,
-      0.9,
-      2,
-      0.8,
-      2
-    ];
-  arrayFontNameId =
-    [
-      'largeTxt',
-      'sFor',
-      'txtForWhat',
-      'smallTxt',
-      'left',
-      'right',
-      'center'
-    ];
-  arrayFontFamili =
-    [
-      'Arial',
-      'Arial',
-      'Arial',
-      'Arial',
-      'Arial',
-      'Arial',
-      'Arial'
-    ];
-  arrayFontColor =
-    [
-      'black',
-      'black',
-      'black',
-      'black',
-      'black',
-      'black'
-    ];
+  arrayFontSize = [3, 0.9, 2, 0.8, 2];
+  arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
+  arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+  arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
   rotate = [];
   imgWidth = [];
   imgHeight = [];
   imgTop = [];
   imgLeft = [];
-  scaleXbool = true;
   scheme = 0;
   ngOnInit() {
     const date = new Date();
@@ -139,48 +104,23 @@ export class CreateComponent implements OnInit {
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
-      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
+      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
       this.scheme = 30;
       this.landscapeOff(2);
     }, 500);
   }
   takeBcg(imgSrc) {
-    console.log(
-      'ten sie podnosi: ' + imgSrc
-    );
+    console.log('ten sie podnosi: ' + imgSrc);
     console.log('a ten opada: ' + this.lastValue);
-    document.getElementById(
-      'bcg' + (this.lastValue + 1) )
-      .style
-      .transform = 'scale(0.8,0.8)';
-    document.getElementById(
-      'bcg' + (this.lastValue + 1) )
-      .style
-      .boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById(
-      'bcg' + (this.lastValue + 1) )
-      .style
-      .webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById(
-      'bcg' + (this.lastValue + 1) )
-      .style
-      .border = 'black 1px solid';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
     this.lastValue = imgSrc;
-    document.getElementById(
-      'bcg' + (imgSrc + 1))
-      .style
-      .transform = 'scale(0.99,0.99)';
-    document.getElementById(
-      'bcg' + (imgSrc + 1))
-      .style
-      .boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById(
-      'bcg' + (this.lastValue + 1) )
-      .style
-      .webkitTransform = 'scale(0.99,0.99)';
-    document.getElementById(
-      'bcg' + (imgSrc + 1))
-      .style.border = '#3aaaff 3px solid';
+    document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
+    document.getElementById('bcg' + (imgSrc + 1)).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
+    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
@@ -204,78 +144,39 @@ export class CreateComponent implements OnInit {
     }
   }
   takeFrame(imgSrc) {
-    document.getElementById(
-      'frmBox' + (this.lastValueFrame + 1) )
-      .style
-      .transform = 'scale(0.8,0.8)';
-    document.getElementById(
-      'frmBox' + (this.lastValueFrame + 1) )
-      .style
-      .webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById(
-      'frmBox' + (this.lastValueFrame + 1) )
-      .style
-      .border = 'black 1px solid';
-    document.getElementById(
-      'frmBox' + (this.lastValueFrame + 1) )
-      .style
-      .boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
     this.lastValueFrame = imgSrc;
-    document.getElementById(
-      'frmBox' + (imgSrc + 1))
-      .style
-      .transform = 'scale(0.99,0.99)';
-    document.getElementById(
-      'frmBox' + (imgSrc + 1) )
-      .style
-      .webkitTransform = 'scale(0.99,0.99)';
-    document.getElementById(
-      'frmBox' + (imgSrc + 1) )
-      .style
-      .boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById(
-      'frmBox' + (imgSrc + 1))
-      .style.border = '#3aaaff 3px solid';
+    document.getElementById('frmBox' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
+    document.getElementById('frmBox' + (imgSrc + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
+    document.getElementById('frmBox' + (imgSrc + 1) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frmBox' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
     this.base64TmpFrame = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFrame = this.frames[imgSrc];
   }
-  takeFont(n) {
-    document.getElementById('toPdf100').style.fontFamily = n;
-    document.getElementById('toPdf100Fix').style.fontFamily = n;
-  }
   generatePdf() {
-    if (this.landscape === 'inline-block') {
-      const elementToPrint = document
-        .getElementById('toPdf100LandscapeFix');
-      const pdf = new jsPDF('l', 'pt', 'a4', true);
-      pdf
-        .internal
-        .scaleFactor = 1;
-      pdf
-        .addHTML(elementToPrint, () => {
-          pdf
-            .save('wygenerowany dyplom.pdf');
-          pdf
-            .autoPrint();
+    if (this.landscape !== 'inline-block') {
+      const elementToPrint = document.getElementById('toPdf100Fix');
+      const pdf = new jsPDF('p', 'pt', 'a4', true);
+      pdf.internal.scaleFactor = 1;
+      pdf.addHTML(elementToPrint, () => {
+          pdf.save('wygenerowany dyplom.pdf');
+          pdf.autoPrint();
         });
     } else {
-      const elementToPrint = document
-        .getElementById('toPdf100Fix');
-      const pdf = new jsPDF('p', 'pt', 'a4', true);
-      pdf
-        .internal
-        .scaleFactor = 1;
-      pdf
-        .addHTML(elementToPrint, () => {
-          pdf
-            .save('wygenerowany dyplom.pdf');
-          pdf
-            .autoPrint();
+      const elementToPrint = document.getElementById('toPdf100LandscapeFix');
+      const pdf = new jsPDF('l', 'pt', 'a4', true);
+      pdf.internal.scaleFactor = 1;
+      pdf.addHTML(elementToPrint, () => {
+          pdf.save('wygenerowany dyplom.pdf');
+          pdf.autoPrint();
         });
     }
   }
-  createArrayToSend(n) {
+  createArrayToSend() {
     const date = new Date();
     let day = '' + date
       .getDate();
@@ -303,22 +204,10 @@ export class CreateComponent implements OnInit {
     this.saveData( msg );
   }
   takeFontForEle(font, element) {
-    document
-      .getElementById(this.arrayFontNameId[element])
-      .style
-      .fontFamily = font;
-    document
-      .getElementById(this.arrayFontNameId[element] + 'Fix')
-      .style
-      .fontFamily = font;
-    document
-      .getElementById(this.arrayFontNameId[element] + 'LandscapeFix')
-      .style
-      .fontFamily = font;
-    document
-      .getElementById(this.arrayFontNameId[element] + 'Landscape')
-      .style
-      .fontFamily = font;
+    document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
+    document.getElementById(this.arrayFontNameId[element] + 'Fix').style.fontFamily = font;
+    document.getElementById(this.arrayFontNameId[element] + 'LandscapeFix').style.fontFamily = font;
+    document.getElementById(this.arrayFontNameId[element] + 'Landscape').style.fontFamily = font;
     this.arrayFontFamili[element] = font;
     if (element === 4) {
       this.takeFontForEle(font, 5);
@@ -328,10 +217,8 @@ export class CreateComponent implements OnInit {
   setUserData(template) {
     this.resetSettings();
     /*const select = document.getElementById('selectTemplate') as HTMLSelectElement;*/
-    this.bcgColor = template
-      .bcgColor;
-    this.landscape = template
-      .landscape;
+    this.bcgColor = template.bcgColor;
+    this.landscape = template.landscape;
     if (this.landscape === 'none') {
       this.landscapeOff(2);
     } else {
@@ -343,63 +230,37 @@ export class CreateComponent implements OnInit {
     } else {
       this.setScheme(50);
     }
-    this.paddingTop = template
-      .paddingTop[0];
-    this.paddingTopForWho = template
-      .paddingTop[1];
-    this.paddingTopForWhat = template
-      .paddingTop[2];
-    this.marginLeft[0] = template
-      .marginLeft[0];
-    this.marginLeft[1] = template
-      .marginLeft[1];
-    this.marginLeft[2] = template
-      .marginLeft[2];
-    this.marginLeft[3] = template
-      .marginLeft[3];
-    this.marginRight[3] = template
-      .marginRight[3];
-    this.marginRight[2] = template
-      .marginRight[2];
-    this.marginRight[1] = template
-      .marginRight[1];
-    this.marginRight[0] = template
-      .marginRight[0];
-    this.bottom = template
-      .bottom;
+    this.paddingTop = template.paddingTop[0];
+    this.paddingTopForWho = template.paddingTop[1];
+    this.paddingTopForWhat = template.paddingTop[2];
+    this.marginLeft[0] = template.marginLeft[0];
+    this.marginLeft[1] = template.marginLeft[1];
+    this.marginLeft[2] = template.marginLeft[2];
+    this.marginLeft[3] = template.marginLeft[3];
+    this.marginRight[3] = template.marginRight[3];
+    this.marginRight[2] = template.marginRight[2];
+    this.marginRight[1] = template.marginRight[1];
+    this.marginRight[0] = template.marginRight[0];
+    this.bottom = template.bottom;
     this.imgSrcFrame = template.frame;
     if ( template.img === '') {
       this.imgSrcFix =  '../../assets/img/0.png';
     } else {
-      this.imgSrcFix = this.bcgTemp[template
-        .img];
+      this.imgSrcFix = this.bcgTemp[template.img];
     }
     this.base64Tmp = template.img;
     for (let i = 0; i < template.arrayFontSize.length; i++ ) {
       console.log(' ' + template.arrayFontSize[i]);
-      this.arrayFontSize[i] = template
-        .arrayFontSize[i];
+      this.arrayFontSize[i] = template.arrayFontSize[i];
     }
     for (let i = 0; i < template.arrayFontColor.length; i++ ) {
       this.arrayFontColor[i] =  template.arrayFontColor[i];
     }
     for (let i = 0; i < template.arrayFontFamili.length; i++ ) {
-      document
-        .getElementById(this.arrayFontNameId[i])
-        .style
-        .fontFamily =  template.arrayFontFamili[i];
-      document
-        .getElementById(this.arrayFontNameId[i] + 'Fix')
-        .style
-        .fontFamily =  template.arrayFontFamili[i];
-      document
-        .getElementById(this.arrayFontNameId[i] + 'LandscapeFix')
-        .style
-        .fontFamily =  template.arrayFontFamili[i];
-      document
-        .getElementById(this.arrayFontNameId[i] + 'Landscape')
-        .style
-        .fontFamily =  template.arrayFontFamili[i];
+      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  template.arrayFontFamili[i];
+      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  template.arrayFontFamili[i];
+      document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =  template.arrayFontFamili[i];
+      document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  template.arrayFontFamili[i];
       this.arrayFontFamili[i] = template.arrayFontFamili[i];
     }
     this.title =  template.title.replace('NEWLINE', '\n' );
@@ -468,127 +329,86 @@ export class CreateComponent implements OnInit {
       this.currImg = -1;
   }
   moveLeft() {
-    const btn =  document
-      .getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('leftDirect') as HTMLButtonElement;
+    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
-        document
-          .getElementById('bcg' + (this.arrayScroll[i] - 3))
-          .style
-          .display = 'inline-block';
+        document.getElementById('bcg' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
         if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
-          document
-            .getElementById('bcg' + (this.arrayScroll[i]))
-            .style
-            .display = 'none';
+          document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'none';
         }
-
-        btn
-          .disabled = false;
+        btn.disabled = false;
       } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
-        btn2
-          .disabled = true;
+        btn2.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] - 3;
     }
     if ( this.arrayScroll[0] <= 1 ) {
-      btn2
-        .disabled = true;
+      btn2.disabled = true;
     }
   }
   moveRight() {
-    const btn =  document
-      .getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('leftDirect') as HTMLButtonElement;
+    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
-        btn2
-          .disabled = false;
+        btn2.disabled = false;
         if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
           document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
           if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
-            document
-              .getElementById('bcg' + (this.arrayScroll[i] + 3))
-              .style
-              .display = 'inline-block';
+            document.getElementById('bcg' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
           }
         }
       } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
-        btn
-          .disabled = true;
+        btn.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
-      console
-        .log('hej to ja: ' + this.arrayScroll[i]);
+      console.log('hej to ja: ' + this.arrayScroll[i]);
     }
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
-      btn
-        .disabled = true;
+      btn.disabled = true;
     }
   }
   moveLeftFrame() {
-    const btn =  document
-      .getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('leftDirectFrame') as HTMLButtonElement;
+    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScrollFrame[i] - 3 < (this.frames.length + 1)) && ((this.arrayScrollFrame[i] - 3 ) > 0)) {
-        document
-          .getElementById('frmBox' + (this.arrayScrollFrame[i] - 3))
-          .style
-          .display = 'inline-block';
+        document.getElementById('frmBox' + (this.arrayScrollFrame[i] - 3)).style.display = 'inline-block';
         if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0 ) {
-          document
-            .getElementById('frmBox' + (this.arrayScrollFrame[i]))
-            .style
-            .display = 'none';
+          document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'none';
         }
-
         btn
           .disabled = false;
       } else if ((this.arrayScrollFrame[i] - 3 ) < 0 ) {
-        btn2
-          .disabled = true;
+        btn2.disabled = true;
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] - 3;
     }
     if ( this.arrayScrollFrame[0] <= 1 ) {
-      btn2
-        .disabled = true;
+      btn2.disabled = true;
     }
   }
   moveRightFrame() {
-    const btn =  document
-      .getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('leftDirectFrame') as HTMLButtonElement;
+    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
     for ( let i = 0; i < 3; i++ ) {
       if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0) {
-        btn2
-          .disabled = false;
+        btn2.disabled = false;
         if ( (this.arrayScrollFrame[i] + 3) < (this.frames.length + 1 )) {
           document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
           if (((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) && (this.arrayScrollFrame[i] + 3) > 0) {
-            document
-              .getElementById('frmBox' + (this.arrayScroll[i] + 3))
-              .style
-              .display = 'inline-block';
+            document.getElementById('frmBox' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
           }
         }
       } else if (this.arrayScrollFrame[i] > (this.frames.length + 1)) {
-        btn
-          .disabled = true;
+        btn.disabled = true;
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
-      console
-        .log('hej to ja: ' + this.arrayScrollFrame[i]);
+      console.log('hej to ja: ' + this.arrayScrollFrame[i]);
     }
     if ( this.arrayScrollFrame[2] >= this.frames.length ) {
-      btn
-        .disabled = true;
+      btn.disabled = true;
     }
   }
   /*showMore() {
@@ -609,10 +429,8 @@ export class CreateComponent implements OnInit {
     this.imgHeight[this.currImg] = 10;
   }
   right(n) {
-    const btn =  document
-      .getElementById('btnLeft') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('btnRight') as HTMLButtonElement;
+    const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
     this.bcgDisplay[n] = 'none';
     this.bcgDisplay[n + 1] = 'block';
     this.currentStep = this.currentStep + 1;
@@ -626,10 +444,8 @@ export class CreateComponent implements OnInit {
     }
   }
   left(n) {
-    const btn =  document
-      .getElementById('btnLeft') as HTMLButtonElement;
-    const btn2 =  document
-      .getElementById('btnRight') as HTMLButtonElement;
+    const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
     this.bcgDisplay[n] = 'none';
     this.bcgDisplay[n - 1] = 'block';
     this.currentStep = this.currentStep  - 1;
@@ -678,8 +494,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
       document.getElementById('sign3').style.display = 'none';
-      document.getElementById('scheme50').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
-      document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)'
+      document.getElementById('scheme50').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
@@ -699,8 +515,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('sign3').style.display = 'inline-block';
-      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)'
-      document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)'
+      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
       this.scheme = 30;
     }
   }
@@ -722,7 +538,6 @@ export class CreateComponent implements OnInit {
       duration: 5000,
     });
   }
-
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
     fileSaver.saveAs(blob, 'template' + date + '.json');
@@ -847,23 +662,7 @@ export class CreateComponent implements OnInit {
     }
   }
   jsonToArray(txt) {
-    const o = txt;
-    const obj = JSON.parse(o);
+    const obj = JSON.parse(txt);
     this.setUserData(obj);
   }
-  /*onSelectFile2(eve2: any) {
-    if (eve2.target.files && eve2.target.files[0]) {
-      const reader = new FileReader() as any;
-      console.log('1');
-      reader.onload = (event2: any) => {
-        console.log('2');
-        console.log('siema' + event2.target.result);
-        this.jsonToArray(event2.target.result);
-
-      };
-      console.log('3');
-      reader.readAsDataURL(eve2.target.files[0]);
-    }
-  }*/
-
 }
