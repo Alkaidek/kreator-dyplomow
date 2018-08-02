@@ -112,7 +112,7 @@
     <input class="fadeInRight" id="fileInput" type="file" accept='.json' (change)="onSelectFile($event)"/>
   </div>
   <button id="btnGeneratePdf" class="button" (click)="generatePdf()">Generuj Dyplom!</button>
-  <button id="btnAddTemplate" class="button" (click)="createArrayToSend(0)"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
+  <button id="btnAddTemplate" class="button" (click)="createArrayToSend()"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
   <mat-horizontal-stepper linear="false" #stepper>
     <mat-step>
       <div>
@@ -136,7 +136,7 @@
         </div>
         <br/>
         <div>
-          <h1 class="fadeInTop">Wybierz schemat</h1>
+          <h1  style="margin-top: 10px" class="fadeInTop">Wybierz schemat</h1>
           <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
           <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
         </div>
@@ -171,11 +171,14 @@
         <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect" class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
           <mat-icon aria-label="prev" >arrow_back</mat-icon>
         </button>
-        <button id="rightDirect"  matTooltip="Nastepnę tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight()">
+        <button id="rightDirect"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight()">
           <mat-icon aria-label="next">arrow_forward</mat-icon>
         </button>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
-        <h1 class="fadeInTop">Kolor tła</h1>
+        <br />
+        <button mat-raised-button color="primary" class="fadeInRight" (click)="resetBcg()" style="margin-bottom: 15px; margin-top: 15px">Usuń tło</button>
+        <br/>
+        <h1 style="margin-top: 10px" class="fadeInTop">Kolor tła</h1>
         <input type="color" matTooltip="Naciśnij i wybierz kolor tła" matTooltipPosition="below" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 30%">
       </div>
     </mat-step>
@@ -200,9 +203,10 @@
         <button matTooltip="Poprzednie ramki" matTooltipPosition="left" id="leftDirectFrame" class="fadeInTop" mat-mini-fab (click)="moveLeftFrame()" disabled>
           <mat-icon aria-label="prev" >arrow_back</mat-icon>
         </button>
-        <button id="rightDirectFrame"  matTooltip="Nastepnę ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
+        <button id="rightDirectFrame"  matTooltip="Następne ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
           <mat-icon aria-label="next">arrow_forward</mat-icon>
-        </button>
+        </button><br/>
+        <button mat-raised-button color="primary" class="fadeInRight" (click)="resetFrame()" style="margin-bottom: 15px; margin-top: 15px">Usuń ramkę</button>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
       </div>
     </mat-step>

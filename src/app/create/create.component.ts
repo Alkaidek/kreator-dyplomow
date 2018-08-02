@@ -3,6 +3,7 @@ import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
+import {tryCatch} from 'rxjs/internal-compatibility';
 
 @Component({
   selector:
@@ -215,72 +216,77 @@ export class CreateComponent implements OnInit {
     }
   }
   setUserData(template) {
-    this.resetSettings();
-    /*const select = document.getElementById('selectTemplate') as HTMLSelectElement;*/
-    this.bcgColor = template.bcgColor;
-    this.landscape = template.landscape;
-    if (this.landscape === 'none') {
-      this.landscapeOff(2);
-    } else {
-      this.landscapeOff(1);
-    }
-    if ( template
-      .scheme === '30' ) {
-      this.setScheme(30);
-    } else {
-      this.setScheme(50);
-    }
-    this.paddingTop = template.paddingTop[0];
-    this.paddingTopForWho = template.paddingTop[1];
-    this.paddingTopForWhat = template.paddingTop[2];
-    this.marginLeft[0] = template.marginLeft[0];
-    this.marginLeft[1] = template.marginLeft[1];
-    this.marginLeft[2] = template.marginLeft[2];
-    this.marginLeft[3] = template.marginLeft[3];
-    this.marginRight[3] = template.marginRight[3];
-    this.marginRight[2] = template.marginRight[2];
-    this.marginRight[1] = template.marginRight[1];
-    this.marginRight[0] = template.marginRight[0];
-    this.bottom = template.bottom;
-    this.imgSrcFrame = template.frame;
-    if ( template.img === '') {
-      this.imgSrcFix =  '../../assets/img/0.png';
-    } else {
-      this.imgSrcFix = this.bcgTemp[template.img];
-    }
-    this.base64Tmp = template.img;
-    for (let i = 0; i < template.arrayFontSize.length; i++ ) {
-      console.log(' ' + template.arrayFontSize[i]);
-      this.arrayFontSize[i] = template.arrayFontSize[i];
-    }
-    for (let i = 0; i < template.arrayFontColor.length; i++ ) {
-      this.arrayFontColor[i] =  template.arrayFontColor[i];
-    }
-    for (let i = 0; i < template.arrayFontFamili.length; i++ ) {
-      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  template.arrayFontFamili[i];
-      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  template.arrayFontFamili[i];
-      document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =  template.arrayFontFamili[i];
-      document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  template.arrayFontFamili[i];
-      this.arrayFontFamili[i] = template.arrayFontFamili[i];
-    }
-    this.title =  template.title.replace('NEWLINE', '\n' );
-    this.forWho =  template.forWho.replace('NEWLINE', '\n' );
-    this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
-    this.sign1 =  template.sign1.replace('NEWLINE', '\n' );
-    this.sign2 = template.sign2.replace('NEWLINE', '\n' );
-    this.sign3 = template.sign3.replace('NEWLINE', '\n' );
-    this.footer = template.footer.replace('NEWLINE', '\n' );
-    if ( template.userBcgBase64.length > 0) {
-      for ( let i = 0; i < template.userBcgBase64.length; i++) {
-        this.userImg.push(this.userImg.length);
-        this.rotate.push(template.userImgRotate[i]);
-        this.imgWidth.push(template.userImgWidth[i]);
-        this.imgHeight.push(template.userImgHeight[i]);
-        this.imgTop.push(template.userImgTop[i]);
-        this.imgLeft.push(template.userImgLeft[i]);
-        this.userImgBase64.push(template.userBcgBase64[i]);
-        this.currImg = this.userImg.length - 1;
+    try {
+      this.resetSettings();
+      /*const select = document.getElementById('selectTemplate') as HTMLSelectElement;*/
+      this.bcgColor = template.bcgColor;
+      this.landscape = template.landscape;
+      if (this.landscape === 'none') {
+        this.landscapeOff(2);
+      } else {
+        this.landscapeOff(1);
       }
+      if ( template
+        .scheme === '30' ) {
+        this.setScheme(30);
+      } else {
+        this.setScheme(50);
+      }
+      this.paddingTop = template.paddingTop[0];
+      this.paddingTopForWho = template.paddingTop[1];
+      this.paddingTopForWhat = template.paddingTop[2];
+      this.marginLeft[0] = template.marginLeft[0];
+      this.marginLeft[1] = template.marginLeft[1];
+      this.marginLeft[2] = template.marginLeft[2];
+      this.marginLeft[3] = template.marginLeft[3];
+      this.marginRight[3] = template.marginRight[3];
+      this.marginRight[2] = template.marginRight[2];
+      this.marginRight[1] = template.marginRight[1];
+      this.marginRight[0] = template.marginRight[0];
+      this.bottom = template.bottom;
+      this.imgSrcFrame = template.frame;
+      if ( template.img === '') {
+        this.imgSrcFix =  '../../assets/img/0.png';
+      } else {
+        this.imgSrcFix = this.bcgTemp[template.img];
+      }
+      this.base64Tmp = template.img;
+      for (let i = 0; i < template.arrayFontSize.length; i++ ) {
+        console.log(' ' + template.arrayFontSize[i]);
+        this.arrayFontSize[i] = template.arrayFontSize[i];
+      }
+      for (let i = 0; i < template.arrayFontColor.length; i++ ) {
+        this.arrayFontColor[i] =  template.arrayFontColor[i];
+      }
+      for (let i = 0; i < template.arrayFontFamili.length; i++ ) {
+        document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  template.arrayFontFamili[i];
+        document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  template.arrayFontFamili[i];
+        document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =  template.arrayFontFamili[i];
+        document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  template.arrayFontFamili[i];
+        this.arrayFontFamili[i] = template.arrayFontFamili[i];
+      }
+      this.title =  template.title.replace('NEWLINE', '\n' );
+      this.forWho =  template.forWho.replace('NEWLINE', '\n' );
+      this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
+      this.sign1 =  template.sign1.replace('NEWLINE', '\n' );
+      this.sign2 = template.sign2.replace('NEWLINE', '\n' );
+      this.sign3 = template.sign3.replace('NEWLINE', '\n' );
+      this.footer = template.footer.replace('NEWLINE', '\n' );
+      if ( template.userBcgBase64.length > 0) {
+        for ( let i = 0; i < template.userBcgBase64.length; i++) {
+          this.userImg.push(this.userImg.length);
+          this.rotate.push(template.userImgRotate[i]);
+          this.imgWidth.push(template.userImgWidth[i]);
+          this.imgHeight.push(template.userImgHeight[i]);
+          this.imgTop.push(template.userImgTop[i]);
+          this.imgLeft.push(template.userImgLeft[i]);
+          this.userImgBase64.push(template.userBcgBase64[i]);
+          this.currImg = this.userImg.length - 1;
+        }
+      }
+    } catch (err) {
+      this.resetSettings();
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
   }
@@ -664,5 +670,21 @@ export class CreateComponent implements OnInit {
   jsonToArray(txt) {
     const obj = JSON.parse(txt);
     this.setUserData(obj);
+  }
+  resetBcg() {
+    this.imgSrc = '../../assets/img/0.png';
+    this.imgSrcFix = '../../assets/img/0.png';
+    this.base64Tmp = '';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
+  }
+  resetFrame() {
+    this.imgSrcFrame = '../../assets/img/0.png';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
+    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
 }
