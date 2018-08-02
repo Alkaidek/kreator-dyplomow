@@ -31,7 +31,7 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscapeFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -79,7 +79,7 @@
                [style.height]="imgHeight[usr]+'%'"
                [style.left]="imgLeft[usr]+'%'"
                [style.top]="imgTop[usr]+'%'"/>
-          <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+          <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
           <div  style="z-index: 8;">
             <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
               <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -210,6 +210,23 @@
         </button>
       </div>
       <ng-template matStepLabel>Trzeci krok</ng-template>
+
+      <div id="frameContainter" [style.display]="bcgDisplay[1]">
+        <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
+        <div class="scroll fadeInTop">
+          <div *ngFor="let frame of frames; let i = index" class="bcg fadeInTop" id="frmBox{{i + 1}}" (click)="takeFrame(i)">
+            <img id="frm{{i}}" src="{{frame}}"  />
+          </div>
+        </div>
+        <!--<button class="button btnDirect fadeInTop" (click)="moveLeft()" disabled><</button> -->
+        <button matTooltip="Poprzednie ramki" matTooltipPosition="left" id="leftDirectFrame" class="fadeInTop" mat-mini-fab (click)="moveLeftFrame()" disabled>
+          <mat-icon aria-label="prev" >arrow_back</mat-icon>
+        </button>
+        <button id="rightDirectFrame"  matTooltip="Nastepnę ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
+          <mat-icon aria-label="next">arrow_forward</mat-icon>
+        </button>
+        <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
+      </div>
 
     </mat-step>
     <mat-step>
@@ -444,7 +461,7 @@
                 <mat-form-field class="example-full-width fadeInLeft">
                   <textarea matInput [value]="sign1" (input)="sign1 = $event.target.value" placeholder="Podpis"></textarea>
                 </mat-form-field>
-                <mat-form-field class="example-full-width fadeInLeft">
+                <mat-form-field class="example-full-width fadeInLeft" id="sign3">
                   <textarea matInput [value]="sign3" (input)="sign3 = $event.target.value" placeholder="Podpis"></textarea>
                 </mat-form-field>
                 <mat-form-field class="example-full-width fadeInLeft">
@@ -484,7 +501,7 @@
                     <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Dolny margines</p>
                     <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -551,7 +568,7 @@
                     <p class="fadeInTop">Prawy margines</p>
                     <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Dolny margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -633,7 +650,7 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
@@ -685,7 +702,7 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <img  src="{{imgSrcFix}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">

@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit {
   bcgTemp: any;
   template: any;
   coordinatesTemplate: any;
-  length: Number;
+  frames: any;
   bool = 'block';
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
@@ -45,20 +45,24 @@ export class CreateComponent implements OnInit {
         this.bool = 'none';
       }
     });*/
+    db.list('/frame').valueChanges().subscribe(frames => {
+      this.frames = frames;
+    });
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
-      console.log(this.coordinatesTemplate);
     });
   }
   selected = 0;
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
+  arrayScrollFrame = [1, 2, 3];
   bcgColor = '#c2f2cf';
   lastValue = 1;
-  schoolNr = '29';
+  lastValueFrame = 1;
   name = 'MateuszB';
   base64Tmp = '';
+  base64TmpFrame = '';
   base64 = '';
   forWho = '';
   forWhat = '';
@@ -68,6 +72,7 @@ export class CreateComponent implements OnInit {
   title = 'Dyplom';
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
+  imgSrcFrame = '../../assets/img/0.png';
   footer = 'Kielce, dnia ';
   paddingTop = 0;
   paddingTopForWho = 10;
@@ -189,16 +194,38 @@ export class CreateComponent implements OnInit {
         this.bottom = 0;
     }
   }
+  takeFrame(imgSrc) {
+    document.getElementById(
+      'frmBox' + (this.lastValueFrame + 1) )
+      .style
+      .transform = 'scale(0.8,0.8)';
+    document.getElementById(
+      'frmBox' + (this.lastValueFrame + 1) )
+      .style
+      .webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById(
+      'frmBox' + (this.lastValueFrame + 1) )
+      .style
+      .border = 'black 1px solid';
+    this.lastValueFrame = imgSrc;
+    document.getElementById(
+      'frmBox' + (imgSrc + 1))
+      .style
+      .transform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'frmBox' + (this.lastValueFrame + 1) )
+      .style
+      .webkitTransform = 'scale(0.99,0.99)';
+    document.getElementById(
+      'frmBox' + (imgSrc + 1))
+      .style.border = '#3aaaff 3px solid';
+    this.base64TmpFrame = imgSrc;
+    this.imgSrc = '' + (imgSrc + 1);
+    this.imgSrcFrame = this.frames[imgSrc];
+  }
   takeFont(n) {
     document.getElementById('toPdf100').style.fontFamily = n;
     document.getElementById('toPdf100Fix').style.fontFamily = n;
-
-  }
-  getBase64() {
-    const base64 = document.getElementById('canvasToBase64') as HTMLCanvasElement;
-    console.log('base64 please: ' + base64.toDataURL('image/jpeg'));
-    const pic = base64.toDataURL('image/jpeg');
-    this.imgSrcFix = pic;
   }
   generatePdf() {
     if (this.landscape === 'inline-block') {
@@ -323,6 +350,7 @@ export class CreateComponent implements OnInit {
       .marginRight[0];
     this.bottom = template
       .bottom;
+    this.imgSrcFrame = template.frame;
     if ( template.img === '') {
       this.imgSrcFix =  '../../assets/img/0.png';
     } else {
@@ -356,7 +384,6 @@ export class CreateComponent implements OnInit {
         .style
         .fontFamily =  template.arrayFontFamili[i];
       this.arrayFontFamili[i] = template.arrayFontFamili[i];
-      document.getElementById('spinner').style.display = 'none';
     }
     this.title =  template.title.replace('NEWLINE', '\n' );
     this.forWho =  template.forWho.replace('NEWLINE', '\n' );
@@ -377,6 +404,7 @@ export class CreateComponent implements OnInit {
         this.currImg = this.userImg.length - 1;
       }
     }
+    document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
     this.bcgColor = '#c2f2cf';
@@ -484,13 +512,75 @@ export class CreateComponent implements OnInit {
         .disabled = true;
     }
   }
-  showMore() {
+  moveLeftFrame() {
+    const btn =  document
+      .getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('leftDirectFrame') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScrollFrame[i] - 3 < (this.frames.length + 1)) && ((this.arrayScrollFrame[i] - 3 ) > 0)) {
+        document
+          .getElementById('frmBox' + (this.arrayScrollFrame[i] - 3))
+          .style
+          .display = 'inline-block';
+        if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0 ) {
+          document
+            .getElementById('frmBox' + (this.arrayScrollFrame[i]))
+            .style
+            .display = 'none';
+        }
+
+        btn
+          .disabled = false;
+      } else if ((this.arrayScrollFrame[i] - 3 ) < 0 ) {
+        btn2
+          .disabled = true;
+      }
+      this.arrayScrollFrame[i] = this.arrayScrollFrame[i] - 3;
+    }
+    if ( this.arrayScrollFrame[0] <= 1 ) {
+      btn2
+        .disabled = true;
+    }
+  }
+  moveRightFrame() {
+    const btn =  document
+      .getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 =  document
+      .getElementById('leftDirectFrame') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0) {
+        btn2
+          .disabled = false;
+        if ( (this.arrayScrollFrame[i] + 3) < (this.frames.length + 1 )) {
+          document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
+          if (((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) && (this.arrayScrollFrame[i] + 3) > 0) {
+            document
+              .getElementById('frmBox' + (this.arrayScroll[i] + 3))
+              .style
+              .display = 'inline-block';
+          }
+        }
+      } else if (this.arrayScrollFrame[i] > (this.frames.length + 1)) {
+        btn
+          .disabled = true;
+      }
+      this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
+      console
+        .log('hej to ja: ' + this.arrayScrollFrame[i]);
+    }
+    if ( this.arrayScrollFrame[2] >= this.frames.length ) {
+      btn
+        .disabled = true;
+    }
+  }
+  /*showMore() {
     const x = document.createElement('IMG');
     x.setAttribute('src', '../../assets/img/icon3.png');
     x.setAttribute('style', 'background-size: cover; position: absolute; z-index: 0;');
     x.setAttribute('id', 'imgToChange2');
     document.getElementById('pdfForlandscape').appendChild(x);
-  }
+  }*/
   set0degress() {
     this.rotate[this.currImg] = 0;
   }
@@ -570,6 +660,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
+      document.getElementById('sign3').style.display = 'none';
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
@@ -588,26 +679,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
       document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
+      document.getElementById('sign3').style.display = 'inline-block';
       this.scheme = 30;
-    }
-  }
-  scaleX() {
-    const img = document.getElementById('imgToChange') as HTMLImageElement;
-    const img2 = document.getElementById('imgToChange2') as HTMLImageElement;
-    const img3 = document.getElementById('imgToChange3') as HTMLImageElement;
-    const img4 = document.getElementById('imgToChange4') as HTMLImageElement;
-    if ( this.scaleXbool ) {
-      img.style.transform = 'scaleX(-1)';
-      img2.style.transform = 'scaleX(-1)';
-      img3.style.transform = 'scaleX(-1)';
-      img4.style.transform = 'scaleX(-1)';
-      this.scaleXbool = false;
-    } else {
-      img.style.transform = 'scaleX(1)';
-      img2.style.transform = 'scaleX(1)';
-      img3.style.transform = 'scaleX(1)';
-      img4.style.transform = 'scaleX(1)';
-      this.scaleXbool = true;
     }
   }
   add() {
@@ -718,6 +791,8 @@ export class CreateComponent implements OnInit {
       + this.userImgMarginLefttxt + '],'
       + '"userImgTop" : [ '
       + this.userImgMarginRigthtxt + '],'
+      + '"frame" : "'
+      + this.imgSrcFrame + '", '
       + '"scheme" : "'
       + this.scheme
       + '" }';
@@ -727,7 +802,7 @@ export class CreateComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsText(event.target.files[0]);
     let txt: any;
-    document.getElementById('spinner').style.display = 'inline-block';
+    document.getElementById('spinner').style.display = 'block';
     reader.onload = function () {
       txt = reader.result;
     };
