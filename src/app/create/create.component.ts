@@ -104,6 +104,10 @@ export class CreateComponent implements OnInit {
   txtSizeText = '';
   txtUserText = '';
   txtColorText = '';
+  txtFontFamili = [];
+  txtFontFamiliText = '';
+  arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura'];
+  currentFontFamili = 0;
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -263,7 +267,7 @@ export class CreateComponent implements OnInit {
       if ( template.img === '') {
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
-        this.imgSrcFix = this.bcgTemp[template.img];
+        this.imgSrcFix = template.img;
       }
       this.base64Tmp = template.img;
       for (let i = 0; i < template.arrayFontSize.length; i++ ) {
@@ -302,8 +306,10 @@ export class CreateComponent implements OnInit {
       if ( template.txtTop.length > 0) {
         for ( let i = 0; i < template.txtTop.length; i++) {
           this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
-            template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i]);
+            template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i]);
         }
+      } else {
+        document.getElementById('hiddenBox').style.display = 'none';
       }
     } catch (err) {
       this.resetSettings();
@@ -373,6 +379,8 @@ export class CreateComponent implements OnInit {
     this.userImgMarginLefttxt = '';
     this.userImgMarginRigthtxt = '';
     this.userTxt = [];
+    this.txtFontFamili = [];
+    this.txtFontFamiliText = '';
   }
   moveLeft() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -601,8 +609,10 @@ export class CreateComponent implements OnInit {
     this.txtSizeText = '';
     this.txtUserText = '';
     this.txtColorText = '';
+    this.txtFontFamiliText = '';
   }
   createFileToSave() {
+    console.log('font famili: ' + this.txtFontFamili);
     this.resetFiled();
     for ( let i = 0; i < this.userImgBase64.length; i ++) {
       if ( i !== this.rotate.length - 1 ) {
@@ -629,6 +639,8 @@ export class CreateComponent implements OnInit {
         this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '", ';
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
+        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '", ';
+        console.log('font famili: ' + this.txtFontFamili[i]);
       } else {
         this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
         this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '" ';
@@ -636,6 +648,8 @@ export class CreateComponent implements OnInit {
         this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '" ';
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
+        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '" ';
+        console.log('font famili: ' + this.txtFontFamili[i]);
       }
     }
     const txt = '{"arrayFontColor" : [ "'
@@ -674,7 +688,7 @@ export class CreateComponent implements OnInit {
       + this.paddingTopForWho + '", "'
       + this.paddingTopForWhat + '" ], '
       + '"img" : "'
-      +  this.base64Tmp + '", '
+      +  this.imgSrcFix + '", '
       + '"bcgColor" : "'
       + this.bcgColor + '", '
       + '"landscape" : "'
@@ -717,6 +731,8 @@ export class CreateComponent implements OnInit {
       + this.txtUserText + '],'
       + '"txtColor" : [ '
       + this.txtColorText + '],'
+      + '"txtFontFamili" : [ '
+      + this.txtFontFamiliText + '],'
       + '"frame" : "'
       + this.imgSrcFrame + '", '
       + '"scheme" : "'
@@ -804,8 +820,9 @@ export class CreateComponent implements OnInit {
     this.txtRight.push(0);
     this.txtSize.push(0.8);
     this.txtColor.push('#000000');
+    this.txtFontFamili.push('Arial');
   }
-  addTxtWithCustomValue(actualTxt, top, left, right, size, color) {
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
       document.getElementById('hiddenBox').style.display = 'inline-block';
     }
@@ -817,5 +834,14 @@ export class CreateComponent implements OnInit {
     this.txtRight.push(right);
     this.txtSize.push(size);
     this.txtColor.push(color);
+    this.txtFontFamili.push(fontfamili);
+  }
+  setFontFamili(n) {
+    console.log('to jest n:' +  n);
+    this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
+    console.log(this.txtFontFamili[this.currentTxt]);
+    console.log('font famili: ' + this.txtFontFamili);
+
+
   }
 }

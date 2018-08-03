@@ -18,11 +18,12 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+      <p *ngFor="let txt of userTxt; let i = index" id="font3{{i}}" style="width:100%; position: absolute; z-index: 1;"
          [style.padding-right]="txtRight[i]+'%'"
          [style.padding-left]="txtLeft[i]+'%'"
          [style.top]="txtTop[i]+'%'"
          [style.font-size]="txtSize[i] + 'vw'"
+         [style.font-family]="txtFontFamili[i]"
          [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
@@ -69,13 +70,16 @@
                [style.width]="imgWidth[usr]+'%'"
                [style.height]="imgHeight[usr]+'%'"
                [style.left]="imgLeft[usr]+'%'"
-               [style.top]="imgTop[usr]+'%'"/>
-          <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+               [style.top]="imgTop[usr]+'%'"
+               />
+          <p *ngFor="let txt of userTxt; let i = index" id="font4{{i}}" style="width:100%; position: absolute; z-index: 1;"
              [style.padding-right]="txtRight[i]+'%'"
              [style.padding-left]="txtLeft[i]+'%'"
              [style.top]="txtTop[i]+'%'"
+             [style.font-family]="txtFontFamili[i]"
              [style.font-size]="txtSize[i] + 'vw'"
-             [style.color]="txtColor[i]">{{txt}}</p>
+             [style.color]="txtColor[i]"
+          >{{txt}}</p>
           <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
           <div  style="z-index: 8;">
             <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
@@ -592,6 +596,9 @@
           <mat-form-field class="example-full-width fadeInRight">
             <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Podpis"></textarea>
           </mat-form-field>
+          <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" style="width: 50%; margin-top: 15px" >
+            <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)">{{fntFamili}}</mat-option>
+          </mat-select> <br/><br />
           <p class="fadeInLeft">Wielkość tekstu</p>
           <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
           <br />
@@ -661,11 +668,12 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+      <p *ngFor="let txt of userTxt; let i = index" id="font1{{i}}" style="width:100%; position: absolute; z-index: 1;"
          [style.padding-right]="txtRight[i]+'%'"
          [style.padding-left]="txtLeft[i]+'%'"
          [style.top]="txtTop[i]+'%'"
         [style.font-size]="txtSize[i] + 'vw'"
+         [style.font-family]="txtFontFamili[i]"
         [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
@@ -714,11 +722,12 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-       <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+       <p *ngFor="let txt of userTxt; let i = index" id="font2{{i}}" style="width:100%; position: absolute; z-index: 1;"
           [style.padding-right]="txtRight[i]+'%'"
           [style.padding-left]="txtLeft[i]+'%'"
           [style.top]="txtTop[i]+'%'"
           [style.font-size]="txtSize[i] + 'vw'"
+          [style.font-family]="txtFontFamili[i]"
           [style.color]="txtColor[i]">{{txt}}</p>
        <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
