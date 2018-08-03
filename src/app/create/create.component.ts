@@ -97,6 +97,13 @@ export class CreateComponent implements OnInit {
   txtRight = [];
   txtSize = [];
   currentTxt = -1;
+  txtColor = [];
+  txtTopText = '';
+  txtLeftText = '';
+  txtRightText = '';
+  txtSizeText = '';
+  txtUserText = '';
+  txtColorText = '';
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -281,7 +288,7 @@ export class CreateComponent implements OnInit {
       this.sign3 = template.sign3.replace('NEWLINE', '\n' );
       this.footer = template.footer.replace('NEWLINE', '\n' );
       if ( template.userBcgBase64.length > 0) {
-        for ( let i = 0; i < template.userBcgBase64.length; i++) {
+        for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);
           this.rotate.push(template.userImgRotate[i]);
           this.imgWidth.push(template.userImgWidth[i]);
@@ -290,6 +297,11 @@ export class CreateComponent implements OnInit {
           this.imgLeft.push(template.userImgLeft[i]);
           this.userImgBase64.push(template.userBcgBase64[i]);
           this.currImg = this.userImg.length - 1;
+        }
+      }
+      if ( template.txtTop.length > 0) {
+        for ( let i = 0; i < template.txtTop.length; i++) {
+          this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i], template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i]);
         }
       }
     } catch (err) {
@@ -333,14 +345,33 @@ export class CreateComponent implements OnInit {
     this.sign2 = 'Wychowawca\n.......................';
     this.sign3 = 'Katecheta\n  ..................';
     this.footer = 'Kielce, dnia ';
-      this.userImg = [];
-      this.rotate = [];
-      this.imgWidth = [];
-      this.imgHeight = [];
-      this.imgTop = [];
-      this.imgLeft = [];
-      this.userImgBase64 = [];
-      this.currImg = -1;
+    this.userImg = [];
+    this.rotate = [];
+    this.imgWidth = [];
+    this.imgHeight = [];
+    this.imgTop = [];
+    this.imgLeft = [];
+    this.userImgBase64 = [];
+    this.currImg = -1;
+    this.txtTop = [];
+    this.txtLeft = [];
+    this.txtRight = [];
+    this.txtSize = [];
+    this.currentTxt = -1;
+    this.txtColor = [];
+    this.txtTopText = '';
+    this.txtLeftText = '';
+    this.txtRightText = '';
+    this.txtSizeText = '';
+    this.txtUserText = '';
+    this.txtColorText = '';
+    this.userImgBase64txt = '';
+    this.userImgRotatetxt = '';
+    this.userImgWidthtxt = '';
+    this.userImgHeighttxt = '';
+    this.userImgMarginLefttxt = '';
+    this.userImgMarginRigthtxt = '';
+    this.userTxt = [];
   }
   moveLeft() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -574,6 +605,23 @@ export class CreateComponent implements OnInit {
         this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '" ';
       }
     }
+    for ( let i = 0; i < this.userTxt.length; i ++) {
+      if ( i !== this.userTxt.length - 1 ) {
+        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] +  '", ';
+        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] +  '", ';
+        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] +  '", ';
+        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] +  '", ';
+        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] +  '", ';
+        this.txtColorText = this.txtColorText + '"' + this.txtColor[i]  +  '", ';
+      } else {
+        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] +  '" ';
+        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] +  '" ';
+        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] +  '" ';
+        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] +  '" ';
+        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] +  '" ';
+        this.txtColorText = this.txtColorText + '"' + this.txtColor[i]  +  '" ';
+      }
+    }
     const txt = '{"arrayFontColor" : [ "'
       + this.arrayFontColor[0] + '", "'
       + this.arrayFontColor[1] + '", "'
@@ -641,6 +689,18 @@ export class CreateComponent implements OnInit {
       + this.userImgMarginLefttxt + '],'
       + '"userImgTop" : [ '
       + this.userImgMarginRigthtxt + '],'
+      + '"txtTop" : [ '
+      + this.txtTopText + '],'
+      + '"txtLeft" : [ '
+      + this.txtLeftText + '],'
+      + '"txtRight" : [ '
+      + this.txtRightText + '],'
+      + '"txtSize" : [ '
+      + this.txtSizeText + '],'
+      + '"txtUser" : [ '
+      + this.txtUserText + '],'
+      + '"txtColor" : [ '
+      + this.txtColorText + '],'
       + '"frame" : "'
       + this.imgSrcFrame + '", '
       + '"scheme" : "'
@@ -727,5 +787,19 @@ export class CreateComponent implements OnInit {
     this.txtLeft.push(0);
     this.txtRight.push(0);
     this.txtSize.push(0.8);
+    this.txtColor.push('#000000');
+  }
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color) {
+    if ( this.currentTxt === -1 ) {
+      document.getElementById('hiddenBox').style.display = 'inline-block';
+    }
+    this.actualTxt = actualTxt;
+    this.currentTxt = this.currentTxt + 1;
+    this.userTxt.push(this.actualTxt);
+    this.txtTop.push(top);
+    this.txtLeft.push(left);
+    this.txtRight.push(right);
+    this.txtSize.push(size);
+    this.txtColor.push(color);
   }
 }

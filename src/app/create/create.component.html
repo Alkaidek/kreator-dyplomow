@@ -18,6 +18,12 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
+      <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+         [style.padding-right]="txtRight[i]+'%'"
+         [style.padding-left]="txtLeft[i]+'%'"
+         [style.top]="txtTop[i]+'%'"
+         [style.font-size]="txtSize[i] + 'vw'"
+         [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
@@ -64,6 +70,12 @@
                [style.height]="imgHeight[usr]+'%'"
                [style.left]="imgLeft[usr]+'%'"
                [style.top]="imgTop[usr]+'%'"/>
+          <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+             [style.padding-right]="txtRight[i]+'%'"
+             [style.padding-left]="txtLeft[i]+'%'"
+             [style.top]="txtTop[i]+'%'"
+             [style.font-size]="txtSize[i] + 'vw'"
+             [style.color]="txtColor[i]">{{txt}}</p>
           <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
           <div  style="z-index: 8;">
             <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
@@ -562,6 +574,44 @@
     </mat-step>
     <mat-step>
       <div>
+        <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
+          <mat-icon >navigate_before</mat-icon>
+        </button>
+        <button  matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab matStepperNext color="primary" style="float: right">
+          <mat-icon >navigate_next</mat-icon>
+        </button>
+      </div>
+      <ng-template matStepLabel>Piąty krok</ng-template>
+      <div class="userTxtFields">
+        <h1 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h1>
+        <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
+        <div id="hiddenBox" style="display: none">
+          <mat-select class="fadeInLeft" placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt" style="width: 50%; margin-top: 15px" >
+            <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
+          </mat-select> <br/><br />
+          <mat-form-field class="example-full-width fadeInRight">
+            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Podpis"></textarea>
+          </mat-form-field>
+          <p class="fadeInLeft">Wielkość tekstu</p>
+          <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+          <br />
+          <p class="fadeInLeft" >Kolor czcionki</p>
+          <input type="color" class="fadeInRight" [value]="txtColor[currentTxt]" (input)="txtColor[currentTxt] = $event.target.value" >
+          <br />
+          <p class="fadeInLeft">Górny margines tekstu</p>
+          <mat-slider thumbLabel min="0" max="100" [(value)]="txtTop[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+          <br />
+          <p class="fadeInLeft">Prawy margines tekstu</p>
+          <mat-slider thumbLabel min="0" max="100" [(value)]="txtLeft[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+          <br />
+          <p class="fadeInLeft">Lewy margines tekstu</p>
+          <mat-slider thumbLabel min="0" max="100" [(value)]="txtRight[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+          <br />
+        </div>
+      </div>
+    </mat-step>
+    <mat-step>
+      <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>
@@ -593,26 +643,6 @@
         </mat-select> <br/><br />
         <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
         <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
-        <div id="hiddenBox" style="display: none">
-          <mat-select placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt" style="width: 50%; margin-top: 15px" >
-            <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
-          </mat-select> <br/><br />
-          <mat-form-field class="example-full-width fadeInLeft">
-            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Podpis"></textarea>
-          </mat-form-field>
-          <p><b class="fadeInRight">Górny margines tekstu</b></p>
-          <input type="range" min="0" max="100" [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
-          <br />
-          <p><b class="fadeInRight">Prawy margines tekstu</b></p>
-          <input type="range" min="0" max="100" [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
-          <br />
-          <p><b class="fadeInRight">Lewy margines tekstu</b></p>
-          <input type="range" min="0" max="100" [value]="txtRight[currentTxt]" (input)="txtRight[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
-          <br />
-          <p><b class="fadeInRight">Wielkość tekstu</b></p>
-          <input type="range" min="0" max="4" step="0.1" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
-          <br />
-        </div>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
@@ -635,7 +665,8 @@
          [style.padding-right]="txtRight[i]+'%'"
          [style.padding-left]="txtLeft[i]+'%'"
          [style.top]="txtTop[i]+'%'"
-        [style.font-size]="txtSize[i] + 'vw'">{{txt}}</p>
+        [style.font-size]="txtSize[i] + 'vw'"
+        [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
@@ -683,7 +714,13 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+       <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+          [style.padding-right]="txtRight[i]+'%'"
+          [style.padding-left]="txtLeft[i]+'%'"
+          [style.top]="txtTop[i]+'%'"
+          [style.font-size]="txtSize[i] + 'vw'"
+          [style.color]="txtColor[i]">{{txt}}</p>
+       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
