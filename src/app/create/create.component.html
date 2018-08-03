@@ -584,8 +584,8 @@
       <ng-template matStepLabel>Piąty krok</ng-template>
       <div class="userTxtFields">
         <h1 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h1>
-        <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
-        <div id="hiddenBox" style="display: none">
+        <button (click)="addTxt()"  mat-raised-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
+        <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
           <mat-select class="fadeInLeft" placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt" style="width: 50%; margin-top: 15px" >
             <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
           </mat-select> <br/><br />

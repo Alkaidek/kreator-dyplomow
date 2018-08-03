@@ -301,7 +301,8 @@ export class CreateComponent implements OnInit {
       }
       if ( template.txtTop.length > 0) {
         for ( let i = 0; i < template.txtTop.length; i++) {
-          this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i], template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i]);
+          this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
+            template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i]);
         }
       }
     } catch (err) {
@@ -587,7 +588,22 @@ export class CreateComponent implements OnInit {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
     fileSaver.saveAs(blob, 'template' + date + '.MACproject');
   }
+  resetFiled() {
+    this.userImgRotatetxt = '';
+    this.userImgWidthtxt = '';
+    this.userImgHeighttxt = '';
+    this.userImgMarginLefttxt = '';
+    this.userImgMarginRigthtxt = '';
+    this.userImgBase64txt = '';
+    this.txtTopText =  '';
+    this.txtLeftText = '';
+    this.txtRightText = '';
+    this.txtSizeText = '';
+    this.txtUserText = '';
+    this.txtColorText = '';
+  }
   createFileToSave() {
+    this.resetFiled();
     for ( let i = 0; i < this.userImgBase64.length; i ++) {
       if ( i !== this.rotate.length - 1 ) {
         this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '", ';
@@ -606,20 +622,20 @@ export class CreateComponent implements OnInit {
       }
     }
     for ( let i = 0; i < this.userTxt.length; i ++) {
-      if ( i !== this.userTxt.length - 1 ) {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] +  '", ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] +  '", ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] +  '", ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] +  '", ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] +  '", ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i]  +  '", ';
+      if (i !== this.userTxt.length - 1) {
+        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '", ';
+        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '", ';
+        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '", ';
+        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '", ';
+        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
+        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
       } else {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] +  '" ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] +  '" ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] +  '" ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] +  '" ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] +  '" ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i]  +  '" ';
+        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
+        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '" ';
+        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '" ';
+        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '" ';
+        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
+        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
       }
     }
     const txt = '{"arrayFontColor" : [ "'
