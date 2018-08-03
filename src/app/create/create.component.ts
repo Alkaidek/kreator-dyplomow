@@ -106,7 +106,8 @@ export class CreateComponent implements OnInit {
   txtColorText = '';
   txtFontFamili = [];
   txtFontFamiliText = '';
-  arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura'];
+  arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
+    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Courier New'];
   currentFontFamili = 0;
   ngOnInit() {
     const date = new Date();
