@@ -19,6 +19,7 @@ export class CreateComponent implements OnInit {
   userImg =
     [];
   userImgBase64 = [];
+  userTxt = [];
   userImgBase64txt = '';
   userImgRotatetxt = '';
   userImgWidthtxt = '';
@@ -53,6 +54,8 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+  actualTxt = '';
+  format = 'a4';
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
@@ -60,7 +63,6 @@ export class CreateComponent implements OnInit {
   bcgColor = '#c2f2cf';
   lastValue = 1;
   lastValueFrame = 1;
-  name = 'MateuszB';
   base64Tmp = '';
   base64TmpFrame = '';
   base64 = '';
@@ -90,6 +92,11 @@ export class CreateComponent implements OnInit {
   imgTop = [];
   imgLeft = [];
   scheme = 0;
+  txtTop = [];
+  txtLeft = [];
+  txtRight = [];
+  txtSize = [];
+  currentTxt = -1;
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -108,6 +115,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
       this.scheme = 30;
       this.landscapeOff(2);
+      this.setFormat('A4');
     }, 500);
   }
   takeBcg(imgSrc) {
@@ -161,7 +169,7 @@ export class CreateComponent implements OnInit {
   generatePdf() {
     if (this.landscape !== 'inline-block') {
       const elementToPrint = document.getElementById('toPdf100Fix');
-      const pdf = new jsPDF('p', 'pt', 'a4', true);
+      const pdf = new jsPDF('p', 'pt', this.format, true);
       pdf.internal.scaleFactor = 1;
       pdf.addHTML(elementToPrint, () => {
           pdf.save('wygenerowany dyplom.pdf');
@@ -169,7 +177,7 @@ export class CreateComponent implements OnInit {
         });
     } else {
       const elementToPrint = document.getElementById('toPdf100LandscapeFix');
-      const pdf = new jsPDF('l', 'pt', 'a4', true);
+      const pdf = new jsPDF('l', 'pt', this.format, true);
       pdf.internal.scaleFactor = 1;
       pdf.addHTML(elementToPrint, () => {
           pdf.save('wygenerowany dyplom.pdf');
@@ -404,7 +412,7 @@ export class CreateComponent implements OnInit {
         if ( (this.arrayScrollFrame[i] + 3) < (this.frames.length + 1 )) {
           document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
           if (((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) && (this.arrayScrollFrame[i] + 3) > 0) {
-            document.getElementById('frmBox' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
+            document.getElementById('frmBox' + (this.arrayScrollFrame[i] + 3)).style.display = 'inline-block';
           }
         }
       } else if (this.arrayScrollFrame[i] > (this.frames.length + 1)) {
@@ -546,11 +554,11 @@ export class CreateComponent implements OnInit {
   }
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    fileSaver.saveAs(blob, 'template' + date + '.json');
+    fileSaver.saveAs(blob, 'template' + date + '.MACproject');
   }
   createFileToSave() {
     for ( let i = 0; i < this.userImgBase64.length; i ++) {
-      if ( i !== this.userImgBase64.length - 1 ) {
+      if ( i !== this.rotate.length - 1 ) {
         this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '", ';
         this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '", ';
         this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '", ';
@@ -641,16 +649,22 @@ export class CreateComponent implements OnInit {
     return txt;
   }
   onSelectFile(event) {
-    const reader = new FileReader();
-    reader.readAsText(event.target.files[0]);
-    let txt: any;
-    document.getElementById('spinner').style.display = 'block';
-    reader.onload = function () {
-      txt = reader.result;
-    };
-    setTimeout( () => {
-      this.jsonToArray(txt);
-    }, 500);
+    try {
+      const reader = new FileReader();
+      reader.readAsText(event.target.files[0]);
+      let txt: any;
+      document.getElementById('spinner').style.display = 'block';
+      reader.onload = function () {
+        txt = reader.result;
+      };
+      setTimeout( () => {
+        this.jsonToArray(txt);
+      }, 500);
+    } catch (err) {
+      this.resetSettings();
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+    }
+    document.getElementById('spinner').style.display = 'none';
   }
   fileUpload(event: any) {
     this.add();
@@ -668,8 +682,14 @@ export class CreateComponent implements OnInit {
     }
   }
   jsonToArray(txt) {
-    const obj = JSON.parse(txt);
-    this.setUserData(obj);
+    try {
+      const obj = JSON.parse(txt);
+      this.setUserData(obj);
+    } catch (err) {
+      this.resetSettings();
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+    }
+    document.getElementById('spinner').style.display = 'none';
   }
   resetBcg() {
     this.imgSrc = '../../assets/img/0.png';
@@ -686,5 +706,26 @@ export class CreateComponent implements OnInit {
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+  }
+  setFormat(n) {
+    this.format = n;
+    document.getElementById('size' + n ).style.transform = 'scale(1,1)';
+    if ( n === 'A4') {
+      document.getElementById('sizeA5' ).style.transform = 'scale(0.8,0.8)';
+    } else {
+      document.getElementById('sizeA4').style.transform = 'scale(0.8, 0.8)';
+    }
+  }
+  addTxt() {
+    if ( this.currentTxt === -1 ) {
+      document.getElementById('hiddenBox').style.display = 'inline-block';
+    }
+    this.actualTxt = '';
+    this.currentTxt = this.currentTxt + 1;
+    this.userTxt.push(this.actualTxt);
+    this.txtTop.push(0);
+    this.txtLeft.push(0);
+    this.txtRight.push(0);
+    this.txtSize.push(0.8);
   }
 }

@@ -109,7 +109,7 @@
       <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
       Wczytaj szablon
     </label>
-    <input class="fadeInRight" id="fileInput" type="file" accept='.json' (change)="onSelectFile($event)"/>
+    <input class="fadeInRight" id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
   </div>
   <button id="btnGeneratePdf" class="button" (click)="generatePdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" class="button" (click)="createArrayToSend()"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
@@ -139,6 +139,11 @@
           <h1  style="margin-top: 10px" class="fadeInTop">Wybierz schemat</h1>
           <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
           <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+        </div>
+        <div>
+          <h1  style="margin-top: 10px" class="fadeInTop">Wybierz Format</h1>
+          <button mat-fab color="accent" class="size" style="margin-right: 10px" id="sizeA4" (click)="setFormat('A4')">A4</button>
+          <button mat-fab color="accent" class="size" style="margin-left: 10px" id="sizeA5" (click)="setFormat('A5')">A5</button>
         </div>
       </div>
         <!--<mat-form-field style="width: 50%">
@@ -552,7 +557,6 @@
           </div>
 
         </mat-expansion-panel>
-
       </mat-accordion>
       </div>
     </mat-step>
@@ -579,7 +583,7 @@
         <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
         <p><b class="fadeInRight">Lewy margines obrazka</b></p>
         <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
-        <p><b class="fadeInRight">Prawy margines obrazka</b></p>
+        <p><b class="fadeInRight">Górny margines obrazka</b></p>
         <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
         <br />
         <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj obrót</button> <br/>
@@ -587,9 +591,29 @@
         <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" style="width: 50%" >
           <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
         </mat-select> <br/><br />
-        <button id="rmvImg" mat-raised-button color="primary" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
+        <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
+        <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
+        <div id="hiddenBox" style="display: none">
+          <mat-select placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt" style="width: 50%; margin-top: 15px" >
+            <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
+          </mat-select> <br/><br />
+          <mat-form-field class="example-full-width fadeInLeft">
+            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Podpis"></textarea>
+          </mat-form-field>
+          <p><b class="fadeInRight">Górny margines tekstu</b></p>
+          <input type="range" min="0" max="100" [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+          <br />
+          <p><b class="fadeInRight">Prawy margines tekstu</b></p>
+          <input type="range" min="0" max="100" [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+          <br />
+          <p><b class="fadeInRight">Lewy margines tekstu</b></p>
+          <input type="range" min="0" max="100" [value]="txtRight[currentTxt]" (input)="txtRight[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+          <br />
+          <p><b class="fadeInRight">Wielkość tekstu</b></p>
+          <input type="range" min="0" max="4" step="0.1" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+          <br />
+        </div>
       </div>
-      <a download="info.txt" id="downloadlink" style="display: none">Download</a>
     </mat-step>
   </mat-horizontal-stepper>
   <br />
@@ -607,6 +631,11 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
+      <p *ngFor="let txt of userTxt; let i = index" style="width:100%; position: absolute; z-index: 1;"
+         [style.padding-right]="txtRight[i]+'%'"
+         [style.padding-left]="txtLeft[i]+'%'"
+         [style.top]="txtTop[i]+'%'"
+        [style.font-size]="txtSize[i] + 'vw'">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
