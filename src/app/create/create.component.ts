@@ -81,6 +81,7 @@ export class CreateComponent implements OnInit {
   paddingTopForWhat = 20;
   marginLeft = [0, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
+  paddingTopFooter = 12;
   bottom = 0;
   arrayFontSize = [3, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
@@ -97,6 +98,9 @@ export class CreateComponent implements OnInit {
   txtRight = [];
   txtSize = [];
   currentTxt = -1;
+  shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
+  shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
+  shadowSmall = '0px 0px';
   txtColor = [];
   txtTopText = '';
   txtLeftText = '';
@@ -109,6 +113,11 @@ export class CreateComponent implements OnInit {
   arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
     'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Courier New'];
   currentFontFamili = 0;
+  letterSpacing = 0;
+  letterSpacingForWho = 0;
+  fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -263,6 +272,34 @@ export class CreateComponent implements OnInit {
       this.marginRight[2] = template.marginRight[2];
       this.marginRight[1] = template.marginRight[1];
       this.marginRight[0] = template.marginRight[0];
+      this.shadowColor[0] =  template.shadowColor[0];
+      this.shadowColor[1] =  template.shadowColor[1];
+      this.shadowColor[2] =  template.shadowColor[2];
+      this.shadowColor[3] =  template.shadowColor[3];
+      this.shadowColor[4] =  template.shadowColor[4];
+      this.shadowLarge[0] =  template.shadowLarge[0];
+      this.shadowLarge[1] =  template.shadowLarge[1];
+      this.shadowLarge[2] =  template.shadowLarge[2];
+      this.shadowLarge[3] =  template.shadowLarge[3];
+      this.fontStyle[0] =  template.fontStyle[0];
+      this.fontStyle[1] =  template.fontStyle[1];
+      this.fontStyle[2] =  template.fontStyle[2];
+      this.fontStyle[3] =  template.fontStyle[3];
+      this.fontStyle[4] =  template.fontStyle[4];
+      this.fontWeight[0] =  template.fontWeight[0];
+      this.fontWeight[1] =  template.fontWeight[1];
+      this.fontWeight[2] =  template.fontWeight[2];
+      this.fontWeight[3] =  template.fontWeight[3];
+      this.fontWeight[4] =  template.fontWeight[4];
+      this.fontVariant[0] =  template.fontVariant[0];
+      this.fontVariant[1] =  template.fontVariant[1];
+      this.fontVariant[2] =  template.fontVariant[2];
+      this.fontVariant[3] =  template.fontVariant[3];
+      this.fontVariant[4] =  template.fontVariant[4];
+      this.paddingTopFooter = template.paddingTopFooter;
+      this.shadowSmall =  template.shadowSmall;
+      this.letterSpacing = template.letterSpacing;
+      this.letterSpacingForWho = template.letterSpacingForWho;
       this.bottom = template.bottom;
       this.imgSrcFrame = template.frame;
       if ( template.img === '') {
@@ -278,13 +315,8 @@ export class CreateComponent implements OnInit {
       for (let i = 0; i < template.arrayFontColor.length; i++ ) {
         this.arrayFontColor[i] =  template.arrayFontColor[i];
       }
-      for (let i = 0; i < template.arrayFontFamili.length; i++ ) {
-        document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  template.arrayFontFamili[i];
-        document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  template.arrayFontFamili[i];
-        document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =  template.arrayFontFamili[i];
-        document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  template.arrayFontFamili[i];
-        this.arrayFontFamili[i] = template.arrayFontFamili[i];
-      }
+      this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
+        template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
       this.title =  template.title.replace('NEWLINE', '\n' );
       this.forWho =  template.forWho.replace('NEWLINE', '\n' );
       this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
@@ -319,10 +351,16 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    this.letterSpacing = 0;
+    this.letterSpacingForWho = 0;
     this.bcgColor = '#c2f2cf';
     this.landscape = '';
     this.landscapeOff(2);
     this.setScheme(30);
+    this.paddingTopFooter = 12;
+    this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.paddingTop = 0;
     this.paddingTopForWho = 10;
     this.paddingTopForWhat = 20;
@@ -340,12 +378,6 @@ export class CreateComponent implements OnInit {
     this.arrayFontSize = [ 3, 0.9, 2, 0.8, 2];
     this.arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
     this.arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
-    for (let i = 0; i < this.arrayFontFamili.length; i++ ) {
-      document.getElementById(this.arrayFontNameId[i]).style.fontFamily =  'Arial';
-      document.getElementById(this.arrayFontNameId[i] + 'Fix').style.fontFamily =  'Arial';
-      document.getElementById(this.arrayFontNameId[i] + 'LandscapeFix').style.fontFamily =   'Arial';
-      document.getElementById(this.arrayFontNameId[i] + 'Landscape').style.fontFamily =  'Arial';
-    }
     this.title = 'Dyplom';
     this.forWho =  '';
     this.forWhat =  '';
@@ -666,7 +698,8 @@ export class CreateComponent implements OnInit {
       + this.arrayFontFamili[2] + '", "'
       + this.arrayFontFamili[3] + '", "'
       + this.arrayFontFamili[4] + '", "'
-      + this.arrayFontFamili[5] + '"],'
+      + this.arrayFontFamili[5] + '", "'
+      + this.arrayFontFamili[6] + '"],'
       + ' "arrayFontSize" : ['
       + this.arrayFontSize[0] + ', '
       + this.arrayFontSize[1] + ', '
@@ -674,6 +707,7 @@ export class CreateComponent implements OnInit {
       + this.arrayFontSize[3] + ', '
       + this.arrayFontSize[4] + '], '
       + '"bottom" : "' + this.bottom + '", '
+      + '"paddingTopFooter" : "' + this.paddingTopFooter + '", '
       + '"marginLeft" : [ "'
       + this.marginLeft[0] + '", "'
       + this.marginLeft[1] + '", "'
@@ -684,6 +718,41 @@ export class CreateComponent implements OnInit {
       + this.marginRight[1] + '", "'
       + this.marginRight[2] + '", "'
       + this.marginRight[3] + '" ], '
+      + '"shadowColor" : [ "'
+      + this.shadowColor[0] + '", "'
+      + this.shadowColor[1] + '", "'
+      + this.shadowColor[2] + '", "'
+      + this.shadowColor[3] + '", "'
+      + this.shadowColor[4] + '" ], '
+      + '"shadowLarge" : [ "'
+      + this.shadowLarge[0] + '", "'
+      + this.shadowLarge[1] + '", "'
+      + this.shadowLarge[2] + '", "'
+      + this.shadowLarge[3] + '" ], '
+      + '"fontStyle" : [ "'
+      + this.fontStyle[0] + '", "'
+      + this.fontStyle[1] + '", "'
+      + this.fontStyle[2] + '", "'
+      + this.fontStyle[3] + '", "'
+      + this.fontStyle[4] + '" ], '
+      + '"fontWeight" : [ "'
+      + this.fontWeight[0] + '", "'
+      + this.fontWeight[1] + '", "'
+      + this.fontWeight[2] + '", "'
+      + this.fontWeight[3] + '", "'
+      + this.fontWeight[4] + '" ], '
+      + '"fontVariant" : [ "'
+      + this.fontVariant[0] + '", "'
+      + this.fontVariant[1] + '", "'
+      + this.fontVariant[2] + '", "'
+      + this.fontVariant[3] + '", "'
+      + this.fontVariant[4] + '" ], '
+      + '"shadowSmall" : "'
+      +  this.shadowSmall + '", '
+      + '"letterSpacing" : "'
+      + this.letterSpacing + '", '
+      + '"letterSpacingForWho" : "'
+      + this.letterSpacingForWho + '", '
       + '"paddingTop" : [ "'
       + this.paddingTop + '", "'
       + this.paddingTopForWho + '", "'
@@ -838,11 +907,50 @@ export class CreateComponent implements OnInit {
     this.txtFontFamili.push(fontfamili);
   }
   setFontFamili(n) {
-    console.log('to jest n:' +  n);
     this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
-    console.log(this.txtFontFamili[this.currentTxt]);
-    console.log('font famili: ' + this.txtFontFamili);
-
-
+  }
+  setFontFamiliForMainField(n, m) {
+    this.arrayFontFamili[m] = this.arraySelectFontFamili[n];
+    if (m === 3 ) {
+      this.arrayFontFamili[4] = this.arraySelectFontFamili[n];
+      this.arrayFontFamili[5] = this.arraySelectFontFamili[n];
+    }
+  }
+  shadowOnOff(n, m) {
+    console.log(n + '' + m);
+    if ( m === 0 ) {
+      if ( this.shadowLarge[n] === '4px 4px 4px' ) {
+        this.shadowLarge[n] = '0px 0px';
+      } else {
+        this.shadowLarge[n] = '4px 4px 4px';
+      }
+    } else {
+      if ( this.shadowSmall === '2px 2px 2px' ) {
+        this.shadowSmall = '0px 0px';
+      } else {
+        this.shadowSmall = '2px 2px 2px';
+      }
+    }
+  }
+  setFontStyle(n) {
+    if (this.fontStyle[n] === 'italic') {
+      this.fontStyle[n] = 'normal';
+    } else {
+      this.fontStyle[n] = 'italic';
+    }
+  }
+  setFontWeight(n) {
+    if (this.fontWeight[n] === 'bold') {
+      this.fontWeight[n] = 'normal';
+    } else {
+      this.fontWeight[n] = 'bold';
+    }
+  }
+  setFontVariant(n) {
+    if (this.fontVariant[n] === 'small-caps') {
+      this.fontVariant[n] = 'normal';
+    } else {
+      this.fontVariant[n] = 'small-caps';
+    }
   }
 }
