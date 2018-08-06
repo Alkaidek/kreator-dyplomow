@@ -27,34 +27,34 @@
          [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxtLandscapeFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'"  [style.transform]="'rotate('+mainRotate[0]+'deg)'" >
+          <s id="largeTxtLandscapeFix" [style.font-size]="arrayFontSize[0] + 'vw'"[style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sForLandscapeFix" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.transform]="'rotate('+mainRotate[1]+'deg)'">
+        <s id="sForLandscapeFix" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7" [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.transform]="'rotate('+mainRotate[2]+'deg)'">
         <s id="txtForWhatLandscapeFix" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
           {{forWhat}}
         </s>
       </div>
       <div class="signature" id="signLandscapeFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="leftLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="leftLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[3]+'deg)'">
           {{sign1}}
         </p>
-        <p id="centerLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="centerLandscapeFix" [style.transform]="'rotate('+mainRotate[4]+'deg)'" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
           {{sign3}}
         </p>
-        <p id="rightLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="rightLandscapeFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[5]+'deg)'">
           {{sign2}}
         </p>
-        <p id="smallTxtLandscapeFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+        <p id="smallTxtLandscapeFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.transform]="'rotate('+mainRotate[6]+'deg)'" [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
       </div>
@@ -77,40 +77,41 @@
              [style.padding-left]="txtLeft[i]+'%'"
              [style.top]="txtTop[i]+'%'"
              [style.font-family]="txtFontFamili[i]"
+
              [style.font-size]="txtSize[i] + 'vw'"
              [style.color]="txtColor[i]"
           >{{txt}}</p>
           <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
           <div  style="z-index: 8;">
-            <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-              <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+            <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.transform]="'rotate('+mainRotate[0]+'deg)'"  >
+              <s id="largeTxtFix" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]"[style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
                 {{title}}
               </s>
               <br/>
             </p>
           </div>
-          <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+          <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.transform]="'rotate('+mainRotate[1]+'deg)'">
             <s id="sForFix" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
               {{forWho}}
             </s>
           </div>
-          <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+          <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.transform]="'rotate('+mainRotate[2]+'deg)'">
+            <s id="txtForWhatFix" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7"  [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
               {{forWhat}}
             </s>
           </div>
 
           <div class="signature" id="signFix" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-            <p id="leftFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+            <p id="leftFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[3]+'deg)'">
               {{sign1}}
             </p>
-            <p id="centerFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+            <p id="centerFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[4]+'deg)'">
               {{sign3}}
             </p>
-            <p id="rightFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+            <p id="rightFix" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[5]+'deg)'">
               {{sign2}}
             </p>
-            <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+            <p id="smallTxtFix" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]" [style.transform]="'rotate('+mainRotate[6]+'deg)'">
               {{footer}}
             </p>
           </div>
@@ -253,7 +254,7 @@
               Ustaw właściwości pola 'Tytuł'
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="dataContainer" style="height: 320px">
+          <div class="dataContainer" style="height: 360px">
             <div class="leftCont">
               <!--<p><b class="fadeInLeft">Nazwa: </b></p>
                0
@@ -302,6 +303,8 @@
                         <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
                         <p class="fadeInTop" >Górny margines</p>
                         <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTop" class="example-full-width"></mat-slider>
+                        <p class="fadeInTop" >Obrót tekstu</p>
+                        <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[0]" class="example-full-width"></mat-slider>
                       </div>
                     </div>
                   </div>
@@ -319,7 +322,7 @@
               Ustaw właściwości pola 'Dla kogo?'
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="dataContainer"  style="height: 350px">
+          <div class="dataContainer"  style="height: 390px">
             <div class="leftCont ">
               <!--<p><b class="fadeInLeft">Dla kogo: </b></p>
              2
@@ -367,6 +370,8 @@
                     <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Górny margines</p>
                     <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[1]" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -382,7 +387,7 @@
               Ustaw właściwości pola 'Za co?'
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="dataContainer" style="height: 350px">
+          <div class="dataContainer" style="height: 390px">
             <div class="leftCont ">
               <!-- <p><b class="fadeInLeft">Za co:</b></p>
                4
@@ -431,6 +436,8 @@
                     <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Górny margines</p>
                     <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360"step="45" [(value)]="mainRotate[2]" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -446,7 +453,7 @@
               Ustaw właściwości pola 'Podpisy'
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="dataContainer" style="height: 500px">
+          <div class="dataContainer" style="height: 620px">
             <div class="leftCont ">
               <!--<p><b class="fadeInLeft">Podpisy:</b></p>
                1
@@ -499,6 +506,12 @@
                     <p class="fadeInTop" >Dolny margines</p>
                     <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
                     <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[3]" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[4]" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[5]" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -517,7 +530,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <div class="dataContainer" style="height: 320px">
+          <div class="dataContainer" style="height: 360px">
             <div class="leftCont">
               <!--  <p><b class="fadeInLeft">Stopka</b></p>
               3
@@ -566,6 +579,8 @@
                     <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Dolny margines</p>
                     <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <p class="fadeInTop" >Obrót tekstu</p>
+                    <mat-slider thumbLabel  min="-360" max="360" step="45" [(value)]="mainRotate[6]" class="example-full-width"></mat-slider>
                   </div>
                 </div>
               </div>
@@ -670,42 +685,48 @@
            [style.top]="imgTop[usr]+'%'"/>
       <p *ngFor="let txt of userTxt; let i = index" id="font1{{i}}" style="width:100%; position: absolute; z-index: 1;"
          [style.padding-right]="txtRight[i]+'%'"
+         [style.transform]="'rotate('+txtRotate[i]+'deg)'"
          [style.padding-left]="txtLeft[i]+'%'"
          [style.top]="txtTop[i]+'%'"
         [style.font-size]="txtSize[i] + 'vw'"
          [style.font-family]="txtFontFamili[i]"
         [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <div  style="z-index: 8;">
+      <div  style="z-index: 8;"  [style.transform]="'rotate('+mainRotate[0]+'deg)'">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+          <s id="largeTxt"
+             [style.font-size]="arrayFontSize[0] + 'vw'"
+             [style.color]="arrayFontColor[0]"
+             [style.margin-left]="marginLeft[0] + '%'"
+             [style.margin-right]="marginRight[0] + '%'"
+             style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.transform]="'rotate('+mainRotate[1]+'deg)'" >
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7" [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
           {{forWho}}
         </s>
       </div>
-        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.transform]="'rotate('+mainRotate[2]+'deg)'" >
           <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
             {{forWhat}}
           </s>
         </div>
 
       <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[3]+'deg)'">
           {{sign1}}
         </p>
-        <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[4]+'deg)'">
           {{sign3}}
         </p>
-        <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[5]+'deg)'">
           {{sign2}}
         </p>
-        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+        <p id="smallTxt" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]" [style.transform]="'rotate('+mainRotate[6]+'deg)'">
           {{footer}}
         </p>
       </div>
@@ -731,34 +752,34 @@
           [style.color]="txtColor[i]">{{txt}}</p>
        <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.transform]="'rotate('+mainRotate[0]+'deg)'">
+          <s id="largeTxtLandscape" [style.font-size]="arrayFontSize[0] + 'vw'"  [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sForLandscape" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.transform]="'rotate('+mainRotate[1]+'deg)'">
+        <s id="sForLandscape" [style.font-size]="arrayFontSize[2] + 'vw'" [style.color]="arrayFontColor[2]" style="z-index: 7"   [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-        <s id="txtForWhatLandscape" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.transform]="'rotate('+mainRotate[2]+'deg)'">
+        <s id="txtForWhatLandscape" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" style="z-index: 7"  [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
           {{forWhat}}
         </s>
       </div>
-      <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="leftLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+      <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'"  [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+        <p id="leftLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[3]+'deg)'">
           {{sign1}}
         </p>
-        <p id="centerLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="centerLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[4]+'deg)'">
           {{sign3}}
         </p>
-        <p id="rightLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]">
+        <p id="rightLandscape" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.transform]="'rotate('+mainRotate[5]+'deg)'">
           {{sign2}}
         </p>
-        <p id="smallTxtLandscape" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+        <p id="smallTxtLandscape" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]" [style.transform]="'rotate('+mainRotate[6]+'deg)'">
           {{footer}}
         </p>
       </div>

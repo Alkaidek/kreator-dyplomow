@@ -96,6 +96,7 @@ export class CreateComponent implements OnInit {
   txtLeft = [];
   txtRight = [];
   txtSize = [];
+  mainRotate = [0, 0, 0, 0, 0, 0, 0];
   currentTxt = -1;
   txtColor = [];
   txtTopText = '';
@@ -109,6 +110,7 @@ export class CreateComponent implements OnInit {
   arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
     'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Courier New'];
   currentFontFamili = 0;
+  txtRotate = [];
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -822,6 +824,7 @@ export class CreateComponent implements OnInit {
     this.txtSize.push(0.8);
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
+    this.txtRotate.push(0);
   }
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
