@@ -3,7 +3,7 @@ import * as jsPDF from 'jspdf';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
-import {tryCatch} from 'rxjs/internal-compatibility';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector:
@@ -83,7 +83,7 @@ export class CreateComponent implements OnInit {
   marginRight = [0, 0, 0, 0];
   paddingTopFooter = 12;
   bottom = 0;
-  arrayFontSize = [3, 0.9, 2, 0.8, 2];
+  arrayFontSize = [30, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
   arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
   arrayFontColor = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000'];
@@ -213,6 +213,20 @@ export class CreateComponent implements OnInit {
           pdf.autoPrint();
         });
     }
+    const data =  document.getElementById('toPdf100Fix');
+    html2canvas(data).then(canvas => {
+      const imgWidth = 416;
+      const pageHeight = 590;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.deletePage(1);
+      pdf.addPage(imgWidth, imgHeight);
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('MYPdf.pdf');
+    });
   }
   createArrayToSend() {
     const date = new Date();
