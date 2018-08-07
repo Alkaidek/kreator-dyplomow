@@ -86,7 +86,7 @@ export class CreateComponent implements OnInit {
   arrayFontSize = [3, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
   arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
-  arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
+  arrayFontColor = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000'];
   rotate = [];
   imgWidth = [];
   imgHeight = [];
@@ -190,7 +190,11 @@ export class CreateComponent implements OnInit {
   generatePdf() {
     if (this.landscape !== 'inline-block') {
       const elementToPrint = document.getElementById('toPdf100Fix');
-      const pdf = new jsPDF('p', 'pt', this.format, true);
+      const width = document.getElementById('toPdf100Fix').offsetWidth;
+      const height = document.getElementById('toPdf100Fix').offsetHeight;
+      const pdf = new jsPDF('p', 'px', this.format, true);
+      pdf.deletePage(1);
+      pdf.addPage(width, height);
       pdf.internal.scaleFactor = 1;
       pdf.addHTML(elementToPrint, () => {
           pdf.save('wygenerowany dyplom.pdf');
@@ -199,6 +203,10 @@ export class CreateComponent implements OnInit {
     } else {
       const elementToPrint = document.getElementById('toPdf100LandscapeFix');
       const pdf = new jsPDF('l', 'pt', this.format, true);
+      const width = document.getElementById('toPdf100LandscapeFix').offsetWidth;
+      const height = document.getElementById('toPdf100LandscapeFix').offsetHeight;
+      pdf.deletePage(1);
+      pdf.addPage(width, height);
       pdf.internal.scaleFactor = 1;
       pdf.addHTML(elementToPrint, () => {
           pdf.save('wygenerowany dyplom.pdf');
