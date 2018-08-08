@@ -20,6 +20,7 @@ export class CreateComponent implements OnInit {
     [];
   userImgBase64 = [];
   userTxt = [];
+  imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
   userImgBase64txt = '';
   userImgRotatetxt = '';
   userImgWidthtxt = '';
@@ -140,8 +141,8 @@ export class CreateComponent implements OnInit {
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
-      alert('wartosć: ' + ( 2480 / width) );
-      this.multiple = 2480 / width;
+      console.log('wartosć: ' + ( 2480 / width) );
+      this.multiple = (2480 / width );
     }, 500);
   }
   takeBcg(imgSrc) {
@@ -191,12 +192,11 @@ export class CreateComponent implements OnInit {
     this.base64TmpFrame = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFrame = this.frames[imgSrc];
+    this.imgMAClogoFrame = '../../assets/img/0.png';
   }
   generateHQualityPdf() {
-    document.getElementById('spinner').style.display = 'inline-block';
-    setTimeout( () => {
-      this.generatePdf();
-    }, 500);
+    document.getElementById('spinner').style.display = 'block';
+    this.generatePdf();
   }
   generatePdf() {
     if (this.landscape !== 'inline-block') {
@@ -223,7 +223,7 @@ export class CreateComponent implements OnInit {
         pdf.addPage(imgWidth, imgHeight);
         const position = 0;
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-        pdf.save('MYPdf.pdf');
+        pdf.save('TwojDyplom.pdf');
         document.getElementById('spinner').style.display = 'none';
       });
     } else {
@@ -352,6 +352,11 @@ export class CreateComponent implements OnInit {
       this.letterSpacingForWho = template.letterSpacingForWho;
       this.bottom = template.bottom;
       this.imgSrcFrame = template.frame;
+      if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
+        this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+      } else {
+        this.imgMAClogoFrame = '../../assets/img/0.png';
+      }
       if ( template.img === '') {
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
@@ -401,6 +406,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
     this.bcgColor = '#c2f2cf';
@@ -914,6 +920,7 @@ export class CreateComponent implements OnInit {
   }
   resetFrame() {
     this.imgSrcFrame = '../../assets/img/0.png';
+    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.transform = 'scale(0.8,0.8)';
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
@@ -987,7 +994,7 @@ export class CreateComponent implements OnInit {
     }
   }
   setShadowFix(temp) {
-    for (let i = 0; i < temp.shadowLarge.length; i++ ){
+    for (let i = 0; i < temp.shadowLarge.length; i++ ) {
       if ( temp.shadowLarge[i] === '4px 4px 4px' ) {
         this.shadowLargeFix[i] = '20px 20px 20px';
       } else {
