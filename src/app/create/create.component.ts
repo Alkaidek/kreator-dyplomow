@@ -83,7 +83,8 @@ export class CreateComponent implements OnInit {
   marginRight = [0, 0, 0, 0];
   paddingTopFooter = 12;
   bottom = 0;
-  arrayFontSize = [30, 0.9, 2, 0.8, 2];
+  multiple = 4.5;
+  arrayFontSize = [3, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
   arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
   arrayFontColor = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000'];
@@ -100,7 +101,9 @@ export class CreateComponent implements OnInit {
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
-  shadowSmall = '0px 0px';
+  shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
+  shadowSmall = '0% 0%';
+  shadowSmallFix = '0% 0%';
   txtColor = [];
   txtTopText = '';
   txtLeftText = '';
@@ -136,7 +139,9 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
       this.scheme = 30;
       this.landscapeOff(2);
-      this.setFormat('A4');
+      const width = document.getElementById('toPdf100').offsetWidth;
+      alert('wartosć: ' + ( 2480 / width) );
+      this.multiple = 2480 / width;
     }, 500);
   }
   takeBcg(imgSrc) {
@@ -187,9 +192,15 @@ export class CreateComponent implements OnInit {
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFrame = this.frames[imgSrc];
   }
+  generateHQualityPdf() {
+    document.getElementById('spinner').style.display = 'inline-block';
+    setTimeout( () => {
+      this.generatePdf();
+    }, 500);
+  }
   generatePdf() {
     if (this.landscape !== 'inline-block') {
-      const elementToPrint = document.getElementById('toPdf100Fix');
+      /*const elementToPrint = document.getElementById('toPdf100Fix');
       const width = document.getElementById('toPdf100Fix').offsetWidth;
       const height = document.getElementById('toPdf100Fix').offsetHeight;
       const pdf = new jsPDF('p', 'px', this.format, true);
@@ -199,9 +210,24 @@ export class CreateComponent implements OnInit {
       pdf.addHTML(elementToPrint, () => {
           pdf.save('wygenerowany dyplom.pdf');
           pdf.autoPrint();
-        });
+        });*/
+      const data =  document.getElementById('toPdf100Fix');
+      html2canvas(data).then(canvas => {
+        const imgWidth = 416;
+        const pageHeight = 590;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        const heightLeft = imgHeight;
+        const contentDataURL = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.deletePage(1);
+        pdf.addPage(imgWidth, imgHeight);
+        const position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.save('MYPdf.pdf');
+        document.getElementById('spinner').style.display = 'none';
+      });
     } else {
-      const elementToPrint = document.getElementById('toPdf100LandscapeFix');
+      /*const elementToPrint = document.getElementById('toPdf100LandscapeFix');
       const pdf = new jsPDF('l', 'pt', this.format, true);
       const width = document.getElementById('toPdf100LandscapeFix').offsetWidth;
       const height = document.getElementById('toPdf100LandscapeFix').offsetHeight;
@@ -209,24 +235,25 @@ export class CreateComponent implements OnInit {
       pdf.addPage(width, height);
       pdf.internal.scaleFactor = 1;
       pdf.addHTML(elementToPrint, () => {
-          pdf.save('wygenerowany dyplom.pdf');
+          pdf.save('TwojDyplom.pdf');
           pdf.autoPrint();
-        });
+        });*/
+      const data =  document.getElementById('toPdf100LandscapeFix');
+      html2canvas(data).then(canvas => {
+        const imgWidth = 590;
+        const pageHeight = 416;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        const heightLeft = imgHeight;
+        const contentDataURL = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.deletePage(1);
+        pdf.addPage(imgWidth, imgHeight);
+        const position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.save('TwojDyplom.pdf');
+        document.getElementById('spinner').style.display = 'none';
+      });
     }
-    const data =  document.getElementById('toPdf100Fix');
-    html2canvas(data).then(canvas => {
-      const imgWidth = 416;
-      const pageHeight = 590;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
-      const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      pdf.deletePage(1);
-      pdf.addPage(imgWidth, imgHeight);
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf');
-    });
   }
   createArrayToSend() {
     const date = new Date();
@@ -303,6 +330,7 @@ export class CreateComponent implements OnInit {
       this.shadowLarge[1] =  template.shadowLarge[1];
       this.shadowLarge[2] =  template.shadowLarge[2];
       this.shadowLarge[3] =  template.shadowLarge[3];
+      this.setShadowFix(template);
       this.fontStyle[0] =  template.fontStyle[0];
       this.fontStyle[1] =  template.fontStyle[1];
       this.fontStyle[2] =  template.fontStyle[2];
@@ -943,15 +971,33 @@ export class CreateComponent implements OnInit {
     if ( m === 0 ) {
       if ( this.shadowLarge[n] === '4px 4px 4px' ) {
         this.shadowLarge[n] = '0px 0px';
+        this.shadowLargeFix[n] = '0px 0px';
       } else {
         this.shadowLarge[n] = '4px 4px 4px';
+        this.shadowLargeFix[n] = '20px 20px 20px';
       }
     } else {
       if ( this.shadowSmall === '2px 2px 2px' ) {
         this.shadowSmall = '0px 0px';
+        this.shadowSmallFix = '0px 0px';
       } else {
         this.shadowSmall = '2px 2px 2px';
+        this.shadowSmallFix = '10px 10px 10px';
       }
+    }
+  }
+  setShadowFix(temp) {
+    for (let i = 0; i < temp.shadowLarge.length; i++ ){
+      if ( temp.shadowLarge[i] === '4px 4px 4px' ) {
+        this.shadowLargeFix[i] = '20px 20px 20px';
+      } else {
+        this.shadowLargeFix[i] = '0px 0px';
+      }
+    }
+    if ( temp.shadowSmall === '2px 2px 2px' ) {
+      this.shadowSmallFix = '10px 10px 10px';
+    } else {
+      this.shadowSmallFix = '0px 0px';
     }
   }
   setFontStyle(n) {
