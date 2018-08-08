@@ -390,9 +390,12 @@
               <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
               <br />
               <p class="fadeInTop" >Czcionka</p>
-              <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" style="width: 80%; margin-top: 10px" >
-                <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 0)">{{fntFamili}}</mat-option>
-              </mat-select> <br/><br />
+              <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
+                <mat-select placeholder="Wybierz czcionkę">
+                  <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 0)">{{fntFamili}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+               <br/><br />
               <button mat-raised-button color="accent" (click)="shadowOnOff(0, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[0]" (input)="shadowColor[0] = $event.target.value" >
@@ -470,9 +473,12 @@
               <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
               <br />
               <p class="fadeInTop">Czcionka</p>
-              <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" style="width: 80%; margin-top: 10px" >
-                <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 1)">{{fntFamili}}</mat-option>
-              </mat-select> <br/><br />
+              <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
+                <mat-select placeholder="Wybierz czcionkę">
+                  <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 1)">{{fntFamili}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br/><br />
               <button mat-raised-button color="accent" (click)="shadowOnOff(1, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[1]" (input)="shadowColor[1] = $event.target.value" >
@@ -546,9 +552,12 @@
               <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
               <br />
               <p class="fadeInTop">Czcionka</p>
-              <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" style="width: 80%; margin-top: 10px" >
-                <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 2)">{{fntFamili}}</mat-option>
-              </mat-select> <br/><br />
+              <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
+                <mat-select  placeholder="Wybierz czcionkę">
+                  <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 2)">{{fntFamili}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+               <br/><br />
               <button mat-raised-button color="accent" (click)="shadowOnOff(2, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[2]" (input)="shadowColor[2] = $event.target.value" >
@@ -631,9 +640,12 @@
               <input type="color" [value]="arrayFontColor[1]" (input)="arrayFontColor[1] = $event.target.value" id="card444">
               <br />
               <p class="fadeInTop">Czcionka</p>
-              <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" style="width: 80%; margin-top: 10px" >
-                <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 3)">{{fntFamili}}</mat-option>
-              </mat-select> <br/><br />
+              <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
+                <mat-select  placeholder="Wybierz czcionkę" >
+                  <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 3)">{{fntFamili}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br/><br />
               <button mat-raised-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[3]" (input)="shadowColor[3] = $event.target.value" >
@@ -703,9 +715,12 @@
               <input type="color" [value]="arrayFontColor[3]" (input)="arrayFontColor[3] = $event.target.value" id="card333" >
               <br />
               <p class="fadeInTop" >Czcionka</p>
-              <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" style="width: 80%; margin-top: 10px" >
-                <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 6)">{{fntFamili}}</mat-option>
-              </mat-select> <br/><br />
+              <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
+                <mat-select  placeholder="Wybierz czcionkę" >
+                  <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 6)">{{fntFamili}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+               <br/><br />
               <button mat-raised-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[4]" (input)="shadowColor[4] = $event.target.value" >
@@ -772,15 +787,21 @@
         <h1 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h1>
         <button (click)="addTxt()"  mat-raised-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
         <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
-          <mat-select class="fadeInLeft" placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt" style="width: 50%; margin-top: 15px" >
-            <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
-          </mat-select> <br/><br />
+          <mat-form-field class="fadeInLeft" style="width: 50%; margin-top: 15px" >
+            <mat-select placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt">
+              <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br/><br />
           <mat-form-field class="example-full-width fadeInRight">
             <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Treść pola"></textarea>
           </mat-form-field>
-          <mat-select class="fadeInLeft" placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" style="width: 50%; margin-top: 15px" >
-            <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)">{{fntFamili}}</mat-option>
-          </mat-select> <br/><br />
+          <mat-form-field class="fadeInLeft" style="width: 50%; margin-top: 15px" >
+            <mat-select placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" >
+              <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)">{{fntFamili}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+           <br/><br />
           <p class="fadeInLeft">Wielkość tekstu</p>
           <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
           <br />
@@ -807,6 +828,27 @@
       </div>
       <ng-template matStepLabel>Ostatni krok</ng-template>
       <div [style.display]="bcgDisplay[3]" style="text-align: center">
+
+
+        <h1 class="fadeInTop">Wybierz obrazek</h1>
+        <mat-form-field style="width: 50%" >
+          <mat-select placeholder="Wybierz kategorię obrazków" [(value)]="currentOption" >
+            <mat-option  value="0">Sport</mat-option>
+            <mat-option  value="1">Zdrowie</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="scroll fadeInTop" id="scrollableMAC">
+          <div *ngFor="let tmp of images[currentOption]; let i = index" class="bcg fadeInTop" id="bcgMAC{{i + 1}}" (click)="takeBcg(i)">
+            <img id="imgMAC{{i}}" src="{{tmp}}"  />
+          </div>
+        </div>
+        <!--<button class="button btnDirect fadeInTop" (click)="moveLeft()" disabled><</button> -->
+        <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect2" class="fadeInTop" mat-mini-fab (click)="moveLeft2()" disabled>
+          <mat-icon aria-label="prev" >arrow_back</mat-icon>
+        </button>
+        <button id="rightDirect2"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight2()">
+          <mat-icon aria-label="next">arrow_forward</mat-icon>
+        </button>
         <h1 class="fadeInTop">Dodaj swój obrazek</h1>
         <label for="file-upload" class="button fadeInLeft">
           <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
@@ -827,9 +869,12 @@
         <br />
         <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj obrót</button> <br/>
         <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()">Zresetuj obrazek</button> <br /><br />
-        <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" style="width: 50%" >
-          <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
-        </mat-select> <br/><br />
+        <mat-form-field style="width: 50%" >
+          <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" >
+            <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+         <br/><br />
         <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
         <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
       </div>
@@ -915,7 +960,7 @@
           [style.font-family]="txtFontFamili[i]"
           [style.color]="txtColor[i]">{{txt}}</p>
        <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
+       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
           <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">

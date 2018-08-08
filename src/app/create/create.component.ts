@@ -35,9 +35,12 @@ export class CreateComponent implements OnInit {
   coordinatesTemplate: any;
   frames: any;
   bool = 'block';
+  images = [];
+  currentOption = 0;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
+      this.images[0] = bcgTemp;
     });
     /*db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
       this.template = template;
@@ -50,6 +53,7 @@ export class CreateComponent implements OnInit {
     });*/
     db.list('/frame').valueChanges().subscribe(frames => {
       this.frames = frames;
+      this.images[1] = frames;
     });
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
@@ -136,7 +140,7 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      document.getElementById('scheme30').style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme30').style.border = '#eb008b solid 3px';
       document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
       this.scheme = 30;
       this.landscapeOff(2);
@@ -512,6 +516,46 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
+  moveLeft2() {
+    const btn =  document.getElementById('rightDirect2') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect2') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
+        document.getElementById('bcgMAC' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
+        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
+          document.getElementById('bcgMAC' + (this.arrayScroll[i])).style.display = 'none';
+        }
+        btn.disabled = false;
+      } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
+        btn2.disabled = true;
+      }
+      this.arrayScroll[i] = this.arrayScroll[i] - 3;
+    }
+    if ( this.arrayScroll[0] <= 1 ) {
+      btn2.disabled = true;
+    }
+  }
+  moveRight2() {
+    const btn =  document.getElementById('rightDirect2') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect2') as HTMLButtonElement;
+    for ( let i = 0; i < 3; i++ ) {
+      if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
+        btn2.disabled = false;
+        if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
+          document.getElementById('bcgMAC' + this.arrayScroll[i]).style.display = 'none';
+          if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
+            document.getElementById('bcgMAC' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
+          }
+        }
+      } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
+        btn.disabled = true;
+      }
+      this.arrayScroll[i] = this.arrayScroll[i] + 3;
+    }
+    if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
+      btn.disabled = true;
+    }
+  }
   moveLeftFrame() {
     const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
     const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
@@ -633,7 +677,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('right').style.width = n + '%';
       document.getElementById('left').style.width = n + '%';
       document.getElementById('scheme' + n).style.transform = 'scale(1,1)';
-      document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme' + n).style.border = '#eb008b solid 3px';
       document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
       document.getElementById('sign3').style.display = 'none';
@@ -655,7 +699,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('left').style.width = n + '%';
       document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      document.getElementById('scheme' + n).style.border = 'rgba(87, 255, 0, 0.7) solid 3px';
+      document.getElementById('scheme' + n).style.border = '#eb008b solid 3px';
       document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('sign3').style.display = 'inline-block';
       document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
