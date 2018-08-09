@@ -946,7 +946,6 @@ export class CreateComponent implements OnInit {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
     }
-    document.getElementById('spinner').style.display = 'none';
   }
   fileUpload(event: any) {
     this.add();
