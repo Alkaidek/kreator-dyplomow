@@ -848,7 +848,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC" [style.height]="( (images.length + 1) / 6) * 12 + 'vh'">
-              <div *ngFor="let tmp of images; let i = index" class="imgToSet fadeInTop" id="imgSport{{i + 1}}" (click)="takeBcg(i)">
+              <div *ngFor="let tmp of images; let i = index" class="imgToSet fadeInTop" id="imgSport{{i + 1}}" (click)="setImg(i)">
                 <img id="imgMAC{{i}}" src="{{tmp}}" style="background-color: white" />
               </div>
             </div>
@@ -863,8 +863,23 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC" [style.height]="( (images.length + 1) / 6) * 12 + 'vh'">
-              <div *ngFor="let tmp of images.reverse(); let i = index" class="imgToSet fadeInTop" id="imgZdrowie{{i + 1}}" (click)="takeBcg(i)">
+              <div *ngFor="let tmp of images; let i = index" class="imgToSet fadeInTop" id="imgZdrowie{{i + 1}}" (click)="setImg(i)">
                 <img id="imgZdrowie{{i}}" src="{{tmp}}" style="background-color: white" />
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Zwierzęta
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Zwierzęta
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC" [style.height]="( (images.length + 1) / 6) * 12 + 'vh'">
+              <div *ngFor="let tmp of images; let i = index" class="imgToSet fadeInTop" id="imgAnimal{{i + 1}}" (click)="setImg(i)">
+                <img id="imgAnimal{{i}}" src="{{tmp}}" style="background-color: white" />
               </div>
             </div>
           </mat-expansion-panel>

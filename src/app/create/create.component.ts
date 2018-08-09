@@ -39,23 +39,16 @@ export class CreateComponent implements OnInit {
   images = ['../../assets/img/sport/sport1.png',
     '../../assets/img/sport/sport2.png',
     '../../assets/img/sport/sport3.png',
-    '../../assets/img/sport/sport4.png',
-    '../../assets/img/sport/sport1.png',
-    '../../assets/img/sport/sport2.png',
-    '../../assets/img/sport/sport3.png',
-    '../../assets/img/sport/sport4.png',
-    '../../assets/img/sport/sport1.png',
-    '../../assets/img/sport/sport2.png',
-    '../../assets/img/sport/sport3.png',
-    '../../assets/img/sport/sport4.png',
-    '../../assets/img/sport/sport4.png',
-    '../../assets/img/sport/sport4.png',
-    '../../assets/img/sport/sport4.png',
     '../../assets/img/sport/sport4.png'];
   currentOption = 0;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private bottomSheet: MatBottomSheet) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
+    });
+    db.list('/images/sport').valueChanges().subscribe(sport => {
+      for (let i = 0; i < sport.length; i++) {
+        this.images.push('' + sport[i] );
+      }
     });
     /*db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
       this.template = template;
@@ -1085,6 +1078,12 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontVariant[n] = 'small-caps';
     }
+  }
+  setImg(n) {
+    this.add();
+    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+    rmvBtn.disabled = false;
+    this.userImgBase64.push(this.images[n]);
   }
 }
 
