@@ -40,8 +40,7 @@ export class CreateComponent implements OnInit {
     '../../assets/img/sport/sport2.png',
     '../../assets/img/sport/sport3.png',
     '../../assets/img/sport/sport4.png'];
-  currentOption = 0;
-  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private bottomSheet: MatBottomSheet) {
+  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
@@ -50,15 +49,6 @@ export class CreateComponent implements OnInit {
         this.images.push('' + sport[i] );
       }
     });
-    /*db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
-      this.template = template;
-      this.template.reverse();
-      console.log(this.template);
-      this.length = this.template.length;
-      if ( this.length === 0) {
-        this.bool = 'none';
-      }
-    });*/
     db.list('/frame').valueChanges().subscribe(frames => {
       this.frames = frames;
     });
@@ -133,6 +123,24 @@ export class CreateComponent implements OnInit {
   fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  scroll = (): void => {
+    console.log('scroll: ' + window.scrollY);
+    const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
+    if ( window.scrollY > 50 ) {
+      imgMAClogo.style.width = '5vh';
+      imgMAClogo.style.height = '5vh';
+      document.getElementById('logoBox').style.height = '5vh';
+      document.getElementById('logoBox').style.fontSize = '1vh';
+      document.getElementById('logoBox').style.paddingTop = '0.5vh';
+    }
+    if ( window.scrollY === 0 ) {
+      imgMAClogo.style.width = '11vh';
+      imgMAClogo.style.height = '11vh';
+      document.getElementById('logoBox').style.height = '11vh';
+      document.getElementById('logoBox').style.fontSize = '2vh';
+      document.getElementById('logoBox').style.paddingTop = '0vh';
+    }
+  }
   ngOnInit() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -155,6 +163,7 @@ export class CreateComponent implements OnInit {
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
+    window.addEventListener('scroll', this.scroll, true);
   }
   takeBcg(imgSrc) {
     console.log('ten sie podnosi: ' + imgSrc);
@@ -224,8 +233,8 @@ export class CreateComponent implements OnInit {
         });*/
       const data =  document.getElementById('toPdf100Fix');
       html2canvas(data).then(canvas => {
-        const imgWidth = 416;
-        const pageHeight = 590;
+        const imgWidth = 210;
+        const pageHeight = 297;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         const heightLeft = imgHeight;
         const contentDataURL = canvas.toDataURL('image/png');
@@ -251,8 +260,8 @@ export class CreateComponent implements OnInit {
         });*/
       const data =  document.getElementById('toPdf100LandscapeFix');
       html2canvas(data).then(canvas => {
-        const imgWidth = 590;
-        const pageHeight = 416;
+        const imgWidth = 297;
+        const pageHeight = 210;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         const heightLeft = imgHeight;
         const contentDataURL = canvas.toDataURL('image/png');
