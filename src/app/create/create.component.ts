@@ -36,17 +36,21 @@ export class CreateComponent implements OnInit {
   coordinatesTemplate: any;
   frames: any;
   bool = 'block';
-  images = ['../../assets/img/sport/sport1.png',
+  imagesSport = ['../../assets/img/sport/sport1.png',
     '../../assets/img/sport/sport2.png',
     '../../assets/img/sport/sport3.png',
     '../../assets/img/sport/sport4.png'];
+  imagesAnimal = ['../../assets/img/animal/1.png',
+    '../../assets/img/animal/2.png',
+    '../../assets/img/animal/3.png',
+    '../../assets/img/animal/4.png'];
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
     db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
-        this.images.push('' + sport[i] );
+        this.imagesSport.push('' + sport[i] );
       }
     });
     db.list('/frame').valueChanges().subscribe(frames => {
@@ -1088,11 +1092,15 @@ export class CreateComponent implements OnInit {
       this.fontVariant[n] = 'small-caps';
     }
   }
-  setImg(n) {
+  setImg(n, name) {
     this.add();
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
-    this.userImgBase64.push(this.images[n]);
+    if (name === 'Animal') {
+      this.userImgBase64.push(this.imagesAnimal[n]);
+    } else if (name === 'Sport') {
+      this.userImgBase64.push(this.imagesSport[n]);
+    }
   }
 }
 
