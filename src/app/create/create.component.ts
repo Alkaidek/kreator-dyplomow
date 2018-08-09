@@ -4,6 +4,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 @Component({
   selector:
@@ -35,12 +36,26 @@ export class CreateComponent implements OnInit {
   coordinatesTemplate: any;
   frames: any;
   bool = 'block';
-  images = [];
+  images = ['../../assets/img/sport/sport1.png',
+    '../../assets/img/sport/sport2.png',
+    '../../assets/img/sport/sport3.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport1.png',
+    '../../assets/img/sport/sport2.png',
+    '../../assets/img/sport/sport3.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport1.png',
+    '../../assets/img/sport/sport2.png',
+    '../../assets/img/sport/sport3.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport4.png',
+    '../../assets/img/sport/sport4.png'];
   currentOption = 0;
-  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
+  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private bottomSheet: MatBottomSheet) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
-      this.images[0] = bcgTemp;
     });
     /*db.list('/template/' + this.schoolNr + '' + this.name).valueChanges().subscribe(template => {
       this.template = template;
@@ -53,7 +68,6 @@ export class CreateComponent implements OnInit {
     });*/
     db.list('/frame').valueChanges().subscribe(frames => {
       this.frames = frames;
-      this.images[1] = frames;
     });
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
@@ -1073,3 +1087,4 @@ export class CreateComponent implements OnInit {
     }
   }
 }
+

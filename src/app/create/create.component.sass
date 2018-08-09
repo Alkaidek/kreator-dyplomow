@@ -39,16 +39,17 @@ $a4wl: ($a4h/0.7066508313539192)
   animation-timing-function: linear
   text-align: center
 
-.curtain img
-  width: 30%
-  animation-name: curtainImg
-  animation-duration: 3s
-  animation-delay: 0s
-  animation-iteration-count: 1
-  animation-timing-function: linear
-  animation-fill-mode: forwards
+.curtain
+  img
+    width: 30%
+    animation-name: curtainImg
+    animation-duration: 3s
+    animation-delay: 0s
+    animation-iteration-count: 1
+    animation-timing-function: linear
+    animation-fill-mode: forwards
 
-.curtain span
+.curtain span, .logoBox span
   font-size: 200%
   margin-left: 5px
   margin-right: 5px
@@ -56,10 +57,21 @@ $a4wl: ($a4h/0.7066508313539192)
   animation-name: curtainSpan
   animation-duration: 0.8s
   animation-iteration-count: 1
-  animation-delay: 0.5s
+  animation-delay: 4s
   animation-timing-function: linear
   transform: scale(0.9,0.9)
   animation-fill-mode: forwards
+
+.logoBox
+  span
+    font-size: 4vh
+    display: inline-block
+    animation-fill-mode: backwards
+    animation-iteration-count: infinite
+    animation-duration: 10s
+    animation-name: logoSpan
+    font-family: "Arial Black", sans-serif
+
 
 @keyframes curtainSpan
   0%
@@ -74,8 +86,23 @@ $a4wl: ($a4h/0.7066508313539192)
     opacity: 0
     color: white
 
+@keyframes logoSpan
+  0%
+    color: $MACblue
+  5%
+    color: $MACorange
+  15%
+    color: $MACblue
+  100%
+    color: $MACblue
+
+
 @for $i from 1 through 18
   .curtain span:nth-child(#{$i})
+    animation-delay: $i * 0.10s
+
+@for $i from 1 through 18
+  .logoBox span:nth-child(#{$i})
     animation-delay: $i * 0.10s
 
 @keyframes curtainImg
@@ -107,7 +134,7 @@ $a4wl: ($a4h/0.7066508313539192)
 #create
   width: 60%
   max-width: 60%
-  padding-top: 1%
+  padding-top: 11vh
   border-right: $MACblue 3px solid
 
 #view, #viewFix, #viewLandscape, #viewLandscapeFix
@@ -356,8 +383,29 @@ $a4wl: ($a4h/0.7066508313539192)
   cursor: zoom-in
   display: none
 
+.imgToSet
+  transform: scale(0.8,0.8)
+  margin-left: $newmargin
+  margin-right: $newmargin
+  margin-bottom: 10px
+  cursor: zoom-in
+  display: inline-block
+  box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
+  transition: 0.3s
+  border: black 1px solid
+  float: left
+  height: 10vh
+  width: 5vw
+
+.scrollableMAC
+  min-height: 300px
+
 .fnt
   transform: scale(0.8,0.8)
+
+.imgToSet:hover
+  transform: scale(0.9,0.9)
+  box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
 
 .bcg:hover, .fnt:hover, frm:hover
   transform: scale(0.99,0.99)

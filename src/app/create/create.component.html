@@ -235,12 +235,20 @@
 
       </div>
     </div>
+
+<div class="logoBox" style="height:11vh; z-index: 15; width:59%; background-color: white; position: fixed">
+  <img src="../../assets/img/logoMAC.png" style="width: 11vh; height: 11vh; z-index: 15; top: 15px; left: 7px" />
+
+  <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
+  <span style='margin-left: 20px'></span>
+  <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
+</div>
 <img src="../../assets/img/topLogo.png" style="min-width: 100%; height: 8px; position: fixed; z-index: 15" />
 <!--<img src="../../assets/img/kreator%20dyplomów%20logo.png" style="width: 55vh; height: 11vh; z-index: 15; top: 15px; left: 7px; position: fixed;" />-->
 <img id="podglad" src="../../assets/img/podglad2.png" />
 <div id="create" xmlns="" [style.display]="auth">
   <!--<img src="../../assets/img/logoMAC.png" style="width: 11vh; height: 11vh; z-index: 15; top: 15px; left: 7px" />-->
-  <img src="../../assets/img/kreator%20dyplomów%20logo.png" style="width: 55vh; height: 11vh; z-index: 15; top: 15px; left: 7px" />
+
   <div >
     <label (click)="stepper.reset()" for="fileInput" id="fileInputLabel" class="button fadeInLeft" matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">
       <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
@@ -828,27 +836,39 @@
       </div>
       <ng-template matStepLabel>Ostatni krok</ng-template>
       <div [style.display]="bcgDisplay[3]" style="text-align: center">
-
-
         <h1 class="fadeInTop">Wybierz obrazek</h1>
-        <mat-form-field style="width: 50%" >
-          <mat-select placeholder="Wybierz kategorię obrazków" [(value)]="currentOption" >
-            <mat-option  value="0">Sport</mat-option>
-            <mat-option  value="1">Zdrowie</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="scroll fadeInTop" id="scrollableMAC">
-          <div *ngFor="let tmp of images[currentOption]; let i = index" class="bcg fadeInTop" id="bcgMAC{{i + 1}}" (click)="takeBcg(i)">
-            <img id="imgMAC{{i}}" src="{{tmp}}"  />
-          </div>
-        </div>
-        <!--<button class="button btnDirect fadeInTop" (click)="moveLeft()" disabled><</button> -->
-        <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect2" class="fadeInTop" mat-mini-fab (click)="moveLeft2()" disabled>
-          <mat-icon aria-label="prev" >arrow_back</mat-icon>
-        </button>
-        <button id="rightDirect2"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight2()">
-          <mat-icon aria-label="next">arrow_forward</mat-icon>
-        </button>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Sport
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Sport
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC" [style.height]="( (images.length + 1) / 6) * 12 + 'vh'">
+              <div *ngFor="let tmp of images; let i = index" class="imgToSet fadeInTop" id="imgSport{{i + 1}}" (click)="takeBcg(i)">
+                <img id="imgMAC{{i}}" src="{{tmp}}" style="background-color: white" />
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Zdrowie
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Zdrowie
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC" [style.height]="( (images.length + 1) / 6) * 12 + 'vh'">
+              <div *ngFor="let tmp of images.reverse(); let i = index" class="imgToSet fadeInTop" id="imgZdrowie{{i + 1}}" (click)="takeBcg(i)">
+                <img id="imgZdrowie{{i}}" src="{{tmp}}" style="background-color: white" />
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
         <h1 class="fadeInTop">Dodaj swój obrazek</h1>
         <label for="file-upload" class="button fadeInLeft">
           <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
