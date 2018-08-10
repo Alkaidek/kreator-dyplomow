@@ -170,7 +170,7 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b';
+      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';
       document.getElementById('scheme30').style.opacity = '1';
       this.scheme = 30;
       this.landscapeOff(2);
@@ -659,7 +659,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme' + n).style.transform = 'scale(1,1)';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
       document.getElementById('sign3').style.display = 'none';
-      document.getElementById('scheme50').style.boxShadow = '0px 0px 40px #eb008b';
+      document.getElementById('scheme50').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';
       document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
       document.getElementById('scheme50').style.opacity = '1';
       document.getElementById('scheme30').style.opacity = '0.5';
@@ -680,7 +680,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('sign3').style.display = 'inline-block';
-      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b';
+      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';
       document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
       document.getElementById('scheme30').style.opacity = '1';
       document.getElementById('scheme50').style.opacity = '0.5';
