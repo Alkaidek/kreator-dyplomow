@@ -133,8 +133,17 @@ $a4wl: ($a4h/0.7066508313539192)
   width: 60%
   max-width: 60%
   padding-top: 11vh
-  border-right: $MACblue 3px solid
   min-height: 100vh
+
+.logoBox
+  height: 11vh
+  z-index: 15
+  width: 60%
+  background-color: white
+  position: fixed
+  font-size: 2vh
+  transition: all linear 0.3s
+  text-align: center
 
 #view, #viewFix, #viewLandscape, #viewLandscapeFix
   width: 50%
@@ -148,6 +157,7 @@ $a4wl: ($a4h/0.7066508313539192)
   background-color: white
   z-index: 10
   height: 100%
+  border-left: $MACblue 3px solid
 
 .rotateInDownRight
   -webkit-animation-name: rotateInDownRight
@@ -810,19 +820,6 @@ input[type="file"]
   padding: 6px 12px
   cursor: pointer
 
-.schemeImg
-  width: 10%
-  transform: scale(0.9, 0.9)
-  margin: 10px 10px 10px 10px
-  transition: .5s
-  opacity: 1
-  border: rgba(255,0,255,0.0) solid 3px
-  box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
-
-.schemeImg:hover
-  transform: scale(1,1)
-  box-shadow: 5px 5px rgba(0, 0, 15, 0.2)
-
 #selectOrientation
   width: 100%
   height: 100%
@@ -912,3 +909,24 @@ input[type="file"]
 s, p
   word-wrap: break-word
 
+.example-headers-align .mat-expansion-panel-header-title, .example-headers-align .mat-expansion-panel-header-description
+  flex-basis: 0
+
+
+.example-headers-align .mat-expansion-panel-header-description
+  justify-content: space-between
+  align-items: center
+
+.schemeImg
+  width: 10%
+  transform: scale(0.9, 0.9)
+  margin: 10px 10px 10px 10px
+  transition: .5s
+  box-shadow: 0px 0px rgba(0, 0, 15, 0.2)
+  border-radius: 5px
+  opacity: 0.5
+
+.schemeImg:hover
+  transform: scale(1,1)
+  box-shadow: 0px 0px 40px #eb008b
+  opacity: 1

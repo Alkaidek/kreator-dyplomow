@@ -4,7 +4,6 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 @Component({
   selector:
@@ -51,6 +50,11 @@ export class CreateComponent implements OnInit {
     db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
         this.imagesSport.push('' + sport[i] );
+      }
+    });
+    db.list('/images/animal').valueChanges().subscribe(animal => {
+      for (let i = 0; i < animal.length; i++) {
+        this.imagesAnimal.push('' + animal[i] );
       }
     });
     db.list('/frame').valueChanges().subscribe(frames => {
@@ -159,8 +163,8 @@ export class CreateComponent implements OnInit {
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      document.getElementById('scheme30').style.border = '#eb008b solid 3px';
-      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b';
+      document.getElementById('scheme30').style.opacity = '1';
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
@@ -251,17 +255,6 @@ export class CreateComponent implements OnInit {
         document.getElementById('spinner').style.display = 'none';
       });
     } else {
-      /*const elementToPrint = document.getElementById('toPdf100LandscapeFix');
-      const pdf = new jsPDF('l', 'pt', this.format, true);
-      const width = document.getElementById('toPdf100LandscapeFix').offsetWidth;
-      const height = document.getElementById('toPdf100LandscapeFix').offsetHeight;
-      pdf.deletePage(1);
-      pdf.addPage(width, height);
-      pdf.internal.scaleFactor = 1;
-      pdf.addHTML(elementToPrint, () => {
-          pdf.save('TwojDyplom.pdf');
-          pdf.autoPrint();
-        });*/
       const data =  document.getElementById('toPdf100LandscapeFix');
       html2canvas(data).then(canvas => {
         const imgWidth = 297;
@@ -697,12 +690,12 @@ export class CreateComponent implements OnInit {
       document.getElementById('right').style.width = n + '%';
       document.getElementById('left').style.width = n + '%';
       document.getElementById('scheme' + n).style.transform = 'scale(1,1)';
-      document.getElementById('scheme' + n).style.border = '#eb008b solid 3px';
-      document.getElementById('scheme30').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
       document.getElementById('sign3').style.display = 'none';
-      document.getElementById('scheme50').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme50').style.boxShadow = '0px 0px 40px #eb008b';
       document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme50').style.opacity = '1';
+      document.getElementById('scheme30').style.opacity = '0.5';
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
@@ -719,11 +712,11 @@ export class CreateComponent implements OnInit {
       document.getElementById('left').style.width = n + '%';
       document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      document.getElementById('scheme' + n).style.border = '#eb008b solid 3px';
-      document.getElementById('scheme50').style.border = 'rgba(255,0,255,0.0) solid 3px';
       document.getElementById('sign3').style.display = 'inline-block';
-      document.getElementById('scheme30').style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b';
       document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('scheme30').style.opacity = '1';
+      document.getElementById('scheme50').style.opacity = '0.5';
       this.scheme = 30;
     }
   }
