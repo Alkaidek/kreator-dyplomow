@@ -935,8 +935,22 @@ s, p
   opacity: 0.5
 
 #fbLogo:hover, #ytLogo:hover
-  opacity: 1
-  transform: rotate(360deg)
+  -webkit-animation: rotate 1s 1
+  -moz-animation: rotate 1s 1
+  -o-animation: rotate 1s 1
+  animation: rotate 1s 1
+
+@keyframes rotate
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(390deg)
+  75%
+    transform: rotate(340deg)
+  100%
+    transform: rotate(360deg)
+    opacity: 1
+
 
 #mobile
   z-index: 26
