@@ -132,12 +132,15 @@ export class CreateComponent implements OnInit {
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   scroll = (): void => {
-    console.log('scroll: ' + window.scrollY);
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
       imgMAClogo.style.width = '5vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
+      document.getElementById('fbLogo').style.height = '3vh';
+      document.getElementById('ytLogo').style.height = '3vh';
+      document.getElementById('fbLogo').style.width = '3vh';
+      document.getElementById('ytLogo').style.width = '3vh';
       document.getElementById('logoBox').style.fontSize = '1vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
     }
@@ -147,6 +150,10 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '11vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
+      document.getElementById('fbLogo').style.height = '4.5vh';
+      document.getElementById('ytLogo').style.height = '4.5vh';
+      document.getElementById('fbLogo').style.width = '4.5vh';
+      document.getElementById('ytLogo').style.width = '4.5vh';
     }
   }
   ngOnInit() {
@@ -524,46 +531,6 @@ export class CreateComponent implements OnInit {
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
       console.log('hej to ja: ' + this.arrayScroll[i]);
-    }
-    if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
-      btn.disabled = true;
-    }
-  }
-  moveLeft2() {
-    const btn =  document.getElementById('rightDirect2') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect2') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
-        document.getElementById('bcgMAC' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
-        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
-          document.getElementById('bcgMAC' + (this.arrayScroll[i])).style.display = 'none';
-        }
-        btn.disabled = false;
-      } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
-        btn2.disabled = true;
-      }
-      this.arrayScroll[i] = this.arrayScroll[i] - 3;
-    }
-    if ( this.arrayScroll[0] <= 1 ) {
-      btn2.disabled = true;
-    }
-  }
-  moveRight2() {
-    const btn =  document.getElementById('rightDirect2') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect2') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
-        btn2.disabled = false;
-        if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
-          document.getElementById('bcgMAC' + this.arrayScroll[i]).style.display = 'none';
-          if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
-            document.getElementById('bcgMAC' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
-          }
-        }
-      } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
-        btn.disabled = true;
-      }
-      this.arrayScroll[i] = this.arrayScroll[i] + 3;
     }
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
       btn.disabled = true;
