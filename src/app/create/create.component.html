@@ -250,8 +250,9 @@
     </div>
 
 <div id="logoBox" class="logoBox" style="">
-  <img id="MAClogo" src="../../assets/img/macl.png" style="width: 11vh; height: 11vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left" />
-
+  <a href="https://www.mac.pl/">
+    <img id="MAClogo" src="../../assets/img/macl.png" style="width: 11vh; height: 11vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left" />
+  </a>
   <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
   <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
@@ -273,7 +274,7 @@
       <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
       Wczytaj szablon
     </label>
-    <input class="fadeInRight" id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
+    <input class="fadeInRight button" id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
   </div>
   <button id="btnGeneratePdf" class="button" (click)="generateHQualityPdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" class="button" (click)="createArrayToSend()"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
