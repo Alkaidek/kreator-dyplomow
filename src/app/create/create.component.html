@@ -912,15 +912,15 @@
         <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
         <br />
         <p><b class="fadeInRight">Obrót obrazka</b></p>
-        <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45"> <br />
+        <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         <p><b class="fadeInRight">Szerokość obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgLeft[currImg]}}" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" ><br />
+        <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" ><br />
         <p><b class="fadeInRight">Wysokość obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
+        <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
         <p><b class="fadeInRight">Lewy margines obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
+        <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
         <p><b class="fadeInRight">Górny margines obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+        <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
         <br />
         <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj obrót</button> <br/>
         <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()">Zresetuj obrazek</button> <br /><br />

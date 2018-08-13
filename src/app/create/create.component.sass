@@ -18,6 +18,7 @@ $gradientColor2: #d399ad
 $a4h: 3508px
 $a4w: 2480px
 $a4wl: ($a4h/0.7066508313539192)
+$SliderPX: 13px
 
 #create, #view, #viewLandscape
   display: inline-block
@@ -608,7 +609,7 @@ s
 
 .slider, .slider50, input[type=color], .sliderInput
   -webkit-appearance: none
-  height: 25px
+  height: 2px
   background: #d3d3d3
   outline: none
   opacity: 0.7
@@ -627,6 +628,7 @@ s
 
 input[type=color]
   border: none
+  height: 25px
   animation-name: fadeInLeft
   animation-duration: .5s
   animation-iteration-count: 1
@@ -665,11 +667,11 @@ input[type=color]
 .slider::-webkit-slider-thumb, .slider50::-webkit-slider-thumb, .sliderInput::-webkit-slider-thumb
   -webkit-appearance: none
   appearance: none
-  width: 25px
-  height: 25px
-  background: $MACblue
+  width: $SliderPX
+  height: $SliderPX
+  background: $MACpink
   cursor: pointer
-  border-radius: 0px
+  border-radius: 50%
   transition: .3s
   -webkit-transition: .3s
   transition-duration: .3s
@@ -683,11 +685,11 @@ input[type=color]
 .slider::-moz-range-thumb, .slider50::-moz-range-thumb, .sliderInput::-moz-range-thumb
   appearance: none
   -moz-appearance: none
-  width: 25px
-  height: 25px
-  background: $MACblue
+  width: $SliderPX
+  height: $SliderPX
+  background: $MACpink
   cursor: pointer
-  border-radius: 0px
+  border-radius: 50%
   transition: .3s
   -webkit-transition: .3s
   transition-duration: .3s
