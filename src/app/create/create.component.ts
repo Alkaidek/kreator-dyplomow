@@ -147,7 +147,7 @@ export class CreateComponent implements OnInit {
     if ( window.scrollY === 0 ) {
       imgMAClogo.style.width = '11vh';
       imgMAClogo.style.height = '11vh';
-      document.getElementById('logoBox').style.height = '11vh';
+      document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
       document.getElementById('fbLogo').style.height = '4.5vh';
@@ -183,15 +183,13 @@ export class CreateComponent implements OnInit {
   takeBcg(imgSrc) {
     console.log('ten sie podnosi: ' + imgSrc);
     console.log('a ten opada: ' + this.lastValue);
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
+    document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
     this.lastValue = imgSrc;
-    document.getElementById('bcg' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
-    document.getElementById('bcg' + (imgSrc + 1)).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
-    document.getElementById('bcg' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
+    document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
+    document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc];
@@ -215,17 +213,17 @@ export class CreateComponent implements OnInit {
     }
   }
   takeFrame(imgSrc) {
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
     this.lastValueFrame = imgSrc;
-    document.getElementById('frmBox' + (imgSrc + 1)).style.transform = 'scale(0.99,0.99)';
-    document.getElementById('frmBox' + (imgSrc + 1) ).style.webkitTransform = 'scale(0.99,0.99)';
-    document.getElementById('frmBox' + (imgSrc + 1) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('frmBox' + (imgSrc + 1)).style.border = '#3aaaff 3px solid';
+    document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
     this.base64TmpFrame = imgSrc;
-    this.imgSrc = '' + (imgSrc + 1);
+    this.imgSrc = '' + (imgSrc );
     this.imgSrcFrame = this.frames[imgSrc];
     this.imgMAClogoFrame = '../../assets/img/0.png';
   }
@@ -936,18 +934,16 @@ export class CreateComponent implements OnInit {
     this.imgSrc = '../../assets/img/0.png';
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('bcg' + (this.lastValue + 1) ).style.border = 'black 1px solid';
+    document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
   }
   resetFrame() {
     this.imgSrcFrame = '../../assets/img/0.png';
     this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.border = 'black 1px solid';
-    document.getElementById('frmBox' + (this.lastValueFrame + 1) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
   setFormat(n) {
     this.format = n;

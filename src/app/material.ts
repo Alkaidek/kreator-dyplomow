@@ -12,13 +12,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   imports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSnackBarModule,
     MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule, MatBadgeModule, MatExpansionModule,
-    MatDialogModule, MatProgressSpinnerModule, MatBottomSheetModule],
+    MatDialogModule, MatProgressSpinnerModule, MatBottomSheetModule, MatGridListModule],
   exports: [MatButtonModule, MatCheckboxModule, MatIconModule, MatInputModule, MatSnackBarModule,
     MatSelectModule, MatSliderModule, MatTooltipModule, MatStepperModule, MatBadgeModule, MatExpansionModule,
-    MatDialogModule, MatProgressSpinnerModule, MatBottomSheetModule],
+    MatDialogModule, MatProgressSpinnerModule, MatBottomSheetModule, MatGridListModule],
 })
 export class MaterialModule { }

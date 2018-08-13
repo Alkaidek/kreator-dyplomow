@@ -278,7 +278,7 @@
   </div>
   <button id="btnGeneratePdf" class="button" (click)="generateHQualityPdf()">Generuj Dyplom!</button>
   <button id="btnAddTemplate" class="button" (click)="createArrayToSend()"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
-  <mat-horizontal-stepper linear="false" #stepper>
+  <mat-horizontal-stepper linear="false" #stepper class="stepper">
     <mat-step>
       <div>
         <button matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary" disabled style="opacity: 0">
@@ -288,24 +288,39 @@
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>
-      <ng-template matStepLabel>Pierwszy krok</ng-template>
+      <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
       <div class="orientationBox" [style.display]="bcgDisplay[0]">
-        <h1 class="fadeInTop">
-          Wybierz orientację dyplomu
-        </h1>
-        <div matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="left" class="orientationImgBox fadeInTop">
-          <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(1)"/>
+        <div class="orientationContent">
+          <div class="textBox">
+            <h3 class="fadeInTop">
+              Wybierz orientację dyplomu
+            </h3>
+          </div>
+          <div class="box33">
+            <div matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="left" class="orientationImgBox fadeInTop borderRight">
+            <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(1)"/>
+            </div>
+          </div>
+          <div class="box33">
+            <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
+              <img id="imgO2" matTooltip="Naciśnij aby wybrać orientację pionową" matTooltipPosition="right" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(2)"/>
+            </div>
+          </div>
         </div>
-        <div class="orientationImgBox">
-          <img id="imgO2" matTooltip="Naciśnij aby wybrać orientację pionową" matTooltipPosition="right" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal.png" (click)="landscapeOff(2)"/>
-        </div>
-        <br/>
-        <div>
-          <h1  style="margin-top: 10px" class="fadeInTop">Wybierz schemat</h1>
-          <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
-          <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+        <br />
+        <div class="orientationContent">
+          <div class="textBox">
+            <h3  style="margin-top: 10px" class="fadeInTop">Wybierz schemat</h3>
+          </div>
+          <div class="box33">
+            <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left" class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
+          </div>
+          <div class="box33">
+            <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right" class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+          </div>
         </div>
 
+        <br/>
         <!--
         <div>
           <h1  style="margin-top: 10px" class="fadeInTop">Wybierz Format</h1>
@@ -313,13 +328,6 @@
           <button mat-fab color="accent" class="size" style="margin-left: 10px" id="sizeA5" (click)="setFormat('A5')">A5</button>
         </div> -->
       </div>
-        <!--<mat-form-field style="width: 50%">
-          <mat-select placeholder="Wybierz swój szablon" [(value)]="selected">
-            <mat-option *ngFor="let tmp of template; let i = index" value="{{i}}">{{tmp.nameOfTemplate}}</mat-option>
-          </mat-select>
-        </mat-form-field>-->
-        <br/>
-
     </mat-step>
     <mat-step>
       <div>
@@ -332,25 +340,34 @@
       </div>
       <ng-template matStepLabel>Drugi krok</ng-template>
       <div id="bcgContainter" [style.display]="bcgDisplay[1]">
-        <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
+        <div class="textBox">
+          <h3 class="fadeInTop">Wybierz tło dyplomu</h3>
+        </div>
+        <div class="directBtn" style="padding-left: 1vh">
+          <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect" class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
+            <mat-icon aria-label="prev" >arrow_back</mat-icon>
+          </button>
+        </div>
         <div class="scroll fadeInTop" id="scrollable">
-          <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg fadeInTop" id="bcg{{i + 1}}" (click)="takeBcg(i)">
+          <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg boxReal33 fadeInTop" id="bcg{{i + 1}}" (click)="takeBcg(i)">
             <img id="img{{i}}" src="{{tmp}}"  />
           </div>
         </div>
-        <!--<button class="button btnDirect fadeInTop" (click)="moveLeft()" disabled><</button> -->
-        <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect" class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
-          <mat-icon aria-label="prev" >arrow_back</mat-icon>
-        </button>
-        <button id="rightDirect"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight()">
-          <mat-icon aria-label="next">arrow_forward</mat-icon>
-        </button>
-        <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
+        <div class="directBtn" style="padding-right: 1vh">
+          <button id="rightDirect"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight()">
+            <mat-icon aria-label="next">arrow_forward</mat-icon>
+          </button>
+        </div>
         <br />
-        <button mat-raised-button color="primary" class="fadeInRight" (click)="resetBcg()" style="margin-bottom: 15px; margin-top: 15px">Usuń tło</button>
-        <br/>
-        <h1 style="margin-top: 10px" class="fadeInTop">Kolor tła</h1>
-        <input type="color" matTooltip="Naciśnij i wybierz kolor tła" matTooltipPosition="below" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 30%">
+        <div style="width: 100%;  height: 100px; padding-top: 70px">
+          <button mat-raised-button color="primary" class="fadeInRight" (click)="resetBcg()" style="margin-bottom: 15px; margin-top: 15px;">Usuń tło</button>
+        </div>
+      </div>
+      <div class="textBox" style="width: 33.3333333%; display: block; text-align: left">
+        <h3 class="fadeInTop">Kolor tła</h3>
+      </div>
+      <div class="box33block" style="height: 64px; padding-top: 16px; text-align: center">
+        <input type="color" matTooltip="Naciśnij i wybierz kolor tła" matTooltipPosition="below" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 60%">
       </div>
     </mat-step>
     <mat-step>
@@ -364,19 +381,26 @@
       </div>
       <ng-template matStepLabel>Trzeci krok</ng-template>
       <div id="frameContainter" [style.display]="bcgDisplay[1]">
-        <h1 class="fadeInTop">Wybierz tło dyplomu</h1>
+
+        <div class="textBox">
+          <h3 class="fadeInTop">Wybierz ramkę dyplomu</h3>
+        </div>
+        <div class="directBtn" style="padding-left: 1vh">
+          <button matTooltip="Poprzednie ramki" matTooltipPosition="left" id="leftDirectFrame" class="fadeInTop" mat-mini-fab (click)="moveLeftFrame()" disabled>
+            <mat-icon aria-label="prev" >arrow_back</mat-icon>
+          </button>
+        </div>
         <div class="scroll fadeInTop">
-          <div *ngFor="let frame of frames; let i = index" class="bcg fadeInTop" id="frmBox{{i + 1}}" (click)="takeFrame(i)">
+          <div *ngFor="let frame of frames; let i = index" class="bcg boxReal33 fadeInTop" id="frmBox{{i + 1}}" (click)="takeFrame(i)">
             <img id="frm{{i}}" src="{{frame}}"  />
           </div>
         </div>
-        <!--<button class="button btnDirect fadeInTop" (click)="moveLeft()" disabled><</button> -->
-        <button matTooltip="Poprzednie ramki" matTooltipPosition="left" id="leftDirectFrame" class="fadeInTop" mat-mini-fab (click)="moveLeftFrame()" disabled>
-          <mat-icon aria-label="prev" >arrow_back</mat-icon>
-        </button>
-        <button id="rightDirectFrame"  matTooltip="Następne ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
-          <mat-icon aria-label="next">arrow_forward</mat-icon>
-        </button><br/>
+        <div class="directBtn" style="padding-right: 1vh">
+          <button id="rightDirectFrame"  matTooltip="Następne ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
+            <mat-icon aria-label="next">arrow_forward</mat-icon>
+          </button>
+        </div>
+        <br/>
         <button mat-raised-button color="primary" class="fadeInRight" (click)="resetFrame()" style="margin-bottom: 15px; margin-top: 15px">Usuń ramkę</button>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
       </div>
@@ -392,7 +416,9 @@
       </div>
       <ng-template matStepLabel>Czwarty krok</ng-template>
       <div id="txtContainter">
-      <h1 class="fadeInTop">Wpisz dane</h1>
+        <div class="textBox">
+          <h3 class="fadeInTop">Wpisz dane</h3>
+        </div>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -812,23 +838,45 @@
       </div>
       <ng-template matStepLabel>Piąty krok</ng-template>
       <div class="userTxtFields">
-        <h1 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h1>
-        <button (click)="addTxt()"  mat-raised-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
-        <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
-          <mat-form-field class="fadeInLeft" style="width: 50%; margin-top: 15px" >
-            <mat-select placeholder="Wybierz aktualnie edytowany tekst" [(value)]="currentTxt">
+        <div class="textBox">
+        <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button (click)="addTxt()"  mat-raised-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
+        </div>
+        <div class="box33border" style="height: 10vh;">
+          <mat-form-field class="fadeInLeft" style="width: 50%;" >
+            <mat-select placeholder="Edytowane pole" [(value)]="currentTxt">
               <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <br/><br />
-          <mat-form-field class="example-full-width fadeInRight">
-            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Treść pola"></textarea>
-          </mat-form-field>
-          <mat-form-field class="fadeInLeft" style="width: 50%; margin-top: 15px" >
+        </div>
+        <div class="box33border" style="height: 10vh;">
+          <mat-form-field class="fadeInLeft" style="width: 50%;" >
             <mat-select placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" >
               <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)">{{fntFamili}}</mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+        <div class="box100border" style="height: 10vh;">
+          <mat-form-field class="example-full-width fadeInRight">
+            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Treść pola"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="box33border" style="height: 10vh;">
+
+        </div>
+        <div class="box33border" style="height: 10vh;">
+
+        </div>
+        <div class="box33border" style="height: 10vh;">
+
+        </div>
+        <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
+
+          <br/><br />
+
+
            <br/><br />
           <p class="fadeInLeft">Wielkość tekstu</p>
           <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
