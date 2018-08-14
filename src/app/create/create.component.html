@@ -314,7 +314,7 @@
         <br />
         <div class="orientationContent">
           <div class="textBox">
-            <h3  style="margin-top: 10px" class="fadeInTop">Wybierz schemat</h3>
+            <h3 class="fadeInTop">Wybierz schemat</h3>
           </div>
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
           </div>
@@ -351,7 +351,7 @@
         <div class="textBox">
           <h3 class="fadeInTop">Wybierz tło dyplomu</h3>
         </div>
-        <div class="directBtn" style="padding-left: 1vh">
+        <div class="directBtn">
           <button matTooltip="Poprzednie tła" matTooltipPosition="left" id="leftDirect" class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
             <mat-icon aria-label="prev" >arrow_back</mat-icon>
           </button>
@@ -361,7 +361,7 @@
             <img id="img{{i}}" src="{{tmp}}"  />
           </div>
         </div>
-        <div class="directBtn" style="padding-right: 1vh">
+        <div class="directBtn">
           <button id="rightDirect"  matTooltip="Następne tła" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRight()">
             <mat-icon aria-label="next">arrow_forward</mat-icon>
           </button>
@@ -393,7 +393,7 @@
         <div class="textBox">
           <h3 class="fadeInTop">Wybierz ramkę dyplomu</h3>
         </div>
-        <div class="directBtn" style="padding-left: 1vh">
+        <div class="directBtn">
           <button matTooltip="Poprzednie ramki" matTooltipPosition="left" id="leftDirectFrame" class="fadeInTop" mat-mini-fab (click)="moveLeftFrame()" disabled>
             <mat-icon aria-label="prev" >arrow_back</mat-icon>
           </button>
@@ -403,7 +403,7 @@
             <img id="frm{{i}}" src="{{frame}}"  />
           </div>
         </div>
-        <div class="directBtn" style="padding-right: 1vh">
+        <div class="directBtn">
           <button id="rightDirectFrame"  matTooltip="Następne ramki" matTooltipPosition="right" class="fadeInTop"  mat-mini-fab (click)="moveRightFrame()">
             <mat-icon aria-label="next">arrow_forward</mat-icon>
           </button>
