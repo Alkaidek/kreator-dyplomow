@@ -1,4 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css"
+@import '~@angular/material/theming'
+$custom-typography: mat-typography-config($font-family: 'Segoe')
+@include mat-core($custom-typography)
 
 $margin: 9.16666666667%
 $newmargin: 4%
@@ -1012,6 +1015,7 @@ mat-horizontal-stepper
   float: left
   height: 17vh
   border: 3px solid $backgroundColor
+  padding-top: 5px
 
 .box33border
   width: 33.333333%
@@ -1020,6 +1024,7 @@ mat-horizontal-stepper
   float: left
   height: 17vh
   border: 3px solid $backgroundColor
+  padding-top: 5px
 
 .box100border
   width: 100%
@@ -1028,7 +1033,7 @@ mat-horizontal-stepper
   float: left
   height: 17vh
   border: 3px solid $backgroundColor
-
+  padding-top: 5px
 
 h3
   text-align: left

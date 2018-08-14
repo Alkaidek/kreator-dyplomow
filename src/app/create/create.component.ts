@@ -68,6 +68,7 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+  hidebox = true;
   actualTxt = '';
   format = 'a4';
   landscape = 'inline-block';
@@ -145,6 +146,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
       document.getElementById('ytLogo').style.width = '3vh';
+      document.getElementById('fbLogo').style.marginTop = '10px';
+      document.getElementById('ytLogo').style.marginTop = '10px';
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
     }
@@ -154,6 +157,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
+      document.getElementById('fbLogo').style.marginTop = '16px';
+      document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
       document.getElementById('ytLogo').style.height = '4.5vh';
       document.getElementById('fbLogo').style.width = '4.5vh';
@@ -993,6 +998,7 @@ export class CreateComponent implements OnInit {
   addTxt() {
     if ( this.currentTxt === -1 ) {
       document.getElementById('hiddenBox').style.display = 'inline-block';
+      this.hidebox = false;
     }
     this.actualTxt = '';
     this.currentTxt = this.currentTxt + 1;
@@ -1007,6 +1013,7 @@ export class CreateComponent implements OnInit {
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
       document.getElementById('hiddenBox').style.display = 'inline-block';
+      this.hidebox = false;
     }
     this.actualTxt = actualTxt;
     this.currentTxt = this.currentTxt + 1;
