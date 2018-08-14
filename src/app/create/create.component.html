@@ -960,18 +960,12 @@
         <div class="textBox" style="margin-top: 3vh">
           <h3 class="fadeInTop">Dodaj swój obrazek</h3>
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh;">
           <label for="file-upload" class="button fadeInLeft" style="width: 60%">
             <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
             Dodaj Obrazek
           </label>
           <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
-        </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
-        </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
         </div>
         <div class="box33border" style="height: 10vh;  width: 66.6666666%">
           <mat-form-field style="width: 50%" >
@@ -979,9 +973,6 @@
               <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh;">
-          <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
         </div>
         <div class="box33" style="height: 10vh;">
           <p style="float: left;   padding-left: 5px"><b class="fadeInRight">Szerokość obrazka</b></p>
@@ -1003,7 +994,15 @@
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
           <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
-
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
+        </div>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
