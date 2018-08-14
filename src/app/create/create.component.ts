@@ -75,7 +75,7 @@ export class CreateComponent implements OnInit {
   currentStep = 0;
   arrayScroll = [1, 2, 3];
   arrayScrollFrame = [1, 2, 3];
-  bcgColor = '#c2f2cf';
+  bcgColor = '#ffffff';
   lastValue = 1;
   lastValueFrame = 1;
   base64Tmp = '';
@@ -472,7 +472,7 @@ export class CreateComponent implements OnInit {
     this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
-    this.bcgColor = '#c2f2cf';
+    this.bcgColor = '#ffffff';
     this.landscape = '';
     this.landscapeOff(2);
     this.setScheme(30);
