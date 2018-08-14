@@ -43,6 +43,8 @@ export class CreateComponent implements OnInit {
     '../../assets/img/animal/2.png',
     '../../assets/img/animal/3.png',
     '../../assets/img/animal/4.png'];
+  sportHeight = 11;
+  animalHeight = 11;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
@@ -50,11 +52,13 @@ export class CreateComponent implements OnInit {
     db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
         this.imagesSport.push('' + sport[i] );
+        this.setHeightSport(this.imagesSport);
       }
     });
     db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
+        this.setHeightAnimal(this.imagesAnimal);
       }
     });
     db.list('/frame').valueChanges().subscribe(frames => {
@@ -134,19 +138,19 @@ export class CreateComponent implements OnInit {
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
-      imgMAClogo.style.width = '5vh';
+      imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
       document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
       document.getElementById('ytLogo').style.width = '3vh';
-      document.getElementById('logoBox').style.fontSize = '1vh';
+      document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
     }
     if ( window.scrollY === 0 ) {
       imgMAClogo.style.width = '11vh';
-      imgMAClogo.style.height = '11vh';
+      imgMAClogo.style.height = '8vh';
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
@@ -313,6 +317,38 @@ export class CreateComponent implements OnInit {
     if (element === 4) {
       this.takeFontForEle(font, 5);
       this.takeFontForEle(font, 6);
+    }
+  }
+  setHeightSport(array) {
+    const divide = array.length / 5;
+    console.log('divade: ' + divide);
+    if ( divide >= 0 && divide < 1) {
+      this.sportHeight  = 11;
+      console.log('jestem 1');
+    }
+    if ( divide >= 1 && divide < 2) {
+      this.sportHeight  = 22;
+      console.log('jestem 2');
+    }
+    if ( divide >= 2 && divide < 3) {
+      this.sportHeight  = 33;
+      console.log('jestem 2');
+    }
+  }
+  setHeightAnimal(array) {
+    const divide = array.length / 5;
+    console.log('divade: ' + divide);
+    if ( divide >= 0 && divide < 1) {
+      this.animalHeight  = 11;
+      console.log('jestem 1');
+    }
+    if ( divide >= 1 && divide < 2) {
+      this.animalHeight  = 22;
+      console.log('jestem 2');
+    }
+    if ( divide >= 2 && divide < 3) {
+      this.animalHeight  = 33;
+      console.log('jestem 2');
     }
   }
   setUserData(template) {

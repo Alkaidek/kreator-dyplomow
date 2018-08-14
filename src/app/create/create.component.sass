@@ -8,7 +8,7 @@ $font3: 'Allura'
 $blue: #3aaaff
 $baseCol: #007bff
 $MACorange: #ff8913
-$MACblue: #00489a
+$MACblue: #25408f
 $MACgreen: #00a650
 $MACred: #e6323d
 $MAClightblue: #00adef
@@ -90,13 +90,13 @@ $backgroundColor: #f7f4f8
 
 @keyframes logoSpan
   0%
-    color: $MACblue
+    color: white
   5%
     color: $MACorange
   15%
-    color: $MACblue
+    color: white
   100%
-    color: $MACblue
+    color: white
 
 
 @for $i from 1 through 18
@@ -144,7 +144,7 @@ $backgroundColor: #f7f4f8
   height: 8vh
   z-index: 15
   width: 60%
-  background-color: white
+  background-color: $MACblue
   position: fixed
   font-size: 2vh
   transition: all linear 0.3s
@@ -501,6 +501,7 @@ img
 
 #bcgContainter, #txtContainter, #fontContainter, #detailsContainer, #bcgContainter2, #frameContainter
   text-align: center
+  margin-top: 3vh
 
 #bcgContainter, #frameContainter
   margin-top: 3vh
@@ -907,6 +908,7 @@ input[type="file"]
   text-align: center
   min-width: 100%
   width: 100%
+  padding-top: 3vh
 
 s, p
   word-wrap: break-word

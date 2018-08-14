@@ -251,7 +251,7 @@
 
 <div id="logoBox" class="logoBox" style="">
   <a href="https://www.mac.pl/">
-    <img id="MAClogo" src="../../assets/img/macl.png" style="width: 11vh; height: 11vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left" />
+    <img id="MAClogo" src="../../assets/img/macl.png" style="width: 11vh; height: 8vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left" />
   </a>
   <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
@@ -289,7 +289,7 @@
         </button>
       </div>
       <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
-      <div class="orientationBox" [style.display]="bcgDisplay[0]">
+      <div class="orientationBox" [style.display]="bcgDisplay[0]" style="margin-top: 3vh">
         <div class="orientationContent">
           <div class="textBox">
             <h3 class="fadeInTop">
@@ -839,7 +839,7 @@
       <ng-template matStepLabel>Piąty krok</ng-template>
       <div class="userTxtFields">
         <div class="textBox">
-        <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
+          <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
           <button (click)="addTxt()"  mat-raised-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
@@ -863,36 +863,27 @@
             <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Treść pola"></textarea>
           </mat-form-field>
         </div>
-        <div class="box33border" style="height: 10vh;">
-
-        </div>
-        <div class="box33border" style="height: 10vh;">
-
-        </div>
-        <div class="box33border" style="height: 10vh;">
-
-        </div>
-        <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
-
-          <br/><br />
-
-
-           <br/><br />
+        <div class="box33" style="height: 10vh;">
           <p class="fadeInLeft">Wielkość tekstu</p>
           <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
-          <br />
+        </div>
+        <div class="box33" style="height: 10vh;">
           <p class="fadeInLeft" >Kolor czcionki</p>
           <input type="color" class="fadeInRight" [value]="txtColor[currentTxt]" (input)="txtColor[currentTxt] = $event.target.value" >
-          <br />
-          <p class="fadeInLeft">Górny margines tekstu</p>
-          <mat-slider thumbLabel min="0" max="100" [(value)]="txtTop[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
-          <br />
-          <p class="fadeInLeft">Prawy margines tekstu</p>
-          <mat-slider thumbLabel min="0" max="100" [(value)]="txtLeft[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
-          <br />
+        </div>
+        <div class="box33border" style="height: 10vh;">
           <p class="fadeInLeft">Lewy margines tekstu</p>
           <mat-slider thumbLabel min="0" max="100" [(value)]="txtRight[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
-          <br />
+        </div>
+        <div class="box33border" style="height: 10vh;">
+          <p class="fadeInLeft">Górny margines tekstu</p>
+          <mat-slider thumbLabel min="0" max="100" [(value)]="txtTop[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+        </div>
+        <div class="box33border" style="height: 10vh;">
+          <p class="fadeInLeft">Prawy margines tekstu</p>
+          <mat-slider thumbLabel min="0" max="100" [(value)]="txtLeft[currentTxt]" class="example-full-width fadeInRight"></mat-slider>
+        </div>
+        <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
         </div>
       </div>
     </mat-step>
@@ -903,8 +894,10 @@
         </button>
       </div>
       <ng-template matStepLabel>Ostatni krok</ng-template>
-      <div [style.display]="bcgDisplay[3]" style="text-align: center">
-        <h1 class="fadeInTop">Dodaj dodatkowy obrazek</h1>
+      <div [style.display]="bcgDisplay[3]" style="text-align: center; padding-top: 3vh">
+        <div class="textBox">
+          <h3 class="fadeInTop">Dodaj obrazek ze zbioru</h3>
+        </div>
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -915,7 +908,7 @@
                 Obrazki z kategorii Sport
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="scrollableMAC" [style.height]="( (imagesSport.length + 1) / 6) * 12 + 'vh'">
+            <div class="scrollableMAC" [style.height]=" sportHeight + 'vh'">
               <div *ngFor="let tmp of imagesSport; let i = index" class="imgToSet fadeInTop" id="imgSport{{i + 1}}" (click)="setImg(i, 'Sport')">
                 <img id="imgMAC{{i}}" src="{{tmp}}" style="background-color: white" />
               </div>
@@ -930,7 +923,7 @@
                 Obrazki z kategorii Zdrowie
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="scrollableMAC" [style.height]="( (imagesSport.length + 1) / 6) * 12 + 'vh'">
+            <div class="scrollableMAC" [style.height]=" sportHeight + 'vh'">
               <div *ngFor="let tmp of imagesSport; let i = index" class="imgToSet fadeInTop" id="imgZdrowie{{i + 1}}" (click)="setImg(i, 'Sport')">
                 <img id="imgZdrowie{{i}}" src="{{tmp}}" style="background-color: white" />
               </div>
@@ -945,41 +938,72 @@
                 Obrazki z kategorii Zwierzęta
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="scrollableMAC" [style.height]="( (imagesAnimal.length + 1) / 6) * 12 + 'vh'">
+            <div class="scrollableMAC" [style.height]=" animalHeight + 'vh'">
               <div *ngFor="let tmp of imagesAnimal; let i = index" class="imgToSet fadeInTop" id="imgAnimal{{i + 1}}" (click)="setImg(i, 'Animal')">
                 <img id="imgAnimal{{i}}" src="{{tmp}}" style="background-color: white" />
               </div>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
-        <h1 class="fadeInTop">Dodaj swój obrazek</h1>
-        <label for="file-upload" class="button fadeInLeft">
-          <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
-          Dodaj Obrazek
-        </label>
-        <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
-        <br />
-        <p><b class="fadeInRight">Obrót obrazka</b></p>
-        <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
-        <p><b class="fadeInRight">Szerokość obrazka</b></p>
-        <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" ><br />
-        <p><b class="fadeInRight">Wysokość obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
-        <p><b class="fadeInRight">Lewy margines obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
-        <p><b class="fadeInRight">Górny margines obrazka</b></p>
-        <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
-        <br />
-        <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px">Zresetuj obrót</button> <br/>
-        <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()">Zresetuj obrazek</button> <br /><br />
-        <mat-form-field style="width: 50%" >
-          <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" >
-            <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-         <br/><br />
-        <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" disabled>Usuń obrazek</button> <br /><br />
-        <button (click)="addTxt()"  mat-raised-button color="primary" >Dodaj nowe pole tekstowe</button> <br />
+
+
+        <div class="textBox" style="margin-top: 3vh">
+          <h3 class="fadeInTop">Dodaj swój obrazek</h3>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <label for="file-upload" class="button fadeInLeft" style="width: 60%">
+            <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>
+            Dodaj Obrazek
+          </label>
+          <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button mat-raised-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button mat-raised-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
+        </div>
+        <div class="box33border" style="height: 10vh;  width: 66.6666666%">
+          <mat-form-field style="width: 50%" >
+            <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" >
+              <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="box33border" style="height: 10vh; padding-top: 2.8vh;">
+          <button id="rmvImg" mat-raised-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
+        </div>
+        <div class="box33" style="height: 10vh;">
+          <p><b class="fadeInRight">Szerokość obrazka</b></p>
+          <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+        </div>
+        <div class="box33" style="height: 10vh;">
+          <p><b class="fadeInRight">Wysokość obrazka</b></p>
+          <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
+        </div>
+        <div class="boxReal33" style="height: 10vh;">
+          <p><b class="fadeInRight">Górny margines obrazka</b></p>
+          <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
+        </div>
+        <div class="boxReal33" style="height: 10vh;">
+          <p><b class="fadeInRight">Lewy margines obrazka</b></p>
+          <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
+        </div>
+        <div class="boxReal33" style="height: 10vh;">
+          <p><b class="fadeInRight">Obrót obrazka</b></p>
+          <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
+        </div>
+
+
+
+
+
+
+
+
+
+
+
       </div>
     </mat-step>
   </mat-horizontal-stepper>
