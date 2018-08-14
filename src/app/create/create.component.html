@@ -367,7 +367,7 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="resetBcg()" style="width: 60%">Usuń tło</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="resetBcg()" style="width: 60%">Usuń tło</button>
         </div>
         <br />
       </div>
@@ -409,7 +409,7 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="resetFrame()" style="width: 60%">Usuń ramkę</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="resetFrame()" style="width: 60%">Usuń ramkę</button>
         </div>
 
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
@@ -460,7 +460,7 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[0]" (input)="shadowColor[0] = $event.target.value" >
             </div>
@@ -543,7 +543,7 @@
                 </mat-select>
               </mat-form-field>
               <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(1, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(1, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[1]" (input)="shadowColor[1] = $event.target.value" >
             </div>
@@ -622,7 +622,7 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(2, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(2, 0)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[2]" (input)="shadowColor[2] = $event.target.value" >
             </div>
@@ -710,7 +710,7 @@
                 </mat-select>
               </mat-form-field>
               <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[3]" (input)="shadowColor[3] = $event.target.value" >
             </div>
@@ -785,7 +785,7 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[4]" (input)="shadowColor[4] = $event.target.value" >
             </div>
@@ -852,7 +852,7 @@
           <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button (click)="addTxt()"  mat-stroked-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
+          <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
         </div>
         <div class="box33border" style="height: 10vh;">
           <mat-form-field class="fadeInLeft" style="width: 50%;" >
@@ -995,13 +995,13 @@
           <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
+          <button mat-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
+          <button mat-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button id="rmvImg" mat-stroked-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
+          <button id="rmvImg" mat-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
         </div>
       </div>
     </mat-step>
