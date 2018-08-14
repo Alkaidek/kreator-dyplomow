@@ -150,6 +150,10 @@ export class CreateComponent implements OnInit {
       document.getElementById('ytLogo').style.marginTop = '10px';
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
+      const elements = document.getElementsByClassName('logoText') as any;
+      for ( let i = 0; i < elements.length; i++ ) {
+        elements[i].style.marginTop = '5px';
+      }
     }
     if ( window.scrollY === 0 ) {
       imgMAClogo.style.width = '11vh';
@@ -163,6 +167,10 @@ export class CreateComponent implements OnInit {
       document.getElementById('ytLogo').style.height = '4.5vh';
       document.getElementById('fbLogo').style.width = '4.5vh';
       document.getElementById('ytLogo').style.width = '4.5vh';
+      const elements = document.getElementsByClassName('logoText') as any;
+      for ( let i = 0; i < elements.length; i++ ) {
+        elements[i].style.marginTop = '10px';
+      }
     }
   }
   ngOnInit() {
