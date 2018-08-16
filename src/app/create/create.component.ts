@@ -68,6 +68,8 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+  bcgBtnDisable = true;
+  frmBtnDisable = true;
   boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
@@ -128,6 +130,10 @@ export class CreateComponent implements OnInit {
   txtUserText = '';
   txtColorText = '';
   txtFontFamili = [];
+  bcgRotateX = 1;
+  bcgRotateY = 1;
+  frmRotateX = 1;
+  frmRotateY = 1;
   txtFontFamiliText = '';
   arraySelectFontFamili = ['Arial', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
     'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Courier New'];
@@ -199,6 +205,8 @@ export class CreateComponent implements OnInit {
     window.addEventListener('scroll', this.scroll, true);
   }
   takeBcg(imgSrc) {
+    this.bcgBtnDisable = false;
+
     console.log('ten sie podnosi: ' + imgSrc);
     console.log('a ten opada: ' + this.lastValue);
     document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
@@ -231,6 +239,7 @@ export class CreateComponent implements OnInit {
     }
   }
   takeFrame(imgSrc) {
+    this.frmBtnDisable = false;
     document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
@@ -251,17 +260,6 @@ export class CreateComponent implements OnInit {
   }
   generatePdf() {
     if (this.landscape !== 'inline-block') {
-      /*const elementToPrint = document.getElementById('toPdf100Fix');
-      const width = document.getElementById('toPdf100Fix').offsetWidth;
-      const height = document.getElementById('toPdf100Fix').offsetHeight;
-      const pdf = new jsPDF('p', 'px', this.format, true);
-      pdf.deletePage(1);
-      pdf.addPage(width, height);
-      pdf.internal.scaleFactor = 1;
-      pdf.addHTML(elementToPrint, () => {
-          pdf.save('wygenerowany dyplom.pdf');
-          pdf.autoPrint();
-        });*/
       const data =  document.getElementById('toPdf100Fix');
       html2canvas(data).then(canvas => {
         const imgWidth = 210;
@@ -428,11 +426,13 @@ export class CreateComponent implements OnInit {
         this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
       } else {
         this.imgMAClogoFrame = '../../assets/img/0.png';
+        this.frmBtnDisable = false;
       }
       if ( template.img === '') {
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
         this.imgSrcFix = template.img;
+        this.bcgBtnDisable = false;
       }
       this.base64Tmp = template.img;
       for (let i = 0; i < template.arrayFontSize.length; i++ ) {
@@ -479,6 +479,12 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    this.bcgRotateX = 1;
+    this.bcgRotateY = 1;
+    this.frmRotateX = 1;
+    this.frmRotateY = 1;
+    this.bcgBtnDisable = true;
+    this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
     this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -978,6 +984,9 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetBcg() {
+    this.bcgRotateX = 1;
+    this.bcgRotateY = 1;
+    this.bcgBtnDisable = true;
     this.imgSrc = '../../assets/img/0.png';
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
@@ -986,6 +995,9 @@ export class CreateComponent implements OnInit {
     document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
   }
   resetFrame() {
+    this.frmRotateX = 1;
+    this.frmRotateY = 1;
+    this.frmBtnDisable = true;
     this.imgSrcFrame = '../../assets/img/0.png';
     this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
@@ -1105,6 +1117,18 @@ export class CreateComponent implements OnInit {
     } else if (name === 'Sport') {
       this.userImgBase64.push(this.imagesSport[n]);
     }
+  }
+  rotateBcgX() {
+    this.bcgRotateX = this.bcgRotateX * -1;
+  }
+  rotateBcgY() {
+    this.bcgRotateY = this.bcgRotateY * -1;
+  }
+  rotateFrmX() {
+    this.frmRotateX = this.frmRotateX * -1;
+  }
+  rotateFrmY() {
+    this.frmRotateY = this.frmRotateY * -1;
   }
 }
 
