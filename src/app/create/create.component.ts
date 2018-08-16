@@ -462,6 +462,7 @@ export class CreateComponent implements OnInit {
           this.userImgBase64.push(template.userBcgBase64[i]);
           this.currImg = this.userImg.length - 1;
         }
+        this.boolDisableUserImgFields = false;
       }
       if ( template.txtTop.length > 0) {
         for ( let i = 0; i < template.txtTop.length; i++) {
