@@ -479,6 +479,8 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    this.boolDisableUserImgFields = true;
+    this.hidebox = true;
     this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
@@ -627,13 +629,6 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
-  /*showMore() {
-    const x = document.createElement('IMG');
-    x.setAttribute('src', '../../assets/img/icon3.png');
-    x.setAttribute('style', 'background-size: cover; position: absolute; z-index: 0;');
-    x.setAttribute('id', 'imgToChange2');
-    document.getElementById('pdfForlandscape').appendChild(x);
-  }*/
   set0degress() {
     this.rotate[this.currImg] = 0;
   }
