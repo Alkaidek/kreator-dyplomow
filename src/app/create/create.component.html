@@ -976,32 +976,32 @@
         </div>
         <div class="box33" style="height: 10vh;">
           <p style="float: left;   padding-left: 5px"><b class="fadeInRight">Szerokość obrazka</b></p>
-          <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+          <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [disabled]="boolDisableUserImgFields" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
         </div>
         <div class="box33" style="height: 10vh;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Wysokość obrazka</b></p>
-          <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
+          <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
         </div>
         <div class="box33border" style="height: 10vh;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight" style="float: left;">Górny margines obrazka</b></p>
-          <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
+          <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
         </div>
         <div class="box33border" style="height: 10vh;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Lewy margines obrazka</b></p>
-          <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
+          <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
         </div>
         <div class="box33border" style="height: 10vh;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
-          <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
+          <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" [disabled]="boolDisableUserImgFields" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
+          <button mat-stroked-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInLeft" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
+          <button mat-stroked-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button id="rmvImg" mat-stroked-button color="warn" class="fadeInLeft" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
+          <button id="rmvImg" mat-stroked-button color="warn" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
         </div>
       </div>
     </mat-step>

@@ -68,6 +68,7 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+  boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
   format = 'a4';
@@ -735,13 +736,14 @@ export class CreateComponent implements OnInit {
     }
   }
   add() {
-   this.userImg.push(this.userImg.length);
-   this.rotate.push(0);
-   this.imgWidth.push(10);
-   this.imgHeight.push(10);
-   this.imgTop.push(0);
-   this.imgLeft.push(0);
-   this.currImg = this.userImg.length - 1;
+    this.boolDisableUserImgFields = false;
+    this.userImg.push(this.userImg.length);
+    this.rotate.push(0);
+    this.imgWidth.push(10);
+    this.imgHeight.push(10);
+    this.imgTop.push(0);
+    this.imgLeft.push(0);
+    this.currImg = this.userImg.length - 1;
   }
   removeImg() {
     this.imgHeight[this.currImg] = 0;
