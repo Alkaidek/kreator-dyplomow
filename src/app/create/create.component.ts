@@ -114,6 +114,7 @@ export class CreateComponent implements OnInit {
   imgLeft = [];
   scheme = 0;
   txtTop = [];
+  email = 'abc@gmail.com';
   txtLeft = [];
   txtRight = [];
   txtSize = [];
@@ -129,6 +130,7 @@ export class CreateComponent implements OnInit {
   txtRightText = '';
   txtSizeText = '';
   txtUserText = '';
+  disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
   bcgRotateX = 1;
@@ -183,6 +185,52 @@ export class CreateComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.cookies();
+    this.session();
+    this.setOnInitData();
+    this.addScrollListener();
+  }
+  addScrollListener() {
+    window.addEventListener('scroll', this.scroll, true);
+  }
+  session() {
+    if (typeof(Storage) !== 'undefined') {
+      console.log('ok');
+      /*localStorage*/
+      console.log('sesja:bofore: ' + localStorage.getItem('key'));
+      if ( localStorage.getItem('key') === null ) {
+        console.log('Go Away bad Hacker!');
+      }
+      localStorage.setItem(
+        'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'LocalStorage' + Math.floor(Math.random() * 999 ) + 1 );
+      console.log('sesja:after: ' + localStorage.getItem('key'));
+      /*sessionStorage*/
+      console.log('sesja:before: ' + sessionStorage.getItem('key'));
+      if ( localStorage.getItem('key') === 'null' ) {
+        console.log('Go Away bad Hacker!');
+      }
+      sessionStorage.setItem(
+        'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'SessionStorage' + Math.floor(Math.random() * 999 ) + 1 );
+      console.log('sesja:after: ' + sessionStorage.getItem('key'));
+    } else {
+      console.log('sorry');
+    }
+  }
+  cookies() {
+    /*console.log('ciasteczka: ' + document.cookie);*/
+    /*const d = new Date();
+    d.setTime(d.getTime() + ( 2 * 60 * 1000));
+    const expires = 'expires=' + d.toUTCString();
+    document.cookie = 'email=' + this.email + ';' + expires + ';path=/';
+    console.log('email=' + this.email + ';' + expires + ';path=/');*/
+    const value = '; ' + document.cookie;
+    const parts = value.split('; CookiesPrivagles=');
+    if ( parts.length === 2 ) {
+      this.disp = parts.pop().split(';').shift();
+    }
+    console.log('ciasteczka: ' + document.cookie);
+  }
+  setOnInitData(){
     const date = new Date();
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
@@ -205,7 +253,6 @@ export class CreateComponent implements OnInit {
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
-    window.addEventListener('scroll', this.scroll, true);
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
@@ -1146,6 +1193,7 @@ export class CreateComponent implements OnInit {
     this.frmRotateY = this.frmRotateY * -1;
   }
   baseTemplate(n) {
+    document.getElementById('spinner').style.display = 'block';
     try {
       const request = new XMLHttpRequest();
       request.open('GET', '../../assets/data/' + n + '.MACproject', false);
@@ -1167,6 +1215,9 @@ export class CreateComponent implements OnInit {
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
+  }
+  setCookies() {
+    document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
 }
 
