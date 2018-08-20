@@ -367,13 +367,25 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="warn" class="fadeInRight" (click)="resetBcg()" style="width: 60%" [disabled]="bcgBtnDisable">Usuń tło</button>
+          <button mat-button color="warn" class="fadeInRight" (click)="resetBcg()" style="width: 60%" [disabled]="bcgBtnDisable">
+            <i class="material-icons">
+              remove
+            </i>
+            Usuń tło</button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="rotateBcgX()" style="width: 60%" [disabled]="bcgBtnDisable">Odbij w poziomie</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgX()" style="width: 60%" [disabled]="bcgBtnDisable">
+            <i class="material-icons">
+              swap_horiz
+            </i>
+            Odbij w poziomie</button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="rotateBcgY()" style="width: 60%" [disabled]="bcgBtnDisable">Odbij w pionie</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgY()" style="width: 60%" [disabled]="bcgBtnDisable">
+            <i class="material-icons">
+              swap_vert
+            </i>
+            Odbij w pionie</button>
         </div>
         <br />
       </div>
@@ -415,13 +427,25 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="warn" class="fadeInRight" (click)="resetFrame()" style="width: 60%" [disabled]="frmBtnDisable">Usuń ramkę</button>
+          <button mat-button color="warn" class="fadeInRight" (click)="resetFrame()" style="width: 60%" [disabled]="frmBtnDisable">
+            <i class="material-icons">
+              remove
+            </i>
+            Usuń ramkę</button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="rotateFrmX()" style="width: 60%" [disabled]="frmBtnDisable">Odbij w poziomie</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateFrmX()" style="width: 60%" [disabled]="frmBtnDisable">
+            <i class="material-icons">
+              swap_horiz
+            </i>
+            Odbij w poziomie</button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight" (click)="rotateFrmY()" style="width: 60%" [disabled]="frmBtnDisable">Odbij w pionie</button>
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateFrmY()" style="width: 60%" [disabled]="frmBtnDisable">
+            <i class="material-icons">
+              swap_vert
+            </i>
+            Odbij w pionie</button>
         </div>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
       </div>
@@ -471,7 +495,11 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 0)" style="margin-bottom: 10px">
+                <i class="material-icons">
+                  highlight
+                </i>
+                Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[0]" (input)="shadowColor[0] = $event.target.value" >
             </div>
@@ -554,7 +582,11 @@
                 </mat-select>
               </mat-form-field>
               <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(1, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(1, 0)" style="margin-bottom: 10px">
+                <i class="material-icons">
+                  highlight
+                </i>
+                Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[1]" (input)="shadowColor[1] = $event.target.value" >
             </div>
@@ -633,7 +665,11 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(2, 0)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(2, 0)" style="margin-bottom: 10px">
+                <i class="material-icons">
+                  highlight
+                </i>
+                Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[2]" (input)="shadowColor[2] = $event.target.value" >
             </div>
@@ -721,7 +757,11 @@
                 </mat-select>
               </mat-form-field>
               <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">
+                <i class="material-icons">
+                  highlight
+                </i>
+                Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[3]" (input)="shadowColor[3] = $event.target.value" >
             </div>
@@ -796,7 +836,11 @@
                 </mat-select>
               </mat-form-field>
                <br/><br />
-              <button mat-stroked-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">Cień</button>
+              <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">
+                <i class="material-icons">
+                  highlight
+                </i>
+                Cień</button>
               <p class="fadeInTop" >Kolor cienia</p>
               <input type="color" [value]="shadowColor[4]" (input)="shadowColor[4] = $event.target.value" >
             </div>
@@ -863,7 +907,11 @@
           <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button (click)="addTxt()"  mat-stroked-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">Dodaj nowe pole tekstowe</button> <br />
+          <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">
+            <i class="material-icons">
+              text_fields
+            </i>
+            Dodaj nowe pole tekstowe</button> <br />
         </div>
         <div class="box33border" style="height: 10vh;">
           <mat-form-field class="fadeInLeft" style="width: 50%;" >
@@ -974,6 +1022,9 @@
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh;">
           <label id="addImg" for="file-upload" class="button fadeInLeft" style="width: 60%; font-weight: normal; height: 36px; padding-top: 4px">
 <!--            <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
+            <i class="material-icons">
+              add_photo_alternate
+            </i>
             Dodaj Obrazek
           </label>
           <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
@@ -1006,13 +1057,25 @@
           <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" [disabled]="boolDisableUserImgFields" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">Zresetuj obrót</button> <br/>
+          <button mat-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">
+            <i class="material-icons">
+              crop_rotate
+            </i>
+            Zresetuj obrót</button> <br/>
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button mat-stroked-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">Zresetuj obrazek</button> <br /><br />
+          <button mat-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">
+            <i class="material-icons">
+              image
+            </i>
+            Zresetuj obrazek</button> <br /><br />
         </div>
         <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button id="rmvImg" mat-stroked-button color="warn" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="removeImg()" style="width: 60%" disabled>Usuń obrazek</button>
+          <button id="rmvImg" mat-button color="warn" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="removeImg()" style="width: 60%" disabled>
+            <i class="material-icons">
+              remove
+            </i>
+            Usuń obrazek</button>
         </div>
       </div>
     </mat-step>
