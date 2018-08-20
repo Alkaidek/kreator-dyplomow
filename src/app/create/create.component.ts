@@ -230,7 +230,7 @@ export class CreateComponent implements OnInit {
     }
     console.log('ciasteczka: ' + document.cookie);
   }
-  setOnInitData(){
+  setOnInitData() {
     const date = new Date();
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
