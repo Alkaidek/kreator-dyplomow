@@ -935,7 +935,7 @@ s, p
   justify-content: space-between
   align-items: center
 
-.schemeImg
+.schemeImg, .imgBase
   width: 9vh
   max-height: 13vh
   transform: scale(0.9, 0.9)
@@ -946,7 +946,10 @@ s, p
   border-radius: 2px
   opacity: 0.5
 
-.schemeImg:hover
+.imgBase
+  filter: grayscale(100%)
+
+.schemeImg:hover, .imgBase:hover
   transform: scale(1,1) !important
   filter: grayscale(0%) !important
 //  box-shadow: 0px 0px 40px #eb008b

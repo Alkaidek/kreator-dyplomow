@@ -68,6 +68,7 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+  currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
   boolDisableUserImgFields = true;
@@ -1135,6 +1136,29 @@ export class CreateComponent implements OnInit {
   }
   rotateFrmY() {
     this.frmRotateY = this.frmRotateY * -1;
+  }
+  baseTemplate(n) {
+    if ( this.currentBaseTemplate !== -1 ) {
+      document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
+      document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
+      document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
+      document.getElementById('base' + n).style.filter = 'grayscale(0%)';
+    } else {
+      document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
+      document.getElementById('base' + n).style.filter = 'grayscale(0%)';
+    }
+    this.currentBaseTemplate = n;
+    try {
+      const request = new XMLHttpRequest();
+      request.open('GET', '../../assets/data/' + n + '.MACproject', false);
+      request.send(null);
+      const obj = JSON.parse(request.responseText);
+      this.setUserData(obj);
+    } catch (err) {
+      this.resetSettings();
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+    }
+    document.getElementById('spinner').style.display = 'none';
   }
 }
 
