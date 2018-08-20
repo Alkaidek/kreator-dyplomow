@@ -419,6 +419,10 @@ export class CreateComponent implements OnInit {
       this.fontVariant[2] =  template.fontVariant[2];
       this.fontVariant[3] =  template.fontVariant[3];
       this.fontVariant[4] =  template.fontVariant[4];
+      this.bcgRotateX =  template.bcgRotateX;
+      this.bcgRotateY =  template.bcgRotateY;
+      this.frmRotateX =  template.frmRotateX;
+      this.frmRotateY =  template.frmRotateY;
       this.paddingTopFooter = template.paddingTopFooter;
       this.shadowSmall =  template.shadowSmall;
       this.letterSpacing = template.letterSpacing;
@@ -846,6 +850,10 @@ export class CreateComponent implements OnInit {
       + this.arrayFontSize[4] + '], '
       + '"bottom" : "' + this.bottom + '", '
       + '"paddingTopFooter" : "' + this.paddingTopFooter + '", '
+      + '"bcgRotateX" : "' + this.bcgRotateX + '", '
+      + '"bcgRotateY" : "' + this.bcgRotateY + '", '
+      + '"frmRotateX" : "' + this.frmRotateX + '", '
+      + '"frmRotateY" : "' + this.frmRotateY + '", '
       + '"marginLeft" : [ "'
       + this.marginLeft[0] + '", "'
       + this.marginLeft[1] + '", "'
@@ -1138,22 +1146,22 @@ export class CreateComponent implements OnInit {
     this.frmRotateY = this.frmRotateY * -1;
   }
   baseTemplate(n) {
-    if ( this.currentBaseTemplate !== -1 ) {
-      document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
-      document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
-      document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
-      document.getElementById('base' + n).style.filter = 'grayscale(0%)';
-    } else {
-      document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
-      document.getElementById('base' + n).style.filter = 'grayscale(0%)';
-    }
-    this.currentBaseTemplate = n;
     try {
       const request = new XMLHttpRequest();
       request.open('GET', '../../assets/data/' + n + '.MACproject', false);
       request.send(null);
       const obj = JSON.parse(request.responseText);
       this.setUserData(obj);
+      if ( this.currentBaseTemplate !== -1 ) {
+        document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
+        document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
+        document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
+        document.getElementById('base' + n).style.filter = 'grayscale(0%)';
+      } else {
+        document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
+        document.getElementById('base' + n).style.filter = 'grayscale(0%)';
+      }
+      this.currentBaseTemplate = n;
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
