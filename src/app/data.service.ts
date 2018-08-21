@@ -15,4 +15,8 @@ export class DataService {
   getSportImg() {
     return this._http.get('/api/sport').pipe(map(result => this.result = result.json().data));
   }
+  getBase64Img() {
+    return this._http.get('/api/base64Img').pipe(map(result => this.result = result.json().data));
+  }
+
 }

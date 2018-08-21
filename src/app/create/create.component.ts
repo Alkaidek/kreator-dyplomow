@@ -49,9 +49,9 @@ export class CreateComponent implements OnInit {
   users: any;
   sport: any;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
-    db.list('/base64').valueChanges().subscribe(bcgTemp => {
+   /* db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
-    });
+    });*/
     /*db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
         this.imagesSport.push('' + sport[i] );
@@ -65,15 +65,19 @@ export class CreateComponent implements OnInit {
          this.setHeightSport(this.imagesSport);
        }
       });
+    this._dataService.getBase64Img()
+      .subscribe(bcgTemp => { this.bcgTemp = bcgTemp[0].bcg; });
+    this._dataService.getBase64Img()
+      .subscribe(bcgTemp => { this.frames = bcgTemp[0].frame; });
     db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
         this.setHeightAnimal(this.imagesAnimal);
       }
     });
-    db.list('/frame').valueChanges().subscribe(frames => {
+    /*db.list('/frame').valueChanges().subscribe(frames => {
       this.frames = frames;
-    });
+    });*/
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
     });

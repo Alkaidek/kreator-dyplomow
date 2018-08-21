@@ -55,4 +55,18 @@ router.get('/sport', (req, res) => {
       });
   });
 });
+router.get('/base64Img', (req, res) => {
+  connection((db) => {
+    db.collection('base64')
+      .find()
+      .toArray()
+      .then((base64) => {
+        response.data = base64;
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
 module.exports = router;
