@@ -4,6 +4,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
+import {DataService} from '../data.service';
 
 @Component({
   selector:
@@ -45,16 +46,25 @@ export class CreateComponent implements OnInit {
     '../../assets/img/animal/4.png'];
   sportHeight = 11;
   animalHeight = 11;
-  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
+  users: any;
+  sport: any;
+  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
     });
-    db.list('/images/sport').valueChanges().subscribe(sport => {
+    /*db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
         this.imagesSport.push('' + sport[i] );
         this.setHeightSport(this.imagesSport);
       }
-    });
+    });*/
+    this._dataService.getSportImg()
+      .subscribe(sport => {
+       for (let i = 0; i < sport[0].sport.length; i++) {
+         this.imagesSport.push('' + sport[0].sport[i] );
+         this.setHeightSport(this.imagesSport);
+       }
+      });
     db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
@@ -67,7 +77,10 @@ export class CreateComponent implements OnInit {
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
     });
+    this._dataService.getUser()
+      .subscribe(res => this.users = res);
   }
+
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -189,6 +202,11 @@ export class CreateComponent implements OnInit {
     this.session();
     this.setOnInitData();
     this.addScrollListener();
+  }
+  chceckArray() {
+    console.log('array');
+    console.log(this.sport);
+    console.log(this.sport[0].sport);
   }
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);

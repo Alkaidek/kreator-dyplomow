@@ -10,6 +10,8 @@ import { CreateComponent } from './create/create.component';
 import { LandscapeComponent } from './landscape/landscape.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
+import { HttpModule} from '@angular/http';
+import {DataService} from './data.service';
 
 const firebase = {
   apiKey: 'AIzaSyB7P4-5PpvWM1D5dZ6rIeNRlczTt1nlBS4',
@@ -32,9 +34,10 @@ const firebase = {
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
