@@ -69,4 +69,18 @@ router.get('/base64Img', (req, res) => {
       });
   });
 });
+router.get('/templates', (req, res) => {
+  connection((db) => {
+    db.collection('templates')
+      .find()
+      .toArray()
+      .then((templates) => {
+        response.data = templates;
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
 module.exports = router;

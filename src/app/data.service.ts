@@ -18,5 +18,8 @@ export class DataService {
   getBase64Img() {
     return this._http.get('/api/base64Img').pipe(map(result => this.result = result.json().data));
   }
+  getTemplates() {
+    return this._http.get('/api/templates').pipe(map(result => this.result = result.json().data));
+  }
 
 }

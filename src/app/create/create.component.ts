@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
   auth = 'block';
   bcgTemp: any;
   template: any;
-  coordinatesTemplate: any;
+  coordinatesTemplate =  [];
   frames: any;
   bool = 'block';
   imagesSport = ['../../assets/img/sport/sport1.png',
@@ -46,7 +46,6 @@ export class CreateComponent implements OnInit {
     '../../assets/img/animal/4.png'];
   sportHeight = 11;
   animalHeight = 11;
-  users: any;
   sport: any;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
    /* db.list('/base64').valueChanges().subscribe(bcgTemp => {
@@ -58,12 +57,21 @@ export class CreateComponent implements OnInit {
         this.setHeightSport(this.imagesSport);
       }
     });*/
+    /*db.list('/frame').valueChanges().subscribe(frames => {
+      this.frames = frames;
+    });*/
     this._dataService.getSportImg()
       .subscribe(sport => {
        for (let i = 0; i < sport[0].sport.length; i++) {
          this.imagesSport.push('' + sport[0].sport[i] );
          this.setHeightSport(this.imagesSport);
        }
+      });
+    this._dataService.getTemplates()
+      .subscribe(tmp => {
+        for (let i = 0; i < tmp[0].templates.length; i++) {
+          this.coordinatesTemplate.push( tmp[0].templates[i] );
+        }
       });
     this._dataService.getBase64Img()
       .subscribe(bcgTemp => { this.bcgTemp = bcgTemp[0].bcg; });
@@ -75,14 +83,9 @@ export class CreateComponent implements OnInit {
         this.setHeightAnimal(this.imagesAnimal);
       }
     });
-    /*db.list('/frame').valueChanges().subscribe(frames => {
-      this.frames = frames;
-    });*/
-    db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
+    /*db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
       this.coordinatesTemplate = coordinatesTemplate;
-    });
-    this._dataService.getUser()
-      .subscribe(res => this.users = res);
+    });*/
   }
 
   currentBaseTemplate = -1;
@@ -207,11 +210,11 @@ export class CreateComponent implements OnInit {
     this.setOnInitData();
     this.addScrollListener();
   }
-  chceckArray() {
+  /*chceckArray() {
     console.log('array');
     console.log(this.sport);
     console.log(this.sport[0].sport);
-  }
+  }*/
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);
   }
