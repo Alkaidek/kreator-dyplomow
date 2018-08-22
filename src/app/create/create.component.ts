@@ -1249,7 +1249,7 @@ export class CreateComponent implements OnInit {
       this.currentBaseTemplate = n;
     } catch (err) {
       this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niekomaptybilny, uszkodzony lub przestarzały!', 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
   }
