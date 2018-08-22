@@ -31,10 +31,10 @@ export class CreateComponent implements OnInit {
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
-  bcgTemp: any;
+  bcgTemp = [];
   template: any;
   coordinatesTemplate =  [];
-  frames: any;
+  frames = [];
   bool = 'block';
   imagesSport = ['../../assets/img/sport/sport1.png',
     '../../assets/img/sport/sport2.png',
@@ -74,9 +74,18 @@ export class CreateComponent implements OnInit {
         }
       });
     this._dataService.getBase64Img()
-      .subscribe(bcgTemp => { this.bcgTemp = bcgTemp[0].bcg; });
+      .subscribe(bcgTemp => {
+      for (let i = 0; i <  bcgTemp[0].bcg.length; i++) {
+        this.bcgTemp.push( bcgTemp[0].bcg[i] );
+      }
+    });
+
     this._dataService.getBase64Img()
-      .subscribe(bcgTemp => { this.frames = bcgTemp[0].frame; });
+      .subscribe(bcgTemp => {
+      for (let i = 0; i <  bcgTemp[0].frame.length; i++) {
+        this.frames.push( bcgTemp[0].frame[i] );
+      }
+    });
     db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
@@ -524,12 +533,15 @@ export class CreateComponent implements OnInit {
       this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
         template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
       this.title =  template.title.replace('NEWLINE', '\n' );
-      this.forWho =  template.forWho.replace('NEWLINE', '\n' );
-      this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
-      this.sign1 =  template.sign1.replace('NEWLINE', '\n' );
-      this.sign2 = template.sign2.replace('NEWLINE', '\n' );
-      this.sign3 = template.sign3.replace('NEWLINE', '\n' );
+      /*this.forWho =  template.forWho.replace('NEWLINE', '\n' );*/
+      this.forWho =  template.forWho.split('NEWLINE').join('\n');
+      this.forWhat =  template.forWhat.split('NEWLINE').join('\n');
+      this.sign1 =  template.sign1.split('NEWLINE').join('\n');
+      this.sign2 = template.sign2.split('NEWLINE').join('\n');
+      this.sign3 = template.sign3.split('NEWLINE').join('\n');
       this.footer = template.footer.replace('NEWLINE', '\n' );
+
+
       if ( template.userBcgBase64.length > 0) {
         for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);

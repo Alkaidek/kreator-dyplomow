@@ -519,7 +519,7 @@
               </mat-form-field>
               <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
               <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">-->
-              <mat-slider thumbLabel class="fadeInTop" color="warn" min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
+              <mat-slider thumbLabel class="fadeInTop" min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
               <p class="fadeInTop" >Kolor czcionki</p>
               <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
               <br />
