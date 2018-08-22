@@ -230,7 +230,7 @@ export class CreateComponent implements OnInit {
     }
     console.log('ciasteczka: ' + document.cookie);
   }
-  setOnInitData(){
+  setOnInitData() {
     const date = new Date();
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
@@ -367,7 +367,7 @@ export class CreateComponent implements OnInit {
       min = '0' + min;
     }
     const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
-      this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
+    this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
   takeFontForEle(font, element) {
@@ -499,12 +499,15 @@ export class CreateComponent implements OnInit {
       this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
         template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
       this.title =  template.title.replace('NEWLINE', '\n' );
-      this.forWho =  template.forWho.replace('NEWLINE', '\n' );
-      this.forWhat =  template.forWhat.replace('NEWLINE', '\n' );
-      this.sign1 =  template.sign1.replace('NEWLINE', '\n' );
-      this.sign2 = template.sign2.replace('NEWLINE', '\n' );
-      this.sign3 = template.sign3.replace('NEWLINE', '\n' );
+      /*this.forWho =  template.forWho.replace('NEWLINE', '\n' );*/
+      this.forWho =  template.forWho.split('NEWLINE').join('\n');
+      this.forWhat =  template.forWhat.split('NEWLINE').join('\n');
+      this.sign1 =  template.sign1.split('NEWLINE').join('\n');
+      this.sign2 = template.sign2.split('NEWLINE').join('\n');
+      this.sign3 = template.sign3.split('NEWLINE').join('\n');
       this.footer = template.footer.replace('NEWLINE', '\n' );
+
+
       if ( template.userBcgBase64.length > 0) {
         for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);
@@ -730,21 +733,21 @@ export class CreateComponent implements OnInit {
     }
   }
   landscapeOff(n) {
-      if (n === 2) {
-        this.landscape = 'none';
-        document.getElementById('imgO2').style.filter = 'grayscale(0%)';
-        document.getElementById('imgO1').style.filter = 'grayscale(100%)';
-        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
-        document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
-      } else {
-        this.landscape = 'inline-block';
-        const element = document.getElementById('toPdf100Landscape');
-        element.classList.remove('rotateInDownRight');
-        document.getElementById('imgO2').style.filter = 'grayscale(100%)';
-        document.getElementById('imgO1').style.filter = 'grayscale(0%)';
-        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
-        document.getElementById('imgO1').style.transform = 'scale(1, 1)';
-      }
+    if (n === 2) {
+      this.landscape = 'none';
+      document.getElementById('imgO2').style.filter = 'grayscale(0%)';
+      document.getElementById('imgO1').style.filter = 'grayscale(100%)';
+      document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
+      document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+    } else {
+      this.landscape = 'inline-block';
+      const element = document.getElementById('toPdf100Landscape');
+      element.classList.remove('rotateInDownRight');
+      document.getElementById('imgO2').style.filter = 'grayscale(100%)';
+      document.getElementById('imgO1').style.filter = 'grayscale(0%)';
+      document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
+      document.getElementById('imgO1').style.transform = 'scale(1, 1)';
+    }
   }
   setScheme(n) {
     if (n === 50) {
