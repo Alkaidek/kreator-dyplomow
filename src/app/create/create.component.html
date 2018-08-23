@@ -36,7 +36,7 @@
          [style.padding-right]="txtRight[i]+'%'"
          [style.padding-left]="txtLeft[i]+'%'"
          [style.top]="txtTop[i]+'%'"
-         [style.font-size]="(txtSize[i]* (multiple ) + 0.5 ) + 'vw'"
+         [style.font-size]="(txtSize[i]* (multiple ) + 0.5) + 'vw'"
          [style.font-family]="txtFontFamili[i]"
          [style.color]="txtColor[i]">{{txt}}</p>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
@@ -564,10 +564,10 @@
                           <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
                           -->
                           <p class="fadeInTop">Lewy margines</p>
-                          <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
+                          <mat-slider thumbLabel  min="0" [max]="80 - marginRight[0]" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
                           <br/>
                           <p class="fadeInTop">Prawy margines</p>
-                          <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
+                          <mat-slider thumbLabel  min="0" [max]="80 - marginLeft[0]" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
                           <p class="fadeInTop" >Górny margines</p>
                           <mat-slider thumbLabel  min="-1" max="80" [(value)]="paddingTop" class="example-full-width"></mat-slider>
                           <p class="fadeInTop" >Odstęp między literami</p>
@@ -665,10 +665,10 @@
                         <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
                       -->
                       <p class="fadeInTop">Lewy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginRight[1]" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
                       <br/>
                       <p class="fadeInTop">Prawy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginLeft[1]" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
                       <p class="fadeInTop" >Górny margines</p>
                       <mat-slider thumbLabel  min="0" max="80" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
                       <p class="fadeInTop" >Odstęp między literami</p>
@@ -766,10 +766,10 @@
                       <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
                       -->
                       <p class="fadeInTop">Lewy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginRight[2]" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
                       <br/>
                       <p class="fadeInTop">Prawy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginLeft[2]" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
                       <p class="fadeInTop" >Górny margines</p>
                       <mat-slider thumbLabel  min="0" max="80" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
                       <br />
@@ -866,11 +866,11 @@
                     <div class="inputContainer">
                       <p class="fadeInTop">Lewy margines</p>
                       <!--<input type="range" min="0" max="40" [value]="marginLeft[3]" (input)="marginLeft[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0"[max]="80 - marginRight[3]" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
                       <br/>
                       <p class="fadeInTop">Prawy margines</p>
                       <!--<input type="range" min="0" max="40" [value]="marginRight[3]" (input)="marginRight[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginLeft[3]" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
                       <p class="fadeInTop" >Dolny margines</p>
                       <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
                       <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
@@ -956,10 +956,10 @@
                       <mat-slider thumbLabel  min="10" max="50" [(value)]="paddingTopFooter" class="example-full-width"></mat-slider>
                       <br />
                       <p class="fadeInTop">Lewy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginRight[3]" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
                       <br/>
                       <p class="fadeInTop">Prawy margines</p>
-                      <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
+                      <mat-slider thumbLabel  min="0" [max]="80 - marginLeft[3]" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
                       <p class="fadeInTop" >Dolny margines</p>
                       <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
                       <br />
@@ -1044,7 +1044,7 @@
         </div>
         <div class="box33" style="height: 12vh; font-weight: bold">
           <p style="float: left;  padding-left: 5px" class="fadeInLeft">Wielkość tekstu</p> <br />
-          <mat-slider thumbLabel type="range" min="0" max="8" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>
+          <mat-slider thumbLabel type="range" min="0" max="4" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>
         </div>
         <div class="box33" style="height: 12vh; float: left">
           <p style="float: left; font-weight: bold;  padding-left: 5px" class="fadeInLeft" >Kolor czcionki</p> <br />
@@ -1223,89 +1223,90 @@
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.letter-spacing]="letterSpacingForWho+'vw'" [style.color]="arrayFontColor[2]" [style.font-variant]="fontVariant[1]" style="z-index: 7" [style.font-family]="arrayFontFamili[1]"  [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" >
-          {{forWho}}
-        </s>
-      </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
-        <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" [style.font-variant]="fontVariant[2]" style="z-index: 7" [style.font-family]="arrayFontFamili[2]"  [style.font-style]="fontStyle[2]" [style.font-weight]="fontWeight[2]" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" >
-          {{forWhat}}
-        </s>
-      </div>
-
-      <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[3]">
-          {{sign1}}
-        </p>
-        <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-family]="arrayFontFamili[4]" [style.font-style]="fontStyle[3]">
-          {{sign3}}
-        </p>
-        <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.color]="arrayFontColor[1]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]">
-          {{sign2}}
-        </p>
-      </div>
-      <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
-        <p id="smallTxt" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
-          {{footer}}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="viewLandscape" [style.display]="landscape">
-  <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%" [style.background-color]="bcgColor">
-    <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
-    <div id="pdfForlandscape">
-      <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
-           [style.transform]="'rotate('+rotate[usr]+'deg)'"
-           [style.width]="imgWidth[usr]+'%'"
-           [style.height]="imgHeight[usr]+'%'"
-           [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" id="font2{{i}}" style="width:100%; position: absolute; z-index: 1;"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.top]="txtTop[i]+'%'"
-         [style.font-size]="txtSize[i] + 'vw'"
-         [style.font-family]="txtFontFamili[i]"
-         [style.color]="txtColor[i]">{{txt}}</p>
-      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img  src="{{imgMAClogoFrame}}"  [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
-      <div  style="z-index: 8;">
-        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]" >
-          <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.padding-left]="marginLeft[0] + '%'" [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
-            {{title}}
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10% "  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
+        <div style="z-index: 7; position: absolute; width: 100%; top: 10% "  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
+          <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.letter-spacing]="letterSpacingForWho+'vw'" [style.color]="arrayFontColor[2]" [style.font-variant]="fontVariant[1]" style="z-index: 7" [style.font-family]="arrayFontFamili[1]"  [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" >
+            {{forWho}}
           </s>
-          <br/>
-        </p>
-      </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
-        <s id="sForLandscape"[style.letter-spacing]="letterSpacingForWho+'vw'"  [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.font-size]="arrayFontSize[2] + 'vw'" [style.font-variant]="fontVariant[1]" [style.font-family]="arrayFontFamili[1]" [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.color]="arrayFontColor[2]" style="z-index: 7"  >
-          {{forWho}}
-        </s>
-      </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
-        <s id="txtForWhatLandscape" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.font-style]="fontStyle[2]"  [style.font-family]="arrayFontFamili[2]" [style.font-variant]="fontVariant[2]" [style.font-size]="arrayFontSize[4] + 'vw'" [style.font-weight]="fontWeight[2]" [style.color]="arrayFontColor[4]" style="z-index: 7" >
-          {{forWhat}}
-        </s>
-      </div>
-      <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="leftLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]"  [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.font-family]="arrayFontFamili[3]" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
-          {{sign1}}
-        </p>
-        <p id="centerLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[4]" [style.font-variant]="fontVariant[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
-          {{sign3}}
-        </p>
-        <p id="rightLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-variant]="fontVariant[3]" [style.font-style]="fontStyle[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
-          {{sign2}}
-        </p>
-      </div>
-      <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
-        <p id="smallTxtLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
-          {{footer}}
-        </p>
+        </div>
+        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
+          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" [style.font-variant]="fontVariant[2]" style="z-index: 7" [style.font-family]="arrayFontFamili[2]"  [style.font-style]="fontStyle[2]" [style.font-weight]="fontWeight[2]" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" >
+            {{forWhat}}
+          </s>
+        </div>
+
+        <div class="signature" id="sign" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+          <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[3]">
+            {{sign1}}
+          </p>
+          <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-family]="arrayFontFamili[4]" [style.font-style]="fontStyle[3]">
+            {{sign3}}
+          </p>
+          <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.color]="arrayFontColor[1]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]">
+            {{sign2}}
+          </p>
+        </div>
+        <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
+          <p id="smallTxt" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+            {{footer}}
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <div id="viewLandscape" [style.display]="landscape">
+    <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%" [style.background-color]="bcgColor">
+      <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
+      <div id="pdfForlandscape">
+        <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
+             [style.transform]="'rotate('+rotate[usr]+'deg)'"
+             [style.width]="imgWidth[usr]+'%'"
+             [style.height]="imgHeight[usr]+'%'"
+             [style.left]="imgLeft[usr]+'%'"
+             [style.top]="imgTop[usr]+'%'"/>
+        <p *ngFor="let txt of userTxt; let i = index" id="font2{{i}}" style="width:100%; position: absolute; z-index: 1;"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.top]="txtTop[i]+'%'"
+           [style.font-size]="txtSize[i] + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]">{{txt}}</p>
+        <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+        <img  src="{{imgMAClogoFrame}}"  [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
+        <div  style="z-index: 8;">
+          <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]" >
+            <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.padding-left]="marginLeft[0] + '%'" [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
+              {{title}}
+            </s>
+            <br/>
+          </p>
+        </div>
+        <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
+          <s id="sForLandscape"[style.letter-spacing]="letterSpacingForWho+'vw'"  [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.font-size]="arrayFontSize[2] + 'vw'" [style.font-variant]="fontVariant[1]" [style.font-family]="arrayFontFamili[1]" [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.color]="arrayFontColor[2]" style="z-index: 7"  >
+            {{forWho}}
+          </s>
+        </div>
+        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
+          <s id="txtForWhatLandscape" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.font-style]="fontStyle[2]"  [style.font-family]="arrayFontFamili[2]" [style.font-variant]="fontVariant[2]" [style.font-size]="arrayFontSize[4] + 'vw'" [style.font-weight]="fontWeight[2]" [style.color]="arrayFontColor[4]" style="z-index: 7" >
+            {{forWhat}}
+          </s>
+        </div>
+        <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+          <p id="leftLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]"  [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.font-family]="arrayFontFamili[3]" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+            {{sign1}}
+          </p>
+          <p id="centerLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[4]" [style.font-variant]="fontVariant[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+            {{sign3}}
+          </p>
+          <p id="rightLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-variant]="fontVariant[3]" [style.font-style]="fontStyle[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+            {{sign2}}
+          </p>
+        </div>
+        <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
+          <p id="smallTxtLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+            {{footer}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

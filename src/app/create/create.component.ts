@@ -18,6 +18,7 @@ import html2canvas from 'html2canvas';
 export class CreateComponent implements OnInit {
   userImg =
     [];
+  percent = 100;
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -69,6 +70,7 @@ export class CreateComponent implements OnInit {
     });
   }
 
+
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -86,8 +88,8 @@ export class CreateComponent implements OnInit {
   base64Tmp = '';
   base64TmpFrame = '';
   base64 = '';
-  forWho = '';
-  forWhat = '';
+  forWho = '\n';
+  forWhat = '\n';
   sign1 = 'Dyrektor\n................';
   sign2 = 'Wychowawca\n.......................';
   sign3 = 'Katecheta\n  ..................';
@@ -1237,6 +1239,13 @@ export class CreateComponent implements OnInit {
   }
   setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+  }
+  chceckWidth() {
+    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById('largeTxt').offsetWidth;
+    const percent = 100 - ( document.getElementById('largeTxt').offsetWidth / document.getElementById('toPdf100').offsetWidth * 100);
+    alert(document.getElementById('largeTxt').offsetWidth + ' box: ' +
+      document.getElementById('toPdf100').offsetWidth + ' tyle zostało: ' + width + ' procent: ' + percent);
+    this.percent = percent - 1;
   }
 }
 
