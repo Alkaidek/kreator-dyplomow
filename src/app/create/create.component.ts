@@ -1084,7 +1084,7 @@ export class CreateComponent implements OnInit {
       this.hidebox = false;
     }
     this.actualTxt = '';
-    this.currentTxt = this.currentTxt + 1;
+    this.currentTxt = this.userTxt.length;
     this.userTxt.push(this.actualTxt);
     this.txtTop.push(0);
     this.txtLeft.push(0);
@@ -1093,6 +1093,7 @@ export class CreateComponent implements OnInit {
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
   }
+
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
       document.getElementById('hiddenBox').style.display = 'inline-block';
