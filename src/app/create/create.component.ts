@@ -68,6 +68,7 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
+
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -147,6 +148,7 @@ export class CreateComponent implements OnInit {
   fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  textAlign = ['center', 'center', 'center', 'center', 'center'];
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -190,6 +192,11 @@ export class CreateComponent implements OnInit {
     this.setOnInitData();
     this.addScrollListener();
   }
+  /*chceckArray() {
+    console.log('array');
+    console.log(this.sport);
+    console.log(this.sport[0].sport);
+  }*/
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);
   }
@@ -1086,14 +1093,13 @@ export class CreateComponent implements OnInit {
     this.actualTxt = '';
     this.currentTxt = this.userTxt.length;
     this.userTxt.push(this.actualTxt);
-    this.txtTop.push(0);
+    this.txtTop.push(35);
     this.txtLeft.push(0);
     this.txtRight.push(0);
-    this.txtSize.push(0.8);
+    this.txtSize.push(3);
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
   }
-
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
       document.getElementById('hiddenBox').style.display = 'inline-block';
@@ -1174,6 +1180,15 @@ export class CreateComponent implements OnInit {
       this.fontVariant[n] = 'small-caps';
     }
   }
+  setTextAlignLeft(n) {
+    this.textAlign[n] = 'left';
+  }
+  setTextAlignCenter(n) {
+    this.textAlign[n] = 'center';
+  }
+  setTextAlignRight(n) {
+    this.textAlign[n] = 'right';
+  }
   setImg(n, name) {
     this.add();
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
@@ -1216,7 +1231,7 @@ export class CreateComponent implements OnInit {
       this.currentBaseTemplate = n;
     } catch (err) {
       this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niekomaptybilny, uszkodzony lub przestarzały!', 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
   }
