@@ -1118,7 +1118,7 @@ export class CreateComponent implements OnInit {
       this.hidebox = false;
     }
     this.actualTxt = '';
-    this.currentTxt = this.currentTxt + 1;
+    this.currentTxt = this.userTxt.length;
     this.userTxt.push(this.actualTxt);
     this.txtTop.push(0);
     this.txtLeft.push(0);
