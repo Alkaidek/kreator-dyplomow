@@ -17,6 +17,7 @@ import {DataService} from '../data.service';
     ]
 })
 export class CreateComponent implements OnInit {
+  percent = 0;
   userImg =
     [];
   userImgBase64 = [];
@@ -114,8 +115,8 @@ export class CreateComponent implements OnInit {
   base64Tmp = '';
   base64TmpFrame = '';
   base64 = '';
-  forWho = '';
-  forWhat = '';
+  forWho = '\n';
+  forWhat = '\n';
   sign1 = 'Dyrektor\n................';
   sign2 = 'Wychowawca\n.......................';
   sign3 = 'Katecheta\n  ..................';
@@ -1121,10 +1122,10 @@ export class CreateComponent implements OnInit {
     this.actualTxt = '';
     this.currentTxt = this.userTxt.length;
     this.userTxt.push(this.actualTxt);
-    this.txtTop.push(0);
+    this.txtTop.push(35);
     this.txtLeft.push(0);
     this.txtRight.push(0);
-    this.txtSize.push(0.8);
+    this.txtSize.push(3);
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
   }
@@ -1265,6 +1266,13 @@ export class CreateComponent implements OnInit {
   }
   setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+  }
+  chceckWidth() {
+    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById('largeTxt').offsetWidth;
+    const percent = 100 - ( document.getElementById('largeTxt').offsetWidth / document.getElementById('toPdf100').offsetWidth * 100);
+    alert(document.getElementById('largeTxt').offsetWidth + ' box: ' +
+      document.getElementById('toPdf100').offsetWidth + ' tyle zostało: ' + width + ' procent: ' + percent);
+    this.percent = percent - 1;
   }
 }
 
