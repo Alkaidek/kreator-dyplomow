@@ -18,7 +18,10 @@ import html2canvas from 'html2canvas';
 export class CreateComponent implements OnInit {
   userImg =
     [];
-  percent = 100;
+  percentLeft = [100, 100, 100];
+  percentRight = [100, 100, 100];
+  percentHeight = [80, 80, 80];
+  bottomMaxPx = 120;
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -193,6 +196,12 @@ export class CreateComponent implements OnInit {
     this.session();
     this.setOnInitData();
     this.addScrollListener();
+    this.setPaddingAnchor();
+  }
+  setPaddingAnchor() {
+    this.chceckWidth(0);
+    this.chceckWidth(1);
+    this.chceckWidth(2);
   }
   /*chceckArray() {
     console.log('array');
@@ -1240,12 +1249,50 @@ export class CreateComponent implements OnInit {
   setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
-  chceckWidth() {
-    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById('largeTxt').offsetWidth;
-    const percent = 100 - ( document.getElementById('largeTxt').offsetWidth / document.getElementById('toPdf100').offsetWidth * 100);
-    alert(document.getElementById('largeTxt').offsetWidth + ' box: ' +
-      document.getElementById('toPdf100').offsetWidth + ' tyle zostało: ' + width + ' procent: ' + percent);
-    this.percent = percent - 1;
+  chceckWidth(n) {
+    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById(this.arrayFontNameId[n]).offsetWidth;
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape !== 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    this.percentLeft[n] = Math.round(percent - 1);
+    this.percentRight[n] = Math.round(percent - 1);
+  }
+  chceckWidthWithCenter(n) {
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    this.percentLeft[n] = Math.round(percent - 1);
+    this.percentRight[n] = Math.round(percent - 1);
+    this.marginLeft[n] = 0;
+    this.marginRight[n] = 0;
+    percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    this.percentHeight[n] = Math.round(percent - 1);
+    this.percentHeight[n] = Math.round(percent - 1);
+  }
+  setHeightPercent(n) {
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    this.percentHeight[n] = Math.round(percent - 1);
+    this.percentHeight[n] = Math.round(percent - 1);
+  }
+  setBottomMaxPx() {
+   /* this.bottomMaxPx*/
+    alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
   }
 }
 
