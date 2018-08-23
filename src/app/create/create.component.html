@@ -44,7 +44,7 @@
             [style.width]="10*multiple + 'vh'"
             [style.height]="10*multiple + 'vh'"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]">
           <s id="largeTxtLandscapeFix"  [style.letter-spacing]="(letterSpacing * (multiple ))+'vw'"
              [style.font-family]="arrayFontFamili[0]"
              [style.font-style]="fontStyle[0]"
@@ -53,14 +53,18 @@
              [style.text-shadow]="shadowLargeFix[0] + ' ' + shadowColor[0]"
              [style.font-size]="(arrayFontSize[0]* (multiple) + 0.5) + 'vw'"
              [style.color]="arrayFontColor[0]"
-             [style.margin-left]="marginLeft[0] + '%'"
-             [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+             [style.padding-left]="marginLeft[0] + '%'"
+             [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'"
+           [style.padding-left]="marginLeft[1] + '%'"
+           [style.padding-right]="marginRight[1] + '%'"
+           [style.text-align]="textAlign[1]"
+      >
         <s id="sForLandscapeFix"[style.letter-spacing]="(letterSpacingForWho* (multiple))+'vw'"
            [style.font-size]="(arrayFontSize[2] * (multiple) + 0.5) + 'vw'"
            [style.font-family]="arrayFontFamili[1]"
@@ -69,12 +73,14 @@
            [style.font-weight]="fontWeight[1]"
            [style.text-shadow]="shadowLargeFix[1] + ' ' + shadowColor[1]"
            [style.color]="arrayFontColor[2]" style="z-index: 7"
-           [style.margin-left]="marginLeft[1] + '%'"
-           [style.margin-right]="marginRight[1] + '%'">
+           >
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'"
+            [style.padding-left]="marginLeft[2] + '%'"
+            [style.padding-right]="marginRight[2] + '%'"
+            [style.text-align]="textAlign[2]">
         <s id="txtForWhatLandscapeFix" [style.font-size]="(arrayFontSize[4]* (multiple) + 0.5) + 'vw'"
            [style.font-family]="arrayFontFamili[2]"
            [style.font-style]="fontStyle[2]"
@@ -82,8 +88,7 @@
            [style.font-weight]="fontWeight[2]"
            [style.text-shadow]="shadowLargeFix[2] + ' ' + shadowColor[2]"
            [style.color]="arrayFontColor[4]" style="z-index: 7"
-           [style.margin-left]="marginLeft[2] + '%'"
-           [style.margin-right]="marginRight[2] + '%'">
+           >
           {{forWhat}}
         </s>
       </div>
@@ -119,7 +124,8 @@
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.bottom]="(bottom * multiple * 1.5) + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;" [style.padding-top]="paddingTopFooter + '%'">
+      <div class="signature"
+           [style.text-align]="textAlign[3]" [style.bottom]="(bottom * multiple * 1.5) + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;" [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscapeFix"
            [style.text-shadow]="shadowSmallFix + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
@@ -158,7 +164,7 @@
                 [style.width]="10*multiple + 'vh'"
                 [style.height]="10*multiple + 'vh'"/>
           <div  style="z-index: 8;">
-            <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
+            <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]">
               <s id="largeTxtFix"  [style.letter-spacing]="(letterSpacing* (multiple))+'vw'"
                  [style.font-family]="arrayFontFamili[0]"
                  [style.font-weight]="fontWeight[0]"
@@ -167,15 +173,18 @@
                  [style.font-size]="(arrayFontSize[0] * multiple) + 'vw'"
                  [style.text-shadow]="shadowLargeFix[0] + ' '+ shadowColor[0]"
                  [style.color]="arrayFontColor[0]"
-                 [style.margin-left]="marginLeft[0] + '%'"
-                 [style.margin-right]="marginRight[0] + '%'"
+                 [style.padding-left]="marginLeft[0] + '%'"
+                 [style.padding-right]="marginRight[0] + '%'"
                  style="z-index: 8;">
                 {{title}}
               </s>
               <br/>
             </p>
           </div>
-          <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
+          <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'"
+               [style.padding-left]="marginLeft[1] + '%'"
+               [style.padding-right]="marginRight[1] + '%'"
+               [style.text-align]="textAlign[1]">
             <s id="sForFix"[style.letter-spacing]="(letterSpacingForWho* (multiple -0.5))+'vw'"
                [style.font-size]="(arrayFontSize[2] * multiple) + 'vw'"
                [style.font-family]="arrayFontFamili[1]"
@@ -184,12 +193,14 @@
                [style.font-weight]="fontWeight[1]"
                [style.text-shadow]="shadowLargeFix[1] + ' ' + shadowColor[1]"
                [style.color]="arrayFontColor[2]" style="z-index: 7"
-               [style.margin-left]="marginLeft[1] + '%'"
-               [style.margin-right]="marginRight[1] + '%'">
+               >
               {{forWho}}
             </s>
           </div>
-          <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
+          <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'"
+                [style.padding-left]="marginLeft[2] + '%'"
+                [style.padding-right]="marginRight[2] + '%'"
+                [style.text-align]="textAlign[2]">
             <s id="txtForWhatFix"
                [style.font-size]="(arrayFontSize[4] * multiple) + 'vw'"
                [style.font-family]="arrayFontFamili[2]"
@@ -198,8 +209,7 @@
                [style.font-weight]="fontWeight[2]"
                [style.text-shadow]="shadowLargeFix[2] + ' ' + shadowColor[2]"
                [style.color]="arrayFontColor[4]" style="z-index: 7"
-               [style.margin-left]="marginLeft[2] + '%'"
-               [style.margin-right]="marginRight[2] + '%'">
+               >
               {{forWhat}}
             </s>
           </div>
@@ -234,7 +244,7 @@
               {{sign2}}
             </p>
           </div>
-          <div class="signature" [style.bottom]="(bottom*multiple) + 'px'" [style.padding-top]="paddingTopFooter + '%'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+          <div class="signature" [style.text-align]="textAlign[3]" [style.bottom]="(bottom*multiple) + 'px'" [style.padding-top]="paddingTopFooter + '%'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
             <p id="smallTxtFix" [style.text-shadow]="shadowSmallFix + ' ' + shadowColor[4]"
                [style.font-variant]="fontVariant[4]"
                [style.font-family]="arrayFontFamili[6]"
@@ -554,12 +564,12 @@
                         <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
                         -->
                         <p class="fadeInTop">Lewy margines</p>
-                        <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
+                        <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>
                         <br/>
                         <p class="fadeInTop">Prawy margines</p>
-                        <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
+                        <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>
                         <p class="fadeInTop" >Górny margines</p>
-                        <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTop" class="example-full-width"></mat-slider>
+                        <mat-slider thumbLabel  min="-1" max="80" [(value)]="paddingTop" class="example-full-width"></mat-slider>
                         <p class="fadeInTop" >Odstęp między literami</p>
                         <mat-slider thumbLabel  min="0" max="3" step="0.1" [(value)]="letterSpacing" class="example-full-width"></mat-slider>
                         <br />
@@ -576,6 +586,22 @@
                         <button mat-mini-fab color="accent" (click)="setFontVariant(0)" style="margin-bottom: 10px">
                           <i class="material-icons">
                             format_size
+                          </i>
+                        </button>
+                        <br/>
+                        <button mat-mini-fab color="accent" (click)="setTextAlignLeft(0)" style="margin-bottom: 10px">
+                          <i class="material-icons">
+                            format_align_left
+                          </i>
+                        </button>
+                        <button mat-mini-fab color="accent" (click)="setTextAlignCenter(0)" style="margin-bottom: 10px">
+                          <i class="material-icons">
+                            format_align_center
+                          </i>
+                        </button>
+                        <button mat-mini-fab color="accent" (click)="setTextAlignRight(0)" style="margin-bottom: 10px">
+                          <i class="material-icons">
+                            format_align_right
                           </i>
                         </button>
                       </div>
@@ -639,12 +665,12 @@
                       <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
                     -->
                     <p class="fadeInTop">Lewy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[1]" class="example-full-width"></mat-slider>
                     <br/>
                     <p class="fadeInTop">Prawy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[1] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Górny margines</p>
-                    <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="paddingTopForWho" class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Odstęp między literami</p>
                     <mat-slider thumbLabel  min="0" max="3" step="0.1" [(value)]="letterSpacingForWho" class="example-full-width"></mat-slider>
                     <br />
@@ -663,6 +689,23 @@
                         format_size
                       </i>
                     </button>
+                    <br/>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignLeft(1)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_left
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignCenter(1)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_center
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignRight(1)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_right
+                      </i>
+                    </button>
+
                   </div>
                 </div>
               </div>
@@ -723,12 +766,12 @@
                     <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
                     -->
                     <p class="fadeInTop">Lewy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[2]" class="example-full-width"></mat-slider>
                     <br/>
                     <p class="fadeInTop">Prawy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[2] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Górny margines</p>
-                    <mat-slider thumbLabel  min="0" max="50" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>
                     <br />
                     <button mat-mini-fab color="accent" (click)="setFontStyle(2)" style="margin-bottom: 10px">
                       <i class="material-icons">
@@ -743,6 +786,22 @@
                     <button mat-mini-fab color="accent" (click)="setFontVariant(2)" style="margin-bottom: 10px">
                       <i class="material-icons">
                         format_size
+                      </i>
+                    </button>
+                    <br/>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignLeft(2)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_left
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignCenter(2)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_center
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignRight(2)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_right
                       </i>
                     </button>
                   </div>
@@ -807,14 +866,14 @@
                   <div class="inputContainer">
                     <p class="fadeInTop">Lewy margines</p>
                     <!--<input type="range" min="0" max="40" [value]="marginLeft[3]" (input)="marginLeft[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
                     <br/>
                     <p class="fadeInTop">Prawy margines</p>
                     <!--<input type="range" min="0" max="40" [value]="marginRight[3]" (input)="marginRight[3] = $event.target.value" class="slider"  style="width: 80%">-->
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[3]" class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Dolny margines</p>
                     <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
-                    <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
                     <br />
                     <button mat-mini-fab color="accent" (click)="setFontStyle(3)" style="margin-bottom: 10px">
                       <i class="material-icons">
@@ -894,15 +953,15 @@
 -->
                     <p class="fadeInTop" >Górny margines</p>
                     <!--<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">-->
-                    <mat-slider thumbLabel  min="10" max="25" [(value)]="paddingTopFooter" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="10" max="50" [(value)]="paddingTopFooter" class="example-full-width"></mat-slider>
                     <br />
                     <p class="fadeInTop">Lewy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginLeft[3]" class="example-full-width"></mat-slider>
                     <br/>
                     <p class="fadeInTop">Prawy margines</p>
-                    <mat-slider thumbLabel  min="0" max="40" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="0" max="80" [(value)]="marginRight[3] " class="example-full-width"></mat-slider>
                     <p class="fadeInTop" >Dolny margines</p>
-                    <mat-slider thumbLabel  min="0" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
+                    <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>
                     <br />
                     <button mat-mini-fab color="accent" (click)="setFontStyle(4)" style="margin-bottom: 10px"><i class="material-icons">
                       format_italic
@@ -915,6 +974,22 @@
                     <button mat-mini-fab color="accent" (click)="setFontVariant(4)" style="margin-bottom: 10px">
                       <i class="material-icons">
                         format_size
+                      </i>
+                    </button>
+                    <br/>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignLeft(3)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_left
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignCenter(3)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_center
+                      </i>
+                    </button>
+                    <button mat-mini-fab color="accent" (click)="setTextAlignRight(3)" style="margin-bottom: 10px">
+                      <i class="material-icons">
+                        format_align_right
                       </i>
                     </button>
                   </div>
@@ -1141,20 +1216,20 @@
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.letter-spacing]="letterSpacing+'vw'" [style.font-family]="arrayFontFamili[0]"  [style.color]="arrayFontColor[0]" [style.font-variant]="fontVariant[0]" [style.font-weight]="fontWeight[0]" [style.font-style]="fontStyle[0]" [style.margin-left]="marginLeft[0] + '%'" [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+        <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'"  [style.text-align]="textAlign[0]" >
+          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.letter-spacing]="letterSpacing+'vw'" [style.font-family]="arrayFontFamili[0]"  [style.color]="arrayFontColor[0]" [style.font-variant]="fontVariant[0]" [style.font-weight]="fontWeight[0]" [style.font-style]="fontStyle[0]" [style.padding-left]="marginLeft[0] + '%'" [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.letter-spacing]="letterSpacingForWho+'vw'" [style.color]="arrayFontColor[2]" [style.font-variant]="fontVariant[1]" style="z-index: 7" [style.font-family]="arrayFontFamili[1]"  [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
+        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.letter-spacing]="letterSpacingForWho+'vw'" [style.color]="arrayFontColor[2]" [style.font-variant]="fontVariant[1]" style="z-index: 7" [style.font-family]="arrayFontFamili[1]"  [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" >
           {{forWho}}
         </s>
       </div>
-        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" [style.font-variant]="fontVariant[2]" style="z-index: 7" [style.font-family]="arrayFontFamili[2]"  [style.font-style]="fontStyle[2]" [style.font-weight]="fontWeight[2]" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+        <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
+          <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" [style.font-variant]="fontVariant[2]" style="z-index: 7" [style.font-family]="arrayFontFamili[2]"  [style.font-style]="fontStyle[2]" [style.font-weight]="fontWeight[2]" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" >
             {{forWhat}}
           </s>
         </div>
@@ -1170,7 +1245,7 @@
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
+      <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxt" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
@@ -1198,20 +1273,20 @@
        <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
        <img  src="{{imgMAClogoFrame}}"  [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" >
-          <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.margin-left]="marginLeft[0] + '%'" [style.margin-right]="marginRight[0] + '%'" style="z-index: 8;">
+        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]" >
+          <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.padding-left]="marginLeft[0] + '%'" [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'">
-        <s id="sForLandscape"[style.letter-spacing]="letterSpacingForWho+'vw'"  [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.font-size]="arrayFontSize[2] + 'vw'" [style.font-variant]="fontVariant[1]" [style.font-family]="arrayFontFamili[1]" [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.color]="arrayFontColor[2]" style="z-index: 7"  [style.margin-left]="marginLeft[1] + '%'" [style.margin-right]="marginRight[1] + '%'">
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
+        <s id="sForLandscape"[style.letter-spacing]="letterSpacingForWho+'vw'"  [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.font-size]="arrayFontSize[2] + 'vw'" [style.font-variant]="fontVariant[1]" [style.font-family]="arrayFontFamili[1]" [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.color]="arrayFontColor[2]" style="z-index: 7"  >
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'">
-        <s id="txtForWhatLandscape" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.font-style]="fontStyle[2]"  [style.font-family]="arrayFontFamili[2]" [style.font-variant]="fontVariant[2]" [style.font-size]="arrayFontSize[4] + 'vw'" [style.font-weight]="fontWeight[2]" [style.color]="arrayFontColor[4]" style="z-index: 7" [style.margin-left]="marginLeft[2] + '%'" [style.margin-right]="marginRight[2] + '%'">
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
+        <s id="txtForWhatLandscape" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.font-style]="fontStyle[2]"  [style.font-family]="arrayFontFamili[2]" [style.font-variant]="fontVariant[2]" [style.font-size]="arrayFontSize[4] + 'vw'" [style.font-weight]="fontWeight[2]" [style.color]="arrayFontColor[4]" style="z-index: 7" >
           {{forWhat}}
         </s>
       </div>
@@ -1226,7 +1301,7 @@
           {{sign2}}
         </p>
       </div>
-       <div class="signature" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
+       <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
            {{footer}}
         </p>

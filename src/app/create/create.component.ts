@@ -176,6 +176,7 @@ export class CreateComponent implements OnInit {
   fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  textAlign = ['center', 'center', 'center', 'center', 'center'];
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -1206,6 +1207,15 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontVariant[n] = 'small-caps';
     }
+  }
+  setTextAlignLeft(n) {
+      this.textAlign[n] = 'left';
+  }
+  setTextAlignCenter(n) {
+    this.textAlign[n] = 'center';
+  }
+  setTextAlignRight(n) {
+    this.textAlign[n] = 'right';
   }
   setImg(n, name) {
     this.add();
