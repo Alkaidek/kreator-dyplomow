@@ -1251,12 +1251,21 @@ export class CreateComponent implements OnInit {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
   chceckWidth(n) {
-    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById(this.arrayFontNameId[n]).offsetWidth;
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    width = Number(this.marginLeft[n]) + width;
+    const widthRight = Number(this.marginRight[n]) + width;
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
+    if ( (width) > 98 || widthRight > 98 ) {
+      this.marginLeft[n] = 0;
+      this.marginRight[n] = 0;
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
@@ -1270,8 +1279,16 @@ export class CreateComponent implements OnInit {
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
-    this.marginLeft[n] = 0;
-    this.marginRight[n] = 0;
+    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    width = Number(this.marginLeft[n]) + width;
+    const widthRight = Number(this.marginRight[n]) + width;
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
+    if ( (width) > 98 || widthRight > 98 ) {
+      this.marginLeft[n] = 0;
+      this.marginRight[n] = 0;
+    }
     percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
     if ( (this.landscape === 'inline-block') ) {
@@ -1292,7 +1309,7 @@ export class CreateComponent implements OnInit {
     this.percentHeight[n] = Math.round(percent - 1);
   }
   setBottomMaxPx() {
-   /* this.bottomMaxPx*/
+    /* this.bottomMaxPx*/
     alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
   }
   setMaxWidthForUserTxt() {
@@ -1312,6 +1329,11 @@ export class CreateComponent implements OnInit {
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
     this.maxWidthUserTxtFieldRight = Math.round(percent - 1);
     console.log('margines' + this.maxWidthUserTxtFieldTop );
+    console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
+    if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
+      console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
+      this.txtLeft[this.currentTxt] = 0;
+    }
   }
 }
 
