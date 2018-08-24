@@ -615,10 +615,20 @@ button
   border-radius: 0px
 
 #sFor, #sForFix, #sForLandscape, #sForLandscapeFix
+  display: inline-block
   font-size: 250%
+  word-break: keep-all
+  word-wrap: break-spaces
+  overflow-wrap: break-spaces
+  white-space: pre-wrap
 
 #txtForWhat, #txtForWhatFix, #txtForWhatLandscape, #txtForWhatLandscapeFix
+  display: inline-block
   font-size: 200%
+  word-break: keep-all
+  word-wrap: break-spaces
+  overflow-wrap: break-spaces
+  white-space: pre-wrap
 
 s
   text-decoration: none
@@ -660,6 +670,8 @@ s
 
 #largeTxt, #largeTxtFix, #largeTxtLandscape, #largeTxtLandscapeFix
   font-size: 300%
+  white-space: nowrap
+  word-break: keep-all
 
 .slider, .slider50, input[type=color], .sliderInput
   -webkit-appearance: none
