@@ -17,9 +17,12 @@ import {DataService} from '../data.service';
     ]
 })
 export class CreateComponent implements OnInit {
-  percent = 0;
   userImg =
     [];
+  percentLeft = [100, 100, 100];
+  percentRight = [100, 100, 100];
+  percentHeight = [80, 80, 80];
+  bottomMaxPx = 120;
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -34,7 +37,7 @@ export class CreateComponent implements OnInit {
   auth = 'block';
   bcgTemp = [];
   template: any;
-  coordinatesTemplate =  [];
+  coordinatesTemplate = [];
   frames = [];
   bool = 'block';
   imagesSport = ['../../assets/img/sport/sport1.png',
@@ -47,7 +50,6 @@ export class CreateComponent implements OnInit {
     '../../assets/img/animal/4.png'];
   sportHeight = 11;
   animalHeight = 11;
-  sport: any;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
    /* db.list('/base64').valueChanges().subscribe(bcgTemp => {
       this.bcgTemp = bcgTemp;
@@ -98,6 +100,9 @@ export class CreateComponent implements OnInit {
     });*/
   }
 
+
+  maxWidthUserTxtFieldTop = 80;
+  maxWidthUserTxtFieldRight = 80;
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -220,6 +225,12 @@ export class CreateComponent implements OnInit {
     this.session();
     this.setOnInitData();
     this.addScrollListener();
+    this.setPaddingAnchor();
+  }
+  setPaddingAnchor() {
+    this.chceckWidth(0);
+    this.chceckWidth(1);
+    this.chceckWidth(2);
   }
   /*chceckArray() {
     console.log('array');
@@ -403,7 +414,7 @@ export class CreateComponent implements OnInit {
       min = '0' + min;
     }
     const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
-      this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
+    this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
   takeFontForEle(font, element) {
@@ -769,21 +780,21 @@ export class CreateComponent implements OnInit {
     }
   }
   landscapeOff(n) {
-      if (n === 2) {
-        this.landscape = 'none';
-        document.getElementById('imgO2').style.filter = 'grayscale(0%)';
-        document.getElementById('imgO1').style.filter = 'grayscale(100%)';
-        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
-        document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
-      } else {
-        this.landscape = 'inline-block';
-        const element = document.getElementById('toPdf100Landscape');
-        element.classList.remove('rotateInDownRight');
-        document.getElementById('imgO2').style.filter = 'grayscale(100%)';
-        document.getElementById('imgO1').style.filter = 'grayscale(0%)';
-        document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
-        document.getElementById('imgO1').style.transform = 'scale(1, 1)';
-      }
+    if (n === 2) {
+      this.landscape = 'none';
+      document.getElementById('imgO2').style.filter = 'grayscale(0%)';
+      document.getElementById('imgO1').style.filter = 'grayscale(100%)';
+      document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
+      document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+    } else {
+      this.landscape = 'inline-block';
+      const element = document.getElementById('toPdf100Landscape');
+      element.classList.remove('rotateInDownRight');
+      document.getElementById('imgO2').style.filter = 'grayscale(100%)';
+      document.getElementById('imgO1').style.filter = 'grayscale(0%)';
+      document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
+      document.getElementById('imgO1').style.transform = 'scale(1, 1)';
+    }
   }
   setScheme(n) {
     if (n === 50) {
@@ -1210,7 +1221,7 @@ export class CreateComponent implements OnInit {
     }
   }
   setTextAlignLeft(n) {
-      this.textAlign[n] = 'left';
+    this.textAlign[n] = 'left';
   }
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
@@ -1267,12 +1278,73 @@ export class CreateComponent implements OnInit {
   setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
-  chceckWidth() {
-    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById('largeTxt').offsetWidth;
-    const percent = 100 - ( document.getElementById('largeTxt').offsetWidth / document.getElementById('toPdf100').offsetWidth * 100);
-    alert(document.getElementById('largeTxt').offsetWidth + ' box: ' +
-      document.getElementById('toPdf100').offsetWidth + ' tyle zostało: ' + width + ' procent: ' + percent);
-    this.percent = percent - 1;
+  chceckWidth(n) {
+    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById(this.arrayFontNameId[n]).offsetWidth;
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    this.percentLeft[n] = Math.round(percent - 1);
+    this.percentRight[n] = Math.round(percent - 1);
+  }
+  chceckWidthWithCenter(n) {
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    this.percentLeft[n] = Math.round(percent - 1);
+    this.percentRight[n] = Math.round(percent - 1);
+    this.marginLeft[n] = 0;
+    this.marginRight[n] = 0;
+    percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    this.percentHeight[n] = Math.round(percent - 1);
+    this.percentHeight[n] = Math.round(percent - 1);
+  }
+  setHeightPercent(n) {
+    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    this.percentHeight[n] = Math.round(percent - 1);
+    this.percentHeight[n] = Math.round(percent - 1);
+  }
+  setBottomMaxPx() {
+    /* this.bottomMaxPx*/
+    alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
+  }
+  setMaxWidthForUserTxt() {
+    let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percentTop = 100 - ( document.getElementById('font2' + this.currentTxt).offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
+    this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
+    this.maxWidthUserTxtFieldRight = Math.round(percent - 1);
+    console.log('margines' + this.maxWidthUserTxtFieldTop );
+    console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
+    if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
+      console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
+      this.txtLeft[this.currentTxt] = 0;
+    }
   }
 }
 
