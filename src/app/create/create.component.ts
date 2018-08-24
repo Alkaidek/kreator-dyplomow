@@ -100,7 +100,6 @@ export class CreateComponent implements OnInit {
     });*/
   }
 
-
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 80;
   currentBaseTemplate = -1;
@@ -513,10 +512,23 @@ export class CreateComponent implements OnInit {
       this.fontVariant[2] =  template.fontVariant[2];
       this.fontVariant[3] =  template.fontVariant[3];
       this.fontVariant[4] =  template.fontVariant[4];
-      this.bcgRotateX =  template.bcgRotateX;
-      this.bcgRotateY =  template.bcgRotateY;
-      this.frmRotateX =  template.frmRotateX;
-      this.frmRotateY =  template.frmRotateY;
+      try {
+        this.bcgRotateX = template.bcgRotateX;
+        this.bcgRotateY = template.bcgRotateY;
+        this.frmRotateX = template.frmRotateX;
+        this.frmRotateY = template.frmRotateY;
+      } catch (e) {
+        console.log('no rotate here');
+      }
+      try {
+        this.textAlign[0] = template.textAlign[0];
+        this.textAlign[1] = template.textAlign[1];
+        this.textAlign[2] = template.textAlign[2];
+        this.textAlign[3] = template.textAlign[3];
+        this.textAlign[4] = template.textAlign[4];
+      } catch (e) {
+        console.log('no text Aling here');
+      }
       this.paddingTopFooter = template.paddingTopFooter;
       this.shadowSmall =  template.shadowSmall;
       this.letterSpacing = template.letterSpacing;
@@ -599,6 +611,7 @@ export class CreateComponent implements OnInit {
     this.landscapeOff(2);
     this.setScheme(30);
     this.paddingTopFooter = 12;
+    this.textAlign = ['center', 'center', 'center', 'center', 'center'];
     this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
@@ -990,6 +1003,12 @@ export class CreateComponent implements OnInit {
       + this.fontVariant[2] + '", "'
       + this.fontVariant[3] + '", "'
       + this.fontVariant[4] + '" ], '
+      + '"textAlign" : [ "'
+      + this.textAlign[0] + '", "'
+      + this.textAlign[1] + '", "'
+      + this.textAlign[2] + '", "'
+      + this.textAlign[3] + '", "'
+      + this.textAlign[4] + '" ], '
       + '"shadowSmall" : "'
       +  this.shadowSmall + '", '
       + '"letterSpacing" : "'
@@ -1222,12 +1241,33 @@ export class CreateComponent implements OnInit {
   }
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1) {
+      this.chceckWidth(1);
+    } else if ( n === 0) {
+      this.chceckWidth(0);
+    }
   }
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1 ) {
+      this.chceckWidth(1);
+    } else if ( n === 0 ) {
+      this.chceckWidth(0);
+    }
   }
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1) {
+      this.chceckWidth(1);
+    } else if ( n === 0) {
+      this.chceckWidth(0);
+    }
   }
   setImg(n, name) {
     this.add();
@@ -1279,12 +1319,21 @@ export class CreateComponent implements OnInit {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
   chceckWidth(n) {
-    const width = document.getElementById('toPdf100').offsetWidth - document.getElementById(this.arrayFontNameId[n]).offsetWidth;
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    width = Number(this.marginLeft[n]) + width;
+    const widthRight = Number(this.marginRight[n]) + width;
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
+    if ( (width) > 100 || widthRight > 100 ) {
+      this.marginLeft[n] = 0;
+      this.marginRight[n] = 0;
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
@@ -1298,8 +1347,16 @@ export class CreateComponent implements OnInit {
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
-    this.marginLeft[n] = 0;
-    this.marginRight[n] = 0;
+    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    width = Number(this.marginLeft[n]) + width;
+    const widthRight = Number(this.marginRight[n]) + width;
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
+    if ( (width) > 98 || widthRight > 98 ) {
+      this.marginLeft[n] = 0;
+      this.marginRight[n] = 0;
+    }
     percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
     if ( (this.landscape === 'inline-block') ) {
@@ -1347,4 +1404,3 @@ export class CreateComponent implements OnInit {
     }
   }
 }
-
