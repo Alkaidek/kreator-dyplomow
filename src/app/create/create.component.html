@@ -32,13 +32,16 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" id="font3{{i}}" style="width:100%; position: absolute; z-index: 1;"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.top]="txtTop[i]+'%'"
-         [style.font-size]="(txtSize[i]* (multiple ) + 0.5 ) + 'vw'"
-         [style.font-family]="txtFontFamili[i]"
-         [style.color]="txtColor[i]">{{txt}}</p>
+      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
+            [style.padding-right]="txtRight[i]+'%'"
+            [style.padding-left]="txtLeft[i]+'%'"
+            [style.top]="txtTop[i]+'%'">
+        <p id="font3{{i}}"
+           [style.font-size]="(txtSize[i]* (multiple) + 0.5) + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]">
+          {{txt}}</p>
+      </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
             [style.width]="10*multiple + 'vh'"
@@ -151,14 +154,16 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
       />
-      <p *ngFor="let txt of userTxt; let i = index" id="font4{{i}}" style="width:100%; position: absolute; z-index: 1;"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.top]="txtTop[i]+'%'"
-         [style.font-family]="txtFontFamili[i]"
-         [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
-         [style.color]="txtColor[i]"
-      >{{txt}}</p>
+      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
+            [style.padding-right]="txtRight[i]+'%'"
+            [style.padding-left]="txtLeft[i]+'%'"
+            [style.top]="txtTop[i]+'%'">
+        <p id="font4{{i}}"
+           [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]">
+          {{txt}}</p>
+      </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
             [style.width]="10*multiple + 'vh'"
@@ -1073,14 +1078,14 @@
         <div class="box33border" style="height: 10vh;">
           <mat-form-field class="fadeInLeft" style="width: 50%;" >
             <mat-select placeholder="Edytowane pole" [(value)]="currentTxt">
-              <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}">Edytuj: {{txt}}</mat-option>
+              <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()">Edytuj: {{txt}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="box33border" style="height: 10vh;">
           <mat-form-field class="fadeInLeft" style="width: 50%;" >
             <mat-select placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" >
-              <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)">{{fntFamili}}</mat-option>
+              <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()">{{fntFamili}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -1092,28 +1097,28 @@
         <div class="box33" style="height: 12vh; font-weight: bold">
           <p style="float: left;  padding-left: 5px" class="fadeInLeft">Wielkość tekstu</p> <br />
 <!--          <mat-slider thumbLabel type="range" min="0" max="8" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
-          <input type="range" min="0" max="8" step="0.1" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+          <input type="range" min="0" max="8" step="0.1" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div class="box33" style="height: 12vh; float: left">
           <p style="float: left; font-weight: bold;  padding-left: 5px" class="fadeInLeft" >Kolor czcionki</p> <br />
           <input type="color" class="fadeInRight" [value]="txtColor[currentTxt]" (input)="txtColor[currentTxt] = $event.target.value" [disabled]="hidebox" style="width: 80%; margin-right:7%;">
         </div>
-        <div class="box33border" style="height: 12vh;">
+        <!--<div class="box33border" style="height: 12vh;">
           <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Lewy margines tekstu</p>
-<!--
+&lt;!&ndash;
           <mat-slider thumbLabel min="0" max="100" [(value)]="txtRight[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>
--->
-          <input type="range" min="0" max="100" [value]="txtRight[currentTxt]" (input)="txtRight[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
-        </div>
-        <div class="box33border" style="height: 12vh;">
-          <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Górny margines tekstu</p>
+&ndash;&gt;
+          <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}" [value]="txtRight[currentTxt]" (input)="txtRight[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+        </div>-->
+        <div class="box33" style="height: 12vh;">
+          <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Pionowa pozycja tekstu</p>
           <!--<mat-slider thumbLabel min="0" max="100" [(value)]="txtTop[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
-          <input type="range" min="0" max="100" [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+          <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
-        <div class="box33border" style="height: 12vh;">
-          <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Prawy margines tekstu</p>
+        <div class="box33" style="height: 12vh;">
+          <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Pozioma pozycja tekstu</p>
          <!-- <mat-slider thumbLabel min="0" max="100" [(value)]="txtLeft[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
-          <input type="range" min="0" max="100" [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+          <input type="range" min="0" max="{{maxWidthUserTxtFieldRight}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
         </div>
@@ -1259,13 +1264,16 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" id="font1{{i}}" style="width:100%; position: absolute; z-index: 1;"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.top]="txtTop[i]+'%'"
-         [style.font-size]="txtSize[i] + 'vw'"
-         [style.font-family]="txtFontFamili[i]"
-         [style.color]="txtColor[i]">{{txt}}</p>
+      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
+            [style.padding-right]="txtRight[i]+'%'"
+            [style.padding-left]="txtLeft[i]+'%'"
+            [style.top]="txtTop[i]+'%'">
+        <p id="font1{{i}}"
+           [style.font-size]="txtSize[i] + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]">
+          {{txt}}</p>
+      </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
@@ -1316,13 +1324,16 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <p *ngFor="let txt of userTxt; let i = index" id="font2{{i}}" style="width:100%; position: absolute; z-index: 1;"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.top]="txtTop[i]+'%'"
-         [style.font-size]="txtSize[i] + 'vw'"
-         [style.font-family]="txtFontFamili[i]"
-         [style.color]="txtColor[i]">{{txt}}</p>
+      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
+            [style.padding-right]="txtRight[i]+'%'"
+            [style.padding-left]="txtLeft[i]+'%'"
+            [style.top]="txtTop[i]+'%'">
+        <p id="font2{{i}}"
+           [style.font-size]="txtSize[i] + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]">
+          {{txt}}</p>
+      </div>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}"  [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">

@@ -73,7 +73,8 @@ export class CreateComponent implements OnInit {
     });
   }
 
-
+  maxWidthUserTxtFieldTop = 80;
+  maxWidthUserTxtFieldRight = 80;
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -1253,7 +1254,7 @@ export class CreateComponent implements OnInit {
     const width = document.getElementById('toPdf100').offsetWidth - document.getElementById(this.arrayFontNameId[n]).offsetWidth;
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    if ( (this.landscape !== 'inline-block') ) {
+    if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     }
@@ -1293,6 +1294,24 @@ export class CreateComponent implements OnInit {
   setBottomMaxPx() {
    /* this.bottomMaxPx*/
     alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
+  }
+  setMaxWidthForUserTxt() {
+    let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percentTop = 100 - ( document.getElementById('font2' + this.currentTxt).offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
+    this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
+    this.maxWidthUserTxtFieldRight = Math.round(percent - 1);
+    console.log('margines' + this.maxWidthUserTxtFieldTop );
   }
 }
 
