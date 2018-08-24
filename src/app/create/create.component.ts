@@ -1292,15 +1292,22 @@ export class CreateComponent implements OnInit {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
   chceckWidth(n) {
-    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
-      document.getElementById('toPdf100').offsetWidth * 100);
+    let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    } else {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+        document.getElementById('toPdf100').offsetWidth * 100);
     }
     let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    if ( (this.landscape === 'inline-block') ) {
+      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    console.log('margin left ' + this.marginLeft +
+      ' Width: ' + width + '   percent: ' + percent + ' stete: ' + this.marginLeft[n] +  width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
@@ -1312,16 +1319,22 @@ export class CreateComponent implements OnInit {
     this.percentRight[n] = Math.round(percent - 1);
   }
   chceckWidthWithCenter(n) {
-    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
-      document.getElementById('toPdf100').offsetWidth * 100);
+    let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    } else {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+        document.getElementById('toPdf100').offsetWidth * 100);
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
     let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
