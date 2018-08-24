@@ -1194,12 +1194,33 @@ export class CreateComponent implements OnInit {
   }
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1) {
+      this.chceckWidth(1);
+    } else if ( n === 0) {
+      this.chceckWidth(0);
+    }
   }
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1 ) {
+      this.chceckWidth(1);
+    } else if ( n === 0 ) {
+      this.chceckWidth(0);
+    }
   }
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
+    if ( n === 2 ) {
+      this.chceckWidth(2);
+    } else if ( n === 1) {
+      this.chceckWidth(1);
+    } else if ( n === 0) {
+      this.chceckWidth(0);
+    }
   }
   setImg(n, name) {
     this.add();
@@ -1263,7 +1284,7 @@ export class CreateComponent implements OnInit {
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
-    if ( (width) > 98 || widthRight > 98 ) {
+    if ( (width) > 100 || widthRight > 100 ) {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
     }
