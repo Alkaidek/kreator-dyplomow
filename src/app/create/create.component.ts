@@ -485,10 +485,14 @@ export class CreateComponent implements OnInit {
       this.fontVariant[2] =  template.fontVariant[2];
       this.fontVariant[3] =  template.fontVariant[3];
       this.fontVariant[4] =  template.fontVariant[4];
-      this.bcgRotateX =  template.bcgRotateX;
-      this.bcgRotateY =  template.bcgRotateY;
-      this.frmRotateX =  template.frmRotateX;
-      this.frmRotateY =  template.frmRotateY;
+      try {
+        this.bcgRotateX = template.bcgRotateX;
+        this.bcgRotateY = template.bcgRotateY;
+        this.frmRotateX = template.frmRotateX;
+        this.frmRotateY = template.frmRotateY;
+      } catch (e) {
+        console.log('no rotate here');
+      }
       try {
         this.textAlign[0] = template.textAlign[0];
         this.textAlign[1] = template.textAlign[1];
@@ -496,7 +500,7 @@ export class CreateComponent implements OnInit {
         this.textAlign[3] = template.textAlign[3];
         this.textAlign[4] = template.textAlign[4];
       } catch (e) {
-        console.log('stare ale jare');
+        console.log('no text Aling here');
       }
       this.paddingTopFooter = template.paddingTopFooter;
       this.shadowSmall =  template.shadowSmall;
