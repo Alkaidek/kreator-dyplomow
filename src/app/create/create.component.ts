@@ -489,6 +489,15 @@ export class CreateComponent implements OnInit {
       this.bcgRotateY =  template.bcgRotateY;
       this.frmRotateX =  template.frmRotateX;
       this.frmRotateY =  template.frmRotateY;
+      try {
+        this.textAlign[0] = template.textAlign[0];
+        this.textAlign[1] = template.textAlign[1];
+        this.textAlign[2] = template.textAlign[2];
+        this.textAlign[3] = template.textAlign[3];
+        this.textAlign[4] = template.textAlign[4];
+      } catch (e) {
+        console.log('stare ale jare');
+      }
       this.paddingTopFooter = template.paddingTopFooter;
       this.shadowSmall =  template.shadowSmall;
       this.letterSpacing = template.letterSpacing;
@@ -571,6 +580,7 @@ export class CreateComponent implements OnInit {
     this.landscapeOff(2);
     this.setScheme(30);
     this.paddingTopFooter = 12;
+    this.textAlign = ['center', 'center', 'center', 'center', 'center'];
     this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
@@ -962,6 +972,12 @@ export class CreateComponent implements OnInit {
       + this.fontVariant[2] + '", "'
       + this.fontVariant[3] + '", "'
       + this.fontVariant[4] + '" ], '
+      + '"textAlign" : [ "'
+      + this.textAlign[0] + '", "'
+      + this.textAlign[1] + '", "'
+      + this.textAlign[2] + '", "'
+      + this.textAlign[3] + '", "'
+      + this.textAlign[4] + '" ], '
       + '"shadowSmall" : "'
       +  this.shadowSmall + '", '
       + '"letterSpacing" : "'
