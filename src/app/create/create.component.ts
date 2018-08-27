@@ -15,13 +15,13 @@ import html2canvas from 'html2canvas';
       './create.component.sass'
     ]
 })
+
 export class CreateComponent implements OnInit {
   userImg =
     [];
   percentLeft = [100, 100, 100];
   percentRight = [100, 100, 100];
   percentHeight = [80, 80, 80];
-  bottomMaxPx = 120;
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -72,12 +72,14 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });
   }
-
+  MACblue = '#25408f';
+  whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 80;
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
+  tmpBtnDisable = true;
   boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
@@ -121,10 +123,13 @@ export class CreateComponent implements OnInit {
   imgLeft = [];
   scheme = 0;
   txtTop = [];
-  email = 'abc@gmail.com';
   txtLeft = [];
   txtRight = [];
   txtSize = [];
+  txtStyle = [];
+  txtWeight = [];
+  txtVariant  = [];
+  txt = [];
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
@@ -161,12 +166,12 @@ export class CreateComponent implements OnInit {
       imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
-      document.getElementById('fbLogo').style.height = '3vh';
+      /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
       document.getElementById('ytLogo').style.width = '3vh';
       document.getElementById('fbLogo').style.marginTop = '10px';
-      document.getElementById('ytLogo').style.marginTop = '10px';
+      document.getElementById('ytLogo').style.marginTop = '10px';*/
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
       const elements = document.getElementsByClassName('logoText') as any;
@@ -180,12 +185,12 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
-      document.getElementById('fbLogo').style.marginTop = '16px';
+      /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
       document.getElementById('ytLogo').style.height = '4.5vh';
       document.getElementById('fbLogo').style.width = '4.5vh';
-      document.getElementById('ytLogo').style.width = '4.5vh';
+      document.getElementById('ytLogo').style.width = '4.5vh';*/
       const elements = document.getElementsByClassName('logoText') as any;
       for ( let i = 0; i < elements.length; i++ ) {
         elements[i].style.marginTop = '10px';
@@ -200,9 +205,11 @@ export class CreateComponent implements OnInit {
     this.setPaddingAnchor();
   }
   setPaddingAnchor() {
-    this.chceckWidth(0);
-    this.chceckWidth(1);
-    this.chceckWidth(2);
+    setTimeout( () => {
+      this.chceckWidth(0);
+      this.chceckWidth(1);
+      this.chceckWidth(2);
+    }, 300);
   }
   /*chceckArray() {
     console.log('array');
@@ -275,9 +282,6 @@ export class CreateComponent implements OnInit {
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
-
-    console.log('ten sie podnosi: ' + imgSrc);
-    console.log('a ten opada: ' + this.lastValue);
     document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
@@ -402,34 +406,26 @@ export class CreateComponent implements OnInit {
   }
   setHeightSport(array) {
     const divide = array.length / 5;
-    console.log('divade: ' + divide);
     if ( divide >= 0 && divide < 1) {
       this.sportHeight  = 11;
-      console.log('jestem 1');
     }
     if ( divide >= 1 && divide < 2) {
       this.sportHeight  = 22;
-      console.log('jestem 2');
     }
     if ( divide >= 2 && divide < 3) {
       this.sportHeight  = 33;
-      console.log('jestem 2');
     }
   }
   setHeightAnimal(array) {
     const divide = array.length / 5;
-    console.log('divade: ' + divide);
     if ( divide >= 0 && divide < 1) {
       this.animalHeight  = 11;
-      console.log('jestem 1');
     }
     if ( divide >= 1 && divide < 2) {
       this.animalHeight  = 22;
-      console.log('jestem 2');
     }
     if ( divide >= 2 && divide < 3) {
       this.animalHeight  = 33;
-      console.log('jestem 2');
     }
   }
   setUserData(template) {
@@ -568,6 +564,19 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    try {
+      document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
+    } catch (err) {
+      console.log('no element');
+    }
+    this.txtStyle = [];
+    this.txtWeight = [];
+    this.txtVariant  = [];
+    this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
+    this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
+    this.shadowSmall = '0px 0px';
+    this.shadowSmallFix = '0px 0px';
     this.bcgRotateX = 1;
     this.bcgRotateY = 1;
     this.frmRotateX = 1;
@@ -641,6 +650,7 @@ export class CreateComponent implements OnInit {
     this.userTxt = [];
     this.txtFontFamili = [];
     this.txtFontFamiliText = '';
+    this.imgSrcFrame = '../../assets/img/0.png';
   }
   moveLeft() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -677,7 +687,6 @@ export class CreateComponent implements OnInit {
         btn.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
-      console.log('hej to ja: ' + this.arrayScroll[i]);
     }
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
       btn.disabled = true;
@@ -719,7 +728,6 @@ export class CreateComponent implements OnInit {
         btn.disabled = true;
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
-      console.log('hej to ja: ' + this.arrayScrollFrame[i]);
     }
     if ( this.arrayScrollFrame[2] >= this.frames.length ) {
       btn.disabled = true;
@@ -733,7 +741,6 @@ export class CreateComponent implements OnInit {
     this.imgLeft[this.currImg] = 0;
     this.imgTop[this.currImg] = 0;
     this.imgWidth[this.currImg] = 10;
-    this.imgHeight[this.currImg] = 10;
   }
   right(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
@@ -840,10 +847,20 @@ export class CreateComponent implements OnInit {
     this.imgTop.push(0);
     this.imgLeft.push(0);
     this.currImg = this.userImg.length - 1;
+    setTimeout(() => {
+        this.setUserImgFrame(this.currImg);
+      }, 500 );
   }
   removeImg() {
-    this.imgHeight[this.currImg] = 0;
-    this.imgWidth[this.currImg] = 0;
+    this.userImg.pop();
+    this.userImgBase64.splice(this.currImg, 1);
+    this.rotate.splice(this.currImg, 1);
+    this.imgWidth.splice(this.currImg, 1);
+    this.imgHeight.splice(this.currImg, 1);
+    this.imgTop.splice(this.currImg, 1);
+    this.imgLeft.splice(this.currImg, 1);
+    this.currImg = this.userImg.length - 1;
+    this.setUserImgFrame(this.currImg);
   }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -1068,12 +1085,9 @@ export class CreateComponent implements OnInit {
     rmvBtn.disabled = false;
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader() as any;
-      console.log('1');
       reader.onload = (event2: any) => {
-        console.log('2');
         this.userImgBase64.push(event2.target.result);
       };
-      console.log('3');
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -1119,7 +1133,6 @@ export class CreateComponent implements OnInit {
   }
   addTxt() {
     if ( this.currentTxt === -1 ) {
-      document.getElementById('hiddenBox').style.display = 'inline-block';
       this.hidebox = false;
     }
     this.actualTxt = '';
@@ -1131,6 +1144,32 @@ export class CreateComponent implements OnInit {
     this.txtSize.push(3);
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
+    this.txtStyle.push('normal');
+    this.txtWeight.push('normal');
+    this.txtVariant.push('normal');
+    this.setWhiteColor('fontStyle5');
+    this.setWhiteColor('fontVariant5');
+    this.setWhiteColor('fontWeight5');
+    this.setWhiteColor('alignLeft5');
+    this.setWhiteColor('alignRight5');
+    this.setBlueColor('alignCenter5');
+  }
+  setUserTxtFiledProperty(n) {
+    if ( this.txtWeight[n] === 'normal' ) {
+      this.setWhiteColor('fontWeight5');
+    } else {
+      this.setBlueColor('fontWeight5');
+    }
+    if ( this.txtStyle[n] === 'normal' ) {
+      this.setWhiteColor('fontStyle5');
+    } else {
+      this.setBlueColor('fontStyle5');
+    }
+    if ( this.txtVariant[n] === 'normal' ) {
+      this.setWhiteColor('fontVariant5');
+    } else {
+      this.setBlueColor('fontVariant5');
+    }
   }
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
     if ( this.currentTxt === -1 ) {
@@ -1156,9 +1195,17 @@ export class CreateComponent implements OnInit {
       this.arrayFontFamili[4] = this.arraySelectFontFamili[n];
       this.arrayFontFamili[5] = this.arraySelectFontFamili[n];
     }
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
   }
   shadowOnOff(n, m) {
-    console.log(n + '' + m);
     if ( m === 0 ) {
       if ( this.shadowLarge[n] === '4px 4px 4px' ) {
         this.shadowLarge[n] = '0px 0px';
@@ -1197,6 +1244,43 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontStyle[n] = 'italic';
     }
+    this.setButtonColor('fontStyle' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
+  }
+  setTxtStyle() {
+    if (this.txtStyle[this.currentTxt] === 'italic') {
+      this.txtStyle[this.currentTxt] = 'normal';
+    } else {
+      this.txtStyle[this.currentTxt] = 'italic';
+    }
+    this.setButtonColor('fontStyle5');
+    this.setMaxWidthForUserTxt();
+  }
+  setTxtWeight() {
+    if (this.txtWeight[this.currentTxt] === 'bold') {
+      this.txtWeight[this.currentTxt] = 'normal';
+    } else {
+      this.txtWeight[this.currentTxt] = 'bold';
+    }
+    this.setButtonColor('fontWeight5');
+    this.setMaxWidthForUserTxt();
+  }
+  setTxtVariant() {
+    if (this.txtVariant[this.currentTxt] === 'small-caps') {
+      this.txtVariant[this.currentTxt] = 'normal';
+    } else {
+      this.txtVariant[this.currentTxt] = 'small-caps';
+    }
+    this.setButtonColor('fontVariant5');
+    this.setMaxWidthForUserTxt();
   }
   setFontWeight(n) {
     if (this.fontWeight[n] === 'bold') {
@@ -1204,6 +1288,16 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontWeight[n] = 'bold';
     }
+    this.setButtonColor('fontWeight' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
   }
   setFontVariant(n) {
     if (this.fontVariant[n] === 'small-caps') {
@@ -1211,9 +1305,22 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontVariant[n] = 'small-caps';
     }
+    this.setButtonColor('fontVariant' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+      }, 300);
   }
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
+    this.setWhiteColor('alignRight' + n);
+    this.setWhiteColor('alignCenter' + n);
+    this.setBlueColor('alignLeft' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1) {
@@ -1224,6 +1331,9 @@ export class CreateComponent implements OnInit {
   }
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
+    this.setWhiteColor('alignRight' + n);
+    this.setWhiteColor('alignLeft' + n);
+    this.setBlueColor('alignCenter' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1 ) {
@@ -1232,8 +1342,28 @@ export class CreateComponent implements OnInit {
       this.chceckWidth(0);
     }
   }
+  setButtonColor(n) {
+    if ( document.getElementById(n).style.background === 'white' || document.getElementById(n).style.background === '') {
+      document.getElementById(n).style.background = this.MACblue;
+      document.getElementById(n).style.color = 'white';
+    } else {
+      document.getElementById(n).style.background = 'white';
+      document.getElementById(n).style.color = this.MACblue;
+    }
+  }
+  setWhiteColor(n) {
+    document.getElementById(n).style.background = 'white';
+    document.getElementById(n).style.color = this.MACblue;
+  }
+  setBlueColor(n) {
+    document.getElementById(n).style.background = this.MACblue;
+    document.getElementById(n).style.color = 'white';
+  }
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
+    this.setWhiteColor('alignCenter' + n);
+    this.setWhiteColor('alignLeft' + n);
+    this.setBlueColor('alignRight' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1) {
@@ -1265,6 +1395,7 @@ export class CreateComponent implements OnInit {
     this.frmRotateY = this.frmRotateY * -1;
   }
   baseTemplate(n) {
+    this.tmpBtnDisable = false;
     document.getElementById('spinner').style.display = 'block';
     try {
       const request = new XMLHttpRequest();
@@ -1319,6 +1450,7 @@ export class CreateComponent implements OnInit {
     this.percentRight[n] = Math.round(percent - 1);
   }
   chceckWidthWithCenter(n) {
+    console.log('blur?');
     let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
@@ -1362,10 +1494,6 @@ export class CreateComponent implements OnInit {
     this.percentHeight[n] = Math.round(percent - 1);
     this.percentHeight[n] = Math.round(percent - 1);
   }
-  setBottomMaxPx() {
-    /* this.bottomMaxPx*/
-    alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
-  }
   setMaxWidthForUserTxt() {
     let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
@@ -1387,6 +1515,20 @@ export class CreateComponent implements OnInit {
     if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
       console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
       this.txtLeft[this.currentTxt] = 0;
+    }
+  }
+  setUserImgFrame(n) {
+    for (let i = 0; i <  this.imgTop.length; i ++ ) {
+      console.log('jestem');
+      if (i === n) {
+        document.getElementById('imgToChange4' + i).style.border = '2px solid red';
+        document.getElementById('imgToChange2' + i).style.border = '2px solid red';
+        console.log('jestem');
+      } else {
+        document.getElementById('imgToChange4' + i).style.border = 'none';
+        document.getElementById('imgToChange2' + i).style.border = 'none';
+        console.log('jestem');
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ const firebase = {
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    FormsModule,
     MaterialModule
   ],
   providers: [],
