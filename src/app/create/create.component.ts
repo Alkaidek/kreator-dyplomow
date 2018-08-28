@@ -792,12 +792,14 @@ export class CreateComponent implements OnInit {
   landscapeOff(n) {
     if (n === 2) {
       this.landscape = 'none';
+      this.setMaxWidthForUserTxt();
       document.getElementById('imgO2').style.filter = 'grayscale(0%)';
       document.getElementById('imgO1').style.filter = 'grayscale(100%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
     } else {
       this.landscape = 'inline-block';
+      this.setMaxWidthForUserTxt();
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
       document.getElementById('imgO2').style.filter = 'grayscale(100%)';
@@ -1620,6 +1622,7 @@ export class CreateComponent implements OnInit {
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+      console.log('landscape');
     }
     let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
