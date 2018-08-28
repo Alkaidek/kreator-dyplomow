@@ -554,7 +554,7 @@ export class CreateComponent implements OnInit {
         }
         this.boolDisableUserImgFields = false;
       }
-      try{
+      try {
         if ( template.txtTop.length > 0) {
           for ( let i = 0; i < template.txtTop.length; i++) {
             this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
@@ -1189,6 +1189,7 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('fontVariant5');
     this.setWhiteColor('fontWeight5');
     this.txtAlign.push('left');
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
     /*this.setWhiteColor('alignLeft5');
     this.setWhiteColor('alignRight5');
     this.setBlueColor('alignCenter5');*/

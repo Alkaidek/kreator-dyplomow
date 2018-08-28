@@ -34,7 +34,7 @@
            [style.top]="imgTop[usr]+'%'"/>
       <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font3{{i}}" style="width: max-content;"
+        <p id="font3{{i}}" class="maxContent" style=""
            [style.margin-right]="txtRight[i]+'%'"
            [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
@@ -159,7 +159,7 @@
       />
       <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font4{{i}}" style="width: max-content;"
+        <p id="font4{{i}}" class="maxContent" style=""
            [style.margin-right]="txtRight[i]+'%'"
            [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
@@ -1399,7 +1399,7 @@
            [style.top]="imgTop[usr]+'%'"/>
       <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font1{{i}}" style="width: max-content;"
+        <p id="font1{{i}}" class="maxContent" style=""
            [style.margin-right]="txtRight[i]+'%'"
            [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
@@ -1460,9 +1460,9 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; text-align: center;"
             [style.top]="txtTop[i]+'%'">
-        <p id="font2{{i}}" style="width: max-content;"
+        <p id="font2{{i}}"  class="maxContent" style=""
            [style.margin-right]="txtRight[i]+'%'"
            [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
