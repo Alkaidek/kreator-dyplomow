@@ -34,10 +34,10 @@ export class CreateComponent implements OnInit {
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
-  bcgTemp: any;
+  bcgTemp = [];
   template: any;
-  coordinatesTemplate: any;
-  frames: any;
+  coordinatesTemplate = [];
+  frames = [];
   bool = 'block';
   imagesSport = ['../../assets/img/sport/sport1.png',
     '../../assets/img/sport/sport2.png',
@@ -51,7 +51,9 @@ export class CreateComponent implements OnInit {
   animalHeight = 11;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
-      this.bcgTemp = bcgTemp;
+      for (let i = 0; i < bcgTemp.length; i++) {
+        this.bcgTemp.push('' + bcgTemp[i] );
+      }
     });
     db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
@@ -66,10 +68,14 @@ export class CreateComponent implements OnInit {
       }
     });
     db.list('/frame').valueChanges().subscribe(frames => {
-      this.frames = frames;
+      for (let i = 0; i < frames.length; i++) {
+        this.frames.push('' + frames[i] );
+      }
     });
     db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
-      this.coordinatesTemplate = coordinatesTemplate;
+      for (let i = 0; i < coordinatesTemplate.length; i++) {
+        this.coordinatesTemplate.push('' + coordinatesTemplate[i] );
+      }
     });
   }
   MACblue = '#25408f';
