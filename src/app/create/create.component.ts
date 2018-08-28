@@ -129,6 +129,7 @@ export class CreateComponent implements OnInit {
   txtStyle = [];
   txtWeight = [];
   txtVariant  = [];
+  txtAlign = [];
   txt = [];
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
@@ -142,6 +143,10 @@ export class CreateComponent implements OnInit {
   txtRightText = '';
   txtSizeText = '';
   txtUserText = '';
+  txtStyleText = '';
+  txtWeightText = '';
+  txtVariantText  = '';
+  txtAlignText = '';
   disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
@@ -549,14 +554,19 @@ export class CreateComponent implements OnInit {
         }
         this.boolDisableUserImgFields = false;
       }
-      if ( template.txtTop.length > 0) {
-        for ( let i = 0; i < template.txtTop.length; i++) {
-          this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
-            template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i]);
+      try{
+        if ( template.txtTop.length > 0) {
+          for ( let i = 0; i < template.txtTop.length; i++) {
+            this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
+              template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i],
+              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i]);
+            this.setUserTxtFiledProperty(i);
+          }
         }
-      } else {
-        document.getElementById('hiddenBox').style.display = 'none';
+      } catch (e) {
+        console.log('Old UserTxt Element');
       }
+      this.setAllButtonColor();
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
@@ -570,6 +580,12 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
+    this.txtAlignText = '';
+    this.txtAlign = [];
+    this.txtStyleText = '';
+    this.txtWeightText = '';
+    this.txtVariantText  = '';
+    this.tmpBtnDisable = true;
     this.txtStyle = [];
     this.txtWeight = [];
     this.txtVariant  = [];
@@ -741,6 +757,7 @@ export class CreateComponent implements OnInit {
     this.imgLeft[this.currImg] = 0;
     this.imgTop[this.currImg] = 0;
     this.imgWidth[this.currImg] = 10;
+    this.imgHeight[this.currImg] = 10;
   }
   right(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
@@ -885,6 +902,10 @@ export class CreateComponent implements OnInit {
     this.txtUserText = '';
     this.txtColorText = '';
     this.txtFontFamiliText = '';
+    this.txtStyleText = '';
+    this.txtWeightText = '';
+    this.txtVariantText = '';
+    this.txtAlignText = '';
   }
   createFileToSave() {
     console.log('font famili: ' + this.txtFontFamili);
@@ -915,6 +936,11 @@ export class CreateComponent implements OnInit {
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
         this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '", ';
+        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '", ';
+        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '", ';
+        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '", ';
+        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '", ';
+
         console.log('font famili: ' + this.txtFontFamili[i]);
       } else {
         this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
@@ -924,6 +950,10 @@ export class CreateComponent implements OnInit {
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
         this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '" ';
+        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '" ';
+        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '" ';
+        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '" ';
+        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '" ';
         console.log('font famili: ' + this.txtFontFamili[i]);
       }
     }
@@ -1049,6 +1079,14 @@ export class CreateComponent implements OnInit {
       + this.txtRightText + '],'
       + '"txtSize" : [ '
       + this.txtSizeText + '],'
+      + '"txtStyle" : [ '
+      + this.txtStyleText + '],'
+      + '"txtWeight" : [ '
+      + this.txtWeightText + '],'
+      + '"txtVariant" : [ '
+      + this.txtVariantText + '],'
+      + '"txtAlign" : [ '
+      + this.txtAlignText + '],'
       + '"txtUser" : [ '
       + this.txtUserText + '],'
       + '"txtColor" : [ '
@@ -1150,9 +1188,10 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('fontStyle5');
     this.setWhiteColor('fontVariant5');
     this.setWhiteColor('fontWeight5');
-    this.setWhiteColor('alignLeft5');
+    this.txtAlign.push('left');
+    /*this.setWhiteColor('alignLeft5');
     this.setWhiteColor('alignRight5');
-    this.setBlueColor('alignCenter5');
+    this.setBlueColor('alignCenter5');*/
   }
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
@@ -1170,10 +1209,11 @@ export class CreateComponent implements OnInit {
     } else {
       this.setBlueColor('fontVariant5');
     }
+    console.log('textAlign: ' + this.txtAlign + ' : ' + n);
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[n]);
   }
-  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align) {
     if ( this.currentTxt === -1 ) {
-      document.getElementById('hiddenBox').style.display = 'inline-block';
       this.hidebox = false;
     }
     this.actualTxt = actualTxt;
@@ -1185,6 +1225,11 @@ export class CreateComponent implements OnInit {
     this.txtSize.push(size);
     this.txtColor.push(color);
     this.txtFontFamili.push(fontfamili);
+    this.txtStyle.push(style);
+    this.txtWeight.push(weight);
+    this.txtVariant.push(variant);
+    this.txtAlign.push(align);
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
   setFontFamili(n) {
     this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
@@ -1282,6 +1327,45 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontVariant5');
     this.setMaxWidthForUserTxt();
   }
+  setTxtAlign(value) {
+    if (value === 'left') {
+      this.txtAlign[this.currentTxt] = 'left';
+      this.txtLeft[this.currentTxt] = 0;
+      this.setWhiteColor('alignCenter5');
+      this.setBlueColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    } else if (value === 'right') {
+      this.txtAlign[this.currentTxt] = 'right';
+      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();
+      this.setWhiteColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setBlueColor('alignRight5');
+    } else {
+      this.txtAlign[this.currentTxt] = 'center';
+      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;
+      this.setBlueColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    }
+  }
+  setTxtAlignWithoutPossitionChange(value) {
+    if (value === 'left') {
+      this.txtAlign[this.currentTxt] = 'left';
+      this.setWhiteColor('alignCenter5');
+      this.setBlueColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    } else if (value === 'right') {
+      this.txtAlign[this.currentTxt] = 'right';
+      this.setWhiteColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setBlueColor('alignRight5');
+    } else {
+      this.txtAlign[this.currentTxt] = 'center';
+      this.setBlueColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    }
+  }
   setFontWeight(n) {
     if (this.fontWeight[n] === 'bold') {
       this.fontWeight[n] = 'normal';
@@ -1359,6 +1443,41 @@ export class CreateComponent implements OnInit {
     document.getElementById(n).style.background = this.MACblue;
     document.getElementById(n).style.color = 'white';
   }
+  setAllButtonColor() {
+    for (let i = 0; i < this.fontStyle.length; i++) {
+      if (this.fontStyle[i] === 'normal') {
+        this.setWhiteColor('fontStyle' + i);
+      } else {
+        this.setBlueColor('fontStyle' + i);
+      }
+      if (this.fontWeight[i] === 'normal') {
+        this.setWhiteColor('fontWeight' + i);
+      } else {
+        this.setBlueColor('fontWeight' + i);
+      }
+      if (this.fontVariant[i] === 'normal') {
+        this.setWhiteColor('fontVariant' + i);
+      } else {
+        this.setBlueColor('fontVariant' + i);
+      }
+      if (i < 4) {
+        if (this.textAlign[i] === 'center') {
+          this.setWhiteColor('alignLeft' + i);
+          this.setWhiteColor('alignRight' + i);
+          this.setBlueColor('alignCenter' + i);
+        } else if (this.textAlign[i] === 'left' ) {
+          this.setBlueColor('alignLeft' + i);
+          this.setWhiteColor('alignRight' + i);
+          this.setWhiteColor('alignCenter' + i);
+        } else {
+          this.setWhiteColor('alignLeft' + i);
+          this.setBlueColor('alignRight' + i);
+          this.setWhiteColor('alignCenter' + i);
+        }
+      }
+    }
+  }
+
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
     this.setWhiteColor('alignCenter' + n);
@@ -1395,7 +1514,6 @@ export class CreateComponent implements OnInit {
     this.frmRotateY = this.frmRotateY * -1;
   }
   baseTemplate(n) {
-    this.tmpBtnDisable = false;
     document.getElementById('spinner').style.display = 'block';
     try {
       const request = new XMLHttpRequest();
@@ -1413,6 +1531,7 @@ export class CreateComponent implements OnInit {
         document.getElementById('base' + n).style.filter = 'grayscale(0%)';
       }
       this.currentBaseTemplate = n;
+      this.tmpBtnDisable = false;
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niekomaptybilny, uszkodzony lub przestarzały!', 'ok');
@@ -1516,6 +1635,7 @@ export class CreateComponent implements OnInit {
       console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
       this.txtLeft[this.currentTxt] = 0;
     }
+    return Math.round(percent - 1);
   }
   setUserImgFrame(n) {
     for (let i = 0; i <  this.imgTop.length; i ++ ) {

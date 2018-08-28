@@ -32,12 +32,12 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font3{{i}}"
-           [style.font-size]="(txtSize[i]* (multiple) + 0.5) + 'vw'"
+        <p id="font3{{i}}" style="width: max-content;"
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
+           [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
            [style.font-family]="txtFontFamili[i]"
            [style.color]="txtColor[i]"
            [style.font-variant]="txtVariant[i]"
@@ -140,8 +140,8 @@
            [style.font-weight]="fontWeight[4]"
            [style.font-size]="(arrayFontSize[3]* (multiple ) + 0.5) + 'vw'"
            [style.color]="arrayFontColor[3]">
-          {{footer}}Kielce Piaski, 25-001 KielceZagnańska 67, 25-558 Kielce
-        </p>Kielce Piaski, 25-001 Kielce
+          {{footer}}
+        </p>
       </div>
     </div>
   </div>
@@ -157,11 +157,11 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
       />
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font4{{i}}"
+        <p id="font4{{i}}" style="width: max-content;"
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
            [style.font-family]="txtFontFamili[i]"
            [style.color]="txtColor[i]"
@@ -1183,7 +1183,7 @@
         <div class="leftCont" style="background-color: white">
           <br />
           <mat-form-field class="example-full-width fadeInRight">
-            <textarea matInput [value]="userTxt[currentTxt]" (input)="userTxt[currentTxt] = $event.target.value" placeholder="Treść pola" [disabled]="hidebox"></textarea>
+            <input matInput (ngModelChange)="setMaxWidthForUserTxt();" (blur)="setMaxWidthForUserTxt()" [(ngModel)]="userTxt[currentTxt]" placeholder="Treść pola" [disabled]="hidebox">
           </mat-form-field>
           <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
           <input type="range" min="0" max="8" step="0.1" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
@@ -1228,7 +1228,29 @@
                     format_size
                   </i>
                 </button>
-                <br/>
+                <br />
+                <button mat-mini-fab color="accent" color="primary" id="alignLeft5" (click)="setTxtAlign('left')" style="margin-bottom: 10px; background-color: white;"
+                        [style.background-color]="MACblue"
+                        [style.color]="whiteColor"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_left
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" id="alignCenter5" color="primary" (click)="setTxtAlign('center')" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_center
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" id="alignRight5" color="primary" (click)="setTxtAlign('right')" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_right
+                  </i>
+                </button>
               </div>
             </div>
           </div>
@@ -1375,11 +1397,11 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font1{{i}}"
+        <p id="font1{{i}}" style="width: max-content;"
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
            [style.font-family]="txtFontFamili[i]"
            [style.color]="txtColor[i]"
@@ -1438,11 +1460,11 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font2{{i}}"
+        <p id="font2{{i}}" style="width: max-content;"
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
            [style.font-family]="txtFontFamili[i]"
            [style.color]="txtColor[i]"
