@@ -792,14 +792,12 @@ export class CreateComponent implements OnInit {
   landscapeOff(n) {
     if (n === 2) {
       this.landscape = 'none';
-      this.setMaxWidthForUserTxt();
       document.getElementById('imgO2').style.filter = 'grayscale(0%)';
       document.getElementById('imgO1').style.filter = 'grayscale(100%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
     } else {
       this.landscape = 'inline-block';
-      this.setMaxWidthForUserTxt();
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
       document.getElementById('imgO2').style.filter = 'grayscale(100%)';
