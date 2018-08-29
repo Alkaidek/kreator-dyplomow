@@ -5,7 +5,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { LandscapeComponent } from './landscape/landscape.component';

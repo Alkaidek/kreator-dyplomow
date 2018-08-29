@@ -25,12 +25,6 @@ export class CreateComponent implements OnInit {
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
-  userImgBase64txt = '';
-  userImgRotatetxt = '';
-  userImgWidthtxt = '';
-  userImgHeighttxt = '';
-  userImgMarginLefttxt = '';
-  userImgMarginRigthtxt = '';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
@@ -144,15 +138,6 @@ export class CreateComponent implements OnInit {
   shadowSmall = '0% 0%';
   shadowSmallFix = '0% 0%';
   txtColor = [];
-  txtTopText = '';
-  txtLeftText = '';
-  txtRightText = '';
-  txtSizeText = '';
-  txtUserText = '';
-  txtStyleText = '';
-  txtWeightText = '';
-  txtVariantText  = '';
-  txtAlignText = '';
   disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
@@ -306,9 +291,11 @@ export class CreateComponent implements OnInit {
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
     switch ( imgSrc ) {
       case imgSrc:
-        this.paddingTop = this.coordinatesTemplate[imgSrc][0];
-        this.paddingTopForWho = this.coordinatesTemplate[imgSrc][0] + 10;
-        this.paddingTopForWhat = this.coordinatesTemplate[imgSrc][0] + 20;
+        console.log('number' + imgSrc);
+        console.log('Array' + this.coordinatesTemplate[imgSrc]);
+        this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
+        this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
+        this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
         this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
         this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
         this.bottom = this.coordinatesTemplate[imgSrc][3];
@@ -586,11 +573,7 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
-    this.txtAlignText = '';
     this.txtAlign = [];
-    this.txtStyleText = '';
-    this.txtWeightText = '';
-    this.txtVariantText  = '';
     this.tmpBtnDisable = true;
     this.txtStyle = [];
     this.txtWeight = [];
@@ -657,18 +640,7 @@ export class CreateComponent implements OnInit {
     this.txtSize = [];
     this.currentTxt = -1;
     this.txtColor = [];
-    this.txtTopText = '';
-    this.txtLeftText = '';
-    this.txtRightText = '';
-    this.txtSizeText = '';
-    this.txtUserText = '';
     this.txtColorText = '';
-    this.userImgBase64txt = '';
-    this.userImgRotatetxt = '';
-    this.userImgWidthtxt = '';
-    this.userImgHeighttxt = '';
-    this.userImgMarginLefttxt = '';
-    this.userImgMarginRigthtxt = '';
     this.userTxt = [];
     this.txtFontFamili = [];
     this.txtFontFamiliText = '';
@@ -894,147 +866,46 @@ export class CreateComponent implements OnInit {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
     fileSaver.saveAs(blob, 'template' + date + '.MACproject');
   }
-  resetFiled() {
-    this.userImgRotatetxt = '';
-    this.userImgWidthtxt = '';
-    this.userImgHeighttxt = '';
-    this.userImgMarginLefttxt = '';
-    this.userImgMarginRigthtxt = '';
-    this.userImgBase64txt = '';
-    this.txtTopText =  '';
-    this.txtLeftText = '';
-    this.txtRightText = '';
-    this.txtSizeText = '';
-    this.txtUserText = '';
-    this.txtColorText = '';
-    this.txtFontFamiliText = '';
-    this.txtStyleText = '';
-    this.txtWeightText = '';
-    this.txtVariantText = '';
-    this.txtAlignText = '';
+  createTextToJSON(name) {
+    let txt = '';
+    for ( let i = 0; i < name.length; i ++) {
+      if (i !== name.length - 1) {
+        txt = txt + '"' + name[i] + '", ';
+      } else {
+        txt = txt + '"' + name[i] + '" ';
+      }
+    }
+    return txt;
   }
   createFileToSave() {
-    console.log('font famili: ' + this.txtFontFamili);
-    this.resetFiled();
-    for ( let i = 0; i < this.userImgBase64.length; i ++) {
-      if ( i !== this.rotate.length - 1 ) {
-        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '", ';
-        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '", ';
-        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '", ';
-        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '", ';
-        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '", ';
-        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '", ';
-      } else {
-        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '" ';
-        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '" ';
-        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '" ';
-        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '" ';
-        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '" ';
-        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '" ';
-      }
-    }
-    for ( let i = 0; i < this.userTxt.length; i ++) {
-      if (i !== this.userTxt.length - 1) {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '", ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '", ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '", ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '", ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
-        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '", ';
-        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '", ';
-        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '", ';
-        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '", ';
-        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '", ';
-
-        console.log('font famili: ' + this.txtFontFamili[i]);
-      } else {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '" ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '" ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '" ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
-        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '" ';
-        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '" ';
-        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '" ';
-        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '" ';
-        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '" ';
-        console.log('font famili: ' + this.txtFontFamili[i]);
-      }
-    }
-    const txt = '{"arrayFontColor" : [ "'
-      + this.arrayFontColor[0] + '", "'
-      + this.arrayFontColor[1] + '", "'
-      + this.arrayFontColor[2] + '", "'
-      + this.arrayFontColor[3] + '", "'
-      + this.arrayFontColor[4] + '", "'
-      + this.arrayFontColor[5]
-      + '"], "arrayFontFamili" : [ "'
-      + this.arrayFontFamili[0] + '", "'
-      + this.arrayFontFamili[1] + '", "'
-      + this.arrayFontFamili[2] + '", "'
-      + this.arrayFontFamili[3] + '", "'
-      + this.arrayFontFamili[4] + '", "'
-      + this.arrayFontFamili[5] + '", "'
-      + this.arrayFontFamili[6] + '"],'
+    const txt = '{"arrayFontColor" : [ '
+      + this.createTextToJSON(this.arrayFontColor) + '],'
+      + ' "arrayFontFamili" : [ '
+      + this.createTextToJSON(this.arrayFontFamili) + '],'
       + ' "arrayFontSize" : ['
-      + this.arrayFontSize[0] + ', '
-      + this.arrayFontSize[1] + ', '
-      + this.arrayFontSize[2] + ', '
-      + this.arrayFontSize[3] + ', '
-      + this.arrayFontSize[4] + '], '
+      + this.createTextToJSON(this.arrayFontSize) + '],'
       + '"bottom" : "' + this.bottom + '", '
       + '"paddingTopFooter" : "' + this.paddingTopFooter + '", '
       + '"bcgRotateX" : "' + this.bcgRotateX + '", '
       + '"bcgRotateY" : "' + this.bcgRotateY + '", '
       + '"frmRotateX" : "' + this.frmRotateX + '", '
       + '"frmRotateY" : "' + this.frmRotateY + '", '
-      + '"marginLeft" : [ "'
-      + this.marginLeft[0] + '", "'
-      + this.marginLeft[1] + '", "'
-      + this.marginLeft[2] + '", "'
-      + this.marginLeft[3] + '" ], '
-      + '"marginRight" : [ "'
-      + this.marginRight[0] + '", "'
-      + this.marginRight[1] + '", "'
-      + this.marginRight[2] + '", "'
-      + this.marginRight[3] + '" ], '
-      + '"shadowColor" : [ "'
-      + this.shadowColor[0] + '", "'
-      + this.shadowColor[1] + '", "'
-      + this.shadowColor[2] + '", "'
-      + this.shadowColor[3] + '", "'
-      + this.shadowColor[4] + '" ], '
-      + '"shadowLarge" : [ "'
-      + this.shadowLarge[0] + '", "'
-      + this.shadowLarge[1] + '", "'
-      + this.shadowLarge[2] + '", "'
-      + this.shadowLarge[3] + '" ], '
-      + '"fontStyle" : [ "'
-      + this.fontStyle[0] + '", "'
-      + this.fontStyle[1] + '", "'
-      + this.fontStyle[2] + '", "'
-      + this.fontStyle[3] + '", "'
-      + this.fontStyle[4] + '" ], '
-      + '"fontWeight" : [ "'
-      + this.fontWeight[0] + '", "'
-      + this.fontWeight[1] + '", "'
-      + this.fontWeight[2] + '", "'
-      + this.fontWeight[3] + '", "'
-      + this.fontWeight[4] + '" ], '
-      + '"fontVariant" : [ "'
-      + this.fontVariant[0] + '", "'
-      + this.fontVariant[1] + '", "'
-      + this.fontVariant[2] + '", "'
-      + this.fontVariant[3] + '", "'
-      + this.fontVariant[4] + '" ], '
-      + '"textAlign" : [ "'
-      + this.textAlign[0] + '", "'
-      + this.textAlign[1] + '", "'
-      + this.textAlign[2] + '", "'
-      + this.textAlign[3] + '", "'
-      + this.textAlign[4] + '" ], '
+      + '"marginLeft" : [ '
+      + this.createTextToJSON(this.marginLeft) + '],'
+      + '"marginRight" : [ '
+      + this.createTextToJSON(this.marginRight) + '],'
+      + '"shadowColor" : [ '
+      + this.createTextToJSON(this.shadowColor) + '],'
+      + '"shadowLarge" : [ '
+      + this.createTextToJSON(this.shadowLarge) + '],'
+      + '"fontStyle" : [ '
+      + this.createTextToJSON(this.fontStyle) + '],'
+      + '"fontWeight" : [ '
+      + this.createTextToJSON(this.fontWeight) + '],'
+      + '"fontVariant" : [ '
+      + this.createTextToJSON(this.fontVariant) + '],'
+      + '"textAlign" : [ '
+      + this.createTextToJSON(this.textAlign) + '],'
       + '"shadowSmall" : "'
       +  this.shadowSmall + '", '
       + '"letterSpacing" : "'
@@ -1066,39 +937,39 @@ export class CreateComponent implements OnInit {
       + '"footer" : "'
       + this.footer.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
       + '"userBcgBase64" : [ '
-      + this.userImgBase64txt + '],'
+      + this.createTextToJSON(this.userImgBase64) + '],'
       + '"userImgRotate" : [ '
-      + this.userImgRotatetxt + '],'
+      + this.createTextToJSON(this.rotate) + '],'
       + '"userImgWidth" : [ '
-      + this.userImgWidthtxt + '],'
+      + this.createTextToJSON(this.imgWidth) + '],'
       + '"userImgHeight" : [ '
-      + this.userImgHeighttxt + '],'
+      + this.createTextToJSON(this.imgHeight) + '],'
       + '"userImgLeft" : [ '
-      + this.userImgMarginLefttxt + '],'
+      + this.createTextToJSON(this.imgLeft) + '],'
       + '"userImgTop" : [ '
-      + this.userImgMarginRigthtxt + '],'
+      + this.createTextToJSON(this.imgTop) + '],'
       + '"txtTop" : [ '
-      + this.txtTopText + '],'
+      + this.createTextToJSON(this.txtTop) + '],'
       + '"txtLeft" : [ '
-      + this.txtLeftText + '],'
+      + this.createTextToJSON(this.txtLeft) + '],'
       + '"txtRight" : [ '
-      + this.txtRightText + '],'
+      + this.createTextToJSON(this.txtRight) + '],'
       + '"txtSize" : [ '
-      + this.txtSizeText + '],'
+      + this.createTextToJSON(this.txtSize) + '],'
       + '"txtStyle" : [ '
-      + this.txtStyleText + '],'
+      + this.createTextToJSON(this.txtStyle) + '],'
       + '"txtWeight" : [ '
-      + this.txtWeightText + '],'
+      + this.createTextToJSON(this.txtWeight) + '],'
       + '"txtVariant" : [ '
-      + this.txtVariantText + '],'
+      + this.createTextToJSON(this.txtVariant) + '],'
       + '"txtAlign" : [ '
-      + this.txtAlignText + '],'
+      + this.createTextToJSON(this.txtAlign) + '],'
       + '"txtUser" : [ '
-      + this.txtUserText + '],'
+      + this.createTextToJSON(this.userTxt) + '],'
       + '"txtColor" : [ '
-      + this.txtColorText + '],'
+      + this.createTextToJSON(this.txtColor) + '],'
       + '"txtFontFamili" : [ '
-      + this.txtFontFamiliText + '],'
+      + this.createTextToJSON(this.txtFontFamili) + '],'
       + '"frame" : "'
       + this.imgSrcFrame + '", '
       + '"scheme" : "'
@@ -1196,9 +1067,6 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('fontWeight5');
     this.txtAlign.push('left');
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
-    /*this.setWhiteColor('alignLeft5');
-    this.setWhiteColor('alignRight5');
-    this.setBlueColor('alignCenter5');*/
   }
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
