@@ -206,7 +206,7 @@ export class CreateComponent implements OnInit {
       this.checkWidth(2);
     }, 300);
   }
-  /*chceckArray() {
+  /*checkArray() {
     console.log('array');
     console.log(this.sport);
     console.log(this.sport[0].sport);
@@ -1422,7 +1422,7 @@ export class CreateComponent implements OnInit {
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
   }
-  protected checkWidthWithCenter(n): void {
+  checkWidthWithCenter(n): void {
     console.log('blur?');
     let percent;
     if ( (this.landscape === 'inline-block') ) {
