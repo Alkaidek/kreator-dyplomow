@@ -32,14 +32,17 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font3{{i}}"
-           [style.font-size]="(txtSize[i]* (multiple) + 0.5) + 'vw'"
+        <p id="font3{{i}}" class="maxContent" style=""
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
+           [style.font-size]="(txtSize[i]* (multiple + 1.4) )  + 'vw'"
            [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]">
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]">
           {{txt}}</p>
       </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
@@ -47,17 +50,17 @@
             [style.width]="10*multiple + 'vh'"
             [style.height]="10*multiple + 'vh'"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]">
+        <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]"  [style.padding-left]="marginLeft[0] + '%'"
+           [style.padding-right]="marginRight[0] + '%'">
           <s id="largeTxtLandscapeFix"  [style.letter-spacing]="(letterSpacing * (multiple ))+'vw'"
              [style.font-family]="arrayFontFamili[0]"
              [style.font-style]="fontStyle[0]"
              [style.font-variant]="fontVariant[0]"
              [style.font-weight]="fontWeight[0]"
              [style.text-shadow]="shadowLargeFix[0] + ' ' + shadowColor[0]"
-             [style.font-size]="(arrayFontSize[0]* (multiple) + 0.5) + 'vw'"
+             [style.font-size]="(arrayFontSize[0]* (multiple +  1.4)) + 'vw'"
              [style.color]="arrayFontColor[0]"
-             [style.padding-left]="marginLeft[0] + '%'"
-             [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
+             style="z-index: 8;">
             {{title}}
           </s>
           <br/>
@@ -69,7 +72,7 @@
            [style.text-align]="textAlign[1]"
       >
         <s id="sForLandscapeFix"[style.letter-spacing]="(letterSpacingForWho* (multiple))+'vw'"
-           [style.font-size]="(arrayFontSize[2] * (multiple) + 0.5) + 'vw'"
+           [style.font-size]="(arrayFontSize[2] * (multiple +  1.4)) + 'vw'"
            [style.font-family]="arrayFontFamili[1]"
            [style.font-variant]="fontVariant[1]"
            [style.font-style]="fontStyle[1]"
@@ -84,7 +87,7 @@
             [style.padding-left]="marginLeft[2] + '%'"
             [style.padding-right]="marginRight[2] + '%'"
             [style.text-align]="textAlign[2]">
-        <s id="txtForWhatLandscapeFix" [style.font-size]="(arrayFontSize[4]* (multiple) + 0.5) + 'vw'"
+        <s id="txtForWhatLandscapeFix" [style.font-size]="(arrayFontSize[4]* (multiple +  1.4)) + 'vw'"
            [style.font-family]="arrayFontFamili[2]"
            [style.font-style]="fontStyle[2]"
            [style.font-variant]="fontVariant[2]"
@@ -97,7 +100,7 @@
       </div>
       <div class="signature" id="signLandscapeFix" [style.bottom]="(bottom * multiple * 1.4) + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="leftLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple -0.5+ 0.5) ) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple + 0.8) ) + 'vw'"
            [style.font-family]="arrayFontFamili[3]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -107,7 +110,7 @@
           {{sign1}}
         </p>
         <p id="centerLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple - 0.5  + 0.5)) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple +  0.8)) + 'vw'"
            [style.font-family]="arrayFontFamili[4]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -117,7 +120,7 @@
           {{sign3}}
         </p>
         <p id="rightLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple - 0.5 + 0.5) ) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple + 0.8) ) + 'vw'"
            [style.font-family]="arrayFontFamili[5]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -135,7 +138,7 @@
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
            [style.font-weight]="fontWeight[4]"
-           [style.font-size]="(arrayFontSize[3]* (multiple ) + 0.5) + 'vw'"
+           [style.font-size]="(arrayFontSize[3]* (multiple + 1.1)) + 'vw'"
            [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
@@ -154,14 +157,17 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
       />
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font4{{i}}"
+        <p id="font4{{i}}" class="maxContent" style=""
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
            [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]">
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]">
           {{txt}}</p>
       </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
@@ -221,7 +227,7 @@
 
       <div class="signature" id="signFix" [style.bottom]="(bottom*multiple) + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="leftFix"
-           [style.font-size]="(arrayFontSize[1] * (multiple - 0.5)) + 'vw'"
+           [style.font-size]="(arrayFontSize[1] * (multiple - 0.2 )) + 'vw'"
            [style.font-family]="arrayFontFamili[3]"
            [style.font-variant]="fontVariant[3]"
            [style.font-style]="fontStyle[3]"
@@ -230,7 +236,7 @@
            [style.color]="arrayFontColor[1]">
           {{sign1}}
         </p>
-        <p id="centerFix" [style.font-size]="(arrayFontSize[1]*(multiple - 0.5 )) + 'vw'"
+        <p id="centerFix" [style.font-size]="(arrayFontSize[1]*(multiple - 0.2 )) + 'vw'"
            [style.font-variant]="fontVariant[3]"
            [style.font-family]="arrayFontFamili[4]"
            [style.font-style]="fontStyle[3]"
@@ -240,7 +246,7 @@
           {{sign3}}
         </p>
         <p id="rightFix" [style.font-variant]="fontVariant[3]"
-           [style.font-size]="(arrayFontSize[1] * (multiple - 0.5)) + 'vw'"
+           [style.font-size]="(arrayFontSize[1] * (multiple - 0.2)) + 'vw'"
            [style.font-family]="arrayFontFamili[5]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -272,12 +278,12 @@
   <span class="logoText">K</span><span class="logoText">R</span><span class="logoText">E</span><span class="logoText">A</span><span class="logoText">T</span><span class="logoText">O</span><span class="logoText">R</span>
   <span style='margin-left: 20px'></span>
   <span class="logoText">D</span><span class="logoText">Y</span><span class="logoText">P</span><span class="logoText">L</span><span class="logoText">O</span><span class="logoText">M</span><span class="logoText">Ó</span><span class="logoText">W</span>
-  <a href="https://www.youtube.com/channel/UCmFEaiDaKet-IT1meLrYcVA">
+  <!--<a href="https://www.youtube.com/channel/UCmFEaiDaKet-IT1meLrYcVA">
     <img id="ytLogo" src="../../assets/icon/yt.png" style="width: 4.5vh; height: 4.5vh; z-index: 15; margin-top: 16px; margin-right: 8px; left: 7px; transition: all linear 0.3s; float: right;"/>
   </a>
   <a href="https://www.facebook.com/macedukacja">
     <img id="fbLogo" src="../../assets/icon/fb.png" style="width: 4.5vh; height: 4.5vh; z-index: 15; margin-top: 16px; margin-right: 8px; left: 7px; transition: all linear 0.3s; float: right;"/>
-  </a>
+  </a>-->
 </div>
 <img src="../../assets/img/topLogo.png" style="min-width: 100%; height: 8px; position: fixed; z-index: 15; left: 0px" />
 <!--<img src="../../assets/img/kreator%20dyplomów%20logo.png" style="width: 55vh; height: 11vh; z-index: 15; top: 15px; left: 7px; position: fixed;" />-->
@@ -306,24 +312,23 @@
       </div>
       <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
       <div class="orientationBox" [style.display]="bcgDisplay[0]" style="margin-top: 3vh">
-        <div class="orientationContent">
+        <div class="orientationContent" style="height: 31.6vh; max-height: 40vh">
           <div class="textBox">
             <h3 class="fadeInTop">
               Wybierz gotowy szablon dyplomu
             </h3>
           </div>
-
-          <div class="box33" style="width: 20%; border-left: white; border-right: white">
+          <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top:0px">
             <div matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="left" class="orientationImgBox fadeInTop borderRight">
               <img id="base0" class="imgBase fadeInTop" src="../../assets/img/basic0.png" (click)="baseTemplate(0)"/>
             </div>
           </div>
-          <div class="box33" style="width: 20%; border-left: white; border-right: white">
+          <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top: 0px">
             <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
               <img id="base1" class="imgBase fadeInTop" src="../../assets/img/basic1.png" (click)="baseTemplate(1)"/>
             </div>
           </div>
-          <div class="box33" style="width: 20%; border-left: white; border-right: white">
+          <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top:0px">
             <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
               <img id="base2" class="imgBase fadeInTop" src="../../assets/img/basic2.png" (click)="baseTemplate(2)"/>
             </div>
@@ -338,6 +343,17 @@
             <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
               <img id="base4" class="imgBase fadeInTop" src="../../assets/img/basic4.png" (click)="baseTemplate(4)"/>
             </div>
+          </div>
+          <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block;  margin-top: 1px">
+            <button mat-button color="warn" class="fadeInRight" (click)="resetSettings()" style="width: 60%" [disabled]="tmpBtnDisable">
+              <i class="material-icons">
+                remove
+              </i>
+              Zresetuj szablon</button>
+          </div>
+          <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block;  margin-top: 1px">
+          </div>
+          <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block; margin-top: 1px">
           </div>
 
         </div>
@@ -530,19 +546,19 @@
                  0
                 <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa">-->
                 <mat-form-field class="example-full-width fadeInLeft">
-                  <input matInput placeholder="Tytuł" [value]="title" (input)="title = $event.target.value">
+                  <input matInput placeholder="Tytuł" (ngModelChange)="chceckWidthWithCenter(0); setHeightPercent(0)" [(ngModel)]="title"  (blur)="chceckWidthWithCenter(0)">
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">
                 <mat-slider thumbLabel class="fadeInTop" min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>-->
-                <input type="range" min="0" max="9" [value]="arrayFontSize[0]"  (input)="arrayFontSize[0] = $event.target.value" step="0.01" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"  (click)="chceckWidthWithCenter(0)" (change)="chceckWidthWithCenter(0)">
+                <input type="range" min="0" max="9" [value]="arrayFontSize[0]"  (input)="arrayFontSize[0] = $event.target.value" step="0.01" (blur)="chceckWidthWithCenter(0)" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"  (click)="chceckWidthWithCenter(0)" (change)="chceckWidthWithCenter(0)">
                 <p class="fadeInTop" >Kolor czcionki</p>
-                <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000">
+                <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000" (blur)="chceckWidthWithCenter(0)">
                 <br />
                 <p class="fadeInTop" >Czcionka</p>
                 <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
                   <mat-select placeholder="Wybierz czcionkę">
-                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamiliForMainField(i, 0)" (click)="chceckWidthWithCenter(0)"  [style.font-family]="fntFamili" style="text-align: center" >{{fntFamili}}</mat-option>
+                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamiliForMainField(i, 0)"  [style.font-family]="fntFamili" style="text-align: center" >{{fntFamili}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <br/><br />
@@ -583,33 +599,40 @@
                           <!--<mat-slider thumbLabel  min="0" max="3" step="0.1" [(value)]="letterSpacing" class="example-full-width"></mat-slider>-->
                           <input type="range" min="0" max="3" [value]="letterSpacing" (input)="letterSpacing = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                           <br />
-                          <button mat-mini-fab color="accent" color="primary" (click)="setFontStyle(0)" style="margin-bottom: 10px">
+                          <button mat-mini-fab color="accent" color="primary" id="fontStyle0" (click)="setFontStyle(0)" style="margin-bottom: 10px; background-color: white;"
+                                  [style.color]="MACblue">
                             <i class="material-icons">
                               format_italic
                             </i>
                           </button>
-                          <button mat-mini-fab color="accent" color="primary" (click)="setFontWeight(0)" style="margin-bottom: 10px">
+                          <button mat-mini-fab color="accent" color="primary" id="fontWeight0" (click)="setFontWeight(0)" style="margin-bottom: 10px; background-color: white;"
+                                  [style.color]="MACblue">
                             <i class="material-icons">
                               format_bold
                             </i>
                           </button>
-                          <button mat-mini-fab color="accent" color="primary" (click)="setFontVariant(0)" style="margin-bottom: 10px">
+                          <button mat-mini-fab color="accent" color="primary" id="fontVariant0" (click)="setFontVariant(0)" style="margin-bottom: 10px; background-color: white;"
+                                  [style.color]="MACblue">
                             <i class="material-icons">
                               format_size
                             </i>
                           </button>
                           <br/>
-                          <button mat-mini-fab color="accent" (click)="setTextAlignLeft(0)" style="margin-bottom: 10px; background-color: #088811">
+                          <button mat-mini-fab color="accent" color="primary" id="alignLeft0" (click)="setTextAlignLeft(0)" style="margin-bottom: 10px; background-color: white;"
+                                  [style.color]="MACblue">
                             <i class="material-icons">
                               format_align_left
                             </i>
                           </button>
-                          <button mat-mini-fab color="accent" (click)="setTextAlignCenter(0)" style="margin-bottom: 10px; background-color: #088811">
+                          <button mat-mini-fab color="accent" id="alignCenter0" color="primary" (click)="setTextAlignCenter(0)" style="margin-bottom: 10px; "
+                                  [style.background-color]="MACblue"
+                                  [style.color]="whiteColor">
                             <i class="material-icons">
                               format_align_center
                             </i>
                           </button>
-                          <button mat-mini-fab color="accent" (click)="setTextAlignRight(0)" style="margin-bottom: 10px; background-color: #088811">
+                          <button mat-mini-fab color="accent" id="alignRight0" color="primary" (click)="setTextAlignRight(0)" style="margin-bottom: 10px; background-color: white;"
+                                  [style.color]="MACblue">
                             <i class="material-icons">
                               format_align_right
                             </i>
@@ -637,7 +660,7 @@
                2
                <textarea class="input fadeInLeft textarea" > </textarea> -->
                 <mat-form-field class="example-full-width fadeInLeft">
-                  <textarea matInput [value]="forWho" (input)="forWho = $event.target.value" placeholder="Dla kogo"></textarea>
+                  <textarea matInput [value]="forWho" (blur)="chceckWidthWithCenter(1)" (ngModelChange)="chceckWidthWithCenter(1); setHeightPercent(1)" [(ngModel)]="forWho" placeholder="Dla kogo"></textarea>
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card11">
@@ -652,7 +675,7 @@
                 <p class="fadeInTop">Czcionka</p>
                 <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
                   <mat-select placeholder="Wybierz czcionkę" >
-                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}"  (click)="chceckWidthWithCenter(1)" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 1)">{{fntFamili}}</mat-option>
+                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 1)">{{fntFamili}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <br/><br />
@@ -696,33 +719,40 @@
                       <p class="fadeInTop" >Odstęp między literami</p>
                       <mat-slider thumbLabel  min="0" max="3" step="0.1" [(value)]="letterSpacingForWho" class="example-full-width"></mat-slider>-->
                       <br />
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontStyle(1)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontStyle1" (click)="setFontStyle(1)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_italic
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontWeight(1)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontWeight1" (click)="setFontWeight(1)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_bold
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontVariant(1)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontVariant1" (click)="setFontVariant(1)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_size
                         </i>
                       </button>
                       <br/>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignLeft(1)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" color="primary" id="alignLeft1" (click)="setTextAlignLeft(1)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_left
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignCenter(1)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignCenter1" color="primary" (click)="setTextAlignCenter(1)" style="margin-bottom: 10px; "
+                              [style.background-color]="MACblue"
+                              [style.color]="whiteColor">
                         <i class="material-icons">
                           format_align_center
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignRight(1)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignRight1" color="primary" (click)="setTextAlignRight(1)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_right
                         </i>
@@ -749,7 +779,7 @@
                  4
                 <textarea class="input fadeInLeft textarea" > </textarea> <br/>-->
                 <mat-form-field class="example-full-width">
-                  <textarea matInput [value]="forWhat" (input)="forWhat = $event.target.value" placeholder="Za co"></textarea>
+                  <textarea matInput [value]="forWhat" (blur)="chceckWidthWithCenter(2)"  (ngModelChange)="chceckWidthWithCenter(2); setHeightPercent(0)" [(ngModel)]="forWhat" placeholder="Za co"></textarea>
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
@@ -762,7 +792,7 @@
                 <p class="fadeInTop">Czcionka</p>
                 <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
                   <mat-select  placeholder="Wybierz czcionkę">
-                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="chceckWidthWithCenter(2)" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 2)">{{fntFamili}}</mat-option>
+                    <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" [style.font-family]="fntFamili" style="text-align: center" (click)="setFontFamiliForMainField(i, 2)">{{fntFamili}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <br/><br />
@@ -802,33 +832,40 @@
                       <p class="fadeInTop" >Górny margines</p>
                       <mat-slider thumbLabel  min="0" max="80" [(value)]="paddingTopForWhat" class="example-full-width"></mat-slider>-->
                       <br />
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontStyle(2)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontStyle2" (click)="setFontStyle(2)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_italic
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary"(click)="setFontWeight(2)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontWeight2" (click)="setFontWeight(2)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_bold
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary"(click)="setFontVariant(2)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontVariant2" (click)="setFontVariant(2)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_size
                         </i>
                       </button>
                       <br/>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignLeft(2)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" color="primary" id="alignLeft2" (click)="setTextAlignLeft(2)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_left
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignCenter(2)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignCenter2" color="primary" (click)="setTextAlignCenter(2)" style="margin-bottom: 10px; "
+                              [style.background-color]="MACblue"
+                              [style.color]="whiteColor">
                         <i class="material-icons">
                           format_align_center
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignRight(2)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignRight2" color="primary" (click)="setTextAlignRight(2)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_right
                         </i>
@@ -883,7 +920,7 @@
                   </mat-select>
                 </mat-form-field>
                 <br/><br />
-                <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px">
+                <button mat-button color="accent" (click)="shadowOnOff(0, 1)" style="margin-bottom: 10px" mouse>
                   <i class="material-icons">
                     highlight
                   </i>
@@ -915,17 +952,20 @@
                       &lt;!&ndash;<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">&ndash;&gt;
                       <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>-->
                       <br />
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontStyle(3)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontStyle3" (click)="setFontStyle(3)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_italic
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontWeight(3)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontWeight3" (click)="setFontWeight(3)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_bold
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontVariant(3)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontVariant3" (click)="setFontVariant(3)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_size
                         </i>
@@ -1015,31 +1055,40 @@
                       <p class="fadeInTop" >Dolny margines</p>
                       <mat-slider thumbLabel  min="-100" max="120" [(value)]="bottom" class="example-full-width"></mat-slider>-->
                       <br />
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontStyle(4)" style="margin-bottom: 10px"><i class="material-icons">
-                        format_italic
-                      </i></button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontWeight(4)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontStyle4" (click)="setFontStyle(4)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
+                        <i class="material-icons">
+                          format_italic
+                        </i>
+                      </button>
+                      <button mat-mini-fab color="accent" color="primary" id="fontWeight4" (click)="setFontWeight(4)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_bold
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" color="primary" (click)="setFontVariant(4)" style="margin-bottom: 10px">
+                      <button mat-mini-fab color="accent" color="primary" id="fontVariant4" (click)="setFontVariant(4)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_size
                         </i>
                       </button>
                       <br/>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignLeft(3)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" color="primary" id="alignLeft3" (click)="setTextAlignLeft(3)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_left
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignCenter(3)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignCenter3" color="primary" (click)="setTextAlignCenter(3)" style="margin-bottom: 10px; "
+                              [style.background-color]="MACblue"
+                              [style.color]="whiteColor">
                         <i class="material-icons">
                           format_align_center
                         </i>
                       </button>
-                      <button mat-mini-fab color="accent" (click)="setTextAlignRight(3)" style="margin-bottom: 10px; background-color: #088811">
+                      <button mat-mini-fab color="accent" id="alignRight3" color="primary" (click)="setTextAlignRight(3)" style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_align_right
                         </i>
@@ -1068,13 +1117,14 @@
         <div class="textBox">
           <h3 class="fadeInTop">Dodaj dodatkowe pola tekstowe</h3>
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        <!--<div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
           <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">
             <i class="material-icons">
               text_fields
             </i>
             Dodaj nowe pole tekstowe</button> <br />
         </div>
+
         <div class="box33border" style="height: 10vh;">
           <mat-form-field class="fadeInLeft" style="width: 50%;" >
             <mat-select placeholder="Edytowane pole" [(value)]="currentTxt">
@@ -1096,31 +1146,114 @@
         </div>
         <div class="box33" style="height: 12vh; font-weight: bold">
           <p style="float: left;  padding-left: 5px" class="fadeInLeft">Wielkość tekstu</p> <br />
-          <!--          <mat-slider thumbLabel type="range" min="0" max="8" step="0.1" [(value)]="txtSize[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
           <input type="range" min="0" max="8" step="0.1" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div class="box33" style="height: 12vh; float: left">
           <p style="float: left; font-weight: bold;  padding-left: 5px" class="fadeInLeft" >Kolor czcionki</p> <br />
           <input type="color" class="fadeInRight" [value]="txtColor[currentTxt]" (input)="txtColor[currentTxt] = $event.target.value" [disabled]="hidebox" style="width: 80%; margin-right:7%;">
         </div>
-        <!--<div class="box33border" style="height: 12vh;">
-          <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Lewy margines tekstu</p>
-&lt;!&ndash;
-          <mat-slider thumbLabel min="0" max="100" [(value)]="txtRight[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>
-&ndash;&gt;
-          <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}" [value]="txtRight[currentTxt]" (input)="txtRight[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
-        </div>-->
+
         <div class="box33" style="height: 12vh;">
           <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Pionowa pozycja tekstu</p>
-          <!--<mat-slider thumbLabel min="0" max="100" [(value)]="txtTop[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
           <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div class="box33" style="height: 12vh;">
           <p style="float: left; font-weight: bold;   padding-left: 5px" class="fadeInLeft">Pozioma pozycja tekstu {{txtLeft[currentTxt]}}</p>
-          <!-- <mat-slider thumbLabel min="0" max="100" [(value)]="txtLeft[currentTxt]" class="example-full-width fadeInRight" [disabled]="hidebox"></mat-slider>-->
           <input type="range" min="0" max="{{maxWidthUserTxtFieldRight}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
+        </div>-->
+      </div>
+
+      <div class="dataContainer" style="height: 490px; background-color: white; text-align: center ">
+        <div class="box33" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+          <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">
+            <i class="material-icons">
+              text_fields
+            </i>
+            Dodaj nowe pole tekstowe</button> <br />
+        </div>
+        <div class="box33" style="height: 10vh;">
+          <mat-form-field class="fadeInLeft" style="width: 80%;" >
+            <mat-select placeholder="Edytowane pole" [(value)]="currentTxt">
+              <mat-option  *ngFor="let txt of userTxt; let i = index" value="{{i}}" (click)="setMaxWidthForUserTxt(); setUserTxtFiledProperty(i)" (change)="setMaxWidthForUserTxt()">Edytuj: {{txt}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="leftCont" style="background-color: white">
+          <br />
+          <mat-form-field class="example-full-width fadeInRight">
+            <input matInput (ngModelChange)="setMaxWidthForUserTxt();" (blur)="setMaxWidthForUserTxt()" [(ngModel)]="userTxt[currentTxt]" placeholder="Treść pola" [disabled]="hidebox">
+          </mat-form-field>
+          <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
+          <input type="range" min="0" max="8" step="0.1" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()" [value]="txtSize[currentTxt]" (input)="txtSize[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+          <p class="fadeInTop" >Kolor czcionki</p>
+          <input type="color" class="fadeInRight" [value]="txtColor[currentTxt]" (input)="txtColor[currentTxt] = $event.target.value" [disabled]="hidebox" style="width: 80%;">
+          <br />
+          <p class="fadeInTop" >Czcionka</p>
+          <mat-form-field class="fadeInLeft" style="width: 80%;" >
+            <mat-select placeholder="Wybierz czcionkę" [(value)]="currentFontFamili" >
+              <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()">{{fntFamili}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="rightCont" style="background-color: white">
+          <br />
+          <br />
+          <div class="card">
+            <div class="card-body">
+              <div class="inputContainer">
+
+                <p class="fadeInTop">Pionowa pozycja tekstu</p>
+                <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox" >
+                <p class="fadeInTop">Pozioma pozycja tekstu</p>
+                <input type="range" min="0" max="{{maxWidthUserTxtFieldRight}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+                <br />
+                <button mat-mini-fab color="accent" color="primary" id="fontStyle5" (click)="setTxtStyle()" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"  [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_italic
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" color="primary" id="fontWeight5" (click)="setTxtWeight()" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"  [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_bold
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" color="primary" id="fontVariant5" (click)="setTxtVariant()" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"  [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_size
+                  </i>
+                </button>
+                <br />
+                <button mat-mini-fab color="accent" color="primary" id="alignLeft5" (click)="setTxtAlign('left')" style="margin-bottom: 10px; background-color: white;"
+                        [style.background-color]="MACblue"
+                        [style.color]="whiteColor"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_left
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" id="alignCenter5" color="primary" (click)="setTxtAlign('center')" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_center
+                  </i>
+                </button>
+                <button mat-mini-fab color="accent" id="alignRight5" color="primary" (click)="setTxtAlign('right')" style="margin-bottom: 10px; background-color: white;"
+                        [style.color]="MACblue"
+                        [disabled]="hidebox">
+                  <i class="material-icons">
+                    format_align_right
+                  </i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </mat-step>
@@ -1184,62 +1317,62 @@
         </mat-accordion>
 
 
-        <div class="textBox" style="margin-top: 3vh">
+        <div class="textBox" style="margin-top: 1vh">
           <h3 class="fadeInTop">Dodaj swój obrazek</h3>
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh;">
+        <div class="box33border" style="height:  10vh; padding-top: 2.8vh; width: 50%">
           <label id="addImg" for="file-upload" class="button fadeInLeft" style="width: 60%; font-weight: normal; height: 36px; padding-top: 0px">
             <!--            <img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
             <p>
               <i class="material-icons">
                 add_photo_alternate
               </i>
-              Dodaj Obrazek</p>
+              Importuj obrazek</p>
           </label>
           <input id="file-upload" class="fadeInRight" type="file" accept="image/*" (change)="fileUpload($event)"/>
         </div>
-        <div class="box33border" style="height: 10vh;  width: 66.6666666%">
+        <div class="box33border" style="height:  10vh;  width: 50%;  padding-top: 5px">
           <mat-form-field style="width: 50%" >
             <mat-select placeholder="Wybierz aktualnie edytowany obraz" [(value)]="currImg" >
-              <mat-option  *ngFor="let x of userImg;" value="{{x}}">Obrazek nr. {{x + 1}}</mat-option>
+              <mat-option  *ngFor="let x of userImg; let i = index" value="{{x}}" (click)="setUserImgFrame(i)">Obrazek nr. {{x + 1}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="box33" style="height: 10vh;">
+        <div class="box33" style="height: 110px;">
           <p style="float: left;   padding-left: 5px"><b class="fadeInRight">Szerokość obrazka</b></p>
           <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [disabled]="boolDisableUserImgFields" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
         </div>
-        <div class="box33" style="height: 10vh;">
+        <div class="box33" style="height: 110px;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Wysokość obrazka</b></p>
           <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
         </div>
-        <div class="box33border" style="height: 10vh;">
+        <div class="box33border" style="height: 110px;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight" style="float: left;">Górny margines obrazka</b></p>
           <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
         </div>
-        <div class="box33border" style="height: 10vh;">
+        <div class="box33border" style="height: 110px;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Lewy margines obrazka</b></p>
           <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
         </div>
-        <div class="box33border" style="height: 10vh;">
+        <div class="box33border" style="height: 110px;">
           <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
           <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" [disabled]="boolDisableUserImgFields" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">
             <i class="material-icons">
               crop_rotate
             </i>
             Zresetuj obrót</button> <br/>
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">
             <i class="material-icons">
               image
             </i>
             Zresetuj obrazek</button> <br /><br />
         </div>
-        <div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button id="rmvImg" mat-button color="warn" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="removeImg()" style="width: 60%" disabled>
             <i class="material-icons">
               remove
@@ -1254,8 +1387,8 @@
 </div>
 <div id="view">
   <div id="toPdf100" class="rotateInDownRight" [style.background-color]="bcgColor">
-    <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100" />
-
+    <img src="{{imgSrcFix}}"
+         [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100" />
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfFor">
       <img *ngFor="let usr of userImg; let i = index" id="imgToChange2{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
@@ -1264,33 +1397,71 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
             [style.top]="txtTop[i]+'%'">
-        <p id="font1{{i}}"
+        <p id="font1{{i}}" class="maxContent" style=""
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
            [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]">
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]">
           {{txt}}</p>
       </div>
-      <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+      <img  src="{{imgSrcFrame}}"
+            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
+            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'"  [style.text-align]="textAlign[0]"  [style.padding-left]="marginLeft[0] + '%'" [style.padding-right]="marginRight[0] + '%'" >
-          <s id="largeTxt" [style.font-size]="arrayFontSize[0] + 'vw'" [style.letter-spacing]="letterSpacing+'vw'" [style.font-family]="arrayFontFamili[0]"  [style.color]="arrayFontColor[0]" [style.font-variant]="fontVariant[0]" [style.font-weight]="fontWeight[0]" [style.font-style]="fontStyle[0]" [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]"  style="z-index: 8;">
+        <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"
+           [style.top]="paddingTop + '%'"
+           [style.text-align]="textAlign[0]"
+           [style.padding-left]="marginLeft[0] + '%'"
+           [style.padding-right]="marginRight[0] + '%'" >
+          <s id="largeTxt"
+             [style.font-size]="arrayFontSize[0] + 'vw'"
+             [style.letter-spacing]="letterSpacing+'vw'"
+             [style.font-family]="arrayFontFamili[0]"
+             [style.color]="arrayFontColor[0]"
+             [style.font-variant]="fontVariant[0]"
+             [style.font-weight]="fontWeight[0]"
+             [style.font-style]="fontStyle[0]"
+             [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]"
+             style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
       <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
-        <s id="sFor" [style.font-size]="arrayFontSize[2] + 'vw'" [style.letter-spacing]="letterSpacingForWho+'vw'" [style.color]="arrayFontColor[2]" [style.font-variant]="fontVariant[1]" style="z-index: 7" [style.font-family]="arrayFontFamili[1]"  [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" >
+        <s id="sFor"
+           [style.font-size]="arrayFontSize[2] + 'vw'"
+           [style.letter-spacing]="letterSpacingForWho+'vw'"
+           [style.color]="arrayFontColor[2]"
+           [style.font-variant]="fontVariant[1]"
+           [style.font-family]="arrayFontFamili[1]"
+           [style.font-style]="fontStyle[1]"
+           [style.font-weight]="fontWeight[1]"
+           [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]"
+           style="z-index: 7" >
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
-        <s id="txtForWhat" [style.font-size]="arrayFontSize[4] + 'vw'"  [style.color]="arrayFontColor[4]" [style.font-variant]="fontVariant[2]" style="z-index: 7" [style.font-family]="arrayFontFamili[2]"  [style.font-style]="fontStyle[2]" [style.font-weight]="fontWeight[2]" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" >
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'"
+            [style.padding-left]="marginLeft[2] + '%'"
+            [style.padding-right]="marginRight[2] + '%'"
+            [style.text-align]="textAlign[2]" >
+        <s id="txtForWhat"
+           [style.font-size]="arrayFontSize[4] + 'vw'"
+           [style.color]="arrayFontColor[4]"
+           [style.font-variant]="fontVariant[2]"
+           [style.font-family]="arrayFontFamili[2]"
+           [style.font-style]="fontStyle[2]"
+           [style.font-weight]="fontWeight[2]"
+           [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]"
+           style="z-index: 7" >
           {{forWhat}}
         </s>
       </div>
@@ -1299,15 +1470,41 @@
         <p id="left" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[3]">
           {{sign1}}
         </p>
-        <p id="center" [style.font-size]="arrayFontSize[1] + 'vw'" [style.color]="arrayFontColor[1]" [style.font-variant]="fontVariant[3]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-weight]="fontWeight[3]" [style.font-family]="arrayFontFamili[4]" [style.font-style]="fontStyle[3]">
+        <p id="center"
+           [style.font-size]="arrayFontSize[1] + 'vw'"
+           [style.color]="arrayFontColor[1]"
+           [style.font-variant]="fontVariant[3]"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]"
+           [style.font-weight]="fontWeight[3]"
+           [style.font-family]="arrayFontFamili[4]"
+           [style.font-style]="fontStyle[3]">
           {{sign3}}
         </p>
-        <p id="right" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.color]="arrayFontColor[1]" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-weight]="fontWeight[3]" [style.font-style]="fontStyle[3]">
+        <p id="right"
+           [style.font-size]="arrayFontSize[1] + 'vw'"
+           [style.font-variant]="fontVariant[3]"
+           [style.color]="arrayFontColor[1]"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]"
+           [style.font-family]="arrayFontFamili[5]"
+           [style.font-weight]="fontWeight[3]"
+           [style.font-style]="fontStyle[3]">
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
-        <p id="smallTxt" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+      <div class="signature"
+           [style.text-align]="textAlign[3]"
+           [style.bottom]="bottom + 'px'"
+           [style.padding-left]="marginLeft[3] + '%'"
+           [style.padding-right]="marginRight[3] + '%'" style="min-width:100%; z-index: 7; "
+           [style.padding-top]="paddingTopFooter + '%'">
+        <p id="smallTxt"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]"
+           [style.font-variant]="fontVariant[4]"
+           [style.font-family]="arrayFontFamili[6]"
+           [style.font-style]="fontStyle[4]"
+           [style.font-weight]="fontWeight[4]"
+           [style.font-size]="arrayFontSize[3] + 'vw'"
+           [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
       </div>
@@ -1316,7 +1513,10 @@
 </div>
 <div id="viewLandscape" [style.display]="landscape">
   <div id="toPdf100Landscape" class="rotateInDownRight" style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%" [style.background-color]="bcgColor">
-    <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100Landscape"   style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
+    <img src="{{imgSrcFix}}"
+         [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
+         id="imgPdf100Landscape"
+         style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
     <div id="pdfForlandscape">
       <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
@@ -1324,49 +1524,129 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" style="position: absolute; z-index: 1; text-align: center"
-            [style.padding-right]="txtRight[i]+'%'"
-            [style.padding-left]="txtLeft[i]+'%'"
+      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; text-align: center;"
             [style.top]="txtTop[i]+'%'">
-        <p id="font2{{i}}"
+        <p id="font2{{i}}"  class="maxContent" style=""
+           [style.margin-right]="txtRight[i]+'%'"
+           [style.margin-left]="txtLeft[i]+'%'"
            [style.font-size]="txtSize[i] + 'vw'"
            [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]">
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]">
           {{txt}}</p>
       </div>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img  src="{{imgMAClogoFrame}}"  [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
+      <img  src="{{imgMAClogoFrame}}"
+            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
+            style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
       <div  style="z-index: 8;">
-        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]" >
-          <s id="largeTxtLandscape"  [style.letter-spacing]="letterSpacing+'vw'"  [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]" [style.font-family]="arrayFontFamili[0]" [style.font-variant]="fontVariant[0]" [style.font-style]="fontStyle[0]" [style.font-weight]="fontWeight[0]" [style.font-size]="arrayFontSize[0] + 'vw'" [style.color]="arrayFontColor[0]" [style.padding-left]="marginLeft[0] + '%'" [style.padding-right]="marginRight[0] + '%'" style="z-index: 8;">
+        <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%"
+           [style.top]="paddingTop + '%'"
+           [style.text-align]="textAlign[0]"
+           [style.padding-left]="marginLeft[0] + '%'"
+           [style.padding-right]="marginRight[0] + '%'">
+          <s id="largeTxtLandscape"
+             [style.letter-spacing]="letterSpacing+'vw'"
+             [style.text-shadow]="shadowLarge[0] + ' ' + shadowColor[0]"
+             [style.font-family]="arrayFontFamili[0]"
+             [style.font-variant]="fontVariant[0]"
+             [style.font-style]="fontStyle[0]"
+             [style.font-weight]="fontWeight[0]"
+             [style.font-size]="arrayFontSize[0] + 'vw'"
+             [style.color]="arrayFontColor[0]"
+             style="z-index: 8;">
             {{title}}
           </s>
           <br/>
         </p>
       </div>
-      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"  [style.top]="paddingTopForWho + '%'" [style.padding-left]="marginLeft[1] + '%'" [style.padding-right]="marginRight[1] + '%'" [style.text-align]="textAlign[1]" >
-        <s id="sForLandscape"[style.letter-spacing]="letterSpacingForWho+'vw'"  [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]" [style.font-size]="arrayFontSize[2] + 'vw'" [style.font-variant]="fontVariant[1]" [style.font-family]="arrayFontFamili[1]" [style.font-style]="fontStyle[1]" [style.font-weight]="fontWeight[1]" [style.color]="arrayFontColor[2]" style="z-index: 7"  >
+      <div style="z-index: 7; position: absolute; width: 100%; top: 10%"
+           [style.top]="paddingTopForWho + '%'"
+           [style.padding-left]="marginLeft[1] + '%'"
+           [style.padding-right]="marginRight[1] + '%'"
+           [style.text-align]="textAlign[1]" >
+        <s id="sForLandscape"
+           [style.letter-spacing]="letterSpacingForWho+'vw'"
+           [style.text-shadow]="shadowLarge[1] + ' ' + shadowColor[1]"
+           [style.font-size]="arrayFontSize[2] + 'vw'"
+           [style.font-variant]="fontVariant[1]"
+           [style.font-family]="arrayFontFamili[1]"
+           [style.font-style]="fontStyle[1]"
+           [style.font-weight]="fontWeight[1]"
+           [style.color]="arrayFontColor[2]"
+           style="z-index: 7"  >
           {{forWho}}
         </s>
       </div>
-      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%" [style.top]="paddingTopForWhat + '%'" [style.padding-left]="marginLeft[2] + '%'" [style.padding-right]="marginRight[2] + '%'" [style.text-align]="textAlign[2]" >
-        <s id="txtForWhatLandscape" [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]" [style.font-style]="fontStyle[2]"  [style.font-family]="arrayFontFamili[2]" [style.font-variant]="fontVariant[2]" [style.font-size]="arrayFontSize[4] + 'vw'" [style.font-weight]="fontWeight[2]" [style.color]="arrayFontColor[4]" style="z-index: 7" >
+      <div  style="z-index: 7; position: absolute; width: 100%; top: 20%"
+            [style.top]="paddingTopForWhat + '%'"
+            [style.padding-left]="marginLeft[2] + '%'"
+            [style.padding-right]="marginRight[2] + '%'"
+            [style.text-align]="textAlign[2]" >
+        <s id="txtForWhatLandscape"
+           [style.text-shadow]="shadowLarge[2] + ' ' + shadowColor[2]"
+           [style.font-style]="fontStyle[2]"
+           [style.font-family]="arrayFontFamili[2]"
+           [style.font-variant]="fontVariant[2]"
+           [style.font-size]="arrayFontSize[4] + 'vw'"
+           [style.font-weight]="fontWeight[2]"
+           [style.color]="arrayFontColor[4]"
+           style="z-index: 7" >
           {{forWhat}}
         </s>
       </div>
-      <div class="signature" id="signLandscape" [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="leftLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]"  [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-variant]="fontVariant[3]" [style.font-family]="arrayFontFamili[3]" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+      <div class="signature" id="signLandscape"
+           [style.bottom]="bottom + 'px'"
+           [style.padding-left]="marginLeft[3] + '%'"
+           [style.padding-right]="marginRight[3] + '%'"
+           style="min-width:100%; z-index: 7;">
+        <p id="leftLandscape"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]"
+           [style.font-style]="fontStyle[3]"
+           [style.font-size]="arrayFontSize[1] + 'vw'"
+           [style.font-variant]="fontVariant[3]"
+           [style.font-family]="arrayFontFamili[3]"
+           [style.font-weight]="fontWeight[3]"
+           [style.color]="arrayFontColor[1]">
           {{sign1}}
         </p>
-        <p id="centerLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-style]="fontStyle[3]" [style.font-family]="arrayFontFamili[4]" [style.font-variant]="fontVariant[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+        <p id="centerLandscape"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]"
+           [style.font-style]="fontStyle[3]"
+           [style.font-family]="arrayFontFamili[4]"
+           [style.font-variant]="fontVariant[3]"
+           [style.font-size]="arrayFontSize[1] + 'vw'"
+           [style.font-weight]="fontWeight[3]"
+           [style.color]="arrayFontColor[1]">
           {{sign3}}
         </p>
-        <p id="rightLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]" [style.font-family]="arrayFontFamili[5]" [style.font-variant]="fontVariant[3]" [style.font-style]="fontStyle[3]" [style.font-size]="arrayFontSize[1] + 'vw'" [style.font-weight]="fontWeight[3]" [style.color]="arrayFontColor[1]">
+        <p id="rightLandscape"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[3]"
+           [style.font-family]="arrayFontFamili[5]"
+           [style.font-variant]="fontVariant[3]"
+           [style.font-style]="fontStyle[3]"
+           [style.font-size]="arrayFontSize[1] + 'vw'"
+           [style.font-weight]="fontWeight[3]"
+           [style.color]="arrayFontColor[1]">
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.text-align]="textAlign[3]"  [style.bottom]="bottom + 'px'" [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7; "[style.padding-top]="paddingTopFooter + '%'">
-        <p id="smallTxtLandscape" [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]" [style.font-variant]="fontVariant[4]" [style.font-family]="arrayFontFamili[6]" [style.font-style]="fontStyle[4]" [style.font-weight]="fontWeight[4]" [style.font-size]="arrayFontSize[3] + 'vw'" [style.color]="arrayFontColor[3]">
+      <div class="signature"
+           [style.text-align]="textAlign[3]"
+           [style.bottom]="bottom + 'px'"
+           [style.padding-left]="marginLeft[3] + '%'"
+           [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;"
+           [style.padding-top]="paddingTopFooter + '%'">
+        <p id="smallTxtLandscape"
+           [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]"
+           [style.font-variant]="fontVariant[4]"
+           [style.font-family]="arrayFontFamili[6]"
+           [style.font-style]="fontStyle[4]"
+           [style.font-weight]="fontWeight[4]"
+           [style.font-size]="arrayFontSize[3] + 'vw'"
+           [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
       </div>

@@ -22,7 +22,6 @@ export class CreateComponent implements OnInit {
   percentLeft = [100, 100, 100];
   percentRight = [100, 100, 100];
   percentHeight = [80, 80, 80];
-  bottomMaxPx = 120;
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
@@ -99,12 +98,14 @@ export class CreateComponent implements OnInit {
       this.coordinatesTemplate = coordinatesTemplate;
     });*/
   }
-
+  MACblue = '#25408f';
+  whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 80;
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
+  tmpBtnDisable = true;
   boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
@@ -148,10 +149,14 @@ export class CreateComponent implements OnInit {
   imgLeft = [];
   scheme = 0;
   txtTop = [];
-  email = 'abc@gmail.com';
   txtLeft = [];
   txtRight = [];
   txtSize = [];
+  txtStyle = [];
+  txtWeight = [];
+  txtVariant  = [];
+  txtAlign = [];
+  txt = [];
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
@@ -164,6 +169,10 @@ export class CreateComponent implements OnInit {
   txtRightText = '';
   txtSizeText = '';
   txtUserText = '';
+  txtStyleText = '';
+  txtWeightText = '';
+  txtVariantText  = '';
+  txtAlignText = '';
   disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
@@ -188,12 +197,12 @@ export class CreateComponent implements OnInit {
       imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
-      document.getElementById('fbLogo').style.height = '3vh';
+      /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
       document.getElementById('ytLogo').style.width = '3vh';
       document.getElementById('fbLogo').style.marginTop = '10px';
-      document.getElementById('ytLogo').style.marginTop = '10px';
+      document.getElementById('ytLogo').style.marginTop = '10px';*/
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
       const elements = document.getElementsByClassName('logoText') as any;
@@ -207,12 +216,12 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
-      document.getElementById('fbLogo').style.marginTop = '16px';
+      /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
       document.getElementById('ytLogo').style.height = '4.5vh';
       document.getElementById('fbLogo').style.width = '4.5vh';
-      document.getElementById('ytLogo').style.width = '4.5vh';
+      document.getElementById('ytLogo').style.width = '4.5vh';*/
       const elements = document.getElementsByClassName('logoText') as any;
       for ( let i = 0; i < elements.length; i++ ) {
         elements[i].style.marginTop = '10px';
@@ -227,9 +236,11 @@ export class CreateComponent implements OnInit {
     this.setPaddingAnchor();
   }
   setPaddingAnchor() {
-    this.chceckWidth(0);
-    this.chceckWidth(1);
-    this.chceckWidth(2);
+    setTimeout( () => {
+      this.chceckWidth(0);
+      this.chceckWidth(1);
+      this.chceckWidth(2);
+    }, 300);
   }
   /*chceckArray() {
     console.log('array');
@@ -302,9 +313,6 @@ export class CreateComponent implements OnInit {
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
-
-    console.log('ten sie podnosi: ' + imgSrc);
-    console.log('a ten opada: ' + this.lastValue);
     document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
@@ -429,34 +437,26 @@ export class CreateComponent implements OnInit {
   }
   setHeightSport(array) {
     const divide = array.length / 5;
-    console.log('divade: ' + divide);
     if ( divide >= 0 && divide < 1) {
       this.sportHeight  = 11;
-      console.log('jestem 1');
     }
     if ( divide >= 1 && divide < 2) {
       this.sportHeight  = 22;
-      console.log('jestem 2');
     }
     if ( divide >= 2 && divide < 3) {
       this.sportHeight  = 33;
-      console.log('jestem 2');
     }
   }
   setHeightAnimal(array) {
     const divide = array.length / 5;
-    console.log('divade: ' + divide);
     if ( divide >= 0 && divide < 1) {
       this.animalHeight  = 11;
-      console.log('jestem 1');
     }
     if ( divide >= 1 && divide < 2) {
       this.animalHeight  = 22;
-      console.log('jestem 2');
     }
     if ( divide >= 2 && divide < 3) {
       this.animalHeight  = 33;
-      console.log('jestem 2');
     }
   }
   setUserData(template) {
@@ -580,14 +580,19 @@ export class CreateComponent implements OnInit {
         }
         this.boolDisableUserImgFields = false;
       }
-      if ( template.txtTop.length > 0) {
-        for ( let i = 0; i < template.txtTop.length; i++) {
-          this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
-            template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i]);
+      try {
+        if ( template.txtTop.length > 0) {
+          for ( let i = 0; i < template.txtTop.length; i++) {
+            this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
+              template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i],
+              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i]);
+            this.setUserTxtFiledProperty(i);
+          }
         }
-      } else {
-        document.getElementById('hiddenBox').style.display = 'none';
+      } catch (e) {
+        console.log('Old UserTxt Element');
       }
+      this.setAllButtonColor();
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
@@ -595,6 +600,25 @@ export class CreateComponent implements OnInit {
     document.getElementById('spinner').style.display = 'none';
   }
   resetSettings() {
+    try {
+      document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
+    } catch (err) {
+      console.log('no element');
+    }
+    this.txtAlignText = '';
+    this.txtAlign = [];
+    this.txtStyleText = '';
+    this.txtWeightText = '';
+    this.txtVariantText  = '';
+    this.tmpBtnDisable = true;
+    this.txtStyle = [];
+    this.txtWeight = [];
+    this.txtVariant  = [];
+    this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
+    this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
+    this.shadowSmall = '0px 0px';
+    this.shadowSmallFix = '0px 0px';
     this.bcgRotateX = 1;
     this.bcgRotateY = 1;
     this.frmRotateX = 1;
@@ -668,6 +692,7 @@ export class CreateComponent implements OnInit {
     this.userTxt = [];
     this.txtFontFamili = [];
     this.txtFontFamiliText = '';
+    this.imgSrcFrame = '../../assets/img/0.png';
   }
   moveLeft() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -704,7 +729,6 @@ export class CreateComponent implements OnInit {
         btn.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
-      console.log('hej to ja: ' + this.arrayScroll[i]);
     }
     if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
       btn.disabled = true;
@@ -746,7 +770,6 @@ export class CreateComponent implements OnInit {
         btn.disabled = true;
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
-      console.log('hej to ja: ' + this.arrayScrollFrame[i]);
     }
     if ( this.arrayScrollFrame[2] >= this.frames.length ) {
       btn.disabled = true;
@@ -867,10 +890,20 @@ export class CreateComponent implements OnInit {
     this.imgTop.push(0);
     this.imgLeft.push(0);
     this.currImg = this.userImg.length - 1;
+    setTimeout(() => {
+      this.setUserImgFrame(this.currImg);
+    }, 500 );
   }
   removeImg() {
-    this.imgHeight[this.currImg] = 0;
-    this.imgWidth[this.currImg] = 0;
+    this.userImg.pop();
+    this.userImgBase64.splice(this.currImg, 1);
+    this.rotate.splice(this.currImg, 1);
+    this.imgWidth.splice(this.currImg, 1);
+    this.imgHeight.splice(this.currImg, 1);
+    this.imgTop.splice(this.currImg, 1);
+    this.imgLeft.splice(this.currImg, 1);
+    this.currImg = this.userImg.length - 1;
+    this.setUserImgFrame(this.currImg);
   }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -895,6 +928,10 @@ export class CreateComponent implements OnInit {
     this.txtUserText = '';
     this.txtColorText = '';
     this.txtFontFamiliText = '';
+    this.txtStyleText = '';
+    this.txtWeightText = '';
+    this.txtVariantText = '';
+    this.txtAlignText = '';
   }
   createFileToSave() {
     console.log('font famili: ' + this.txtFontFamili);
@@ -925,6 +962,11 @@ export class CreateComponent implements OnInit {
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
         this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '", ';
+        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '", ';
+        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '", ';
+        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '", ';
+        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '", ';
+
         console.log('font famili: ' + this.txtFontFamili[i]);
       } else {
         this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
@@ -934,6 +976,10 @@ export class CreateComponent implements OnInit {
         this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
         this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
         this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '" ';
+        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '" ';
+        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '" ';
+        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '" ';
+        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '" ';
         console.log('font famili: ' + this.txtFontFamili[i]);
       }
     }
@@ -1059,6 +1105,14 @@ export class CreateComponent implements OnInit {
       + this.txtRightText + '],'
       + '"txtSize" : [ '
       + this.txtSizeText + '],'
+      + '"txtStyle" : [ '
+      + this.txtStyleText + '],'
+      + '"txtWeight" : [ '
+      + this.txtWeightText + '],'
+      + '"txtVariant" : [ '
+      + this.txtVariantText + '],'
+      + '"txtAlign" : [ '
+      + this.txtAlignText + '],'
       + '"txtUser" : [ '
       + this.txtUserText + '],'
       + '"txtColor" : [ '
@@ -1095,12 +1149,9 @@ export class CreateComponent implements OnInit {
     rmvBtn.disabled = false;
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader() as any;
-      console.log('1');
       reader.onload = (event2: any) => {
-        console.log('2');
         this.userImgBase64.push(event2.target.result);
       };
-      console.log('3');
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -1146,7 +1197,6 @@ export class CreateComponent implements OnInit {
   }
   addTxt() {
     if ( this.currentTxt === -1 ) {
-      document.getElementById('hiddenBox').style.display = 'inline-block';
       this.hidebox = false;
     }
     this.actualTxt = '';
@@ -1158,10 +1208,39 @@ export class CreateComponent implements OnInit {
     this.txtSize.push(3);
     this.txtColor.push('#000000');
     this.txtFontFamili.push('Arial');
+    this.txtStyle.push('normal');
+    this.txtWeight.push('normal');
+    this.txtVariant.push('normal');
+    this.setWhiteColor('fontStyle5');
+    this.setWhiteColor('fontVariant5');
+    this.setWhiteColor('fontWeight5');
+    this.txtAlign.push('left');
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
+    /*this.setWhiteColor('alignLeft5');
+    this.setWhiteColor('alignRight5');
+    this.setBlueColor('alignCenter5');*/
   }
-  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili) {
+  setUserTxtFiledProperty(n) {
+    if ( this.txtWeight[n] === 'normal' ) {
+      this.setWhiteColor('fontWeight5');
+    } else {
+      this.setBlueColor('fontWeight5');
+    }
+    if ( this.txtStyle[n] === 'normal' ) {
+      this.setWhiteColor('fontStyle5');
+    } else {
+      this.setBlueColor('fontStyle5');
+    }
+    if ( this.txtVariant[n] === 'normal' ) {
+      this.setWhiteColor('fontVariant5');
+    } else {
+      this.setBlueColor('fontVariant5');
+    }
+    console.log('textAlign: ' + this.txtAlign + ' : ' + n);
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[n]);
+  }
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align) {
     if ( this.currentTxt === -1 ) {
-      document.getElementById('hiddenBox').style.display = 'inline-block';
       this.hidebox = false;
     }
     this.actualTxt = actualTxt;
@@ -1173,6 +1252,11 @@ export class CreateComponent implements OnInit {
     this.txtSize.push(size);
     this.txtColor.push(color);
     this.txtFontFamili.push(fontfamili);
+    this.txtStyle.push(style);
+    this.txtWeight.push(weight);
+    this.txtVariant.push(variant);
+    this.txtAlign.push(align);
+    this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
   setFontFamili(n) {
     this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
@@ -1183,9 +1267,17 @@ export class CreateComponent implements OnInit {
       this.arrayFontFamili[4] = this.arraySelectFontFamili[n];
       this.arrayFontFamili[5] = this.arraySelectFontFamili[n];
     }
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
   }
   shadowOnOff(n, m) {
-    console.log(n + '' + m);
     if ( m === 0 ) {
       if ( this.shadowLarge[n] === '4px 4px 4px' ) {
         this.shadowLarge[n] = '0px 0px';
@@ -1224,6 +1316,82 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontStyle[n] = 'italic';
     }
+    this.setButtonColor('fontStyle' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
+  }
+  setTxtStyle() {
+    if (this.txtStyle[this.currentTxt] === 'italic') {
+      this.txtStyle[this.currentTxt] = 'normal';
+    } else {
+      this.txtStyle[this.currentTxt] = 'italic';
+    }
+    this.setButtonColor('fontStyle5');
+    this.setMaxWidthForUserTxt();
+  }
+  setTxtWeight() {
+    if (this.txtWeight[this.currentTxt] === 'bold') {
+      this.txtWeight[this.currentTxt] = 'normal';
+    } else {
+      this.txtWeight[this.currentTxt] = 'bold';
+    }
+    this.setButtonColor('fontWeight5');
+    this.setMaxWidthForUserTxt();
+  }
+  setTxtVariant() {
+    if (this.txtVariant[this.currentTxt] === 'small-caps') {
+      this.txtVariant[this.currentTxt] = 'normal';
+    } else {
+      this.txtVariant[this.currentTxt] = 'small-caps';
+    }
+    this.setButtonColor('fontVariant5');
+    this.setMaxWidthForUserTxt();
+  }
+  setTxtAlign(value) {
+    if (value === 'left') {
+      this.txtAlign[this.currentTxt] = 'left';
+      this.txtLeft[this.currentTxt] = 0;
+      this.setWhiteColor('alignCenter5');
+      this.setBlueColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    } else if (value === 'right') {
+      this.txtAlign[this.currentTxt] = 'right';
+      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();
+      this.setWhiteColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setBlueColor('alignRight5');
+    } else {
+      this.txtAlign[this.currentTxt] = 'center';
+      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;
+      this.setBlueColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    }
+  }
+  setTxtAlignWithoutPossitionChange(value) {
+    if (value === 'left') {
+      this.txtAlign[this.currentTxt] = 'left';
+      this.setWhiteColor('alignCenter5');
+      this.setBlueColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    } else if (value === 'right') {
+      this.txtAlign[this.currentTxt] = 'right';
+      this.setWhiteColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setBlueColor('alignRight5');
+    } else {
+      this.txtAlign[this.currentTxt] = 'center';
+      this.setBlueColor('alignCenter5');
+      this.setWhiteColor('alignLeft5');
+      this.setWhiteColor('alignRight5');
+    }
   }
   setFontWeight(n) {
     if (this.fontWeight[n] === 'bold') {
@@ -1231,6 +1399,16 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontWeight[n] = 'bold';
     }
+    this.setButtonColor('fontWeight' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
   }
   setFontVariant(n) {
     if (this.fontVariant[n] === 'small-caps') {
@@ -1238,9 +1416,22 @@ export class CreateComponent implements OnInit {
     } else {
       this.fontVariant[n] = 'small-caps';
     }
+    this.setButtonColor('fontVariant' + n);
+    setTimeout( () => {
+      if (n === 0) {
+        this.chceckWidthWithCenter(0);
+      } else if (n === 1) {
+        this.chceckWidthWithCenter(1);
+      } else if (n === 2 ) {
+        this.chceckWidthWithCenter(2);
+      }
+    }, 300);
   }
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
+    this.setWhiteColor('alignRight' + n);
+    this.setWhiteColor('alignCenter' + n);
+    this.setBlueColor('alignLeft' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1) {
@@ -1251,6 +1442,9 @@ export class CreateComponent implements OnInit {
   }
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
+    this.setWhiteColor('alignRight' + n);
+    this.setWhiteColor('alignLeft' + n);
+    this.setBlueColor('alignCenter' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1 ) {
@@ -1259,8 +1453,63 @@ export class CreateComponent implements OnInit {
       this.chceckWidth(0);
     }
   }
+  setButtonColor(n) {
+    if ( document.getElementById(n).style.background === 'white' || document.getElementById(n).style.background === '') {
+      document.getElementById(n).style.background = this.MACblue;
+      document.getElementById(n).style.color = 'white';
+    } else {
+      document.getElementById(n).style.background = 'white';
+      document.getElementById(n).style.color = this.MACblue;
+    }
+  }
+  setWhiteColor(n) {
+    document.getElementById(n).style.background = 'white';
+    document.getElementById(n).style.color = this.MACblue;
+  }
+  setBlueColor(n) {
+    document.getElementById(n).style.background = this.MACblue;
+    document.getElementById(n).style.color = 'white';
+  }
+  setAllButtonColor() {
+    for (let i = 0; i < this.fontStyle.length; i++) {
+      if (this.fontStyle[i] === 'normal') {
+        this.setWhiteColor('fontStyle' + i);
+      } else {
+        this.setBlueColor('fontStyle' + i);
+      }
+      if (this.fontWeight[i] === 'normal') {
+        this.setWhiteColor('fontWeight' + i);
+      } else {
+        this.setBlueColor('fontWeight' + i);
+      }
+      if (this.fontVariant[i] === 'normal') {
+        this.setWhiteColor('fontVariant' + i);
+      } else {
+        this.setBlueColor('fontVariant' + i);
+      }
+      if (i < 4) {
+        if (this.textAlign[i] === 'center') {
+          this.setWhiteColor('alignLeft' + i);
+          this.setWhiteColor('alignRight' + i);
+          this.setBlueColor('alignCenter' + i);
+        } else if (this.textAlign[i] === 'left' ) {
+          this.setBlueColor('alignLeft' + i);
+          this.setWhiteColor('alignRight' + i);
+          this.setWhiteColor('alignCenter' + i);
+        } else {
+          this.setWhiteColor('alignLeft' + i);
+          this.setBlueColor('alignRight' + i);
+          this.setWhiteColor('alignCenter' + i);
+        }
+      }
+    }
+  }
+
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
+    this.setWhiteColor('alignCenter' + n);
+    this.setWhiteColor('alignLeft' + n);
+    this.setBlueColor('alignRight' + n);
     if ( n === 2 ) {
       this.chceckWidth(2);
     } else if ( n === 1) {
@@ -1309,6 +1558,7 @@ export class CreateComponent implements OnInit {
         document.getElementById('base' + n).style.filter = 'grayscale(0%)';
       }
       this.currentBaseTemplate = n;
+      this.tmpBtnDisable = false;
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niekomaptybilny, uszkodzony lub przestarzały!', 'ok');
@@ -1319,15 +1569,22 @@ export class CreateComponent implements OnInit {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }
   chceckWidth(n) {
-    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
-      document.getElementById('toPdf100').offsetWidth * 100);
+    let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    } else {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+        document.getElementById('toPdf100').offsetWidth * 100);
     }
     let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    if ( (this.landscape === 'inline-block') ) {
+      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    console.log('margin left ' + this.marginLeft +
+      ' Width: ' + width + '   percent: ' + percent + ' stete: ' + this.marginLeft[n] +  width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
@@ -1339,16 +1596,23 @@ export class CreateComponent implements OnInit {
     this.percentRight[n] = Math.round(percent - 1);
   }
   chceckWidthWithCenter(n) {
-    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
-      document.getElementById('toPdf100').offsetWidth * 100);
+    console.log('blur?');
+    let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    } else {
+      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+        document.getElementById('toPdf100').offsetWidth * 100);
     }
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
     let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
@@ -1376,16 +1640,13 @@ export class CreateComponent implements OnInit {
     this.percentHeight[n] = Math.round(percent - 1);
     this.percentHeight[n] = Math.round(percent - 1);
   }
-  setBottomMaxPx() {
-    /* this.bottomMaxPx*/
-    alert(document.getElementById('smallTxt').offsetHeight + ' : ' + document.getElementById('toPdf100').offsetHeight );
-  }
   setMaxWidthForUserTxt() {
     let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
+      console.log('landscape');
     }
     let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1402,5 +1663,21 @@ export class CreateComponent implements OnInit {
       console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
       this.txtLeft[this.currentTxt] = 0;
     }
+    return Math.round(percent - 1);
+  }
+  setUserImgFrame(n) {
+    for (let i = 0; i <  this.imgTop.length; i ++ ) {
+      console.log('jestem');
+      if (i === n) {
+        document.getElementById('imgToChange4' + i).style.border = '2px solid red';
+        document.getElementById('imgToChange2' + i).style.border = '2px solid red';
+        console.log('jestem');
+      } else {
+        document.getElementById('imgToChange4' + i).style.border = 'none';
+        document.getElementById('imgToChange2' + i).style.border = 'none';
+        console.log('jestem');
+      }
+    }
   }
 }
+
