@@ -83,7 +83,6 @@ export class CreateComponent implements OnInit {
   boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
-  format = 'a4';
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
@@ -202,9 +201,9 @@ export class CreateComponent implements OnInit {
   }
   setPaddingAnchor() {
     setTimeout( () => {
-      this.chceckWidth(0);
-      this.chceckWidth(1);
-      this.chceckWidth(2);
+      this.checkWidth(0);
+      this.checkWidth(1);
+      this.checkWidth(2);
     }, 300);
   }
   /*chceckArray() {
@@ -390,17 +389,6 @@ export class CreateComponent implements OnInit {
     const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
-  }
-  takeFontForEle(font, element) {
-    document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'Fix').style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'LandscapeFix').style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'Landscape').style.fontFamily = font;
-    this.arrayFontFamili[element] = font;
-    if (element === 4) {
-      this.takeFontForEle(font, 5);
-      this.takeFontForEle(font, 6);
-    }
   }
   setHeightSport(array) {
     const divide = array.length / 5;
@@ -866,7 +854,7 @@ export class CreateComponent implements OnInit {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
     fileSaver.saveAs(blob, 'template' + date + '.MACproject');
   }
-  createTextToJSON(name) {
+  createTextToJSON(name): String {
     let txt = '';
     for ( let i = 0; i < name.length; i ++) {
       if (i !== name.length - 1) {
@@ -1037,15 +1025,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
-  setFormat(n) {
-    this.format = n;
-    document.getElementById('size' + n ).style.transform = 'scale(1,1)';
-    if ( n === 'A4') {
-      document.getElementById('sizeA5' ).style.transform = 'scale(0.8,0.8)';
-    } else {
-      document.getElementById('sizeA4').style.transform = 'scale(0.8, 0.8)';
-    }
-  }
   addTxt() {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
@@ -1117,11 +1096,11 @@ export class CreateComponent implements OnInit {
     }
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1167,11 +1146,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontStyle' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1250,11 +1229,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontWeight' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1267,11 +1246,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontVariant' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
       }, 300);
   }
@@ -1281,11 +1260,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignCenter' + n);
     this.setBlueColor('alignLeft' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setTextAlignCenter(n) {
@@ -1294,11 +1273,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignCenter' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1 ) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0 ) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setButtonColor(n) {
@@ -1359,11 +1338,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignRight' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setImg(n, name) {
@@ -1413,10 +1392,10 @@ export class CreateComponent implements OnInit {
     }
     document.getElementById('spinner').style.display = 'none';
   }
-  setCookies() {
+  /*setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-  }
-  chceckWidth(n) {
+  }*/
+  checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
@@ -1443,7 +1422,7 @@ export class CreateComponent implements OnInit {
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
   }
-  chceckWidthWithCenter(n) {
+  protected checkWidthWithCenter(n): void {
     console.log('blur?');
     let percent;
     if ( (this.landscape === 'inline-block') ) {

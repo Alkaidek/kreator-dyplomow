@@ -546,14 +546,14 @@
                  0
                 <input class="input fadeInLeft" [value]="title" (input)="title = $event.target.value" placeholder="Nazwa">-->
                 <mat-form-field class="example-full-width fadeInLeft">
-                  <input matInput placeholder="Tytuł" (ngModelChange)="chceckWidthWithCenter(0); setHeightPercent(0)" [(ngModel)]="title"  (blur)="chceckWidthWithCenter(0)">
+                  <input matInput placeholder="Tytuł" (ngModelChange)="checkWidthWithCenter(0); setHeightPercent(0)" [(ngModel)]="title"  (blur)="checkWidthWithCenter(0)">
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">
                 <mat-slider thumbLabel class="fadeInTop" min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>-->
-                <input type="range" min="0" max="9" [value]="arrayFontSize[0]"  (input)="arrayFontSize[0] = $event.target.value" step="0.01" (blur)="chceckWidthWithCenter(0)" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"  (click)="chceckWidthWithCenter(0)" (change)="chceckWidthWithCenter(0)">
+                <input type="range" min="0" max="9" [value]="arrayFontSize[0]"  (input)="arrayFontSize[0] = $event.target.value" step="0.01" (blur)="checkWidthWithCenter(0)" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"  (click)="checkWidthWithCenter(0)" (change)="checkWidthWithCenter(0)">
                 <p class="fadeInTop" >Kolor czcionki</p>
-                <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000" (blur)="chceckWidthWithCenter(0)">
+                <input type="color" [value]="arrayFontColor[0]" (input)="arrayFontColor[0] = $event.target.value" id="card000" (blur)="checkWidthWithCenter(0)">
                 <br />
                 <p class="fadeInTop" >Czcionka</p>
                 <mat-form-field class="fadeInLeft" style="width: 80%; margin-top: 10px" >
@@ -586,12 +586,12 @@
                           <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
                           -->
                           <p class="fadeInTop">Lewy margines</p>
-                          <!--<mat-slider thumbLabel  min="0" [max]="percentLeft[0]" (click)="chceckWidth(0)" (change)="chceckWidth(0)" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>-->
-                          <input type="range" min="0" max="{{percentLeft[0]}}" (click)="chceckWidth(0)" (change)="chceckWidth(0)" [value]="marginLeft[0]" (input)="marginLeft[0] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                          <!--<mat-slider thumbLabel  min="0" [max]="percentLeft[0]" (click)="checkWidth(0)" (change)="checkWidth(0)" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>-->
+                          <input type="range" min="0" max="{{percentLeft[0]}}" (click)="checkWidth(0)" (change)="checkWidth(0)" [value]="marginLeft[0]" (input)="marginLeft[0] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                           <br/>
                           <p class="fadeInTop">Prawy margines</p>
-                          <!--<mat-slider thumbLabel  min="0" [max]="percentRight[0]" (click)="chceckWidth(0)"  (change)="chceckWidth(0)" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>-->
-                          <input type="range" min="0" max="{{percentRight[0]}}" (click)="chceckWidth(0)" (change)="chceckWidth(0)" [value]="marginRight[0]" (input)="marginRight[0] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                          <!--<mat-slider thumbLabel  min="0" [max]="percentRight[0]" (click)="checkWidth(0)"  (change)="checkWidth(0)" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>-->
+                          <input type="range" min="0" max="{{percentRight[0]}}" (click)="checkWidth(0)" (change)="checkWidth(0)" [value]="marginRight[0]" (input)="marginRight[0] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                           <p class="fadeInTop" >Górny margines</p>
                           <!--<mat-slider thumbLabel  min="-1" max="80" [(value)]="paddingTop" class="example-full-width"></mat-slider>-->
                           <input type="range" min="0" max="{{percentHeight[0]}}" (click)="setHeightPercent(0)" (change)="setHeightPercent(0)" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
@@ -660,7 +660,7 @@
                2
                <textarea class="input fadeInLeft textarea" > </textarea> -->
                 <mat-form-field class="example-full-width fadeInLeft">
-                  <textarea matInput [value]="forWho" (blur)="chceckWidthWithCenter(1)" (ngModelChange)="chceckWidthWithCenter(1); setHeightPercent(1)" [(ngModel)]="forWho" placeholder="Dla kogo"></textarea>
+                  <textarea matInput [value]="forWho" (blur)="checkWidthWithCenter(1)" (ngModelChange)="checkWidthWithCenter(1); setHeightPercent(1)" [(ngModel)]="forWho" placeholder="Dla kogo"></textarea>
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[2]" (input)="arrayFontSize[2] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card11">
@@ -668,7 +668,7 @@
                 <!--
                                 <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[2]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>
                 -->
-                <input type="range" min="0" max="8" [value]="arrayFontSize[2]"  (click)="chceckWidthWithCenter(1)" (change)="chceckWidthWithCenter(1)" (input)="arrayFontSize[2] = $event.target.value" step="0.01" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                <input type="range" min="0" max="8" [value]="arrayFontSize[2]"  (click)="checkWidthWithCenter(1)" (change)="checkWidthWithCenter(1)" (input)="arrayFontSize[2] = $event.target.value" step="0.01" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                 <p class="fadeInTop">Kolor czcionki</p>
                 <input type="color" [value]="arrayFontColor[2]" (input)="arrayFontColor[2] = $event.target.value" id="card111">
                 <br />
@@ -701,9 +701,9 @@
                         <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
                       -->
                       <p class="fadeInTop">Lewy margines</p>
-                      <input type="range" min="0" max="{{percentLeft[1]}}" (click)="chceckWidth(1)" (change)="chceckWidth(1)" [value]="marginLeft[1]" (input)="marginLeft[1] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                      <input type="range" min="0" max="{{percentLeft[1]}}" (click)="checkWidth(1)" (change)="checkWidth(1)" [value]="marginLeft[1]" (input)="marginLeft[1] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <p class="fadeInTop">Prawy margines</p>
-                      <input type="range" min="0" max="{{percentRight[1]}}" (click)="chceckWidth(1)" (change)="chceckWidth(1)" [value]="marginRight[1]" (input)="marginRight[1] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                      <input type="range" min="0" max="{{percentRight[1]}}" (click)="checkWidth(1)" (change)="checkWidth(1)" [value]="marginRight[1]" (input)="marginRight[1] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <p class="fadeInTop" >Górny margines</p>
                       <input type="range" min="0"  max="{{percentHeight[1]}}" (click)="setHeightPercent(1)" (change)="setHeightPercent(1)" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <p class="fadeInTop" >Odstęp między literami</p>
@@ -779,13 +779,13 @@
                  4
                 <textarea class="input fadeInLeft textarea" > </textarea> <br/>-->
                 <mat-form-field class="example-full-width">
-                  <textarea matInput [value]="forWhat" (blur)="chceckWidthWithCenter(2)"  (ngModelChange)="chceckWidthWithCenter(2); setHeightPercent(0)" [(ngModel)]="forWhat" placeholder="Za co"></textarea>
+                  <textarea matInput [value]="forWhat" (blur)="checkWidthWithCenter(2)"  (ngModelChange)="checkWidthWithCenter(2); setHeightPercent(0)" [(ngModel)]="forWhat" placeholder="Za co"></textarea>
                 </mat-form-field>
                 <p class="fadeInTop" style="margin-top: 10px">Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
                 <br />-->
                 <!--                <mat-slider thumbLabel class="fadeInLeft"  min="0" max="8" [(value)]="arrayFontSize[4]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>-->
-                <input type="range" min="0" max="8" [value]="arrayFontSize[5]"  (click)="chceckWidthWithCenter(2)" (change)="chceckWidthWithCenter(2)" (input)="arrayFontSize[4] = $event.target.value" step="0.01" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                <input type="range" min="0" max="8" [value]="arrayFontSize[5]"  (click)="checkWidthWithCenter(2)" (change)="checkWidthWithCenter(2)" (input)="arrayFontSize[4] = $event.target.value" step="0.01" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                 <p class="fadeInTop">Kolor czcionki</p>
                 <input type="color" [value]="arrayFontColor[4]" (input)="arrayFontColor[4] = $event.target.value" id="card222">
                 <br />
@@ -819,9 +819,9 @@
                       <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
                       -->
                       <p class="fadeInTop">Lewy margines</p>
-                      <input type="range" min="0" max="{{percentLeft[2]}}" (click)="chceckWidth(2)" (change)="chceckWidth(2)" [value]="marginLeft[2]" (input)="marginLeft[2] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                      <input type="range" min="0" max="{{percentLeft[2]}}" (click)="checkWidth(2)" (change)="checkWidth(2)" [value]="marginLeft[2]" (input)="marginLeft[2] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <p class="fadeInTop">Prawy margines</p>
-                      <input type="range" min="0" max="{{percentRight[2]}}" (click)="chceckWidth(2)" (change)="chceckWidth(2)" [value]="marginRight[2]" (input)="marginRight[2] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
+                      <input type="range" min="0" max="{{percentRight[2]}}" (click)="checkWidth(2)" (change)="checkWidth(2)" [value]="marginRight[2]" (input)="marginRight[2] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <p class="fadeInTop" >Górny margines</p>
                       <input type="range" min="0"  max="{{percentHeight[2]}}" (click)="setHeightPercent(2)" (change)="setHeightPercent(2)" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                       <!--<p class="fadeInTop">Lewy margines</p>
