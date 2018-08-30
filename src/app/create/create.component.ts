@@ -844,6 +844,9 @@ export class CreateComponent implements OnInit {
     this.imgLeft.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
+    if ( this.currImg === -1 ) {
+      this.boolDisableUserImgFields = true;
+    }
   }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -1423,7 +1426,6 @@ export class CreateComponent implements OnInit {
     this.percentRight[n] = Math.round(percent - 1);
   }
   checkWidthWithCenter(n): void {
-    console.log('blur?');
     let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
@@ -1473,7 +1475,6 @@ export class CreateComponent implements OnInit {
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
-      console.log('landscape');
     }
     let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1494,15 +1495,12 @@ export class CreateComponent implements OnInit {
   }
   setUserImgFrame(n) {
     for (let i = 0; i <  this.imgTop.length; i ++ ) {
-      console.log('jestem');
       if (i === n) {
         document.getElementById('imgToChange4' + i).style.border = '2px solid red';
         document.getElementById('imgToChange2' + i).style.border = '2px solid red';
-        console.log('jestem');
       } else {
         document.getElementById('imgToChange4' + i).style.border = 'none';
         document.getElementById('imgToChange2' + i).style.border = 'none';
-        console.log('jestem');
       }
     }
   }
