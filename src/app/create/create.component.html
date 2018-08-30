@@ -297,16 +297,17 @@
              id="fileInputLabel"
              class="fadeInLeft"
              matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above"
-             style="padding-top: 6px">
+             style="padding-top: 6px; float: left">
         <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
         WCZYTAJ SZABLON
       </label>
       <input id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
     </div>
-  <button mat-button color="warn"  class="" (click)="generateHQualityPdf()" style="float: left; margin-left: 170px">GENERUJ DYPLOM</button>
+  <button mat-button color="primary"  class="" (click)="generateHQualityPdf()" style="margin-left: 83px; font-weight: bolder">
+    GENERUJ DYPLOM</button>
   <button mat-button color="warn"  class="" (click)="createArrayToSend()"
           matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
-          matTooltipPosition="above"  style="float: left">
+          matTooltipPosition="above"  style="float: right; font-weight: bolder">
     ZAPISZ SZABLON</button>
   </div>
   <mat-horizontal-stepper linear="false" #stepper class="stepper">
