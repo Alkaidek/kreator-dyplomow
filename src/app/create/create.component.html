@@ -290,15 +290,25 @@
 <div id="create" xmlns="" [style.display]="auth">
   <!--<img src="../../assets/img/logoMAC.png" style="width: 11vh; height: 11vh; z-index: 15; top: 15px; left: 7px" />-->
 
-  <div >
-    <label (click)="stepper.reset()" for="fileInput" id="fileInputLabel" class="button fadeInLeft" matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">
-      <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
-      Wczytaj szablon
-    </label>
-    <input class="fadeInRight button" id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
+
+  <div class="footer">
+    <div >
+      <label (click)="stepper.reset()" for="fileInput"
+             id="fileInputLabel"
+             class="fadeInLeft"
+             matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above"
+             style="padding-top: 6px">
+        <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
+        WCZYTAJ SZABLON
+      </label>
+      <input id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
+    </div>
+  <button mat-button color="warn"  class="" (click)="generateHQualityPdf()" style="float: left; margin-left: 170px">GENERUJ DYPLOM</button>
+  <button mat-button color="warn"  class="" (click)="createArrayToSend()"
+          matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
+          matTooltipPosition="above"  style="float: left">
+    ZAPISZ SZABLON</button>
   </div>
-  <button id="btnGeneratePdf" class="button" (click)="generateHQualityPdf()">Generuj Dyplom!</button>
-  <button id="btnAddTemplate" class="button" (click)="createArrayToSend()"  matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above">Zapisz szablon!</button>
   <mat-horizontal-stepper linear="false" #stepper class="stepper">
     <mat-step>
       <div>
@@ -348,7 +358,7 @@
               <i class="material-icons">
                 remove
               </i>
-              Zresetuj szablon</button>
+              Resetuj szablon</button>
           </div>
           <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block;  margin-top: 1px">
           </div>
@@ -1362,14 +1372,14 @@
             <i class="material-icons">
               crop_rotate
             </i>
-            Zresetuj obrót</button> <br/>
+            Resetuj obrót</button> <br/>
         </div>
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">
             <i class="material-icons">
               image
             </i>
-            Zresetuj obrazek</button> <br /><br />
+            Resetuj obrazek</button> <br /><br />
         </div>
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button id="rmvImg" mat-button color="warn" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="removeImg()" style="width: 60%" disabled>
@@ -1536,7 +1546,9 @@
            [style.font-weight]="txtWeight[i]">
           {{txt}}</p>
       </div>
-      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
+      <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"
+            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
+      />
       <img  src="{{imgMAClogoFrame}}"
             [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
             style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
