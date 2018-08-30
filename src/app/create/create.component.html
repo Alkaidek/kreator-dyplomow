@@ -292,7 +292,7 @@
 
 
   <div class="footer">
-    <div >
+
       <label (click)="stepper.reset()" for="fileInput"
              id="fileInputLabel"
              class="fadeInLeft"
@@ -302,12 +302,12 @@
         WCZYTAJ SZABLON
       </label>
       <input id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
-    </div>
-  <button mat-button color="primary"  class="" (click)="generateHQualityPdf()" style="margin-left: 83px; font-weight: bolder">
+
+  <button mat-button color="primary"  class="" (click)="generateHQualityPdf()" style="margin-left: 25%; font-weight: bolder; width: 25%">
     GENERUJ DYPLOM</button>
   <button mat-button color="warn"  class="" (click)="createArrayToSend()"
           matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
-          matTooltipPosition="above"  style="float: right; font-weight: bolder">
+          matTooltipPosition="above"  style="float: right; font-weight: bolder; width: 25%">
     ZAPISZ SZABLON</button>
   </div>
   <mat-horizontal-stepper linear="false" #stepper class="stepper">
