@@ -302,16 +302,15 @@
         WCZYTAJ SZABLON
       </label>
       <input id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
-
-  <button mat-button color="primary"  class="" (click)="generateHQualityPdf()" style="margin-left: 25%; font-weight: bolder; width: 25%">
-    GENERUJ DYPLOM</button>
   <button mat-button color="warn"  class="" (click)="createArrayToSend()"
           matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
-          matTooltipPosition="above"  style="float: right; font-weight: bolder; width: 25%">
+          matTooltipPosition="above" style="margin-left: 25%; font-weight: bolder; width: 25%">
     ZAPISZ SZABLON</button>
+    <button mat-button color="primary"  class="" (click)="generateHQualityPdf()"  style="float: right; font-weight: bolder; width: 25%" >
+      GENERUJ DYPLOM</button>
   </div>
-  <mat-horizontal-stepper linear="false" #stepper class="stepper">
-    <mat-step>
+  <mat-horizontal-stepper linear="false" #stepper class="stepper" style="margin-top: 10vh">
+    <mat-step stepControl="false">
       <div>
         <button matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary" disabled style="opacity: 0">
           <mat-icon >navigate_before</mat-icon>
@@ -413,7 +412,7 @@
         </div> -->
       </div>
     </mat-step>
-    <mat-step>
+    <mat-step stepControl="false">
       <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
@@ -472,7 +471,7 @@
         <input type="color" matTooltip="Naciśnij i wybierz kolor tła" matTooltipPosition="below" class="fadeInTop" [value]="bcgColor" (input)="bcgColor = $event.target.value" style="width: 60%">
       </div>
     </mat-step>
-    <mat-step>
+    <mat-step stepControl="false">
       <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
@@ -526,7 +525,7 @@
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
       </div>
     </mat-step>
-    <mat-step>
+    <mat-step stepControl="false">
       <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
@@ -1113,7 +1112,7 @@
         </mat-accordion>
       </div>
     </mat-step>
-    <mat-step>
+    <mat-step stepControl="false">
       <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
@@ -1267,7 +1266,7 @@
         </div>
       </div>
     </mat-step>
-    <mat-step>
+    <mat-step stepControl="false">
       <div>
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
@@ -1348,33 +1347,27 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="box33" style="height: 110px;">
-          <p style="float: left;   padding-left: 5px"><b class="fadeInRight">Szerokość obrazka</b></p>
+        <div class="box33" style="height: 110px;/* border-right: 1px solid #f2f2f2*/">
+          <p style="/*float: left; */  padding-left: 5px"><b class="fadeInRight">Szerokość obrazka</b></p>
           <input id="inputImgWidth" type="range" min="0" max="{{100-imgLeft[currImg]}}" [disabled]="boolDisableUserImgFields" [value]="imgWidth[currImg]" (input)="imgWidth[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
         </div>
-        <div class="box33" style="height: 110px;">
-          <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Wysokość obrazka</b></p>
+        <div class="box33" style="height: 110px; ">
+          <p style="/*float: left;*/  padding-left: 5px"><b class="fadeInRight">Wysokość obrazka</b></p>
           <input type="range" min="0" max="{{100-imgTop[currImg]}}" [value]="imgHeight[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgHeight[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%"><br />
         </div>
-        <div class="box33border" style="height: 110px;">
-          <p style="float: left;  padding-left: 5px"><b class="fadeInRight" style="float: left;">Górny margines obrazka</b></p>
+        <div class="box33border" style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
+          <p style="/*float: left;*/  padding-left: 5px"><b class="fadeInRight" style="">Górny margines obrazka</b></p>
           <input type="range" min="0" max="{{100-imgHeight[currImg]}}" [value]="imgTop[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgTop[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%" >
         </div>
-        <div class="box33border" style="height: 110px;">
-          <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Lewy margines obrazka</b></p>
+        <div class="box33border" style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
+          <p style="/*float: left;*/  padding-left: 5px"><b class="fadeInRight">Lewy margines obrazka</b></p>
           <input type="range" min="0" max="{{100-imgWidth[currImg]}}" [value]="imgLeft[currImg]" [disabled]="boolDisableUserImgFields" (input)="imgLeft[currImg] = $event.target.value" class="slider50 fadeInLeft"  style="width: 80%; margin-left: 0%"><br />
         </div>
         <div class="box33border" style="height: 110px;">
-          <p style="float: left;  padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
+          <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
           <input type="range" id="inputImgRotate" min="-360" max="360" [value]="rotate[currImg]" [disabled]="boolDisableUserImgFields" (input)="rotate[currImg] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" step="45" > <br />
         </div>
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
-          <button mat-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">
-            <i class="material-icons">
-              crop_rotate
-            </i>
-            Resetuj obrót</button> <br/>
-        </div>
+
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button color="primary" class="fadeInLeft"  [disabled]="boolDisableUserImgFields" (click)="resetImg()" style="width: 60%">
             <i class="material-icons">
@@ -1388,6 +1381,13 @@
               remove
             </i>
             Usuń obrazek</button>
+        </div>
+        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
+          <button mat-button color="primary" class="fadeInRight"  [disabled]="boolDisableUserImgFields" (click)="set0degress()" style="margin-bottom: 15px; width: 60%">
+            <i class="material-icons">
+              crop_rotate
+            </i>
+            Resetuj obrót</button> <br/>
         </div>
       </div>
     </mat-step>

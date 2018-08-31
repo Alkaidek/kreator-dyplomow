@@ -161,6 +161,8 @@ export class CreateComponent implements OnInit {
       imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
+      const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
+      stepper.style.top = '5vh' ;
       /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
@@ -180,6 +182,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
+      const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
+      stepper.style.top = '8vh' ;
       /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
@@ -274,6 +278,36 @@ export class CreateComponent implements OnInit {
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
+    return this.multiple;
+  }
+  highlightBcg(imgSrc) {
+    this.lastValue = imgSrc;
+    console.log('up' + this.lastValue);
+    document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
+    document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    this.lastValue = 0;
+  }
+  downgradeBcg(imgSrc) {
+    console.log('down' + this.lastValue);
+    document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (imgSrc ) ).style.border = 'white 1px solid';
+  }
+  highlightFrame(imgSrc) {
+    this.lastValueFrame = imgSrc;
+    document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    this.lastValueFrame = 0;
+  }
+  downgradeFrame() {
+    console.log('down' + this.lastValueFrame);
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
@@ -491,16 +525,36 @@ export class CreateComponent implements OnInit {
       this.bottom = template.bottom;
       this.imgSrcFrame = template.frame;
       if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
+        this.downgradeFrame();
         this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
       } else {
         this.imgMAClogoFrame = '../../assets/img/0.png';
         this.frmBtnDisable = false;
+        for ( let i = 0; i < this.frames.length; i++ ) {
+          if (this.imgSrcFrame === this.frames[i]) {
+            this.downgradeFrame();
+            this.highlightFrame(i);
+            const tmp = this.frames[i]
+            this.frames[i] = this.frames[0];
+            this.frames[0] = tmp;
+          }
+        }
       }
-      if ( template.img === '') {
+      if ( template.img === '' || template.img === '../../assets/img/0.png') {
+        this.downgradeBcg(this.lastValue);
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
         this.imgSrcFix = template.img;
         this.bcgBtnDisable = false;
+        for ( let i = 0; i < this.bcgTemp.length; i++ ) {
+          if (this.imgSrcFix === this.bcgTemp[i]) {
+            this.downgradeBcg(this.lastValue);
+            this.highlightBcg(i);
+            const tmp = this.bcgTemp[i]
+            this.bcgTemp[i] = this.bcgTemp[0];
+            this.bcgTemp[0] = tmp;
+          }
+        }
       }
       this.base64Tmp = template.img;
       for (let i = 0; i < template.arrayFontSize.length; i++ ) {
@@ -855,7 +909,8 @@ export class CreateComponent implements OnInit {
   }
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    const result = fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    return result.readyState;
   }
   createTextToJSON(name): String {
     let txt = '';
@@ -1014,6 +1069,7 @@ export class CreateComponent implements OnInit {
     this.imgSrc = '../../assets/img/0.png';
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
+    this.bcgColor = '#ffffff';
     document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
@@ -1398,7 +1454,7 @@ export class CreateComponent implements OnInit {
   /*setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
   }*/
-  checkWidth(n) {
+  public checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
@@ -1425,8 +1481,9 @@ export class CreateComponent implements OnInit {
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
   }
-  checkWidthWithCenter(n): void {
+  checkWidthWithCenter(n) {
     let percent;
+    let i = 1;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
@@ -1449,6 +1506,7 @@ export class CreateComponent implements OnInit {
     if ( (width) > 98 || widthRight > 98 ) {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
+      i = 0;
     }
     percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1458,6 +1516,7 @@ export class CreateComponent implements OnInit {
     }
     this.percentHeight[n] = Math.round(percent - 1);
     this.percentHeight[n] = Math.round(percent - 1);
+    return i;
   }
   setHeightPercent(n) {
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
@@ -1504,5 +1563,7 @@ export class CreateComponent implements OnInit {
       }
     }
   }
+  test() {
+    return 0;
+  }
 }
-
