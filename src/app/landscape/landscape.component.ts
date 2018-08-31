@@ -9,9 +9,9 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class LandscapeComponent implements OnInit {
   images = [];
   constructor(private db: AngularFireDatabase ) {
-    //db.list('/base64').valueChanges().subscribe(bcgTemp => {
-     // this.images[0] = bcgTemp;
-   // });
+    /*db.list('/base64').valueChanges().subscribe(bcgTemp => {
+     this.images[0] = bcgTemp;
+   });*/
   }
 
   ngOnInit() {

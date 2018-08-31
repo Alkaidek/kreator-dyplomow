@@ -163,6 +163,11 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '5vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '5vh' ;
+      const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      for ( let i = 0; i < buttonStepper.length; i++) {
+        const element = buttonStepper[i] as HTMLElement;
+        element.style.top = '13vh' ;
+      }
       /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
@@ -184,6 +189,11 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.paddingTop = '0vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '8vh' ;
+      const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      for ( let i = 0; i < buttonStepper.length; i++) {
+        const element = buttonStepper[i] as HTMLElement;
+        element.style.top = '16vh' ;
+      }
       /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';

@@ -4,21 +4,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { firebase_config } from './firebase.config';
 
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { LandscapeComponent } from './landscape/landscape.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
-
-const firebase = {
-  apiKey: 'AIzaSyB2EVW_LFNCbihRQ29rZTYtYLT_Ni_AvT8',
-  authDomain: 'dyplomator.firebaseapp.com',
-  databaseURL: 'https://dyplomator.firebaseio.com',
-  projectId: 'dyplomator',
-  storageBucket: 'dyplomator.appspot.com',
-  messagingSenderId: '633386395085'
-}
 
 @NgModule({
   declarations: [
@@ -29,7 +21,7 @@ const firebase = {
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
-    AngularFireModule.initializeApp(firebase),
+    AngularFireModule.initializeApp(firebase_config),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -39,3 +31,5 @@ const firebase = {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
