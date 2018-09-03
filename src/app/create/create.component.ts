@@ -157,8 +157,6 @@ export class CreateComponent implements OnInit {
   textAlign = ['center', 'center', 'center', 'center', 'center'];
   btnDirectLeftDisabled = true;
   btnDirectRightDisabled = false;
-  btnDirectLeftOpacity = 0;
-  btnDirectRightOpacity = 1;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -1585,24 +1583,21 @@ export class CreateComponent implements OnInit {
     console.log('n: ' + n);
     if ( stepperIndex === 5 ) {
       this.btnDirectRightDisabled = true;
-      //this.btnDirectRightOpacity = 0;
       document.getElementById('btnDirectRight').style.right = '-200px';
       document.getElementById('btnDirectRight').style.opacity = '0';
+
     } else {
       this.btnDirectRightDisabled = false;
-      this.btnDirectRightOpacity = 1;
       document.getElementById('btnDirectRight').style.right = '0px';
       document.getElementById('btnDirectRight').style.opacity = '1';
     }
     if (  stepperIndex === 0 ) {
       this.btnDirectLeftDisabled = true;
-      //this.btnDirectLeftOpacity = 0;
       document.getElementById('btnDirectLeft').style.left = '-200px';
       document.getElementById('btnDirectLeft').style.opacity = '0';
     } else {
       this.btnDirectLeftDisabled = false;
-      this.btnDirectLeftOpacity = 1;
-      document.getElementById('btnDirectLeft').style.left = '0px'
+      document.getElementById('btnDirectLeft').style.left = '0px';
       document.getElementById('btnDirectLeft').style.opacity = '1';
     }
   }

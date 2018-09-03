@@ -302,7 +302,7 @@
         WCZYTAJ SZABLON
       </label>
       <input id="fileInput" type="file" accept='.MACproject' (change)="onSelectFile($event)"/>
-  <button mat-button color="warn"  class="" (click)="createArrayToSend()"
+  <button mat-button color="accent" (click)="createArrayToSend()"
           matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
           matTooltipPosition="above" style="margin-left: 25%; font-weight: bolder; width: 25%">
     ZAPISZ SZABLON</button>
@@ -310,7 +310,8 @@
       GENERUJ DYPLOM</button>
   </div>
   <div class="directButtonContainter">
-    <button id="btnDirectLeft" matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab  (click)="stepper.previous();" color="primary" [disabled]="btnDirectLeftDisabled" style="left: -200px; opacity: 0">
+    <button id="btnDirectLeft" matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab  (click)="stepper.previous();" color="primary" [disabled]="btnDirectLeftDisabled"
+            style="left: -200px; opacity: 0">
       <mat-icon >navigate_before</mat-icon>
     </button>
     <button id="btnDirectRight" matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
