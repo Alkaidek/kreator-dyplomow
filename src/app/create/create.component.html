@@ -284,7 +284,7 @@
     <img id="fbLogo" src="../../assets/icon/fb.png" style="width: 4.5vh; height: 4.5vh; z-index: 15; margin-top: 16px; margin-right: 8px; left: 7px; transition: all linear 0.3s; float: right;"/>
   </a>-->
 </div>
-<img src="../../assets/img/topLogo.png" style="min-width: 100%; height: 8px; position: fixed; z-index: 15; left: 0px" />
+<img src="../../assets/img/topLogoV2.png" style="min-width: 100%; height: 8px; position: fixed; z-index: 15; left: 0px" />
 <!--<img src="../../assets/img/kreator%20dyplomów%20logo.png" style="width: 55vh; height: 11vh; z-index: 15; top: 15px; left: 7px; position: fixed;" />-->
 <!--<img id="podglad" src="../../assets/img/podglad2.png" />-->
 <div id="create" xmlns="" [style.display]="auth">
@@ -310,14 +310,14 @@
       GENERUJ DYPLOM</button>
   </div>
   <div class="directButtonContainter">
-    <button matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab  (click)="stepper.previous()" color="primary" style="opacity: 1">
+    <button matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab  (click)="stepper.previous();" color="primary" style="opacity: 1" [disabled]="btnDirectLeftDisabled">
       <mat-icon >navigate_before</mat-icon>
     </button>
-    <button matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab (click)="stepper.next()" color="primary" style="float: right">
+    <button matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab (click)="stepper.next();" color="primary" style="float: right" [disabled]="btnDirectRightDisabled">
       <mat-icon >navigate_next</mat-icon>
     </button>
   </div>
-  <mat-horizontal-stepper linear="false" #stepper class="stepper" style="margin-top: 10vh">
+  <mat-horizontal-stepper linear="false" #stepper class="stepper" style="margin-top: 10vh" (selectionChange)="checkDirectButtonValue(-1, $event.selectedIndex)">
     <mat-step stepControl="false">
 
       <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
@@ -527,7 +527,7 @@
       </div>
     </mat-step>
     <mat-step stepControl="false">
-      <<!--div class="directButtonContainter">
+      <!--<div class="directButtonContainter">
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>

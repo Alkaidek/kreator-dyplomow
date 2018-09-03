@@ -155,6 +155,9 @@ export class CreateComponent implements OnInit {
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   textAlign = ['center', 'center', 'center', 'center', 'center'];
+  btnDirectLeftDisabled = true;
+  btnDirectRightDisabled = false;
+  stepperValue = 0;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -544,7 +547,7 @@ export class CreateComponent implements OnInit {
           if (this.imgSrcFrame === this.frames[i]) {
             this.downgradeFrame();
             this.highlightFrame(i);
-            const tmp = this.frames[i]
+            const tmp = this.frames[i];
             this.frames[i] = this.frames[0];
             this.frames[0] = tmp;
           }
@@ -560,7 +563,7 @@ export class CreateComponent implements OnInit {
           if (this.imgSrcFix === this.bcgTemp[i]) {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
-            const tmp = this.bcgTemp[i]
+            const tmp = this.bcgTemp[i];
             this.bcgTemp[i] = this.bcgTemp[0];
             this.bcgTemp[0] = tmp;
           }
@@ -1576,4 +1579,28 @@ export class CreateComponent implements OnInit {
   test() {
     return 0;
   }
+  checkDirectButtonValue(n, stepperIndex) {
+    if (stepperIndex === -1 ) {
+      if ( n === 1 ) {
+        this.stepperValue++;
+      } else if ( n === 0 ) {
+        this.stepperValue--;
+      }
+    } else {
+      this.stepperValue = stepperIndex;
+    }
+    console.log('stepperValue: ' + this.stepperValue);
+    console.log('n: ' + n);
+    if ( this.stepperValue === 5 ) {
+      this.btnDirectRightDisabled = true;
+    } else {
+      this.btnDirectRightDisabled = false;
+    }
+    if (  this.stepperValue === 0 ) {
+      this.btnDirectLeftDisabled = true;
+    } else {
+      this.btnDirectLeftDisabled = false;
+    }
+  }
+
 }
