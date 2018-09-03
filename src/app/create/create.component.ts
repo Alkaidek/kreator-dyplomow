@@ -157,7 +157,8 @@ export class CreateComponent implements OnInit {
   textAlign = ['center', 'center', 'center', 'center', 'center'];
   btnDirectLeftDisabled = true;
   btnDirectRightDisabled = false;
-  stepperValue = 0;
+  btnDirectLeftOpacity = 0;
+  btnDirectRightOpacity = 1;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -1580,26 +1581,29 @@ export class CreateComponent implements OnInit {
     return 0;
   }
   checkDirectButtonValue(n, stepperIndex) {
-    if (stepperIndex === -1 ) {
-      if ( n === 1 ) {
-        this.stepperValue++;
-      } else if ( n === 0 ) {
-        this.stepperValue--;
-      }
-    } else {
-      this.stepperValue = stepperIndex;
-    }
-    console.log('stepperValue: ' + this.stepperValue);
+    console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
-    if ( this.stepperValue === 5 ) {
+    if ( stepperIndex === 5 ) {
       this.btnDirectRightDisabled = true;
+      //this.btnDirectRightOpacity = 0;
+      document.getElementById('btnDirectRight').style.right = '-200px';
+      document.getElementById('btnDirectRight').style.opacity = '0';
     } else {
       this.btnDirectRightDisabled = false;
+      this.btnDirectRightOpacity = 1;
+      document.getElementById('btnDirectRight').style.right = '0px';
+      document.getElementById('btnDirectRight').style.opacity = '1';
     }
-    if (  this.stepperValue === 0 ) {
+    if (  stepperIndex === 0 ) {
       this.btnDirectLeftDisabled = true;
+      //this.btnDirectLeftOpacity = 0;
+      document.getElementById('btnDirectLeft').style.left = '-200px';
+      document.getElementById('btnDirectLeft').style.opacity = '0';
     } else {
       this.btnDirectLeftDisabled = false;
+      this.btnDirectLeftOpacity = 1;
+      document.getElementById('btnDirectLeft').style.left = '0px'
+      document.getElementById('btnDirectLeft').style.opacity = '1';
     }
   }
 
