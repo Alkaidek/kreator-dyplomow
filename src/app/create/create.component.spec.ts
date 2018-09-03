@@ -68,10 +68,48 @@ describe('CreateComponent', () => {
   });
 
   describe('checkSaveData',  () => {
-      it ( 'expect 0', () => {
+      xit ( 'expect 0', () => {
         const result = component.saveData( '123' );
         expect(result).toBe(0);
       });
+  });
+  describe('A spy', function() {
+    beforeEach(function () {
+      spyOn(component, 'rotateBcgX');
+      component.rotateBcgX();
+      component.rotateBcgX();
+      component.rotateBcgX();
+      component.rotateBcgX();
+    });
+
+    it('tracks that function was called', function () {
+      expect(component.rotateBcgX).toHaveBeenCalled();
+    });
+  });
+  describe('A spy for setTextAlignLeft', function() {
+    beforeEach(function () {
+      spyOn(component, 'setTextAlignLeft');
+      component.setTextAlignLeft(0);
+      component.setTextAlignLeft(1);
+      component.setTextAlignLeft(2);
+      component.setTextAlignLeft(3);
+    });
+
+    it('tracks that function was called', function () {
+      expect(component.setTextAlignLeft).toHaveBeenCalled();
+    });
+    it('expect 0', function () {
+      expect(component.setTextAlignLeft).toHaveBeenCalledWith(0);
+    });
+    it('expect 2', function () {
+      expect(component.setTextAlignLeft).toHaveBeenCalledWith(2);
+    });
+    it('expect 1', function () {
+      expect(component.setTextAlignLeft).toHaveBeenCalledWith(1);
+    });
+    it('expect 4 times function call', function () {
+      expect(component.setTextAlignLeft).toHaveBeenCalledTimes(4);
+    });
   });
 });
 
