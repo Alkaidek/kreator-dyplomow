@@ -39,7 +39,7 @@ describe('CreateComponent', () => {
 
   beforeEach(() => {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 250000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
     fixture = TestBed.createComponent(CreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -48,10 +48,64 @@ describe('CreateComponent', () => {
   it('should create', () => {
     expect(component).toBeDefined();
   });
+  it('chceck h3 element', function() {
+    setTimeout( () => {
+      const result = document.getElementById('DOMtest').innerHTML;
+      expect(result).toBe('Wybierz ramkę dyplomu');
+    }, 1000);
+  } );
+  it('chceck btnDirectLeft element with DOM', function() {
+    setTimeout( () => {
+      const result = document.getElementById('btnDirectLeft').style.left;
+      expect(result).toBe('-200px');
+    }, 1000);
+  } );
+  it('chceck btnDirectLeft element with DOM', function() {
+    setTimeout( () => {
+      const result = document.getElementById('btnDirectLeft').style.opacity;
+      expect(result).toEqual('0');
+    }, 1000);
+  } );
+  it('chceck src attribute of .imgO2 usisng: indexOF', function() {
+    setTimeout( () => {
+      const result = document.getElementById('imgO2').getAttribute('src');
+      expect(result.indexOf('.png') !== -1).toBe(true);
+    }, 1000);
+  } );
+  it('chceck src attribute of .imgO2 using: toContain', function() {
+    setTimeout( () => {
+      const result = document.getElementById('imgO2').getAttribute('src');
+      expect(result).toContain('.png');
+    }, 1000);
+  } );
+  it('chceck btnDirectLeft > element > attribute > style > opacity after set it on 1', function() {
+    setTimeout( () => {
+      document.getElementById('btnDirectLeft').style.opacity = '1';
+      const result = document.getElementById('btnDirectLeft').style.opacity;
+      expect(result).toEqual('1');
+    }, 1000);
+  } );
+  it('chceck scheme30 element Angular attribute', function() {
+    setTimeout( () => {
+      const result = document.getElementById('scheme30').getAttribute('click');
+      console.log('attribute scheme30 ' + result);
+      expect('' + result).not.toBeNull();
+    });
+  } );
   describe('test',  () => {
     it ( 'return 0 ', () => {
       const result = component.test();
       expect(result).toBe(0);
+    });
+  });
+  it( 'chceck btnDirectRight > class conatin mat-mini-fab', function () {
+    setTimeout( () => {
+      expect(document.getElementById( 'btnDirectRight').getAttribute('class')).toContain('mat-mini-fab');
+    });
+  });
+  xit( 'chceck btnDirectRight > class conatin, with ERROR', function () {
+    setTimeout( () => {
+      expect(document.getElementById( 'btnDirectRight').getAttribute('class')).toContain('kontrolny ERROR');
     });
   });
   describe('checkWidthWithCenter',  () => {
@@ -87,12 +141,20 @@ describe('CreateComponent', () => {
     });
   });
   describe('A spy for setTextAlignLeft', function() {
+    let i = 0;
     beforeEach(function () {
       spyOn(component, 'setTextAlignLeft');
+      i = 0;
       component.setTextAlignLeft(0);
+      i++;
       component.setTextAlignLeft(1);
+      i++;
       component.setTextAlignLeft(2);
+      i++;
       component.setTextAlignLeft(3);
+      i++;
+      component.setTextAlignLeft(5);
+      i++;
     });
 
     it('tracks that function was called', function () {
@@ -108,7 +170,8 @@ describe('CreateComponent', () => {
       expect(component.setTextAlignLeft).toHaveBeenCalledWith(1);
     });
     it('expect 4 times function call', function () {
-      expect(component.setTextAlignLeft).toHaveBeenCalledTimes(4);
+      console.log('i: ' + i);
+      expect(component.setTextAlignLeft).toHaveBeenCalledTimes(i);
     });
   });
 });
