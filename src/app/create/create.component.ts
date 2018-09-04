@@ -170,6 +170,8 @@ export class CreateComponent implements OnInit {
         const element = buttonStepper[i] as HTMLElement;
         element.style.top = '13vh' ;
       }
+      document.getElementById('directButtonContainter').style.paddingLeft = '0.2%';
+      document.getElementById('directButtonContainter').style.paddingRight = '0.2%';
       /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
@@ -196,6 +198,8 @@ export class CreateComponent implements OnInit {
         const element = buttonStepper[i] as HTMLElement;
         element.style.top = '16vh' ;
       }
+      document.getElementById('directButtonContainter').style.paddingLeft = '3%';
+      document.getElementById('directButtonContainter').style.paddingRight = '3%';
       /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
@@ -432,7 +436,7 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
-    const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
+    const msg =  ' ' + date.getFullYear() + '.' + monthStr + '.' + day  + ' ' +  hours + ':' + min;
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
@@ -600,6 +604,9 @@ export class CreateComponent implements OnInit {
           this.currImg = this.userImg.length - 1;
         }
         this.boolDisableUserImgFields = false;
+        setTimeout(() => {
+          this.setUserImgFrame(this.currImg);
+        }, 500 );
       }
       try {
         if ( template.txtTop.length > 0) {
@@ -898,7 +905,7 @@ export class CreateComponent implements OnInit {
     this.currImg = this.userImg.length - 1;
     setTimeout(() => {
         this.setUserImgFrame(this.currImg);
-      }, 500 );
+        }, 500 );
   }
   removeImg() {
     this.userImg.pop();

@@ -293,7 +293,7 @@
 
   <div class="footer">
 
-      <label (click)="stepper.reset()" for="fileInput"
+      <label (click)="stepper.selectedIndex = 0" for="fileInput"
              id="fileInputLabel"
              class="fadeInLeft"
              matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above"
@@ -309,7 +309,7 @@
     <button mat-button color="primary"  class="" (click)="generateHQualityPdf()"  style="float: right; font-weight: bolder; width: 25%" >
       GENERUJ DYPLOM</button>
   </div>
-  <div class="directButtonContainter">
+  <div class="directButtonContainter" id="directButtonContainter">
     <button id="btnDirectLeft" matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab  (click)="stepper.previous();" color="primary" [disabled]="btnDirectLeftDisabled"
             style="left: -200px; opacity: 0">
       <mat-icon >navigate_before</mat-icon>
@@ -330,28 +330,28 @@
             </h3>
           </div>
           <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top:0px">
-            <div matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="left" class="orientationImgBox fadeInTop borderRight">
+            <div class="orientationImgBox fadeInTop borderRight">
               <img id="base0" class="imgBase fadeInTop" src="../../assets/img/templateMin/basic0.png" (click)="baseTemplate(0)"/>
             </div>
           </div>
           <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top: 0px">
-            <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
+            <div class="orientationImgBox" >
               <img id="base1" class="imgBase fadeInTop" src="../../assets/img/templateMin/basic1.png" (click)="baseTemplate(1)"/>
             </div>
           </div>
           <div class="box33" style="width: 20%; border-left: white; border-right: white; margin-top:0px">
-            <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
+            <div class="orientationImgBox">
               <img id="base2" class="imgBase fadeInTop" src="../../assets/img/templateMin/basic2.png" (click)="baseTemplate(2)"/>
             </div>
           </div>
 
           <div class="box33" style="width: 20%; border-left: white; border-right: white">
-            <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
+            <div class="orientationImgBox">
               <img id="base3" class="imgBase fadeInTop" src="../../assets/img/templateMin/basic3.png " (click)="baseTemplate(3)"/>
             </div>
           </div>
           <div class="box33" style="width: 20%; border-left: white; border-right: white">
-            <div class="orientationImgBox"  matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="right" >
+            <div class="orientationImgBox">
               <img id="base4" class="imgBase fadeInTop" src="../../assets/img/templateMin/basic4.png" (click)="baseTemplate(4)"/>
             </div>
           </div>
