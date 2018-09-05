@@ -122,7 +122,7 @@ describe('CreateComponent', () => {
   });
 
   describe('checkSaveData',  () => {
-      xit ( 'expect 0', () => {
+      it ( 'expect 0', () => {
         const result = component.saveData( '123' );
         expect(result).toBe(0);
       });
