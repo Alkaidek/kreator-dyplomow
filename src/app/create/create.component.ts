@@ -1071,15 +1071,19 @@ export class CreateComponent implements OnInit {
     }
   }
   fileUpload(event: any) {
-    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
-    rmvBtn.disabled = false;
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader() as any;
-      reader.onload = (event2: any) => {
-        this.add();
-        this.userImgBase64.push(event2.target.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
+    if (event.target.files[0].size / 1024 < 2049 && event.target.files) {
+      const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+      rmvBtn.disabled = false;
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader() as any;
+        reader.onload = (event2: any) => {
+          this.add();
+          this.userImgBase64.push(event2.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    } else {
+      alert('plik za duży');
     }
   }
   jsonToArray(txt) {
