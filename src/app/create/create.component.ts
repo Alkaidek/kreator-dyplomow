@@ -1083,7 +1083,7 @@ export class CreateComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       }
     } else {
-      alert('plik za duży');
+      this.openSnackBar('Plik jest za duży! Maksymalny rozmiar wynosi 2MB', 'ok');
     }
   }
   jsonToArray(txt) {
