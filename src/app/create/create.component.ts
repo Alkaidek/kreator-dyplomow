@@ -157,6 +157,8 @@ export class CreateComponent implements OnInit {
   textAlign = ['center', 'center', 'center', 'center', 'center'];
   btnDirectLeftDisabled = true;
   btnDirectRightDisabled = false;
+  checkboxSizeAttach = true;
+  checkboxSizeAttachValue = 0;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -166,12 +168,13 @@ export class CreateComponent implements OnInit {
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '5vh' ;
       const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      document.getElementById('directBcg').style.top = '5vh';
       for ( let i = 0; i < buttonStepper.length; i++) {
         const element = buttonStepper[i] as HTMLElement;
-        element.style.top = '13vh' ;
+        element.style.top = '7vh' ;
       }
-      document.getElementById('directButtonContainter').style.paddingLeft = '0.2%';
-      document.getElementById('directButtonContainter').style.paddingRight = '0.2%';
+      /*document.getElementById('directButtonContainter').style.paddingLeft = '0.2%';
+      document.getElementById('directButtonContainter').style.paddingRight = '0.2%';*/
       /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
@@ -191,15 +194,16 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
+      document.getElementById('directBcg').style.top = '8vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '8vh' ;
       const buttonStepper = document.getElementsByClassName('directButtonContainter');
       for ( let i = 0; i < buttonStepper.length; i++) {
         const element = buttonStepper[i] as HTMLElement;
-        element.style.top = '16vh' ;
+        element.style.top = '10vh' ;
       }
-      document.getElementById('directButtonContainter').style.paddingLeft = '3%';
-      document.getElementById('directButtonContainter').style.paddingRight = '3%';
+      /*document.getElementById('directButtonContainter').style.paddingLeft = '3%';
+      document.getElementById('directButtonContainter').style.paddingRight = '3%';*/
       /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
@@ -898,14 +902,21 @@ export class CreateComponent implements OnInit {
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
-    this.imgWidth.push(10);
-    this.imgHeight.push(10);
     this.imgTop.push(0);
     this.imgLeft.push(0);
     this.currImg = this.userImg.length - 1;
+    this.imgHeight.push(10);
+    this.imgWidth.push(10);
     setTimeout(() => {
-        this.setUserImgFrame(this.currImg);
-        }, 500 );
+      this.setUserImgFrame(this.currImg);
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
+        }, 50 );
   }
   removeImg() {
     this.userImg.pop();
@@ -1060,12 +1071,12 @@ export class CreateComponent implements OnInit {
     }
   }
   fileUpload(event: any) {
-    this.add();
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader() as any;
       reader.onload = (event2: any) => {
+        this.add();
         this.userImgBase64.push(event2.target.result);
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -1608,5 +1619,42 @@ export class CreateComponent implements OnInit {
       document.getElementById('btnDirectLeft').style.opacity = '1';
     }
   }
-
+  imageResizeWithProportionsWidth() {
+    if ( this.checkboxSizeAttach ) {
+      this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalHeight;
+      prop = prop / img.naturalWidth;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      if ( this.imgWidth[this.currImg] * prop * propPdfFor > 100 ) {
+        this.imgHeight[this.currImg] = 100;
+        prop =  img.naturalWidth;
+        prop = prop / img.naturalHeight;
+        this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
+      } else {
+        this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
+      }
+    }
+  }
+  imageResizeWithProportionsHeight() {
+    if ( this.checkboxSizeAttach ) {
+      this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100 ) {
+        this.imgWidth[this.currImg] = 100;
+        prop =  img.naturalHeight;
+        prop = prop / img.naturalWidth;
+        this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
+      } else {
+        this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
+      }
+    }
+  }
 }
