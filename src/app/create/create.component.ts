@@ -1302,6 +1302,8 @@ export class CreateComponent implements OnInit {
       this.setWhiteColor('alignCenter5');
       this.setBlueColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      this.txtLeft[this.currentTxt] = 0;
+      this.txtRight[this.currentTxt] = 0;
       console.log(this.txtAlign[this.currentTxt]);
     } else if (value === 'right') {
       this.txtAlign[this.currentTxt] = 'right';
@@ -1309,6 +1311,8 @@ export class CreateComponent implements OnInit {
       this.setWhiteColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setBlueColor('alignRight5');
+      this.txtLeft[this.currentTxt] = 0;
+      this.txtRight[this.currentTxt] = 0;
       console.log(this.txtAlign[this.currentTxt]);
     } else {
       this.txtAlign[this.currentTxt] = 'center';
@@ -1316,6 +1320,8 @@ export class CreateComponent implements OnInit {
       this.setBlueColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      this.txtLeft[this.currentTxt] = 0;
+      this.txtRight[this.currentTxt] = 0;
       console.log(this.txtAlign[this.currentTxt]);
     }
   }
