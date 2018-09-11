@@ -106,7 +106,7 @@
         src="{{imgMAClogoFrame}}"
         style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
         [style.width]="10*multiple + 'vh'"
-        style.height]="10*multiple + 'vh'"/>
+        [style.height]="10*multiple + 'vh'"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]"  [style.padding-left]="marginLeft[0] + '%'"
            [style.padding-right]="marginRight[0] + '%'">
@@ -1289,7 +1289,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="leftCont" style="background-color: white; height: 550px">
+        <div class="leftCont" style="background-color: white; height: 510px">
           <br />
           <mat-form-field class="example-full-width fadeInRight">
             <input matInput (ngModelChange)="setMaxWidthForUserTxt();" (blur)="setMaxWidthForUserTxt()" [(ngModel)]="userTxt[currentTxt]" placeholder="Treść pola" [disabled]="hidebox">
@@ -1315,7 +1315,7 @@
           <input type="color" class="fadeInRight" [value]="txtShadowColor[currentTxt]" (input)="txtShadowColor[currentTxt] = $event.target.value" [disabled]="hidebox" style="width: 80%;">
 
         </div>
-        <div class="rightCont" style="background-color: white; height: 550px">
+        <div class="rightCont" style="background-color: white; height: 510px">
           <br />
           <br />
           <div class="card">
