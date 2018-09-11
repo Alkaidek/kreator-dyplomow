@@ -5,49 +5,108 @@
   <span style='margin-left: 20px'></span>
   <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
 </div>
-<div id="mobile">
-  <button mat-fab color="warn">
-    <mat-icon aria-label="Example icon-button with a heart icon">error_outline</mat-icon>
+<div
+  id="mobile"
+>
+  <button
+    mat-fab color="warn"
+  >
+    <mat-icon
+      aria-label="Example icon-button with a heart icon"
+    >
+      error_outline
+    </mat-icon>
   </button>
   <br />
   <br />
-  <h1>Kreator dyplomów nie działa na małych ekranach!</h1>
+  <h1>
+    Kreator dyplomów nie działa na małych ekranach!
+  </h1>
   <br />
-  <h5>Jest to niezbędne dla zapewnienia najwyższej jakości doznań z użytkowania.</h5>
+  <h5>
+    Jest to niezbędne dla zapewnienia najwyższej jakości doznań z użytkowania.
+  </h5>
   <br />
   <h5>Przepraszamy za kłopot</h5>
 
 </div>
-<div id="spinner" style="z-index: 20; background-color: rgba(0,0,0, 0.7); width: 100%; height: 100%; position: fixed; padding-top: 15%; display: none">
-  <mat-spinner disabled style="width: 10%; margin-left: 45%"></mat-spinner>
+<div
+  id="spinner"
+  style="z-index: 20; background-color: rgba(0,0,0, 0.7); width: 100%; height: 100%; position: fixed; padding-top: 15%; display: none"
+>
+  <mat-spinner
+    disabled
+    style="width: 10%; margin-left: 45%">
+  </mat-spinner>
 </div>
-<div id="viewLandscapeFix">
-  <div id="toPdf100LandscapeFix" class="" [style.background-color]="bcgColor">
-    <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100LandscapeFix"  />
-    <div id="pdfForLandscapeFix">
-      <img *ngFor="let usr of userImg; let i = index" id="imgToChange3{{usr}}" src="{{userImgBase64[i]}}" style="background-size: cover; position: absolute; z-index: 0;"
-           [style.transform]="'rotate('+rotate[usr]+'deg)'"
-           [style.width]="imgWidth[usr]+'%'"
-           [style.height]="imgHeight[usr]+'%'"
-           [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
-            [style.top]="txtTop[i]+'%'">
-        <p id="font3{{i}}" class="maxContent" style=""
-           [style.margin-right]="txtRight[i]+'%'"
-           [style.margin-left]="txtLeft[i]+'%'"
-           [style.font-size]="(txtSize[i]* (multiple + 1.4) )  + 'vw'"
-           [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]"
-           [style.font-variant]="txtVariant[i]"
-           [style.font-style]="txtStyle[i]"
-           [style.font-weight]="txtWeight[i]">
-          {{txt}}</p>
+<div
+  id="viewLandscapeFix"
+>
+  <div
+    id="toPdf100LandscapeFix"
+    class=""
+    [style.background-color]="bcgColor"
+  >
+    <img
+      src="{{imgSrcFix}}"
+      [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
+      id="imgPdf100LandscapeFix"
+    />
+    <div
+      id="pdfForLandscapeFix"
+    >
+      <img
+        *ngFor="let usr of userImg; let i = index"
+        id="imgToChange3{{usr}}"
+        src="{{userImgBase64[i]}}"
+        style="background-size: cover; position: absolute; z-index: 0;"
+        [style.transform]="'rotate('+rotate[usr]+'deg)'"
+        [style.width]="imgWidth[usr]+'%'"
+        [style.height]="imgHeight[usr]+'%'"
+        [style.left]="imgLeft[usr]+'%'"
+        [style.top]="imgTop[usr]+'%'"
+      />
+      <div
+        *ngFor="let txt of userTxt; let i = index"
+        class="userTxt"
+        style="position: absolute;
+        z-index: 1;
+        width: 100%;"
+        [style.top]="txtTop[i]+'%'"
+      >
+        <p
+          style="position: absolute; width: 100%;"
+          [style.padding-left]="txtLeft[i]+'%'"
+          [style.padding-right]="txtRight[i]+'%'"
+          [style.text-align]="txtAlign[i]"
+        >
+          <s
+            id="font3{{i}}" class="maxContent"
+            style="white-space: pre-wrap"
+            [style.margin-right]="txtRight[i]+'%'"
+            [style.margin-left]="txtLeft[i]+'%'"
+            [style.font-size]="txtSize[i] * multiple + 'vw'"
+            [style.font-family]="txtFontFamili[i]"
+            [style.color]="txtColor[i]"
+            [style.font-variant]="txtVariant[i]"
+            [style.font-style]="txtStyle[i]"
+            [style.font-weight]="txtWeight[i]"
+            [style.text-shadow]="txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadowColor[i]"
+          >
+            {{txt}}
+          </s>
+        </p>
       </div>
-      <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
-            [style.width]="10*multiple + 'vh'"
-            [style.height]="10*multiple + 'vh'"/>
+      <img
+        src="{{imgSrcFrame}}"
+        [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
+        style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"
+      />
+      <img
+        src="{{imgMAClogoFrame}}"
+        style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
+        [style.width]="10*multiple + 'vh'"
+        [style.height]="10*multiple + 'vh'"/>
       <div  style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%"  [style.top]="paddingTop + '%'" [style.text-align]="textAlign[0]"  [style.padding-left]="marginLeft[0] + '%'"
            [style.padding-right]="marginRight[0] + '%'">
@@ -156,18 +215,27 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
       />
-      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
-            [style.top]="txtTop[i]+'%'">
-        <p id="font4{{i}}" class="maxContent" style=""
-           [style.margin-right]="txtRight[i]+'%'"
-           [style.margin-left]="txtLeft[i]+'%'"
-           [style.font-size]="(txtSize[i]* (multiple)) + 'vw'"
-           [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]"
-           [style.font-variant]="txtVariant[i]"
-           [style.font-style]="txtStyle[i]"
-           [style.font-weight]="txtWeight[i]">
-          {{txt}}</p>
+      <div    *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%;"
+              [style.top]="txtTop[i]+'%'">
+        <p style="position: absolute; width: 100%;"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.text-align]="txtAlign[i]"
+        >
+          <s id="font4{{i}}" class="maxContent" style="white-space: pre-wrap"
+             [style.margin-right]="txtRight[i]+'%'"
+             [style.margin-left]="txtLeft[i]+'%'"
+             [style.font-size]="txtSize[i] * multiple + 'vw'"
+             [style.font-family]="txtFontFamili[i]"
+             [style.color]="txtColor[i]"
+             [style.font-variant]="txtVariant[i]"
+             [style.font-style]="txtStyle[i]"
+             [style.font-weight]="txtWeight[i]"
+             [style.text-shadow]="txtShadow[i] * multiple  + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadowColor[i]"
+          >
+            {{txt}}
+          </s>
+        </p>
       </div>
       <img  src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
       <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
@@ -213,7 +281,7 @@
             [style.text-align]="textAlign[2]">
         <s id="txtForWhatFix"
            [style.font-size]="(arrayFontSize[4] * multiple) + 'vw'"
-               [style.font-family]="arrayFontFamili[2]"
+           [style.font-family]="arrayFontFamili[2]"
            [style.font-style]="fontStyle[2]"
            [style.font-variant]="fontVariant[2]"
            [style.font-weight]="fontWeight[2]"
@@ -294,30 +362,30 @@
   <div
     class="footer">
 
-      <label
-        (click)="stepper.selectedIndex = 0" for="fileInput"
-        id="fileInputLabel"
-        class="fadeInLeft"
-        matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above"
-        style="padding-top: 6px; float: left"
-      >
-        <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
-        WCZYTAJ SZABLON
-      </label>
-      <input
-        id="fileInput"
-        type="file"
-        accept='.MACproject'
-        (change)="onSelectFile($event)"
-      />
-  <button
-    mat-button color="accent"
-    (click)="createArrayToSend()"
-    matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
-    matTooltipPosition="above"
-    style="margin-left: 25%; font-weight: bolder; width: 25%"
-  >
-    ZAPISZ SZABLON</button>
+    <label
+      (click)="stepper.selectedIndex = 0" for="fileInput"
+      id="fileInputLabel"
+      class="fadeInLeft"
+      matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'" matTooltipPosition="above"
+      style="padding-top: 6px; float: left"
+    >
+      <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
+      WCZYTAJ SZABLON
+    </label>
+    <input
+      id="fileInput"
+      type="file"
+      accept='.MACproject'
+      (change)="onSelectFile($event)"
+    />
+    <button
+      mat-button color="accent"
+      (click)="createArrayToSend()"
+      matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
+      matTooltipPosition="above"
+      style="margin-left: 25%; font-weight: bolder; width: 25%"
+    >
+      ZAPISZ SZABLON</button>
     <button
       mat-button
       color="primary"
@@ -641,11 +709,11 @@
                           <input type="range" min="0" max="3" [value]="letterSpacing" (input)="letterSpacing = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" >
                           <br />
                           <button mat-mini-fab color="accent" color="primary" id="fontStyle0" (click)="setFontStyle(0)" style="margin-bottom: 10px; background-color: white;"
-                                           [style.color]="MACblue">
-                          <i class="material-icons">
-                            format_italic
-                          </i>
-                        </button>
+                                  [style.color]="MACblue">
+                            <i class="material-icons">
+                              format_italic
+                            </i>
+                          </button>
                           <button mat-mini-fab color="accent" color="primary" id="fontWeight0" (click)="setFontWeight(0)" style="margin-bottom: 10px; background-color: white;"
                                   [style.color]="MACblue">
                             <i class="material-icons">
@@ -880,7 +948,7 @@
                         </i>
                       </button>
                       <button mat-mini-fab color="accent" color="primary" id="fontWeight2" (click)="setFontWeight(2)" style="margin-bottom: 10px; background-color: white;"
-                      [style.color]="MACblue">
+                              [style.color]="MACblue">
                         <i class="material-icons">
                           format_bold
                         </i>
@@ -1145,14 +1213,14 @@
       </div>
     </mat-step>
     <mat-step stepControl="false">
-     <!-- <div class="directButtonContainter">
-        <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
-          <mat-icon >navigate_before</mat-icon>
-        </button>
-        <button  matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab matStepperNext color="primary" class="fadeInTop" style="float: right">
-          <mat-icon >navigate_next</mat-icon>
-        </button>
-      </div>-->
+      <!-- <div class="directButtonContainter">
+         <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
+           <mat-icon >navigate_before</mat-icon>
+         </button>
+         <button  matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab matStepperNext color="primary" class="fadeInTop" style="float: right">
+           <mat-icon >navigate_next</mat-icon>
+         </button>
+       </div>-->
       <ng-template matStepLabel>Piąty krok</ng-template>
       <div class="userTxtFields">
         <div class="textBox">
@@ -1221,7 +1289,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="leftCont" style="background-color: white">
+        <div class="leftCont" style="background-color: white; height: 510px">
           <br />
           <mat-form-field class="example-full-width fadeInRight">
             <input matInput (ngModelChange)="setMaxWidthForUserTxt();" (blur)="setMaxWidthForUserTxt()" [(ngModel)]="userTxt[currentTxt]" placeholder="Treść pola" [disabled]="hidebox">
@@ -1237,20 +1305,48 @@
               <mat-option  *ngFor="let fntFamili of arraySelectFontFamili; let i = index" value="{{i}}" (click)="setFontFamili(i)" (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()">{{fntFamili}}</mat-option>
             </mat-select>
           </mat-form-field>
+          <br />
+          <button mat-button color="accent" (click)="shadowOnOffForUserTextField()" style="margin-bottom: 10px">
+            <i class="material-icons">
+              highlight
+            </i>
+            Cień</button>
+          <p class="fadeInTop" >Kolor cienia</p>
+          <input type="color" class="fadeInRight" [value]="txtShadowColor[currentTxt]" (input)="txtShadowColor[currentTxt] = $event.target.value" [disabled]="hidebox" style="width: 80%;">
 
         </div>
-        <div class="rightCont" style="background-color: white">
+        <div class="rightCont" style="background-color: white; height: 510px">
           <br />
           <br />
           <div class="card">
             <div class="card-body">
               <div class="inputContainer">
-
-                <p class="fadeInTop">Pionowa pozycja tekstu</p>
+                <br/>
+                <p class="fadeInTop">Górny margines</p>
                 <input type="range" min="0" max="{{maxWidthUserTxtFieldTop}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtTop[currentTxt]" (input)="txtTop[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox" >
-                <p class="fadeInTop">Pozioma pozycja tekstu</p>
-                <input type="range" min="0" max="{{maxWidthUserTxtFieldRight}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
+                <p class="fadeInTop">Lewy margines</p>
+                <input type="range" min="0"
+                       max="{{maxWidthUserTxtFieldRight}}"
+                       (click)="setMaxWidthForUserTxt()"
+                       (change)="setMaxWidthForUserTxt()"
+                       [value]="txtLeft[currentTxt]"
+                       (input)="txtLeft[currentTxt] = $event.target.value"
+                       class="slider50 fadeInLeft"
+                       style="width: 80%; margin-left: 0%"
+                       [disabled]="hidebox">
+                <p class="fadeInTop">Prawy margines</p>
+                <input type="range" min="0"
+                       max="{{maxWidthUserTxtFieldRight}}"
+                       (click)="setMaxWidthForUserTxt()"
+                       (change)="setMaxWidthForUserTxt()"
+                       [value]="txtRight[currentTxt]"
+                       (input)="txtRight[currentTxt] = $event.target.value"
+                       class="slider50 fadeInLeft"
+                       style="width: 80%; margin-left: 0%"
+                       [disabled]="hidebox">
                 <br />
+                <br/>
+                <br/>
                 <button mat-mini-fab color="accent" color="primary" id="fontStyle5" (click)="setTxtStyle()" style="margin-bottom: 10px; background-color: white;"
                         [style.color]="MACblue"  [disabled]="hidebox">
                   <i class="material-icons">
@@ -1465,24 +1561,35 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%; text-align: center"
-            [style.top]="txtTop[i]+'%'">
-        <p id="font1{{i}}" class="maxContent" style=""
-           [style.margin-right]="txtRight[i]+'%'"
-           [style.margin-left]="txtLeft[i]+'%'"
-           [style.font-size]="txtSize[i] + 'vw'"
-           [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]"
-           [style.font-variant]="txtVariant[i]"
-           [style.font-style]="txtStyle[i]"
-           [style.font-weight]="txtWeight[i]">
-          {{txt}}</p>
+      <div    *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%;"
+              [style.top]="txtTop[i]+'%'">
+        <p style="position: absolute; width: 100%;"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.text-align]="txtAlign[i]"
+        >
+          <s id="font1{{i}}" class="maxContent" style="white-space: pre-wrap"
+             [style.margin-right]="txtRight[i]+'%'"
+             [style.margin-left]="txtLeft[i]+'%'"
+             [style.font-size]="txtSize[i] + 'vw'"
+             [style.font-family]="txtFontFamili[i]"
+             [style.color]="txtColor[i]"
+             [style.font-variant]="txtVariant[i]"
+             [style.font-style]="txtStyle[i]"
+             [style.font-weight]="txtWeight[i]"
+             [style.text-shadow]="txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadowColor[i]"
+          >
+            {{txt}}
+          </s>
+        </p>
       </div>
       <img  src="{{imgSrcFrame}}"
             [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
             style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img  src="{{imgMAClogoFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
-      <div  style="z-index: 8;">
+      <img  src="{{imgMAClogoFrame}}"
+            style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
+      <div
+        style="z-index: 8;">
         <p id="pdfTxt" style="z-index: 8; position: absolute; width: 100%"
            [style.top]="paddingTop + '%'"
            [style.text-align]="textAlign[0]"
@@ -1592,18 +1699,27 @@
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"/>
-      <div  *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; text-align: center;"
-            [style.top]="txtTop[i]+'%'">
-        <p id="font2{{i}}"  class="maxContent" style=""
-           [style.margin-right]="txtRight[i]+'%'"
-           [style.margin-left]="txtLeft[i]+'%'"
-           [style.font-size]="txtSize[i] + 'vw'"
-           [style.font-family]="txtFontFamili[i]"
-           [style.color]="txtColor[i]"
-           [style.font-variant]="txtVariant[i]"
-           [style.font-style]="txtStyle[i]"
-           [style.font-weight]="txtWeight[i]">
-          {{txt}}</p>
+      <div    *ngFor="let txt of userTxt; let i = index" class="userTxt" style="position: absolute; z-index: 1; width: 100%;"
+              [style.top]="txtTop[i]+'%'">
+        <p style="position: absolute; width: 100%;"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.text-align]="txtAlign[i]"
+        >
+          <s id="font2{{i}}" class="maxContent" style="white-space: pre-wrap"
+             [style.margin-right]="txtRight[i]+'%'"
+             [style.margin-left]="txtLeft[i]+'%'"
+             [style.font-size]="txtSize[i] + 'vw'"
+             [style.font-family]="txtFontFamili[i]"
+             [style.color]="txtColor[i]"
+             [style.font-variant]="txtVariant[i]"
+             [style.font-style]="txtStyle[i]"
+             [style.font-weight]="txtWeight[i]"
+             [style.text-shadow]="txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadowColor[i]"
+          >
+            {{txt}}
+          </s>
+        </p>
       </div>
       <img  src="{{imgSrcFrame}}" style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"
             [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"

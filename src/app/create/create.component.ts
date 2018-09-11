@@ -43,6 +43,9 @@ export class CreateComponent implements OnInit {
     '../../assets/img/animal/4.png'];
   sportHeight = 11;
   animalHeight = 11;
+  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
+    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
+    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar) {
     db.list('/base64').valueChanges().subscribe(bcgTemp => {
       for (let i = 0; i < bcgTemp.length; i++) {
@@ -130,6 +133,8 @@ export class CreateComponent implements OnInit {
   txtVariant  = [];
   txtAlign = [];
   txt = [];
+  txtShadow = [];
+  txtShadowColor = [];
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
@@ -145,9 +150,6 @@ export class CreateComponent implements OnInit {
   frmRotateX = 1;
   frmRotateY = 1;
   txtFontFamiliText = '';
-  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
-    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
-    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   currentFontFamili = 0;
   letterSpacing = 0;
   letterSpacingForWho = 0;
@@ -617,8 +619,8 @@ export class CreateComponent implements OnInit {
           for ( let i = 0; i < template.txtTop.length; i++) {
             this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
               template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i],
-              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i]);
-            this.setUserTxtFiledProperty(i);
+              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i],
+              template.txtShadow[i],  template.txtShadowColor[i]);
           }
         }
       } catch (e) {
@@ -639,6 +641,7 @@ export class CreateComponent implements OnInit {
       console.log('no element');
     }
     this.txtAlign = [];
+    this.txtShadow = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
     this.txtWeight = [];
@@ -651,6 +654,8 @@ export class CreateComponent implements OnInit {
     this.bcgRotateY = 1;
     this.frmRotateX = 1;
     this.frmRotateY = 1;
+    this.txtShadow = [];
+    this.txtShadowColor = [];
     this.bcgBtnDisable = true;
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
@@ -916,7 +921,7 @@ export class CreateComponent implements OnInit {
       const multipleWidth = document.getElementById('pdfFor').offsetWidth;
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
-        }, 50 );
+    }, 50 );
   }
   removeImg() {
     this.userImg.pop();
@@ -1046,6 +1051,10 @@ export class CreateComponent implements OnInit {
       + this.createTextToJSON(this.txtColor) + '],'
       + '"txtFontFamili" : [ '
       + this.createTextToJSON(this.txtFontFamili) + '],'
+      + '"txtShadow" : [ '
+      + this.createTextToJSON(this.txtShadow) + '],'
+      + '"txtShadowColor" : [ '
+      + this.createTextToJSON(this.txtShadowColor) + '],'
       + '"frame" : "'
       + this.imgSrcFrame + '", '
       + '"scheme" : "'
@@ -1138,7 +1147,17 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('fontVariant5');
     this.setWhiteColor('fontWeight5');
     this.txtAlign.push('left');
+    this.txtShadow.push(0);
+    this.txtShadowColor.push('#8c8e91');
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
+  }
+  shadowOnOffForUserTextField(): Number {
+    if ( this.txtShadow[this.currentTxt] > 0) {
+      this.txtShadow[this.currentTxt] = 0;
+    } else {
+      this.txtShadow[this.currentTxt] = 4;
+    }
+    return this.txtShadow[this.currentTxt];
   }
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
@@ -1159,7 +1178,7 @@ export class CreateComponent implements OnInit {
     console.log('textAlign: ' + this.txtAlign + ' : ' + n);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[n]);
   }
-  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align) {
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align, shadow, shadowColor) {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
     }
@@ -1176,6 +1195,8 @@ export class CreateComponent implements OnInit {
     this.txtWeight.push(weight);
     this.txtVariant.push(variant);
     this.txtAlign.push(align);
+    this.txtShadow.push(shadow);
+    this.txtShadowColor.push(shadowColor);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
   setFontFamili(n) {
@@ -1277,22 +1298,25 @@ export class CreateComponent implements OnInit {
   setTxtAlign(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
-      this.txtLeft[this.currentTxt] = 0;
+      /*    this.txtLeft[this.currentTxt] = 0;*/
       this.setWhiteColor('alignCenter5');
       this.setBlueColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     } else if (value === 'right') {
       this.txtAlign[this.currentTxt] = 'right';
-      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();
+      /* this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();*/
       this.setWhiteColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setBlueColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     } else {
       this.txtAlign[this.currentTxt] = 'center';
-      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;
+      /*      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;*/
       this.setBlueColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     }
   }
   setTxtAlignWithoutPossitionChange(value) {
@@ -1345,7 +1369,7 @@ export class CreateComponent implements OnInit {
       } else if (n === 2 ) {
         this.checkWidthWithCenter(2);
       }
-      }, 300);
+    }, 300);
   }
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
@@ -1577,7 +1601,7 @@ export class CreateComponent implements OnInit {
     }
     console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
-    this.maxWidthUserTxtFieldRight = Math.round(percent - 1);
+    this.maxWidthUserTxtFieldRight = Math.round(percent / 2 - 1);
     console.log('margines' + this.maxWidthUserTxtFieldTop );
     console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
     if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
