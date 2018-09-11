@@ -1306,22 +1306,25 @@ export class CreateComponent implements OnInit {
   setTxtAlign(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
-      this.txtLeft[this.currentTxt] = 0;
+  /*    this.txtLeft[this.currentTxt] = 0;*/
       this.setWhiteColor('alignCenter5');
       this.setBlueColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     } else if (value === 'right') {
       this.txtAlign[this.currentTxt] = 'right';
-      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();
+     /* this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();*/
       this.setWhiteColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setBlueColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     } else {
       this.txtAlign[this.currentTxt] = 'center';
-      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;
+/*      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;*/
       this.setBlueColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setWhiteColor('alignRight5');
+      console.log(this.txtAlign[this.currentTxt]);
     }
   }
   setTxtAlignWithoutPossitionChange(value) {
@@ -1606,7 +1609,7 @@ export class CreateComponent implements OnInit {
     }
     console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
-    this.maxWidthUserTxtFieldRight = Math.round(percent - 1);
+    this.maxWidthUserTxtFieldRight = Math.round(percent / 2 - 1);
     console.log('margines' + this.maxWidthUserTxtFieldTop );
     console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
     if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
