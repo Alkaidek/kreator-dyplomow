@@ -7,7 +7,6 @@ const ObjectID = require('mongodb').ObjectID;
 const connection = (closure) => {
   return MongoClient.connect('mongodb://localhost:27017/mean', (err, db) => {
     if (err) return console.log(err);
-
     closure(db);
   });
 };
@@ -77,6 +76,20 @@ router.get('/templates', (req, res) => {
       .then((templates) => {
         response.data = templates;
         res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/font', (req, res) => {
+  connection((db) => {
+    db.collection('font')
+      .find()
+      .toArray()
+      .then((fonts) => {
+        response.data = fonts;
+        res.json(fonts);
       })
       .catch((err) => {
         sendError(err, res);

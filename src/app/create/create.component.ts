@@ -25,18 +25,13 @@ export class CreateComponent implements OnInit {
   userImgBase64 = [];
   userTxt = [];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
-  userImgBase64txt = '';
-  userImgRotatetxt = '';
-  userImgWidthtxt = '';
-  userImgHeighttxt = '';
-  userImgMarginLefttxt = '';
-  userImgMarginRigthtxt = '';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   auth = 'block';
   bcgTemp = [];
   template: any;
   coordinatesTemplate = [];
+  arraySelectFontFamili = [];
   frames = [];
   bool = 'block';
   imagesSport = ['../../assets/img/sport/sport1.png',
@@ -50,18 +45,6 @@ export class CreateComponent implements OnInit {
   sportHeight = 11;
   animalHeight = 11;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
-   /* db.list('/base64').valueChanges().subscribe(bcgTemp => {
-      this.bcgTemp = bcgTemp;
-    });*/
-    /*db.list('/images/sport').valueChanges().subscribe(sport => {
-      for (let i = 0; i < sport.length; i++) {
-        this.imagesSport.push('' + sport[i] );
-        this.setHeightSport(this.imagesSport);
-      }
-    });*/
-    /*db.list('/frame').valueChanges().subscribe(frames => {
-      this.frames = frames;
-    });*/
     this._dataService.getSportImg()
       .subscribe(sport => {
        for (let i = 0; i < sport[0].sport.length; i++) {
@@ -81,22 +64,24 @@ export class CreateComponent implements OnInit {
         this.bcgTemp.push( bcgTemp[0].bcg[i] );
       }
     });
-
     this._dataService.getBase64Img()
       .subscribe(bcgTemp => {
-      for (let i = 0; i <  bcgTemp[0].frame.length; i++) {
-        this.frames.push( bcgTemp[0].frame[i] );
-      }
-    });
+        for (let i = 0; i <  bcgTemp[0].frame.length; i++) {
+          this.frames.push( bcgTemp[0].frame[i]);
+        }
+      });
+    this._dataService.getTemplates()
+      .subscribe(tmp => {
+        for (let i = 0; i < tmp[0].fonts.length; i++) {
+          this.arraySelectFontFamili.push( tmp[0].fonts[i] );
+        }
+      });
     db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
         this.setHeightAnimal(this.imagesAnimal);
       }
     });
-    /*db.list('/base64tmp').valueChanges().subscribe(coordinatesTemplate => {
-      this.coordinatesTemplate = coordinatesTemplate;
-    });*/
   }
   MACblue = '#25408f';
   whiteColor = 'white';
@@ -109,7 +94,6 @@ export class CreateComponent implements OnInit {
   boolDisableUserImgFields = true;
   hidebox = true;
   actualTxt = '';
-  format = 'a4';
   landscape = 'inline-block';
   currentStep = 0;
   arrayScroll = [1, 2, 3];
@@ -157,6 +141,8 @@ export class CreateComponent implements OnInit {
   txtVariant  = [];
   txtAlign = [];
   txt = [];
+  txtShadow = [];
+  txtShadowColor = [];
   currentTxt = -1;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
@@ -164,15 +150,6 @@ export class CreateComponent implements OnInit {
   shadowSmall = '0% 0%';
   shadowSmallFix = '0% 0%';
   txtColor = [];
-  txtTopText = '';
-  txtLeftText = '';
-  txtRightText = '';
-  txtSizeText = '';
-  txtUserText = '';
-  txtStyleText = '';
-  txtWeightText = '';
-  txtVariantText  = '';
-  txtAlignText = '';
   disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
@@ -181,9 +158,6 @@ export class CreateComponent implements OnInit {
   frmRotateX = 1;
   frmRotateY = 1;
   txtFontFamiliText = '';
-  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
-    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
-    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   currentFontFamili = 0;
   letterSpacing = 0;
   letterSpacingForWho = 0;
@@ -191,12 +165,26 @@ export class CreateComponent implements OnInit {
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
   textAlign = ['center', 'center', 'center', 'center', 'center'];
+  btnDirectLeftDisabled = true;
+  btnDirectRightDisabled = false;
+  checkboxSizeAttach = true;
+  checkboxSizeAttachValue = 0;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
       imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
+      const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
+      stepper.style.top = '5vh' ;
+      const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      document.getElementById('directBcg').style.top = '5vh';
+      for ( let i = 0; i < buttonStepper.length; i++) {
+        const element = buttonStepper[i] as HTMLElement;
+        element.style.top = '7vh' ;
+      }
+      /*document.getElementById('directButtonContainter').style.paddingLeft = '0.2%';
+      document.getElementById('directButtonContainter').style.paddingRight = '0.2%';*/
       /*document.getElementById('fbLogo').style.height = '3vh';
       document.getElementById('ytLogo').style.height = '3vh';
       document.getElementById('fbLogo').style.width = '3vh';
@@ -216,6 +204,16 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
+      document.getElementById('directBcg').style.top = '8vh';
+      const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
+      stepper.style.top = '8vh' ;
+      const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      for ( let i = 0; i < buttonStepper.length; i++) {
+        const element = buttonStepper[i] as HTMLElement;
+        element.style.top = '10vh' ;
+      }
+      /*document.getElementById('directButtonContainter').style.paddingLeft = '3%';
+      document.getElementById('directButtonContainter').style.paddingRight = '3%';*/
       /*document.getElementById('fbLogo').style.marginTop = '16px';
       document.getElementById('ytLogo').style.marginTop = '16px';
       document.getElementById('fbLogo').style.height = '4.5vh';
@@ -237,12 +235,12 @@ export class CreateComponent implements OnInit {
   }
   setPaddingAnchor() {
     setTimeout( () => {
-      this.chceckWidth(0);
-      this.chceckWidth(1);
-      this.chceckWidth(2);
+      this.checkWidth(0);
+      this.checkWidth(1);
+      this.checkWidth(2);
     }, 300);
   }
-  /*chceckArray() {
+  /*checkArray() {
     console.log('array');
     console.log(this.sport);
     console.log(this.sport[0].sport);
@@ -310,6 +308,36 @@ export class CreateComponent implements OnInit {
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
+    return this.multiple;
+  }
+  highlightBcg(imgSrc) {
+    this.lastValue = imgSrc;
+    console.log('up' + this.lastValue);
+    document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
+    document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    this.lastValue = 0;
+  }
+  downgradeBcg(imgSrc) {
+    console.log('down' + this.lastValue);
+    document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (imgSrc ) ).style.border = 'white 1px solid';
+  }
+  highlightFrame(imgSrc) {
+    this.lastValueFrame = imgSrc;
+    document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    this.lastValueFrame = 0;
+  }
+  downgradeFrame() {
+    console.log('down' + this.lastValueFrame);
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
@@ -326,9 +354,11 @@ export class CreateComponent implements OnInit {
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
     switch ( imgSrc ) {
       case imgSrc:
-        this.paddingTop = this.coordinatesTemplate[imgSrc][0];
-        this.paddingTopForWho = this.coordinatesTemplate[imgSrc][0] + 10;
-        this.paddingTopForWhat = this.coordinatesTemplate[imgSrc][0] + 20;
+        console.log('number' + imgSrc);
+        console.log('Array' + this.coordinatesTemplate[imgSrc]);
+        this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
+        this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
+        this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
         this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
         this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
         this.bottom = this.coordinatesTemplate[imgSrc][3];
@@ -420,20 +450,9 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
-    const msg =  ' ' + day + '.' + monthStr + '.' + date.getFullYear() + ' ' +  hours + ':' + min;
+    const msg =  ' ' + date.getFullYear() + '.' + monthStr + '.' + day  + ' ' +  hours + ':' + min;
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
-  }
-  takeFontForEle(font, element) {
-    document.getElementById(this.arrayFontNameId[element]).style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'Fix').style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'LandscapeFix').style.fontFamily = font;
-    document.getElementById(this.arrayFontNameId[element] + 'Landscape').style.fontFamily = font;
-    this.arrayFontFamili[element] = font;
-    if (element === 4) {
-      this.takeFontForEle(font, 5);
-      this.takeFontForEle(font, 6);
-    }
   }
   setHeightSport(array) {
     const divide = array.length / 5;
@@ -536,16 +555,36 @@ export class CreateComponent implements OnInit {
       this.bottom = template.bottom;
       this.imgSrcFrame = template.frame;
       if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
+        this.downgradeFrame();
         this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
       } else {
         this.imgMAClogoFrame = '../../assets/img/0.png';
         this.frmBtnDisable = false;
+        for ( let i = 0; i < this.frames.length; i++ ) {
+          if (this.imgSrcFrame === this.frames[i]) {
+            this.downgradeFrame();
+            this.highlightFrame(i);
+            const tmp = this.frames[i];
+            this.frames[i] = this.frames[0];
+            this.frames[0] = tmp;
+          }
+        }
       }
-      if ( template.img === '') {
+      if ( template.img === '' || template.img === '../../assets/img/0.png') {
+        this.downgradeBcg(this.lastValue);
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
         this.imgSrcFix = template.img;
         this.bcgBtnDisable = false;
+        for ( let i = 0; i < this.bcgTemp.length; i++ ) {
+          if (this.imgSrcFix === this.bcgTemp[i]) {
+            this.downgradeBcg(this.lastValue);
+            this.highlightBcg(i);
+            const tmp = this.bcgTemp[i];
+            this.bcgTemp[i] = this.bcgTemp[0];
+            this.bcgTemp[0] = tmp;
+          }
+        }
       }
       this.base64Tmp = template.img;
       for (let i = 0; i < template.arrayFontSize.length; i++ ) {
@@ -579,14 +618,17 @@ export class CreateComponent implements OnInit {
           this.currImg = this.userImg.length - 1;
         }
         this.boolDisableUserImgFields = false;
+        setTimeout(() => {
+          this.setUserImgFrame(this.currImg);
+        }, 500 );
       }
       try {
         if ( template.txtTop.length > 0) {
           for ( let i = 0; i < template.txtTop.length; i++) {
             this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
               template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i],
-              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i]);
-            this.setUserTxtFiledProperty(i);
+              template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i],
+              template.txtShadow[i],  template.txtShadowColor[i]);
           }
         }
       } catch (e) {
@@ -606,11 +648,8 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
-    this.txtAlignText = '';
     this.txtAlign = [];
-    this.txtStyleText = '';
-    this.txtWeightText = '';
-    this.txtVariantText  = '';
+    this.txtShadow = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
     this.txtWeight = [];
@@ -623,6 +662,8 @@ export class CreateComponent implements OnInit {
     this.bcgRotateY = 1;
     this.frmRotateX = 1;
     this.frmRotateY = 1;
+    this.txtShadow = [];
+    this.txtShadowColor = [];
     this.bcgBtnDisable = true;
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
@@ -677,18 +718,7 @@ export class CreateComponent implements OnInit {
     this.txtSize = [];
     this.currentTxt = -1;
     this.txtColor = [];
-    this.txtTopText = '';
-    this.txtLeftText = '';
-    this.txtRightText = '';
-    this.txtSizeText = '';
-    this.txtUserText = '';
     this.txtColorText = '';
-    this.userImgBase64txt = '';
-    this.userImgRotatetxt = '';
-    this.userImgWidthtxt = '';
-    this.userImgHeighttxt = '';
-    this.userImgMarginLefttxt = '';
-    this.userImgMarginRigthtxt = '';
     this.userTxt = [];
     this.txtFontFamili = [];
     this.txtFontFamiliText = '';
@@ -885,14 +915,21 @@ export class CreateComponent implements OnInit {
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
-    this.imgWidth.push(10);
-    this.imgHeight.push(10);
     this.imgTop.push(0);
     this.imgLeft.push(0);
     this.currImg = this.userImg.length - 1;
+    this.imgHeight.push(10);
+    this.imgWidth.push(10);
     setTimeout(() => {
       this.setUserImgFrame(this.currImg);
-    }, 500 );
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
+    }, 50 );
   }
   removeImg() {
     this.userImg.pop();
@@ -904,6 +941,9 @@ export class CreateComponent implements OnInit {
     this.imgLeft.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
+    if ( this.currImg === -1 ) {
+      this.boolDisableUserImgFields = true;
+    }
   }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -912,149 +952,49 @@ export class CreateComponent implements OnInit {
   }
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    const result = fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    return result.readyState;
   }
-  resetFiled() {
-    this.userImgRotatetxt = '';
-    this.userImgWidthtxt = '';
-    this.userImgHeighttxt = '';
-    this.userImgMarginLefttxt = '';
-    this.userImgMarginRigthtxt = '';
-    this.userImgBase64txt = '';
-    this.txtTopText =  '';
-    this.txtLeftText = '';
-    this.txtRightText = '';
-    this.txtSizeText = '';
-    this.txtUserText = '';
-    this.txtColorText = '';
-    this.txtFontFamiliText = '';
-    this.txtStyleText = '';
-    this.txtWeightText = '';
-    this.txtVariantText = '';
-    this.txtAlignText = '';
+  createTextToJSON(name): String {
+    let txt = '';
+    for ( let i = 0; i < name.length; i ++) {
+      if (i !== name.length - 1) {
+        txt = txt + '"' + name[i] + '", ';
+      } else {
+        txt = txt + '"' + name[i] + '" ';
+      }
+    }
+    return txt;
   }
   createFileToSave() {
-    console.log('font famili: ' + this.txtFontFamili);
-    this.resetFiled();
-    for ( let i = 0; i < this.userImgBase64.length; i ++) {
-      if ( i !== this.rotate.length - 1 ) {
-        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '", ';
-        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '", ';
-        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '", ';
-        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '", ';
-        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '", ';
-        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '", ';
-      } else {
-        this.userImgRotatetxt = this.userImgRotatetxt + '"' + this.rotate[i] +  '" ';
-        this.userImgWidthtxt = this.userImgWidthtxt + '"' + this.imgWidth[i] +  '" ';
-        this.userImgHeighttxt = this.userImgHeighttxt + '"' + this.imgHeight[i] +  '" ';
-        this.userImgMarginLefttxt = this.userImgMarginLefttxt + '"' + this.imgLeft[i] +  '" ';
-        this.userImgMarginRigthtxt = this.userImgMarginRigthtxt + '"' + this.imgTop[i] +  '" ';
-        this.userImgBase64txt = this.userImgBase64txt + '"' +  this.userImgBase64[i] +  '" ';
-      }
-    }
-    for ( let i = 0; i < this.userTxt.length; i ++) {
-      if (i !== this.userTxt.length - 1) {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '", ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '", ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '", ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '", ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '", ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '", ';
-        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '", ';
-        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '", ';
-        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '", ';
-        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '", ';
-        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '", ';
-
-        console.log('font famili: ' + this.txtFontFamili[i]);
-      } else {
-        this.txtTopText = this.txtTopText + '"' + this.txtTop[i] + '" ';
-        this.txtLeftText = this.txtLeftText + '"' + this.txtLeft[i] + '" ';
-        this.txtRightText = this.txtRightText + '"' + this.txtRight[i] + '" ';
-        this.txtSizeText = this.txtSizeText + '"' + this.txtSize[i] + '" ';
-        this.txtUserText = this.txtUserText + '"' + this.userTxt[i] + '" ';
-        this.txtColorText = this.txtColorText + '"' + this.txtColor[i] + '" ';
-        this.txtFontFamiliText = this.txtFontFamiliText + '"' + this.txtFontFamili[i] + '" ';
-        this.txtStyleText = this.txtStyleText + '"' + this.txtStyle[i] + '" ';
-        this.txtWeightText = this.txtWeightText + '"' + this.txtWeight[i] + '" ';
-        this.txtVariantText  = this.txtVariantText + '"' + this.txtVariant[i] + '" ';
-        this.txtAlignText  = this.txtAlignText + '"' + this.txtAlign[i] + '" ';
-        console.log('font famili: ' + this.txtFontFamili[i]);
-      }
-    }
-    const txt = '{"arrayFontColor" : [ "'
-      + this.arrayFontColor[0] + '", "'
-      + this.arrayFontColor[1] + '", "'
-      + this.arrayFontColor[2] + '", "'
-      + this.arrayFontColor[3] + '", "'
-      + this.arrayFontColor[4] + '", "'
-      + this.arrayFontColor[5]
-      + '"], "arrayFontFamili" : [ "'
-      + this.arrayFontFamili[0] + '", "'
-      + this.arrayFontFamili[1] + '", "'
-      + this.arrayFontFamili[2] + '", "'
-      + this.arrayFontFamili[3] + '", "'
-      + this.arrayFontFamili[4] + '", "'
-      + this.arrayFontFamili[5] + '", "'
-      + this.arrayFontFamili[6] + '"],'
+    const txt = '{"arrayFontColor" : [ '
+      + this.createTextToJSON(this.arrayFontColor) + '],'
+      + ' "arrayFontFamili" : [ '
+      + this.createTextToJSON(this.arrayFontFamili) + '],'
       + ' "arrayFontSize" : ['
-      + this.arrayFontSize[0] + ', '
-      + this.arrayFontSize[1] + ', '
-      + this.arrayFontSize[2] + ', '
-      + this.arrayFontSize[3] + ', '
-      + this.arrayFontSize[4] + '], '
+      + this.createTextToJSON(this.arrayFontSize) + '],'
       + '"bottom" : "' + this.bottom + '", '
       + '"paddingTopFooter" : "' + this.paddingTopFooter + '", '
       + '"bcgRotateX" : "' + this.bcgRotateX + '", '
       + '"bcgRotateY" : "' + this.bcgRotateY + '", '
       + '"frmRotateX" : "' + this.frmRotateX + '", '
       + '"frmRotateY" : "' + this.frmRotateY + '", '
-      + '"marginLeft" : [ "'
-      + this.marginLeft[0] + '", "'
-      + this.marginLeft[1] + '", "'
-      + this.marginLeft[2] + '", "'
-      + this.marginLeft[3] + '" ], '
-      + '"marginRight" : [ "'
-      + this.marginRight[0] + '", "'
-      + this.marginRight[1] + '", "'
-      + this.marginRight[2] + '", "'
-      + this.marginRight[3] + '" ], '
-      + '"shadowColor" : [ "'
-      + this.shadowColor[0] + '", "'
-      + this.shadowColor[1] + '", "'
-      + this.shadowColor[2] + '", "'
-      + this.shadowColor[3] + '", "'
-      + this.shadowColor[4] + '" ], '
-      + '"shadowLarge" : [ "'
-      + this.shadowLarge[0] + '", "'
-      + this.shadowLarge[1] + '", "'
-      + this.shadowLarge[2] + '", "'
-      + this.shadowLarge[3] + '" ], '
-      + '"fontStyle" : [ "'
-      + this.fontStyle[0] + '", "'
-      + this.fontStyle[1] + '", "'
-      + this.fontStyle[2] + '", "'
-      + this.fontStyle[3] + '", "'
-      + this.fontStyle[4] + '" ], '
-      + '"fontWeight" : [ "'
-      + this.fontWeight[0] + '", "'
-      + this.fontWeight[1] + '", "'
-      + this.fontWeight[2] + '", "'
-      + this.fontWeight[3] + '", "'
-      + this.fontWeight[4] + '" ], '
-      + '"fontVariant" : [ "'
-      + this.fontVariant[0] + '", "'
-      + this.fontVariant[1] + '", "'
-      + this.fontVariant[2] + '", "'
-      + this.fontVariant[3] + '", "'
-      + this.fontVariant[4] + '" ], '
-      + '"textAlign" : [ "'
-      + this.textAlign[0] + '", "'
-      + this.textAlign[1] + '", "'
-      + this.textAlign[2] + '", "'
-      + this.textAlign[3] + '", "'
-      + this.textAlign[4] + '" ], '
+      + '"marginLeft" : [ '
+      + this.createTextToJSON(this.marginLeft) + '],'
+      + '"marginRight" : [ '
+      + this.createTextToJSON(this.marginRight) + '],'
+      + '"shadowColor" : [ '
+      + this.createTextToJSON(this.shadowColor) + '],'
+      + '"shadowLarge" : [ '
+      + this.createTextToJSON(this.shadowLarge) + '],'
+      + '"fontStyle" : [ '
+      + this.createTextToJSON(this.fontStyle) + '],'
+      + '"fontWeight" : [ '
+      + this.createTextToJSON(this.fontWeight) + '],'
+      + '"fontVariant" : [ '
+      + this.createTextToJSON(this.fontVariant) + '],'
+      + '"textAlign" : [ '
+      + this.createTextToJSON(this.textAlign) + '],'
       + '"shadowSmall" : "'
       +  this.shadowSmall + '", '
       + '"letterSpacing" : "'
@@ -1086,39 +1026,43 @@ export class CreateComponent implements OnInit {
       + '"footer" : "'
       + this.footer.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
       + '"userBcgBase64" : [ '
-      + this.userImgBase64txt + '],'
+      + this.createTextToJSON(this.userImgBase64) + '],'
       + '"userImgRotate" : [ '
-      + this.userImgRotatetxt + '],'
+      + this.createTextToJSON(this.rotate) + '],'
       + '"userImgWidth" : [ '
-      + this.userImgWidthtxt + '],'
+      + this.createTextToJSON(this.imgWidth) + '],'
       + '"userImgHeight" : [ '
-      + this.userImgHeighttxt + '],'
+      + this.createTextToJSON(this.imgHeight) + '],'
       + '"userImgLeft" : [ '
-      + this.userImgMarginLefttxt + '],'
+      + this.createTextToJSON(this.imgLeft) + '],'
       + '"userImgTop" : [ '
-      + this.userImgMarginRigthtxt + '],'
+      + this.createTextToJSON(this.imgTop) + '],'
       + '"txtTop" : [ '
-      + this.txtTopText + '],'
+      + this.createTextToJSON(this.txtTop) + '],'
       + '"txtLeft" : [ '
-      + this.txtLeftText + '],'
+      + this.createTextToJSON(this.txtLeft) + '],'
       + '"txtRight" : [ '
-      + this.txtRightText + '],'
+      + this.createTextToJSON(this.txtRight) + '],'
       + '"txtSize" : [ '
-      + this.txtSizeText + '],'
+      + this.createTextToJSON(this.txtSize) + '],'
       + '"txtStyle" : [ '
-      + this.txtStyleText + '],'
+      + this.createTextToJSON(this.txtStyle) + '],'
       + '"txtWeight" : [ '
-      + this.txtWeightText + '],'
+      + this.createTextToJSON(this.txtWeight) + '],'
       + '"txtVariant" : [ '
-      + this.txtVariantText + '],'
+      + this.createTextToJSON(this.txtVariant) + '],'
       + '"txtAlign" : [ '
-      + this.txtAlignText + '],'
+      + this.createTextToJSON(this.txtAlign) + '],'
       + '"txtUser" : [ '
-      + this.txtUserText + '],'
+      + this.createTextToJSON(this.userTxt) + '],'
       + '"txtColor" : [ '
-      + this.txtColorText + '],'
+      + this.createTextToJSON(this.txtColor) + '],'
       + '"txtFontFamili" : [ '
-      + this.txtFontFamiliText + '],'
+      + this.createTextToJSON(this.txtFontFamili) + '],'
+      + '"txtShadow" : [ '
+      + this.createTextToJSON(this.txtShadow) + '],'
+      + '"txtShadowColor" : [ '
+      + this.createTextToJSON(this.txtShadowColor) + '],'
       + '"frame" : "'
       + this.imgSrcFrame + '", '
       + '"scheme" : "'
@@ -1144,15 +1088,19 @@ export class CreateComponent implements OnInit {
     }
   }
   fileUpload(event: any) {
-    this.add();
-    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
-    rmvBtn.disabled = false;
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader() as any;
-      reader.onload = (event2: any) => {
-        this.userImgBase64.push(event2.target.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
+    if (event.target.files[0].size / 1024 < 2049 && event.target.files) {
+      const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+      rmvBtn.disabled = false;
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader() as any;
+        reader.onload = (event2: any) => {
+          this.add();
+          this.userImgBase64.push(event2.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    } else {
+      this.openSnackBar('Plik jest za duży! Maksymalny rozmiar wynosi 2MB', 'ok');
     }
   }
   jsonToArray(txt) {
@@ -1172,6 +1120,7 @@ export class CreateComponent implements OnInit {
     this.imgSrc = '../../assets/img/0.png';
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
+    this.bcgColor = '#ffffff';
     document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
@@ -1185,15 +1134,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
-  }
-  setFormat(n) {
-    this.format = n;
-    document.getElementById('size' + n ).style.transform = 'scale(1,1)';
-    if ( n === 'A4') {
-      document.getElementById('sizeA5' ).style.transform = 'scale(0.8,0.8)';
-    } else {
-      document.getElementById('sizeA4').style.transform = 'scale(0.8, 0.8)';
-    }
   }
   addTxt() {
     if ( this.currentTxt === -1 ) {
@@ -1215,10 +1155,17 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('fontVariant5');
     this.setWhiteColor('fontWeight5');
     this.txtAlign.push('left');
+    this.txtShadow.push(0);
+    this.txtShadowColor.push('#8c8e91');
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
-    /*this.setWhiteColor('alignLeft5');
-    this.setWhiteColor('alignRight5');
-    this.setBlueColor('alignCenter5');*/
+  }
+  shadowOnOffForUserTextField(): Number {
+    if ( this.txtShadow[this.currentTxt] > 0) {
+      this.txtShadow[this.currentTxt] = 0;
+    } else {
+      this.txtShadow[this.currentTxt] = 4;
+    }
+    return this.txtShadow[this.currentTxt];
   }
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
@@ -1239,7 +1186,7 @@ export class CreateComponent implements OnInit {
     console.log('textAlign: ' + this.txtAlign + ' : ' + n);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[n]);
   }
-  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align) {
+  addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align, shadow, shadowColor) {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
     }
@@ -1256,6 +1203,8 @@ export class CreateComponent implements OnInit {
     this.txtWeight.push(weight);
     this.txtVariant.push(variant);
     this.txtAlign.push(align);
+    this.txtShadow.push(shadow);
+    this.txtShadowColor.push(shadowColor);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
   setFontFamili(n) {
@@ -1269,11 +1218,11 @@ export class CreateComponent implements OnInit {
     }
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1319,11 +1268,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontStyle' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1402,11 +1351,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontWeight' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1419,11 +1368,11 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontVariant' + n);
     setTimeout( () => {
       if (n === 0) {
-        this.chceckWidthWithCenter(0);
+        this.checkWidthWithCenter(0);
       } else if (n === 1) {
-        this.chceckWidthWithCenter(1);
+        this.checkWidthWithCenter(1);
       } else if (n === 2 ) {
-        this.chceckWidthWithCenter(2);
+        this.checkWidthWithCenter(2);
       }
     }, 300);
   }
@@ -1433,11 +1382,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignCenter' + n);
     this.setBlueColor('alignLeft' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setTextAlignCenter(n) {
@@ -1446,11 +1395,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignCenter' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1 ) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0 ) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setButtonColor(n) {
@@ -1511,11 +1460,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignRight' + n);
     if ( n === 2 ) {
-      this.chceckWidth(2);
+      this.checkWidth(2);
     } else if ( n === 1) {
-      this.chceckWidth(1);
+      this.checkWidth(1);
     } else if ( n === 0) {
-      this.chceckWidth(0);
+      this.checkWidth(0);
     }
   }
   setImg(n, name) {
@@ -1565,10 +1514,10 @@ export class CreateComponent implements OnInit {
     }
     document.getElementById('spinner').style.display = 'none';
   }
-  setCookies() {
+  /*setCookies() {
     document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-  }
-  chceckWidth(n) {
+  }*/
+  public checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
@@ -1595,9 +1544,9 @@ export class CreateComponent implements OnInit {
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
   }
-  chceckWidthWithCenter(n) {
-    console.log('blur?');
+  checkWidthWithCenter(n) {
     let percent;
+    let i = 1;
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
@@ -1620,6 +1569,7 @@ export class CreateComponent implements OnInit {
     if ( (width) > 98 || widthRight > 98 ) {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
+      i = 0;
     }
     percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1629,6 +1579,7 @@ export class CreateComponent implements OnInit {
     }
     this.percentHeight[n] = Math.round(percent - 1);
     this.percentHeight[n] = Math.round(percent - 1);
+    return i;
   }
   setHeightPercent(n) {
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
@@ -1646,7 +1597,6 @@ export class CreateComponent implements OnInit {
     if ( (this.landscape === 'inline-block') ) {
       percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
-      console.log('landscape');
     }
     let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1667,17 +1617,77 @@ export class CreateComponent implements OnInit {
   }
   setUserImgFrame(n) {
     for (let i = 0; i <  this.imgTop.length; i ++ ) {
-      console.log('jestem');
       if (i === n) {
         document.getElementById('imgToChange4' + i).style.border = '2px solid red';
         document.getElementById('imgToChange2' + i).style.border = '2px solid red';
-        console.log('jestem');
       } else {
         document.getElementById('imgToChange4' + i).style.border = 'none';
         document.getElementById('imgToChange2' + i).style.border = 'none';
-        console.log('jestem');
+      }
+    }
+  }
+  test() {
+    return 0;
+  }
+  checkDirectButtonValue(n, stepperIndex) {
+    console.log('stepperValue: ' + stepperIndex);
+    console.log('n: ' + n);
+    if ( stepperIndex === 5 ) {
+      this.btnDirectRightDisabled = true;
+      document.getElementById('btnDirectRight').style.right = '-200px';
+      document.getElementById('btnDirectRight').style.opacity = '0';
+
+    } else {
+      this.btnDirectRightDisabled = false;
+      document.getElementById('btnDirectRight').style.right = '0px';
+      document.getElementById('btnDirectRight').style.opacity = '1';
+    }
+    if (  stepperIndex === 0 ) {
+      this.btnDirectLeftDisabled = true;
+      document.getElementById('btnDirectLeft').style.left = '-200px';
+      document.getElementById('btnDirectLeft').style.opacity = '0';
+    } else {
+      this.btnDirectLeftDisabled = false;
+      document.getElementById('btnDirectLeft').style.left = '0px';
+      document.getElementById('btnDirectLeft').style.opacity = '1';
+    }
+  }
+  imageResizeWithProportionsWidth() {
+    if ( this.checkboxSizeAttach ) {
+      this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalHeight;
+      prop = prop / img.naturalWidth;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      if ( this.imgWidth[this.currImg] * prop * propPdfFor > 100 ) {
+        this.imgHeight[this.currImg] = 100;
+        prop =  img.naturalWidth;
+        prop = prop / img.naturalHeight;
+        this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
+      } else {
+        this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
+      }
+    }
+  }
+  imageResizeWithProportionsHeight() {
+    if ( this.checkboxSizeAttach ) {
+      this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      const propPdfFor = multipleWidth / multipleHeight;
+      if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100 ) {
+        this.imgWidth[this.currImg] = 100;
+        prop =  img.naturalHeight;
+        prop = prop / img.naturalWidth;
+        this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
+      } else {
+        this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
       }
     }
   }
 }
-

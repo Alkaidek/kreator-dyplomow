@@ -21,5 +21,8 @@ export class DataService {
   getTemplates() {
     return this._http.get('/api/templates').pipe(map(result => this.result = result.json().data));
   }
+  getFont() {
+    return this._http.get('/api/font').pipe(map(result => this.result = result.json().data));
+  }
 
 }
