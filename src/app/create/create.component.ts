@@ -117,7 +117,7 @@ export class CreateComponent implements OnInit {
   paddingTop = 0;
   paddingTopForWho = 10;
   paddingTopForWhat = 20;
-  marginLeft = [0, 0, 0, 0];
+  marginLeft = [1, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
   paddingTopFooter = 12;
   bottom = 0;
@@ -683,7 +683,7 @@ export class CreateComponent implements OnInit {
     this.paddingTop = 0;
     this.paddingTopForWho = 10;
     this.paddingTopForWhat = 20;
-    this.marginLeft[0] = 0;
+    this.marginLeft[0] = 1;
     this.marginLeft[1] = 0;
     this.marginLeft[2] = 0;
     this.marginLeft[3] = 0;
@@ -925,8 +925,15 @@ export class CreateComponent implements OnInit {
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
       let prop =  img.naturalWidth;
       prop = prop / img.naturalHeight;
-      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
-      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      let multipleHeight;
+      let multipleWidth;
+      if ( (this.landscape === 'inline-block') ) {
+        multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+        multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+      } else {
+        multipleHeight = document.getElementById('pdfFor').offsetHeight;
+        multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      }
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }, 50 );
@@ -1667,8 +1674,15 @@ export class CreateComponent implements OnInit {
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
       let prop =  img.naturalHeight;
       prop = prop / img.naturalWidth;
-      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
-      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      let multipleHeight;
+      let multipleWidth;
+      if ( (this.landscape === 'inline-block') ) {
+        multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+        multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+      } else {
+        multipleHeight = document.getElementById('pdfFor').offsetHeight;
+        multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      }
       const propPdfFor = multipleWidth / multipleHeight;
       if ( this.imgWidth[this.currImg] * prop * propPdfFor > 100 ) {
         this.imgHeight[this.currImg] = 100;
@@ -1686,8 +1700,15 @@ export class CreateComponent implements OnInit {
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
       let prop =  img.naturalWidth;
       prop = prop / img.naturalHeight;
-      const multipleHeight = document.getElementById('pdfFor').offsetHeight;
-      const multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      let multipleHeight;
+      let multipleWidth;
+      if ( (this.landscape === 'inline-block') ) {
+        multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+        multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+      } else {
+        multipleHeight = document.getElementById('pdfFor').offsetHeight;
+        multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      }
       const propPdfFor = multipleWidth / multipleHeight;
       if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100 ) {
         this.imgWidth[this.currImg] = 100;
