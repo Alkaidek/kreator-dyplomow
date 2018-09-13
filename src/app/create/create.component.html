@@ -667,7 +667,7 @@
         </div>
         <div class="scroll fadeInTop">
           <div *ngFor="let frame of frames; let i = index"
-               class="bcg boxReal33 fadeInTop"
+               class="frm boxReal33 fadeInTop"
                id="frmBox{{i + 1}}"
                (click)="takeFrame(i)">
             <img id="frm{{i}}"
@@ -2066,6 +2066,153 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
+                Emocje
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Emocje
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" emocjeHeight + 'vh'">
+              <div *ngFor="let tmp of imagesEmocje; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgEmocje{{i + 1}}"
+                   (click)="setImg(i, 'Emocje')">
+                <img id="imgEmocje{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Geografia
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Geografia
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" geografiaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesGeografia; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgGeografia{{i + 1}}"
+                   (click)="setImg(i, 'Geografia')">
+                <img id="imgGeografia{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Literatura
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Literatura
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" literaturaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesLiteratura; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgLiteratura{{i + 1}}"
+                   (click)="setImg(i, 'Literatura')">
+                <img id="imgLiteratura{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Matematyka
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Matematyka
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" matematykaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesMatematyka; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgMatematyka{{i + 1}}"
+                   (click)="setImg(i, 'Matematyka')">
+                <img id="imgMatematyka{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Muzyka
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Muzyka
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" muzykaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesMuzyka; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgMuzyka{{i + 1}}"
+                   (click)="setImg(i, 'Muzyka')">
+                <img id="imgMuzyka{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Polska
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Polska
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" polskaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesPolska; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgPolska{{i + 1}}"
+                   (click)="setImg(i, 'Polska')">
+                <img id="imgPolska{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Rośliny
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Rosliny
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" roslinyHeight + 'vh'">
+              <div *ngFor="let tmp of imagesRosliny; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgRosliny{{i + 1}}"
+                   (click)="setImg(i, 'Rosliny')">
+                <img id="imgRosliny{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
                 Sport
               </mat-panel-title>
               <mat-panel-description>
@@ -2078,7 +2225,7 @@
                    class="imgToSet fadeInTop"
                    id="imgSport{{i + 1}}"
                    (click)="setImg(i, 'Sport')">
-                <img id="imgMAC{{i}}"
+                <img id="imgSport{{i}}"
                      src="{{tmp}}"
                      style="background-color: white"/>
               </div>
@@ -2087,19 +2234,40 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Zdrowie
+                Święta
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Zdrowie
+                Obrazki z kategorii Święta
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
-                 [style.height]=" sportHeight + 'vh'">
-              <div *ngFor="let tmp of imagesSport; let i = index"
+                 [style.height]="swietaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesSwieta; let i = index"
                    class="imgToSet fadeInTop"
-                   id="imgZdrowie{{i + 1}}"
-                   (click)="setImg(i, 'Sport')">
-                <img id="imgZdrowie{{i}}"
+                   id="imgSwieta{{i + 1}}"
+                   (click)="setImg(i, 'Swieta')">
+                <img id="imgSwieta{{i}}"
+                     src="{{tmp}}"
+                     style="background-color: white"/>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Szachy i Multimedia
+              </mat-panel-title>
+              <mat-panel-description>
+                Obrazki z kategorii Szachy i Multimedia
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="scrollableMAC"
+                 [style.height]=" szachyHeight + 'vh'">
+              <div *ngFor="let tmp of imagesSzachy; let i = index"
+                   class="imgToSet fadeInTop"
+                   id="imgSzachy{{i + 1}}"
+                   (click)="setImg(i, 'Szachy')">
+                <img id="imgSzachy{{i}}"
                      src="{{tmp}}"
                      style="background-color: white"/>
               </div>
@@ -2115,20 +2283,19 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
-                 [style.height]=" animalHeight + 'vh'">
-              <div *ngFor="let tmp of imagesAnimal; let i = index"
+                 [style.height]=" zwierzetaHeight + 'vh'">
+              <div *ngFor="let tmp of imagesZwierzeta; let i = index"
                    class="imgToSet fadeInTop"
-                   id="imgAnimal{{i + 1}}"
-                   (click)="setImg(i, 'Animal')">
-                <img id="imgAnimal{{i}}"
+                   id="imgZwierzeta{{i + 1}}"
+                   (click)="setImg(i, 'Zwierzeta')">
+                <img id="imgZwierzeta{{i}}"
                      src="{{tmp}}"
                      style="background-color: white"/>
               </div>
             </div>
           </mat-expansion-panel>
+
         </mat-accordion>
-
-
         <div class="textBox" style="margin-top: 1vh">
           <h3 class="fadeInTop">
             Dodaj swój obrazek

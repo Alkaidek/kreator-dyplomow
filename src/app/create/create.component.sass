@@ -441,6 +441,7 @@ $border2pxSolid: 2px solid
   z-index: 14
   display: none
 
+
 .imgToSet
   transform: scale(0.8,0.8)
   margin-left: $newmargin
@@ -453,6 +454,9 @@ $border2pxSolid: 2px solid
   float: left
   height: 10vh
   width: 5vw
+
+  img
+    object-fit: contain
 
 .scrollableMAC
   min-height: 100px
@@ -473,7 +477,7 @@ $border2pxSolid: 2px solid
 .frm
   img:hover
     transform: scale(0.90,0.90) !important
-    box-shadow: 5px 5px rgba(0, 0, 15, 0.2) !important
+    //box-shadow: 5px 5px rgba(0, 0, 15, 0.2) !important
 
 img
   width: 100%
@@ -498,12 +502,14 @@ img
     width: 70%
     transition: 0.4s
     transform: scale(0.8,0.8)
+    border: 1px solid #959895
 
 .frm
   img
     width: 70%
     transition: 0.4s
-    transform: scale(0.8,0.8)
+    transform: scale(0.7,0.7)
+    object-fit: contain
 
 @keyframes example
   0%
