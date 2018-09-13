@@ -32,6 +32,8 @@ export class CreateComponent implements OnInit {
   template: any;
   coordinatesTemplate = [];
   frames = [];
+  frame1 = [];
+  frame2 = [];
   bool = 'block';
   imagesAnimal = ['../../assets/img/animal/1.png',
     '../../assets/img/animal/2.png',
@@ -117,9 +119,13 @@ export class CreateComponent implements OnInit {
     for ( let i = 1; i < 34; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i + '.jpg');
     }
-    for ( let i = 1; i < 61; i++ ) {
-      this.frames.push('../../assets/img/frame/' + i + '.png');
+    for ( let i = 1; i < 37; i++ ) {
+      this.frame1.push('../../assets/img/frame/' + i + '.png');
     }
+    for ( let i = 37; i < 61; i++ ) {
+      this.frame2.push('../../assets/img/frame2/' + i + '.png');
+    }
+    this.createFramesArray(this.frame1, this.frame2);
    /* db.list('/images/sport').valueChanges().subscribe(sport => {
       for (let i = 0; i < sport.length; i++) {
         this.imagesSport.push('' + sport[i] );
@@ -357,13 +363,18 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
       document.getElementById('scheme30').style.opacity = '1';
       this.scheme = 30;
-      this.frames.reverse();
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
     return this.multiple;
+  }
+  createFramesArray(array, array2) {
+    this.frames = [];
+    for ( let i = 0; i < array.length; i++ ) {
+      this.frames.push(array[i]);
+    }
   }
   highlightBcg(imgSrc) {
     this.lastValue = imgSrc;
@@ -435,13 +446,13 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = false;
     document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-    //document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
-    //document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    /*document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';*/
     this.lastValueFrame = imgSrc;
     document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-    //document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    //document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    /*document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';*/
     this.base64TmpFrame = imgSrc;
     this.imgSrc = '' + (imgSrc );
     this.imgSrcFrame = this.frames[imgSrc];
@@ -786,7 +797,12 @@ export class CreateComponent implements OnInit {
     this.letterSpacingForWho = 0;
     this.bcgColor = '#ffffff';
     this.landscape = '';
-    this.landscapeOff(2);
+    this.landscape = 'none';
+    document.getElementById('imgO2').style.filter = 'grayscale(0%)';
+    document.getElementById('imgO1').style.filter = 'grayscale(100%)';
+    document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
+    document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+    this.createFramesArray(this.frame1, this.frame2);
     this.setScheme(30);
     this.paddingTopFooter = 12;
     this.textAlign = ['center', 'center', 'center', 'center', 'center'];
@@ -965,7 +981,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(100%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
-      this.frames.reverse();
+      this.createFramesArray(this.frame1, this.frame2);
+      this.arrayScrollFrame = [1, 2, 3];
     } else {
       this.landscape = 'inline-block';
       const element = document.getElementById('toPdf100Landscape');
@@ -974,7 +991,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(0%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
       document.getElementById('imgO1').style.transform = 'scale(1, 1)';
-      this.frames.reverse();
+      this.createFramesArray(this.frame2, this.frame1);
+      this.arrayScrollFrame = [1, 2, 3];
     }
   }
   setScheme(n) {
