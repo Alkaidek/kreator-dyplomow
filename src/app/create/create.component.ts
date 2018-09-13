@@ -34,54 +34,123 @@ export class CreateComponent implements OnInit {
   arraySelectFontFamili = [];
   frames = [];
   bool = 'block';
-  imagesSport = ['../../assets/img/sport/sport1.png',
-    '../../assets/img/sport/sport2.png',
-    '../../assets/img/sport/sport3.png',
-    '../../assets/img/sport/sport4.png'];
   imagesAnimal = ['../../assets/img/animal/1.png',
     '../../assets/img/animal/2.png',
     '../../assets/img/animal/3.png',
     '../../assets/img/animal/4.png'];
-  sportHeight = 11;
+  imagesEmocje = [];
+  imagesGeografia = [];
+  imagesLiteratura = [];
+  imagesMatematyka = [];
+  imagesMuzyka = [];
+  imagesPolska = [];
+  imagesRosliny = [];
+  imagesSport = [];
+  imagesSwieta = [];
+  imagesSzachy = [];
+  imagesZwierzeta = [];
   animalHeight = 11;
+  emocjeHeight = 11;
+  geografiaHeight = 11;
+  literaturaHeight = 11;
+  matematykaHeight = 11;
+  muzykaHeight = 11;
+  polskaHeight = 11;
+  roslinyHeight = 11;
+  sportHeight = 11;
+  swietaHeight = 11;
+  szachyHeight = 11;
+  zwierzetaHeight = 11;
+
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
-    this._dataService.getSportImg()
+    for ( let i = 1; i < 50; i++ ) {
+      this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.png');
+    }
+    this.setHeightMatematyka(this.imagesMatematyka);
+    for ( let i = 1; i < 55; i++ ) {
+      this.imagesMuzyka.push('../../assets/img/muzyka/' + i + '.png');
+    }
+    this.setHeightMuzyka(this.imagesMuzyka);
+    for ( let i = 1; i < 13; i++ ) {
+      this.imagesPolska.push('../../assets/img/polska/' + i + '.png');
+    }
+    this.setHeightPolska(this.imagesPolska);
+    for ( let i = 1; i < 42; i++ ) {
+      this.imagesSport.push('../../assets/img/sport/' + i + '.png');
+    }
+    this.setHeightSport(this.imagesSport);
+    for ( let i = 1; i < 51; i++ ) {
+      this.imagesSwieta.push('../../assets/img/swieta/' + i + '.png');
+    }
+    this.setHeightSwieta(this.imagesSwieta);
+    for ( let i = 1; i < 19; i++ ) {
+      this.imagesSzachy.push('../../assets/img/szachy/' + i + '.png');
+    }
+    this.setHeightSzachy(this.imagesSzachy);
+    for ( let i = 1; i < 80; i++ ) {
+      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i + '.png');
+    }
+    this.setHeightZwierzeta(this.imagesZwierzeta);
+    for ( let i = 1; i < 34; i++ ) {
+      this.imagesRosliny.push('../../assets/img/rosliny/' + i + '.png');
+    }
+    this.setHeightRosliny(this.imagesRosliny);
+
+    for ( let i = 1; i < 44; i++ ) {
+      this.imagesEmocje.push('../../assets/img/emocje/' + i + '.png');
+    }
+    this.setHeightEmocje(this.imagesEmocje);
+    for ( let i = 1; i < 40; i++ ) {
+      this.imagesGeografia.push('../../assets/img/geografia/' + i + '.png');
+    }
+    this.setHeightGeografia(this.imagesGeografia);
+    for ( let i = 1; i < 39; i++ ) {
+      this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.png');
+    }
+    this.setHeightLiteratura(this.imagesLiteratura);
+    /*this._dataService.getSportImg()
       .subscribe(sport => {
        for (let i = 0; i < sport[0].sport.length; i++) {
          this.imagesSport.push('' + sport[0].sport[i] );
          this.setHeightSport(this.imagesSport);
        }
-      });
+      });*/
     this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].templates.length; i++) {
           this.coordinatesTemplate.push( tmp[0].templates[i] );
         }
       });
-    this._dataService.getBase64Img()
+    for ( let i = 1; i < 34; i++ ) {
+      this.bcgTemp.push('../../assets/img/bcg/' + i + '.jpg');
+    }
+    for ( let i = 1; i < 61; i++ ) {
+      this.frames.push('../../assets/img/frame/' + i + '.png');
+    }
+    /*this._dataService.getBase64Img()
       .subscribe(bcgTemp => {
       for (let i = 0; i <  bcgTemp[0].bcg.length; i++) {
         this.bcgTemp.push( bcgTemp[0].bcg[i] );
       }
-    });
-    this._dataService.getBase64Img()
+    });*/
+    /*this._dataService.getBase64Img()
       .subscribe(bcgTemp => {
         for (let i = 0; i <  bcgTemp[0].frame.length; i++) {
           this.frames.push( bcgTemp[0].frame[i]);
         }
-      });
+      });*/
     this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].fonts.length; i++) {
           this.arraySelectFontFamili.push( tmp[0].fonts[i] );
         }
       });
-    db.list('/images/animal').valueChanges().subscribe(animal => {
+    /*db.list('/images/animal').valueChanges().subscribe(animal => {
       for (let i = 0; i < animal.length; i++) {
         this.imagesAnimal.push('' + animal[i] );
         this.setHeightAnimal(this.imagesAnimal);
       }
-    });
+    });*/
   }
   MACblue = '#25408f';
   whiteColor = 'white';
@@ -303,6 +372,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
       document.getElementById('scheme30').style.opacity = '1';
       this.scheme = 30;
+      this.frames.reverse();
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
       console.log('wartosć: ' + ( 2480 / width) );
@@ -343,7 +413,7 @@ export class CreateComponent implements OnInit {
     this.bcgBtnDisable = false;
     document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
+    document.getElementById('img' + (this.lastValue ) ).style.border = '#959895 1px solid';
     this.lastValue = imgSrc;
     document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
@@ -454,29 +524,84 @@ export class CreateComponent implements OnInit {
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
-  setHeightSport(array) {
-    const divide = array.length / 5;
-    if ( divide >= 0 && divide < 1) {
-      this.sportHeight  = 11;
+
+  setHeightEmocje(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
     }
-    if ( divide >= 1 && divide < 2) {
-      this.sportHeight  = 22;
-    }
-    if ( divide >= 2 && divide < 3) {
-      this.sportHeight  = 33;
-    }
+    this.emocjeHeight = Math.round(divide) * 10 + Math.round(divide);
   }
-  setHeightAnimal(array) {
-    const divide = array.length / 5;
-    if ( divide >= 0 && divide < 1) {
-      this.animalHeight  = 11;
+  setHeightMuzyka(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
     }
-    if ( divide >= 1 && divide < 2) {
-      this.animalHeight  = 22;
+    this.muzykaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightRosliny(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
     }
-    if ( divide >= 2 && divide < 3) {
-      this.animalHeight  = 33;
+    this.roslinyHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightZwierzeta(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
     }
+    this.zwierzetaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightSwieta(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.swietaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightSport(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.sportHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightPolska(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.polskaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+
+  setHeightGeografia(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.geografiaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightSzachy(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.szachyHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightMatematyka(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.matematykaHeight = Math.round(divide) * 10 + Math.round(divide);
+  }
+  setHeightLiteratura(array) {
+    let divide = array.length / 5;
+    if ( divide > Math.round(divide)) {
+      divide = divide + 0.5;
+    }
+    this.literaturaHeight = Math.round(divide) * 10 + Math.round(divide);
   }
   setUserData(template) {
     try {
@@ -649,7 +774,6 @@ export class CreateComponent implements OnInit {
       console.log('no element');
     }
     this.txtAlign = [];
-    this.txtShadow = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
     this.txtWeight = [];
@@ -852,6 +976,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(100%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+      this.frames.reverse();
     } else {
       this.landscape = 'inline-block';
       const element = document.getElementById('toPdf100Landscape');
@@ -860,6 +985,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(0%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
       document.getElementById('imgO1').style.transform = 'scale(1, 1)';
+      this.frames.reverse();
     }
   }
   setScheme(n) {
@@ -1491,6 +1617,28 @@ export class CreateComponent implements OnInit {
       this.userImgBase64.push(this.imagesAnimal[n]);
     } else if (name === 'Sport') {
       this.userImgBase64.push(this.imagesSport[n]);
+    } else if (name === 'Emocje') {
+      this.userImgBase64.push(this.imagesEmocje[n]);
+    } else if (name === 'Geografia') {
+      this.userImgBase64.push(this.imagesGeografia[n]);
+    } else if (name === 'Literatura') {
+      this.userImgBase64.push(this.imagesLiteratura[n]);
+    } else if (name === 'Matematyka') {
+      this.userImgBase64.push(this.imagesMatematyka[n]);
+    } else if (name === 'Muzyka') {
+      this.userImgBase64.push(this.imagesMuzyka[n]);
+    } else if (name === 'Rosliny') {
+      this.userImgBase64.push(this.imagesRosliny[n]);
+    } else if (name === 'Polska') {
+      this.userImgBase64.push(this.imagesPolska[n]);
+    } else if (name === 'Swieta') {
+      this.userImgBase64.push(this.imagesSwieta[n]);
+    } else if (name === 'Szachy') {
+      this.userImgBase64.push(this.imagesSzachy[n]);
+    } else if (name === 'Zwierzeta') {
+      this.userImgBase64.push(this.imagesZwierzeta[n]);
+    } else if (name === 'Literatura') {
+      this.userImgBase64.push(this.imagesLiteratura[n]);
     }
   }
   rotateBcgX() {
