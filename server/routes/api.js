@@ -24,15 +24,13 @@ let response = {
   data: [],
   message: null
 };
-
-// Get users
-router.get('/user', (req, res) => {
+router.get('/emocje/:element', (req, res) => {
   connection((db) => {
-    db.collection('user')
+    db.collection('images')
       .find()
       .toArray()
-      .then((user) => {
-        response.data = user;
+      .then((images) => {
+        response.data = images[0].emocje[req.params.element];
         res.json(response);
       })
       .catch((err) => {
@@ -40,13 +38,139 @@ router.get('/user', (req, res) => {
       });
   });
 });
-router.get('/sport', (req, res) => {
+router.get('/geografia/:element', (req, res) => {
   connection((db) => {
-    db.collection('images')
+    db.collection('imagesGeografia')
       .find()
       .toArray()
       .then((images) => {
-        response.data = images;
+        response.data = images[0].geografia[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/literatura/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesLiteratura')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].literatura[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/matematyka/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesMatematyka')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].matematyka[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/muzyka/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesMuzyka')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].muzyka[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/polska/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesPolska')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].polska[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/rosliny/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesRosliny')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].rosliny[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/sport/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesSport')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].sport[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/swieta/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesSwieta')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].swieta[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/szachy/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesSzachy')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].szachy[req.params.element];
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
+      });
+  });
+});
+router.get('/zwierzeta/:element', (req, res) => {
+  connection((db) => {
+    db.collection('imagesZwierzeta')
+      .find()
+      .toArray()
+      .then((images) => {
+        response.data = images[0].zwierzeta[req.params.element];
         res.json(response);
       })
       .catch((err) => {
@@ -64,7 +188,7 @@ router.get('/base64Img', (req, res) => {
         res.json(response);
       })
       .catch((err) => {
-        sendError(err, res);
+         sendError(err, res);
       });
   });
 });

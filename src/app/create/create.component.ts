@@ -17,6 +17,7 @@ import {DataService} from '../data.service';
     ]
 })
 export class CreateComponent implements OnInit {
+  arraySelectFontFamili = [];
   userImg =
     [];
   percentLeft = [100, 100, 100];
@@ -31,8 +32,9 @@ export class CreateComponent implements OnInit {
   bcgTemp = [];
   template: any;
   coordinatesTemplate = [];
-  arraySelectFontFamili = [];
   frames = [];
+  frame1 = [];
+  frame2 = [];
   bool = 'block';
   imagesAnimal = ['../../assets/img/animal/1.png',
     '../../assets/img/animal/2.png',
@@ -64,48 +66,48 @@ export class CreateComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     for ( let i = 1; i < 50; i++ ) {
-      this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.png');
+      this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.jpg');
     }
     this.setHeightMatematyka(this.imagesMatematyka);
     for ( let i = 1; i < 55; i++ ) {
-      this.imagesMuzyka.push('../../assets/img/muzyka/' + i + '.png');
+      this.imagesMuzyka.push('../../assets/img/muzyka/' + i + '.jpg');
     }
     this.setHeightMuzyka(this.imagesMuzyka);
     for ( let i = 1; i < 13; i++ ) {
-      this.imagesPolska.push('../../assets/img/polska/' + i + '.png');
+      this.imagesPolska.push('../../assets/img/polska/' + i + '.jpg');
     }
     this.setHeightPolska(this.imagesPolska);
     for ( let i = 1; i < 42; i++ ) {
-      this.imagesSport.push('../../assets/img/sport/' + i + '.png');
+      this.imagesSport.push('../../assets/img/sport/' + i + '.jpg');
     }
     this.setHeightSport(this.imagesSport);
     for ( let i = 1; i < 51; i++ ) {
-      this.imagesSwieta.push('../../assets/img/swieta/' + i + '.png');
+      this.imagesSwieta.push('../../assets/img/swieta/' + i + '.jpg');
     }
     this.setHeightSwieta(this.imagesSwieta);
     for ( let i = 1; i < 19; i++ ) {
-      this.imagesSzachy.push('../../assets/img/szachy/' + i + '.png');
+      this.imagesSzachy.push('../../assets/img/szachy/' + i + '.jpg');
     }
     this.setHeightSzachy(this.imagesSzachy);
     for ( let i = 1; i < 80; i++ ) {
-      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i + '.png');
+      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i + '.jpg');
     }
     this.setHeightZwierzeta(this.imagesZwierzeta);
     for ( let i = 1; i < 34; i++ ) {
-      this.imagesRosliny.push('../../assets/img/rosliny/' + i + '.png');
+      this.imagesRosliny.push('../../assets/img/rosliny/' + i + '.jpg');
     }
     this.setHeightRosliny(this.imagesRosliny);
 
     for ( let i = 1; i < 44; i++ ) {
-      this.imagesEmocje.push('../../assets/img/emocje/' + i + '.png');
+      this.imagesEmocje.push('../../assets/img/emocje/' + i + '.jpg');
     }
     this.setHeightEmocje(this.imagesEmocje);
     for ( let i = 1; i < 40; i++ ) {
-      this.imagesGeografia.push('../../assets/img/geografia/' + i + '.png');
+      this.imagesGeografia.push('../../assets/img/geografia/' + i + '.jpg');
     }
     this.setHeightGeografia(this.imagesGeografia);
     for ( let i = 1; i < 39; i++ ) {
-      this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.png');
+      this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.jpg');
     }
     this.setHeightLiteratura(this.imagesLiteratura);
     /*this._dataService.getSportImg()
@@ -122,11 +124,15 @@ export class CreateComponent implements OnInit {
         }
       });
     for ( let i = 1; i < 34; i++ ) {
-      this.bcgTemp.push('../../assets/img/bcg/' + i + '.jpg');
+      this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
-    for ( let i = 1; i < 61; i++ ) {
-      this.frames.push('../../assets/img/frame/' + i + '.png');
+    for ( let i = 1; i < 37; i++ ) {
+      this.frame1.push('../../assets/img/frame/' + i + '.png');
     }
+    for ( let i = 37; i < 61; i++ ) {
+      this.frame2.push('../../assets/img/frame2/' + i + '.png');
+    }
+    this.createFramesArray(this.frame1, this.frame2);
     /*this._dataService.getBase64Img()
       .subscribe(bcgTemp => {
       for (let i = 0; i <  bcgTemp[0].bcg.length; i++) {
@@ -372,13 +378,18 @@ export class CreateComponent implements OnInit {
       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
       document.getElementById('scheme30').style.opacity = '1';
       this.scheme = 30;
-      this.frames.reverse();
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
     }, 500);
     return this.multiple;
+  }
+  createFramesArray(array, array2) {
+    this.frames = [];
+    for ( let i = 0; i < array.length; i++ ) {
+      this.frames.push(array[i]);
+    }
   }
   highlightBcg(imgSrc) {
     this.lastValue = imgSrc;
@@ -399,14 +410,12 @@ export class CreateComponent implements OnInit {
     document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
     this.lastValueFrame = 0;
   }
   downgradeFrame() {
     console.log('down' + this.lastValueFrame);
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.7,0.7)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
   takeBcg(imgSrc) {
@@ -420,39 +429,43 @@ export class CreateComponent implements OnInit {
     document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
     this.base64Tmp = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
-    this.imgSrcFix = this.bcgTemp[imgSrc];
+    this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
     this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
-    switch ( imgSrc ) {
-      case imgSrc:
-        console.log('number' + imgSrc);
-        console.log('Array' + this.coordinatesTemplate[imgSrc]);
-        this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
-        this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
-        this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
-        this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
-        this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
-        this.bottom = this.coordinatesTemplate[imgSrc][3];
-        break;
-      default:
-        this.paddingTop = 10;
-        this.paddingTopForWho = 20;
-        this.paddingTopForWhat = 30;
-        this.marginLeft[3] = 5;
-        this.marginRight[3] = 5;
-        this.bottom = 0;
-    }
+    /*try {
+      switch ( imgSrc ) {
+        case imgSrc:
+          console.log('number' + imgSrc);
+          console.log('Array' + this.coordinatesTemplate[imgSrc]);
+          this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
+          this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
+          this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
+          this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
+          this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
+          this.bottom = this.coordinatesTemplate[imgSrc][3];
+          break;
+        default:
+          this.paddingTop = 10;
+          this.paddingTopForWho = 20;
+          this.paddingTopForWhat = 30;
+          this.marginLeft[3] = 5;
+          this.marginRight[3] = 5;
+          this.bottom = 0;
+      }
+    } catch (e) {
+      console.log('no right coordintaes');
+    }*/
   }
   takeFrame(imgSrc) {
     this.frmBtnDisable = false;
     document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
+    /*document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';*/
     this.lastValueFrame = imgSrc;
     document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    /*document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';*/
     this.base64TmpFrame = imgSrc;
     this.imgSrc = '' + (imgSrc );
     this.imgSrcFrame = this.frames[imgSrc];
@@ -699,10 +712,11 @@ export class CreateComponent implements OnInit {
         this.downgradeBcg(this.lastValue);
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
-        this.imgSrcFix = template.img;
+        const element = template.img;
+        this.imgSrcFix = template.img.replace('png', 'jpg' );
         this.bcgBtnDisable = false;
         for ( let i = 0; i < this.bcgTemp.length; i++ ) {
-          if (this.imgSrcFix === this.bcgTemp[i]) {
+          if (element === this.bcgTemp[i] + '.png') {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
             const tmp = this.bcgTemp[i];
@@ -773,6 +787,21 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
+    this.bcgTemp = [];
+    this.frame2 = [];
+    this.frame1 = [];
+    for ( let i = 1; i < 34; i++ ) {
+      this.bcgTemp.push('../../assets/img/bcg/' + i );
+    }
+    for ( let i = 1; i < 37; i++ ) {
+      this.frame1.push('../../assets/img/frame/' + i + '.png');
+    }
+    for ( let i = 37; i < 61; i++ ) {
+      this.frame2.push('../../assets/img/frame2/' + i + '.png');
+    }
+    this.createFramesArray(this.frame1, this.frame2);
+    this.downgradeFrame();
+    this.downgradeBcg(this.lastValue);
     this.txtAlign = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
@@ -797,7 +826,12 @@ export class CreateComponent implements OnInit {
     this.letterSpacingForWho = 0;
     this.bcgColor = '#ffffff';
     this.landscape = '';
-    this.landscapeOff(2);
+    this.landscape = 'none';
+    document.getElementById('imgO2').style.filter = 'grayscale(0%)';
+    document.getElementById('imgO1').style.filter = 'grayscale(100%)';
+    document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
+    document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
+    this.createFramesArray(this.frame1, this.frame2);
     this.setScheme(30);
     this.paddingTopFooter = 12;
     this.textAlign = ['center', 'center', 'center', 'center', 'center'];
@@ -976,8 +1010,14 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(100%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
-      this.frames.reverse();
+      this.createFramesArray(this.frame1, this.frame2);
+      this.arrayScrollFrame = [1, 2, 3];
+      this.resetSettings();
     } else {
+      this.arrayScrollFrame = [1, 2, 3];
+      this.resetSettings();
+      this.downgradeFrame();
+      this.downgradeBcg(this.lastValue);
       this.landscape = 'inline-block';
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
@@ -985,7 +1025,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO1').style.filter = 'grayscale(0%)';
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
       document.getElementById('imgO1').style.transform = 'scale(1, 1)';
-      this.frames.reverse();
+      this.createFramesArray(this.frame2, this.frame1);
     }
   }
   setScheme(n) {
@@ -1139,7 +1179,7 @@ export class CreateComponent implements OnInit {
       + this.paddingTopForWho + '", "'
       + this.paddingTopForWhat + '" ], '
       + '"img" : "'
-      +  this.imgSrcFix + '", '
+      +  this.imgSrcFix.replace('jpg', 'png' ) + '", '
       + '"bcgColor" : "'
       + this.bcgColor + '", '
       + '"landscape" : "'
@@ -1439,7 +1479,7 @@ export class CreateComponent implements OnInit {
   setTxtAlign(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
-  /*    this.txtLeft[this.currentTxt] = 0;*/
+      /*    this.txtLeft[this.currentTxt] = 0;*/
       this.setWhiteColor('alignCenter5');
       this.setBlueColor('alignLeft5');
       this.setWhiteColor('alignRight5');
@@ -1448,7 +1488,7 @@ export class CreateComponent implements OnInit {
       console.log(this.txtAlign[this.currentTxt]);
     } else if (value === 'right') {
       this.txtAlign[this.currentTxt] = 'right';
-     /* this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();*/
+      /* this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt();*/
       this.setWhiteColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setBlueColor('alignRight5');
@@ -1457,7 +1497,7 @@ export class CreateComponent implements OnInit {
       console.log(this.txtAlign[this.currentTxt]);
     } else {
       this.txtAlign[this.currentTxt] = 'center';
-/*      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;*/
+      /*      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;*/
       this.setBlueColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setWhiteColor('alignRight5');
@@ -1609,36 +1649,100 @@ export class CreateComponent implements OnInit {
       this.checkWidth(0);
     }
   }
+  setProportion() {
+    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+    let prop =  img.naturalWidth;
+    prop = prop / img.naturalHeight;
+    let multipleHeight;
+    let multipleWidth;
+    if ( (this.landscape === 'inline-block') ) {
+      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+    } else {
+      multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    }
+    const propPdfFor = multipleWidth / multipleHeight;
+    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
+  }
   setImg(n, name) {
-    this.add();
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
     if (name === 'Animal') {
       this.userImgBase64.push(this.imagesAnimal[n]);
     } else if (name === 'Sport') {
-      this.userImgBase64.push(this.imagesSport[n]);
+      this._dataService.getSport2Img(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Emocje') {
-      this.userImgBase64.push(this.imagesEmocje[n]);
+      this._dataService.getSportImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Geografia') {
-      this.userImgBase64.push(this.imagesGeografia[n]);
+      this._dataService.getGeografiaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Literatura') {
-      this.userImgBase64.push(this.imagesLiteratura[n]);
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Matematyka') {
-      this.userImgBase64.push(this.imagesMatematyka[n]);
+      /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
+      this._dataService.getMatematykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Muzyka') {
-      this.userImgBase64.push(this.imagesMuzyka[n]);
+      this._dataService.getMuzykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Rosliny') {
-      this.userImgBase64.push(this.imagesRosliny[n]);
+      this._dataService.getRoslinyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Polska') {
-      this.userImgBase64.push(this.imagesPolska[n]);
+      this._dataService.getPolskaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Swieta') {
-      this.userImgBase64.push(this.imagesSwieta[n]);
+      this._dataService.getSwietaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Szachy') {
-      this.userImgBase64.push(this.imagesSzachy[n]);
+      this._dataService.getSzachyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Zwierzeta') {
-      this.userImgBase64.push(this.imagesZwierzeta[n]);
+      this._dataService.getZwierzetaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Literatura') {
-      this.userImgBase64.push(this.imagesLiteratura[n]);
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     }
   }
   rotateBcgX() {

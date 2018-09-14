@@ -576,7 +576,7 @@
         <div class="scroll fadeInTop" id="scrollable">
           <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg boxReal33 fadeInTop" id="bcg{{i + 1}}"
                (click)="takeBcg(i)">
-            <img id="img{{i}}" src="{{tmp}}"/>
+            <img id="img{{i}}" src="{{tmp}}.png"/>
           </div>
         </div>
         <div class="directBtn" style="padding-right: 1vh">
@@ -1441,7 +1441,7 @@
                 <button mat-button color="accent"
                         (click)="shadowOnOff(0, 1)"
                         style="margin-bottom: 10px"
-                        >
+                >
                   <i class="material-icons">
                     highlight
                   </i>
