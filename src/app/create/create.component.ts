@@ -189,9 +189,9 @@ export class CreateComponent implements OnInit {
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
   imgSrcFrame = '../../assets/img/0.png';
-  paddingTop = 0;
-  paddingTopForWho = 10;
-  paddingTopForWhat = 20;
+  paddingTop = 10;
+  paddingTopForWho = 20;
+  paddingTopForWhat = 30;
   marginLeft = [1, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
   paddingTopFooter = 12;
@@ -416,11 +416,15 @@ export class CreateComponent implements OnInit {
     }
   }
   highlightBcg(imgSrc) {
-    this.lastValue = imgSrc;
-    console.log('up' + this.lastValue);
-    document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-    document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    try {
+      this.lastValue = imgSrc;
+      console.log('up' + this.lastValue);
+      document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    } catch (e) {
+      console.log('higlightbcg');
+    }
   }
   downgradeBcg(imgSrc) {
     try {
@@ -434,11 +438,15 @@ export class CreateComponent implements OnInit {
     }
   }
   highlightFrame(imgSrc) {
-    this.lastValueFrame = imgSrc;
-    console.log('light: ' + imgSrc);
-    document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(0%)';
+    try {
+      this.lastValueFrame = imgSrc;
+      console.log('light: ' + imgSrc);
+      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(0%)';
+    } catch (e) {
+      console.log('highligntframe');
+    }
   }
   downgradeFrame() {
     try {
@@ -452,61 +460,66 @@ export class CreateComponent implements OnInit {
     }
   }
   takeBcg(imgSrc) {
-    this.bcgBtnDisable = false;
-    document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('img' + (this.lastValue ) ).style.border = '#959895 1px solid';
-    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
-    this.lastValue = imgSrc;
-    document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-    document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
-    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
-    this.base64Tmp = imgSrc;
-    this.imgSrc = '' + (imgSrc + 1);
-    this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
-    this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
-    /*try {
-      switch ( imgSrc ) {
-        case imgSrc:
-          console.log('number' + imgSrc);
-          console.log('Array' + this.coordinatesTemplate[imgSrc]);
-          this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
-          this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
-          this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
-          this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
-          this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
-          this.bottom = this.coordinatesTemplate[imgSrc][3];
-          break;
-        default:
-          this.paddingTop = 10;
-          this.paddingTopForWho = 20;
-          this.paddingTopForWhat = 30;
-          this.marginLeft[3] = 5;
-          this.marginRight[3] = 5;
-          this.bottom = 0;
-      }
+    try {
+      this.bcgBtnDisable = false;
+      document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
+      document.getElementById('img' + (this.lastValue ) ).style.border = '#959895 1px solid';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+      this.lastValue = imgSrc;
+      document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
+      this.base64Tmp = imgSrc;
+      this.imgSrc = '' + (imgSrc + 1);
+      this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
+      this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
+      /*try {
+        switch ( imgSrc ) {
+          case imgSrc:
+            console.log('number' + imgSrc);
+            console.log('Array' + this.coordinatesTemplate[imgSrc]);
+            this.paddingTop = Number(this.coordinatesTemplate[imgSrc][0]);
+            this.paddingTopForWho = Number(this.coordinatesTemplate[imgSrc][0]) + 10;
+            this.paddingTopForWhat = Number(this.coordinatesTemplate[imgSrc][0]) + 20;
+            this.marginLeft[3] = this.coordinatesTemplate[imgSrc][1];
+            this.marginRight[3] = this.coordinatesTemplate[imgSrc][2];
+            this.bottom = this.coordinatesTemplate[imgSrc][3];
+            break;
+          default:
+            this.paddingTop = 10;
+            this.paddingTopForWho = 20;
+            this.paddingTopForWhat = 30;
+            this.marginLeft[3] = 5;
+            this.marginRight[3] = 5;
+            this.bottom = 0;
+        }
+      } catch (e) {
+        console.log('no right coordintaes');
+      }*/
     } catch (e) {
-      console.log('no right coordintaes');
-    }*/
+      console.log('takebcg');
+    }
+
   }
   takeFrame(imgSrc) {
-    this.frmBtnDisable = false;
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
-    /*document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';*/
-    this.lastValueFrame = imgSrc;
-    document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
-    /*document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';*/
-    this.base64TmpFrame = imgSrc;
-    this.imgSrc = '' + (imgSrc );
-    this.imgSrcFrame = this.frames[imgSrc];
-   /* this.imgMAClogoFrame = '../../assets/img/0.png';*/
+    try {
+      this.frmBtnDisable = false;
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+
+      this.lastValueFrame = imgSrc;
+      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
+      this.base64TmpFrame = imgSrc;
+      this.imgSrc = '' + (imgSrc );
+      this.imgSrcFrame = this.frames[imgSrc];
+    } catch (e) {
+      console.log('takeframe');
+    }
   }
   generateHQualityPdf() {
     document.getElementById('spinner').style.display = 'block';
@@ -847,7 +860,7 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
-    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.png';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
     this.bcgColor = '#ffffff';
@@ -1101,17 +1114,17 @@ export class CreateComponent implements OnInit {
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
-      document.getElementById('rightLandscape').style.width = n + '%';
-      document.getElementById('leftLandscape').style.width = n + '%';
+      document.getElementById('rightLandscape').style.width = n + 2 + '%';
+      document.getElementById('leftLandscape').style.width = n + 2 + '%';
       document.getElementById('centerLandscapeFix').style.display = 'inline-block';
-      document.getElementById('rightLandscapeFix').style.width = n + '%';
-      document.getElementById('leftLandscapeFix').style.width = n + '%';
+      document.getElementById('rightLandscapeFix').style.width = n + 2 + '%';
+      document.getElementById('leftLandscapeFix').style.width = n + 2 + '%';
       document.getElementById('centerFix').style.display = 'inline-block';
-      document.getElementById('rightFix').style.width = n + '%';
-      document.getElementById('leftFix').style.width = n + '%';
+      document.getElementById('rightFix').style.width = n + 3 + '%';
+      document.getElementById('leftFix').style.width = n + 3 + '%';
       document.getElementById('center').style.display = 'inline-block';
-      document.getElementById('right').style.width = n + '%';
-      document.getElementById('left').style.width = n + '%';
+      document.getElementById('right').style.width = n + 3 + '%';
+      document.getElementById('left').style.width = n + 3 + '%';
       document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       document.getElementById('sign3').style.display = 'inline-block';
