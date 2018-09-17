@@ -424,6 +424,7 @@ $border2pxSolid: 2px solid
   font-size: 3vh
 
 .dataContainer
+  padding-top: 0.5vh
   min-width: 100%
   width: 100%
   display: block
@@ -473,10 +474,12 @@ $border2pxSolid: 2px solid
   img:hover
     transform: scale(0.90,0.90) !important
     box-shadow: 5px 5px rgba(0, 0, 15, 0.2) !important
+    filter: grayscale(10%) !important
 
 .frm
   img:hover
     transform: scale(0.90,0.90) !important
+    filter: grayscale(10%) !important
 //box-shadow: 5px 5px rgba(0, 0, 15, 0.2) !important
 
 img
@@ -499,6 +502,7 @@ img
 
 .bcg
   img
+    filter: grayscale(60%)
     width: 70%
     transition: 0.4s
     transform: scale(0.8,0.8)
@@ -506,6 +510,7 @@ img
 
 .frm
   img
+    filter: grayscale(60%)
     width: 70%
     transition: 0.4s
     transform: scale(0.7,0.7)
@@ -547,11 +552,11 @@ img
 #bcgContainter2,
 #frameContainter
   text-align: center
-  margin-top: 3vh
+  margin-top: 0.5vh
 
 #bcgContainter,
 #frameContainter
-  margin-top: 3vh
+  margin-top: 0.5vh
   min-height: 35vh
   padding-bottom: 5%
 

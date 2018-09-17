@@ -38,6 +38,7 @@
     disabled
     style="width: 10%; margin-left: 45%">
   </mat-spinner>
+  <p>Tworzenie dyplomu może chwilę potrwać!</p>
 </div>
 <div
   id="viewLandscapeFix"
@@ -103,10 +104,11 @@
         style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"
       />
       <img
+        id="imgFrameLandscapeFix"
         src="{{imgMAClogoFrame}}"
-        style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
-        [style.width]="10*multiple + 'vh'"
-        [style.height]="10*multiple + 'vh'"/>
+        style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 45%"
+        [style.width]="imageFrameWidthLandscapeFix + 'px'"
+        [style.height]="imageFrameWidthLandscapeFix + 'px'"/>
       <div style="z-index: 8;">
         <p id="pdfTxtLandscapeFix" style="z-index: 8; position: absolute; width: 100%" [style.top]="paddingTop + '%'"
            [style.text-align]="textAlign[0]" [style.padding-left]="marginLeft[0] + '%'"
@@ -248,10 +250,11 @@
       </div>
       <img src="{{imgSrcFrame}}" [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img src="{{imgMAClogoFrame}}"
-           style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 0px"
-           [style.width]="10*multiple + 'vh'"
-           [style.height]="10*multiple + 'vh'"/>
+      <img id="imgFrameFix"
+           src="{{imgMAClogoFrame}}"
+           style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 43%"
+           [style.width]="imageFrameWidthFix + 'px'"
+           [style.height]="imageFrameWidthFix + 'px'"/>
       <div style="z-index: 8;">
         <p id="pdfTxtFix" style="z-index: 8; position: absolute; width: 100%" [style.top]="paddingTop + '%'"
            [style.text-align]="textAlign[0]">
@@ -448,7 +451,7 @@
     <mat-step stepControl="false">
 
       <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
-      <div class="orientationBox" [style.display]="bcgDisplay[0]" style="margin-top: 3vh">
+      <div class="orientationBox" [style.display]="bcgDisplay[0]" style="margin-top: 0.5vh">
         <div class="orientationContent" style="height: 31.6vh; max-height: 40vh;">
           <div class="textBox">
             <h3 class="fadeInTop">
@@ -2056,7 +2059,7 @@
         Ostatni krok
       </ng-template>
       <div [style.display]="bcgDisplay[3]"
-           style="text-align: center; padding-top: 3vh">
+           style="text-align: center; padding-top: 0.5vh">
         <div class="textBox">
           <h3 class="fadeInTop">
             Dodaj obrazek ze zbioru
@@ -2348,6 +2351,7 @@
             [value]="imgWidth[currImg]"
             (input)="imgWidth[currImg] = $event.target.value"
             class="slider50 fadeInLeft"
+            step="1"
             style="width: 80%; margin-left: 0%"
             (change)="imageResizeWithProportionsWidth()"
           >
@@ -2372,6 +2376,7 @@
           <input
             type="range"
             min="0"
+            step="1"
             max="{{100-imgTop[currImg]}}"
             [value]="imgHeight[currImg]"
             [disabled]="boolDisableUserImgFields"
@@ -2390,6 +2395,7 @@
               Górny margines obrazka</b></p>
           <input type="range"
                  min="0"
+                 step="1"
                  max="{{100-imgHeight[currImg]}}"
                  [value]="imgTop[currImg]"
                  [disabled]="boolDisableUserImgFields"
@@ -2403,6 +2409,7 @@
             <b class="fadeInRight">Lewy margines obrazka</b></p>
           <input type="range"
                  min="0"
+                 step="1"
                  max="{{100-imgWidth[currImg]}}"
                  [value]="imgLeft[currImg]"
                  [disabled]="boolDisableUserImgFields"
@@ -2521,8 +2528,11 @@
       <img src="{{imgSrcFrame}}"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img src="{{imgMAClogoFrame}}"
-           style="background-size: cover; position: absolute; z-index: 1; width: 10vh; height: 10vh; bottom: 0px; right: 0px"/>
+      <img  id="imgFrame"
+            src="{{imgMAClogoFrame}}"
+            [style.width]="imageFrameWidth + 'px'"
+            [style.height]="imageFrameWidth + 'px'"
+            style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 43%"/>
       <div
         style="z-index: 8;">
         <p id="pdfTxt"
@@ -2680,9 +2690,12 @@
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
       />
-      <img src="{{imgMAClogoFrame}}"
+      <img id="imgFrameLandscape"
+           src="{{imgMAClogoFrame}}"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
-           style="background-size: cover; position: absolute; z-index: 1; width: 8vh; height: 8vh; bottom: 0px; right: 0px"/>
+           [style.width]="imageFrameWidthLandscape + 'px'"
+           [style.height]="imageFrameWidthLandscape + 'px'"
+           style="background-size: cover; position: absolute; z-index: 1; bottom: 0px; right: 45%" />
       <div style="z-index: 8;">
         <p id="pdfTxtLandscape" style="z-index: 8; position: absolute; width: 100%; padding-left: 1vh"
            [style.top]="paddingTop + '%'"
@@ -2779,7 +2792,8 @@
            [style.text-align]="textAlign[3]"
            [style.bottom]="bottom + 'px'"
            [style.padding-left]="marginLeft[3] + '%'"
-           [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;"
+           [style.padding-right]="marginRight[3] + '%'"
+           style="min-width:100%; z-index: 7"
            [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscape"
            [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]"

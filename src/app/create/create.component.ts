@@ -63,8 +63,9 @@ export class CreateComponent implements OnInit {
   swietaHeight = 11;
   szachyHeight = 11;
   zwierzetaHeight = 11;
-
+  footer = 'Kielce, dnia ';
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
+    this.setDate();
     for ( let i = 1; i < 50; i++ ) {
       this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.jpg');
     }
@@ -123,7 +124,7 @@ export class CreateComponent implements OnInit {
           this.coordinatesTemplate.push( tmp[0].templates[i] );
         }
       });
-    for ( let i = 1; i < 34; i++ ) {
+    for ( let i = 1; i < 31; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
     for ( let i = 1; i < 37; i++ ) {
@@ -188,7 +189,6 @@ export class CreateComponent implements OnInit {
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
   imgSrcFrame = '../../assets/img/0.png';
-  footer = 'Kielce, dnia ';
   paddingTop = 0;
   paddingTopForWho = 10;
   paddingTopForWhat = 20;
@@ -244,6 +244,10 @@ export class CreateComponent implements OnInit {
   btnDirectRightDisabled = false;
   checkboxSizeAttach = true;
   checkboxSizeAttachValue = 0;
+  imageFrameWidth = 100;
+  imageFrameWidthLandscape = 100;
+  imageFrameWidthFix = 100;
+  imageFrameWidthLandscapeFix = 100;
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -315,6 +319,19 @@ export class CreateComponent implements OnInit {
       this.checkWidth(2);
     }, 300);
   }
+  setDate() {
+    const date = new Date();
+    let day = '' + date.getDate();
+    const month = date.getMonth() + 1;
+    let monthStr = '';
+    if ( date.getDate() < 10) {
+      day = '0' + day;
+    }
+    if ( (date.getMonth() )  < 10) {
+      monthStr = '0' + month;
+    }
+    this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
+  }
   /*checkArray() {
     console.log('array');
     console.log(this.sport);
@@ -361,17 +378,6 @@ export class CreateComponent implements OnInit {
     console.log('ciasteczka: ' + document.cookie);
   }
   setOnInitData() {
-    const date = new Date();
-    let day = '' + date.getDate();
-    const month = date.getMonth() + 1;
-    let monthStr = '';
-    if ( date.getDate() < 10) {
-      day = '0' + day;
-    }
-    if ( (date.getMonth() )  < 10) {
-      monthStr = '0' + month;
-    }
-    this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
       /*document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';*/
@@ -382,7 +388,25 @@ export class CreateComponent implements OnInit {
       const width = document.getElementById('toPdf100').offsetWidth;
       console.log('wartosć: ' + ( 2480 / width) );
       this.multiple = (2480 / width );
-    }, 500);
+      this.imageFrameWidth = document.getElementById('pdfFor').offsetWidth * 0.14;
+      this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
+      this.imageFrameWidthFix = document.getElementById('pdfForFix').offsetWidth * 0.14;
+      this.imageFrameWidthLandscapeFix = document.getElementById('pdfForLandscapeFix').offsetWidth * 0.1;
+      /*document.getElementById('scheme30').style.transform = 'scale(1,1)';
+      let widthLandscape = document.getElementById('toPdf100Landscape').offsetWidth;
+      let widthFrameLandscape = document.getElementById('imgFrameLandscape').offsetWidth;
+      document.getElementById('imgFrameLandscape').style.right = (widthLandscape - widthFrameLandscape) / 2 + 'px';
+      let widthToPDF = document.getElementById('toPdf100').offsetWidth;
+      let widthFrameToPDF = document.getElementById('imgFrame').offsetWidth;
+      document.getElementById('imgFrame').style.right = (widthToPDF - (widthFrameToPDF)) / 2 + 'px';
+      widthToPDF = document.getElementById('toPdf100Fix').offsetWidth;
+      widthFrameToPDF = document.getElementById('imgFrameFix').offsetWidth;
+      document.getElementById('imgFrameFix').style.right = (widthToPDF - widthFrameToPDF) / 2 + 'px';
+      widthLandscape = document.getElementById('toPdf100LandscapeFix').offsetWidth;
+      widthFrameLandscape = document.getElementById('imgFrameLandscapeFix').offsetWidth;
+      document.getElementById('imgFrameLandscapeFix').style.right = (widthLandscape - widthFrameLandscape) / 2 + 'px';*/
+
+    }, 150);
     return this.multiple;
   }
   createFramesArray(array, array2) {
@@ -397,36 +421,47 @@ export class CreateComponent implements OnInit {
     document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
     document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
-    this.lastValue = 0;
   }
   downgradeBcg(imgSrc) {
-    console.log('down' + this.lastValue);
-    document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('img' + (imgSrc ) ).style.border = 'white 1px solid';
+    try {
+      console.log('down' + this.lastValue);
+      document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
+      document.getElementById('img' + (imgSrc ) ).style.border = 'white 1px solid';
+      document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(60%)';
+    } catch (e) {
+      console.log('no bcg');
+    }
   }
   highlightFrame(imgSrc) {
     this.lastValueFrame = imgSrc;
+    console.log('light: ' + imgSrc);
     document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-    document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
-    this.lastValueFrame = 0;
+    document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(0%)';
   }
   downgradeFrame() {
-    console.log('down' + this.lastValueFrame);
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.7,0.7)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    try {
+      console.log('down' + this.lastValueFrame);
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+    } catch (e) {
+      console.log('no frm');
+    }
   }
   takeBcg(imgSrc) {
     this.bcgBtnDisable = false;
     document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = '#959895 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
     this.lastValue = imgSrc;
     document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
     document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
     this.base64Tmp = imgSrc;
     this.imgSrc = '' + (imgSrc + 1);
     this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
@@ -459,17 +494,19 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = false;
     document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
+    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
     /*document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';*/
     this.lastValueFrame = imgSrc;
     document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
     document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+    document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
     /*document.getElementById('frm' + (imgSrc ) ).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
     document.getElementById('frm' + (imgSrc )).style.border = '#3aaaff 3px solid';*/
     this.base64TmpFrame = imgSrc;
     this.imgSrc = '' + (imgSrc );
     this.imgSrcFrame = this.frames[imgSrc];
-    this.imgMAClogoFrame = '../../assets/img/0.png';
+   /* this.imgMAClogoFrame = '../../assets/img/0.png';*/
   }
   generateHQualityPdf() {
     document.getElementById('spinner').style.display = 'block';
@@ -694,17 +731,21 @@ export class CreateComponent implements OnInit {
       this.imgSrcFrame = template.frame;
       if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
         this.downgradeFrame();
-        this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+       /* this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';*/
       } else {
-        this.imgMAClogoFrame = '../../assets/img/0.png';
+        /*this.imgMAClogoFrame = '../../assets/img/0.png';*/
         this.frmBtnDisable = false;
         for ( let i = 0; i < this.frames.length; i++ ) {
           if (this.imgSrcFrame === this.frames[i]) {
             this.downgradeFrame();
-            this.highlightFrame(i);
-            const tmp = this.frames[i];
-            this.frames[i] = this.frames[0];
-            this.frames[0] = tmp;
+            console.log('up: ' + i);
+            setTimeout( () => {
+              this.highlightFrame(i);
+              for ( let h = 0; h < Math.floor(i / 3); h++ ) {
+                console.log('right: ' + h);
+                this.moveRightFrame();
+              }
+            }, 500);
           }
         }
       }
@@ -719,9 +760,9 @@ export class CreateComponent implements OnInit {
           if (element === this.bcgTemp[i] + '.png') {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
-            const tmp = this.bcgTemp[i];
-            this.bcgTemp[i] = this.bcgTemp[0];
-            this.bcgTemp[0] = tmp;
+            for ( let h = 0; h < Math.floor(i / 3); h++ ) {
+              this.moveRight();
+            }
           }
         }
       }
@@ -787,21 +828,6 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
-    this.bcgTemp = [];
-    this.frame2 = [];
-    this.frame1 = [];
-    for ( let i = 1; i < 34; i++ ) {
-      this.bcgTemp.push('../../assets/img/bcg/' + i );
-    }
-    for ( let i = 1; i < 37; i++ ) {
-      this.frame1.push('../../assets/img/frame/' + i + '.png');
-    }
-    for ( let i = 37; i < 61; i++ ) {
-      this.frame2.push('../../assets/img/frame2/' + i + '.png');
-    }
-    this.createFramesArray(this.frame1, this.frame2);
-    this.downgradeFrame();
-    this.downgradeBcg(this.lastValue);
     this.txtAlign = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
@@ -831,7 +857,6 @@ export class CreateComponent implements OnInit {
     document.getElementById('imgO1').style.filter = 'grayscale(100%)';
     document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
     document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
-    this.createFramesArray(this.frame1, this.frame2);
     this.setScheme(30);
     this.paddingTopFooter = 12;
     this.textAlign = ['center', 'center', 'center', 'center', 'center'];
@@ -862,6 +887,7 @@ export class CreateComponent implements OnInit {
     this.sign2 = 'Wychowawca\n.......................';
     this.sign3 = 'Katecheta\n  ..................';
     this.footer = 'Kielce, dnia ';
+    this.setDate();
     this.userImg = [];
     this.rotate = [];
     this.imgWidth = [];
@@ -1003,6 +1029,27 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
+  arrayScrollReset() {
+    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+    const btnfrm =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2frm =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
+    btn.disabled = false;
+    btn2.disabled = true;
+    btnfrm.disabled = false;
+    btn2frm.disabled = true;
+    for ( let i = 0; i < 3; i++) {
+      document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
+      document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
+      console.log('to ma znikać: ' + this.arrayScrollFrame[i] );
+    }
+    this.arrayScroll = [1, 2, 3];
+    this.arrayScrollFrame = [1, 2, 3];
+    for ( let i = 0; i < 3; i++) {
+      document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'inline-block';
+      document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'inline-block';
+    }
+  }
   landscapeOff(n) {
     if (n === 2) {
       this.landscape = 'none';
@@ -1011,10 +1058,10 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
       this.createFramesArray(this.frame1, this.frame2);
-      this.arrayScrollFrame = [1, 2, 3];
+      this.arrayScrollReset();
       this.resetSettings();
     } else {
-      this.arrayScrollFrame = [1, 2, 3];
+      this.arrayScrollReset();
       this.resetSettings();
       this.downgradeFrame();
       this.downgradeBcg(this.lastValue);
@@ -1243,18 +1290,37 @@ export class CreateComponent implements OnInit {
       + '" }';
     return txt;
   }
+  resetBcgFrameArray() {
+    this.bcgTemp = [];
+    this.frame2 = [];
+    this.frame1 = [];
+    for ( let i = 1; i < 31; i++ ) {
+      this.bcgTemp.push('../../assets/img/bcg/' + i );
+    }
+    for ( let i = 1; i < 37; i++ ) {
+      this.frame1.push('../../assets/img/frame/' + i + '.png');
+    }
+    for ( let i = 37; i < 61; i++ ) {
+      this.frame2.push('../../assets/img/frame2/' + i + '.png');
+    }
+    this.createFramesArray(this.frame1, this.frame2);
+  }
   onSelectFile(event) {
     try {
       const reader = new FileReader();
       reader.readAsText(event.target.files[0]);
       let txt: any;
       document.getElementById('spinner').style.display = 'block';
-      reader.onload = function () {
-        txt = reader.result;
+      reader.onload = ()  => {
+        this.downgradeFrame();
+        this.downgradeBcg(this.lastValue);
+        this.resetBcgFrameArray();
+        setTimeout( () => {
+          this.arrayScrollReset();
+          txt = reader.result;
+          this.jsonToArray(txt);
+        }, 30);
       };
-      setTimeout( () => {
-        this.jsonToArray(txt);
-      }, 500);
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
@@ -1303,7 +1369,7 @@ export class CreateComponent implements OnInit {
     this.frmRotateY = 1;
     this.frmBtnDisable = true;
     this.imgSrcFrame = '../../assets/img/0.png';
-    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+    /*this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';*/
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
@@ -1944,6 +2010,9 @@ export class CreateComponent implements OnInit {
       } else {
         this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
       }
+      if ((Number(this.imgHeight[this.currImg]) + Number(this.imgTop[this.currImg]))  > 100 ) {
+        this.imgTop[this.currImg] = 0;
+      }
     }
   }
   imageResizeWithProportionsHeight() {
@@ -1962,13 +2031,16 @@ export class CreateComponent implements OnInit {
         multipleWidth = document.getElementById('pdfFor').offsetWidth;
       }
       const propPdfFor = multipleWidth / multipleHeight;
-      if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100 ) {
+      if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100) {
         this.imgWidth[this.currImg] = 100;
         prop =  img.naturalHeight;
         prop = prop / img.naturalWidth;
         this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
       } else {
         this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
+      }
+      if ((Number(this.imgWidth[this.currImg]) + Number(this.imgLeft[this.currImg]))  > 100 ) {
+        this.imgLeft[this.currImg] = 0;
       }
     }
   }
