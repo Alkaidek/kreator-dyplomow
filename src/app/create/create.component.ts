@@ -860,7 +860,7 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
-    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.png';
+    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
     this.bcgColor = '#ffffff';
