@@ -431,7 +431,7 @@ export class CreateComponent implements OnInit {
       console.log('down' + this.lastValue);
       document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
       document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
-      document.getElementById('img' + (imgSrc ) ).style.border = 'white 1px solid';
+      document.getElementById('img' + (imgSrc ) ).style.border = '1px solid #959895';
       document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(60%)';
     } catch (e) {
       console.log('no bcg');
@@ -1375,7 +1375,7 @@ export class CreateComponent implements OnInit {
     this.bcgColor = '#ffffff';
     document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
     document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('img' + (this.lastValue ) ).style.border = 'white 1px solid';
+    document.getElementById('img' + (this.lastValue ) ).style.border = '1px solid #959895';
   }
   resetFrame() {
     this.frmRotateX = 1;
