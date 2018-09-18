@@ -111,13 +111,6 @@ export class CreateComponent implements OnInit {
       this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.jpg');
     }
     this.setHeightLiteratura(this.imagesLiteratura);
-    /*this._dataService.getSportImg()
-      .subscribe(sport => {
-       for (let i = 0; i < sport[0].sport.length; i++) {
-         this.imagesSport.push('' + sport[0].sport[i] );
-         this.setHeightSport(this.imagesSport);
-       }
-      });*/
     this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].templates.length; i++) {
@@ -134,30 +127,12 @@ export class CreateComponent implements OnInit {
       this.frame2.push('../../assets/img/frame2/' + i + '.png');
     }
     this.createFramesArray(this.frame1, this.frame2);
-    /*this._dataService.getBase64Img()
-      .subscribe(bcgTemp => {
-      for (let i = 0; i <  bcgTemp[0].bcg.length; i++) {
-        this.bcgTemp.push( bcgTemp[0].bcg[i] );
-      }
-    });*/
-    /*this._dataService.getBase64Img()
-      .subscribe(bcgTemp => {
-        for (let i = 0; i <  bcgTemp[0].frame.length; i++) {
-          this.frames.push( bcgTemp[0].frame[i]);
-        }
-      });*/
     this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].fonts.length; i++) {
           this.arraySelectFontFamili.push( tmp[0].fonts[i] );
         }
       });
-    /*db.list('/images/animal').valueChanges().subscribe(animal => {
-      for (let i = 0; i < animal.length; i++) {
-        this.imagesAnimal.push('' + animal[i] );
-        this.setHeightAnimal(this.imagesAnimal);
-      }
-    });*/
   }
   MACblue = '#25408f';
   whiteColor = 'white';
@@ -332,11 +307,6 @@ export class CreateComponent implements OnInit {
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
   }
-  /*checkArray() {
-    console.log('array');
-    console.log(this.sport);
-    console.log(this.sport[0].sport);
-  }*/
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);
   }
@@ -392,20 +362,6 @@ export class CreateComponent implements OnInit {
       this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
       this.imageFrameWidthFix = document.getElementById('pdfForFix').offsetWidth * 0.14;
       this.imageFrameWidthLandscapeFix = document.getElementById('pdfForLandscapeFix').offsetWidth * 0.1;
-      /*document.getElementById('scheme30').style.transform = 'scale(1,1)';
-      let widthLandscape = document.getElementById('toPdf100Landscape').offsetWidth;
-      let widthFrameLandscape = document.getElementById('imgFrameLandscape').offsetWidth;
-      document.getElementById('imgFrameLandscape').style.right = (widthLandscape - widthFrameLandscape) / 2 + 'px';
-      let widthToPDF = document.getElementById('toPdf100').offsetWidth;
-      let widthFrameToPDF = document.getElementById('imgFrame').offsetWidth;
-      document.getElementById('imgFrame').style.right = (widthToPDF - (widthFrameToPDF)) / 2 + 'px';
-      widthToPDF = document.getElementById('toPdf100Fix').offsetWidth;
-      widthFrameToPDF = document.getElementById('imgFrameFix').offsetWidth;
-      document.getElementById('imgFrameFix').style.right = (widthToPDF - widthFrameToPDF) / 2 + 'px';
-      widthLandscape = document.getElementById('toPdf100LandscapeFix').offsetWidth;
-      widthFrameLandscape = document.getElementById('imgFrameLandscapeFix').offsetWidth;
-      document.getElementById('imgFrameLandscapeFix').style.right = (widthLandscape - widthFrameLandscape) / 2 + 'px';*/
-
     }, 150);
     return this.multiple;
   }
@@ -590,7 +546,6 @@ export class CreateComponent implements OnInit {
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
-
   setHeightEmocje(array) {
     let divide = array.length / 5;
     if ( divide > Math.round(divide)) {
@@ -793,15 +748,12 @@ export class CreateComponent implements OnInit {
       this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
         template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
       this.title =  template.title.replace('NEWLINE', '\n' );
-      /*this.forWho =  template.forWho.replace('NEWLINE', '\n' );*/
       this.forWho =  template.forWho.split('NEWLINE').join('\n');
       this.forWhat =  template.forWhat.split('NEWLINE').join('\n');
       this.sign1 =  template.sign1.split('NEWLINE').join('\n');
       this.sign2 = template.sign2.split('NEWLINE').join('\n');
       this.sign3 = template.sign3.split('NEWLINE').join('\n');
       this.footer = template.footer.replace('NEWLINE', '\n' );
-
-
       if ( template.userBcgBase64.length > 0) {
         for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);
@@ -1133,8 +1085,6 @@ export class CreateComponent implements OnInit {
       document.getElementById('sign3').style.display = 'inline-block';
       document.getElementById('scheme50').style.filter = 'grayscale(100%)';
       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
-      /*document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';
-      document.getElementById('scheme50').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';*/
       document.getElementById('scheme30').style.opacity = '1';
       document.getElementById('scheme50').style.opacity = '0.5';
       this.scheme = 30;
