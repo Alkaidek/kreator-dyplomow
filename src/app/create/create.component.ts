@@ -475,7 +475,29 @@ export class CreateComponent implements OnInit {
       this.imgSrc = '' + (imgSrc + 1);
       this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
       this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
-      /*try {
+    } catch (e) {
+      console.log('takebcg');
+    }
+
+  }
+  takeFrame(imgSrc) {
+    try {
+      this.frmBtnDisable = false;
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
+      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+
+      this.lastValueFrame = imgSrc;
+      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
+      this.base64TmpFrame = imgSrc;
+      this.imgSrc = '' + (imgSrc );
+      this.imgSrcFrame = this.frames[imgSrc];
+      try {
+        if (this.landscape !== 'none') {
+          imgSrc = imgSrc + 36;
+        }
         switch ( imgSrc ) {
           case imgSrc:
             console.log('number' + imgSrc);
@@ -497,26 +519,7 @@ export class CreateComponent implements OnInit {
         }
       } catch (e) {
         console.log('no right coordintaes');
-      }*/
-    } catch (e) {
-      console.log('takebcg');
-    }
-
-  }
-  takeFrame(imgSrc) {
-    try {
-      this.frmBtnDisable = false;
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
-
-      this.lastValueFrame = imgSrc;
-      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
-      this.base64TmpFrame = imgSrc;
-      this.imgSrc = '' + (imgSrc );
-      this.imgSrcFrame = this.frames[imgSrc];
+      }
     } catch (e) {
       console.log('takeframe');
     }
