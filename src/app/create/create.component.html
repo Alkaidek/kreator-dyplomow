@@ -450,7 +450,7 @@
     <mat-step stepControl="false">
 
       <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
-      <div class="orientationBox" [style.display]="bcgDisplay[0]" style="margin-top: 0.3vh">
+      <div class="orientationBox" [style.display]="bcgDisplay[0]">
         <div class="orientationContent" style="height: 31.6vh; max-height: 40vh;">
           <div class="textBox">
             <h3 class="fadeInTop">
@@ -1822,7 +1822,7 @@
         </div>-->
       </div>
       <div class="dataContainer"
-           style="height: 490px; background-color: white; text-align: center ">
+           style="height: 490px; background-color: white; text-align: center; padding-top: 0vh">
         <div class="box33"
              style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
           <button (click)="addTxt()"
@@ -2057,8 +2057,8 @@
       <ng-template matStepLabel>
         Ostatni krok
       </ng-template>
-      <div [style.display]="bcgDisplay[3]"
-           style="text-align: center; padding-top: 0.3vh">
+      <div [style.display]="bcgDisplay[3]" id="bcgDisplay3"
+           style="text-align: center; ">
         <div class="textBox">
           <h3 class="fadeInTop">
             Dodaj obrazek ze zbioru
