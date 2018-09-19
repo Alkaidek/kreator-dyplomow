@@ -117,7 +117,7 @@ export class CreateComponent implements OnInit {
           this.coordinatesTemplate.push( tmp[0].templates[i] );
         }
       });
-    for ( let i = 1; i < 31; i++ ) {
+    for ( let i = 1; i < 27; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
     for ( let i = 1; i < 37; i++ ) {
@@ -375,9 +375,9 @@ export class CreateComponent implements OnInit {
     try {
       this.lastValue = imgSrc;
       console.log('up' + this.lastValue);
-      document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
       document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-      document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
+      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (this.lastValue) ).style.filter = 'grayscale(0%)';
     } catch (e) {
       console.log('higlightbcg');
     }
@@ -385,10 +385,9 @@ export class CreateComponent implements OnInit {
   downgradeBcg(imgSrc) {
     try {
       console.log('down' + this.lastValue);
-      document.getElementById('img' + (imgSrc) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-      document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.8,0.8)';
-      document.getElementById('img' + (imgSrc ) ).style.border = '1px solid #959895';
-      document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(60%)';
+      document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (imgSrc) ).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (imgSrc ) ).style.filter = 'grayscale(60%)';
     } catch (e) {
       console.log('no bcg');
     }
@@ -418,15 +417,14 @@ export class CreateComponent implements OnInit {
   takeBcg(imgSrc) {
     try {
       this.bcgBtnDisable = false;
+      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.7,0.7)';
       document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.8,0.8)';
-      document.getElementById('img' + (this.lastValue ) ).style.border = '#959895 1px solid';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+      document.getElementById('img' + (this.lastValue  ) ).style.filter = 'grayscale(60%)';
       this.lastValue = imgSrc;
-      document.getElementById('img' + (imgSrc )).style.boxShadow = '5px 5px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.9,0.9)';
       document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-      document.getElementById('img' + (imgSrc )).style.border = '#3aaaff 3px solid';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
+      document.getElementById('img' + (this.lastValue  ) ).style.filter = 'grayscale(0%)';
       this.base64Tmp = imgSrc;
       this.imgSrc = '' + (imgSrc + 1);
       this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
@@ -439,17 +437,23 @@ export class CreateComponent implements OnInit {
   takeFrame(imgSrc) {
     try {
       this.frmBtnDisable = false;
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.8,0.8)';
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
-
+      document.getElementById('frm' + (this.lastValueFrame)).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.filter = 'grayscale(60%)';
+    } catch (e) {
+      console.log('takeframe down');
+    }
+    try {
       this.lastValueFrame = imgSrc;
-      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(0%)';
+      document.getElementById('frm' + (imgSrc)).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc)).style.webkitTransform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.filter = 'grayscale(0%)';
       this.base64TmpFrame = imgSrc;
-      this.imgSrc = '' + (imgSrc );
+      this.imgSrc = '' + (imgSrc);
       this.imgSrcFrame = this.frames[imgSrc];
+    } catch (e) {
+      console.log('takeframe up');
+    }
       try {
         if (this.landscape !== 'none') {
           imgSrc = imgSrc + 36;
@@ -476,9 +480,6 @@ export class CreateComponent implements OnInit {
       } catch (e) {
         console.log('no right coordintaes');
       }
-    } catch (e) {
-      console.log('takeframe');
-    }
   }
   generateHQualityPdf() {
     document.getElementById('spinner').style.display = 'block';
