@@ -1002,25 +1002,40 @@ export class CreateComponent implements OnInit {
     }
   }
   arrayScrollReset() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-    const btnfrm =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2frm =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
-    btn.disabled = false;
-    btn2.disabled = true;
-    btnfrm.disabled = false;
-    btn2frm.disabled = true;
-    for ( let i = 0; i < 3; i++) {
-      document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
-      document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
-      console.log('b: ' + this.arrayScrollFrame[i] );
-    }
-    this.arrayScroll = [1, 2, 3];
-    this.arrayScrollFrame = [1, 2, 3];
-    for ( let i = 0; i < 3; i++) {
-      document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'inline-block';
-      document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'inline-block';
-    }
+    try {
+      const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
+      const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
+      const btnfrm =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
+      const btn2frm =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
+      btn.disabled = false;
+      btn2.disabled = true;
+      btnfrm.disabled = false;
+      btn2frm.disabled = true;
+      console.log(':::: ' + this.arrayScroll + ' : ' + this.bcgTemp.length);
+      if ( this.arrayScroll[2] === this.bcgTemp.length ||
+        (this.arrayScroll[2]) > this.bcgTemp.length ||
+        (this.arrayScroll[2] -1 ) === this.bcgTemp.length) {
+        console.log('.....' + this.arrayScroll[2] + ' : ' + this.bcgTemp.length);
+        this.moveLeft();
+      }
+        for (let i = 0; i < 3; i++) {
+          document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
+          document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
+          console.log('b: ' + this.arrayScrollFrame[i]);
+        }
+      } catch (e) {
+        console.log('arrayScrollReset none');
+      }
+      try {
+        this.arrayScroll = [1, 2, 3];
+        this.arrayScrollFrame = [1, 2, 3];
+        for (let i = 0; i < 3; i++) {
+          document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'inline-block';
+          document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'inline-block';
+        }
+      } catch (e) {
+        console.log('arrayScrollReset inline-block');
+      }
   }
   landscapeOff(n) {
     if (n === 2) {
@@ -1264,7 +1279,7 @@ export class CreateComponent implements OnInit {
     this.bcgTemp = [];
     this.frame2 = [];
     this.frame1 = [];
-    for ( let i = 1; i < 31; i++ ) {
+    for ( let i = 1; i < 27; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
     for ( let i = 1; i < 37; i++ ) {
