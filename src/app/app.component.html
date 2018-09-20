@@ -1,2 +1,15 @@
-<app-create></app-create>
-<!--<app-landscape></app-landscape>-->
+<app-create [style.display]="disp"></app-create>
+<div id="err" [style.display]="err">
+  <a href="https://www.mac.pl/">
+  <button mat-fab style="background-color: #ff8913">
+    <i class="material-icons" style="color: #25408f">error_outline</i>
+  </button>
+  </a>
+  <br/>
+  <br/>
+  <p >Przepraszamy, ale strona nie może zostać załadowana!
+    <br/>
+    Pamiętaj, aby najpierw zalogować sie na swoje konto Mac.pl.
+  </p>
+</div>
+

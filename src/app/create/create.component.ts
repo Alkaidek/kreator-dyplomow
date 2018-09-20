@@ -282,7 +282,7 @@ export class CreateComponent implements OnInit {
   }
   ngOnInit() {
     this.cookies();
-    this.session();
+    /*this.session();*/
     this.setOnInitData();
     this.addScrollListener();
     this.setPaddingAnchor();
@@ -316,7 +316,7 @@ export class CreateComponent implements OnInit {
       /*localStorage*/
       console.log('sesja:bofore: ' + localStorage.getItem('key'));
       if ( localStorage.getItem('key') === null ) {
-        console.log('Go Away bad Hacker!');
+        console.log('Fail!');
       }
       localStorage.setItem(
         'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'LocalStorage' + Math.floor(Math.random() * 999 ) + 1 );
@@ -324,7 +324,7 @@ export class CreateComponent implements OnInit {
       /*sessionStorage*/
       console.log('sesja:before: ' + sessionStorage.getItem('key'));
       if ( localStorage.getItem('key') === 'null' ) {
-        console.log('Go Away bad Hacker!');
+        console.log('Fail!');
       }
       sessionStorage.setItem(
         'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'SessionStorage' + Math.floor(Math.random() * 999 ) + 1 );
@@ -341,6 +341,9 @@ export class CreateComponent implements OnInit {
     document.cookie = 'email=' + this.email + ';' + expires + ';path=/';
     console.log('email=' + this.email + ';' + expires + ';path=/');*/
     const value = '; ' + document.cookie;
+    if ( value.search('mac-cookie') !== -1 ) {
+
+    }
     const parts = value.split('; CookiesPrivagles=');
     if ( parts.length === 2 ) {
       this.disp = parts.pop().split(';').shift();
@@ -356,7 +359,7 @@ export class CreateComponent implements OnInit {
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log('wartosć: ' + ( 2480 / width) );
+      console.log(': ' + ( 2480 / width) );
       this.multiple = (2480 / width );
       this.imageFrameWidth = document.getElementById('pdfFor').offsetWidth * 0.14;
       this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
@@ -1010,7 +1013,7 @@ export class CreateComponent implements OnInit {
     for ( let i = 0; i < 3; i++) {
       document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
       document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
-      console.log('to ma znikać: ' + this.arrayScrollFrame[i] );
+      console.log('b: ' + this.arrayScrollFrame[i] );
     }
     this.arrayScroll = [1, 2, 3];
     this.arrayScrollFrame = [1, 2, 3];
@@ -1833,7 +1836,7 @@ export class CreateComponent implements OnInit {
       width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     }
-    console.log('margin left ' + this.marginLeft +
+    console.log('margin l: ' + this.marginLeft +
       ' Width: ' + width + '   percent: ' + percent + ' stete: ' + this.marginLeft[n] +  width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
