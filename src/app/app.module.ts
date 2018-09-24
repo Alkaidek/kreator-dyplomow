@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { HttpModule} from '@angular/http';
 import {DataService} from './data.service';
+import { TemplateTypeComponent } from './template-type/template-type.component';
 
 const firebase = {
   apiKey: 'AIzaSyB7P4-5PpvWM1D5dZ6rIeNRlczTt1nlBS4',
@@ -26,7 +27,8 @@ const firebase = {
   declarations: [
     AppComponent,
     CreateComponent,
-    LandscapeComponent
+    LandscapeComponent,
+    TemplateTypeComponent
   ],
   imports: [
     BrowserModule,

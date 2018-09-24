@@ -7,14 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  disp = 'none';
+  disp = false;
   err = 'inline-block';
+  auth = 'none';
+  templateTypeDisplay = false;
+  setTypeDisplay = 'block';
   ngOnInit() {
     const value = '; ' + document.cookie;
     console.log (document.referrer);
     if ((value.search('mac-cookie') !== -1) /*&& (document.referrer.search('localhost') !== -1)*/) {
-      this.disp = 'inline-block';
+      this.auth = 'block';
       this.err = 'none';
     }
+  }
+  setType(displayBlank, displayTemplate) {
+    this.disp = displayBlank;
+    this.templateTypeDisplay = displayTemplate;
+    document.getElementById('setType').style.opacity = '0';
+    setTimeout(() => {
+      this.setTypeDisplay = 'none';
+    }, 600);
   }
 }

@@ -1,4 +1,21 @@
-<app-create [style.display]="disp"></app-create>
+<div [style.display]="auth">
+  <div class="setType" id="setType" [style.display]="setTypeDisplay">
+    <h1 class="fadeInTop">Wybierz co Cie interysuje</h1>
+    <br/>
+    <div class="setTypeBox" id="setTypeBoxLeft">
+      <img src="../../assets/img/type/type_blank.png" (click)="setType(true, false)"/>
+      <p>Pusty projekt<br>
+        <s></s></p>
+    </div>
+    <div class="setTypeBox" id="setTypeBoxRight">
+      <img src="../../assets/img/type/type_template.png" (click)="setType(false, true)"/>
+      <p>Gotowe szablony</p>
+    </div>
+  </div>
+</div>
+<app-create *ngIf="disp"></app-create>
+<app-template-type *ngIf="templateTypeDisplay"></app-template-type>
+
 <div id="err" [style.display]="err">
   <a href="https://www.mac.pl/">
   <button mat-fab style="background-color: #ff8913">

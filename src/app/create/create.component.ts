@@ -67,56 +67,56 @@ export class CreateComponent implements OnInit {
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     for ( let i = 1; i < 50; i++ ) {
-      this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.jpg');
+      this.imagesMatematyka.push('../../assets/img/matematyka/' + i);
     }
     this.setHeightMatematyka(this.imagesMatematyka);
     for ( let i = 1; i < 55; i++ ) {
-      this.imagesMuzyka.push('../../assets/img/muzyka/' + i + '.jpg');
+      this.imagesMuzyka.push('../../assets/img/muzyka/' + i );
     }
     this.setHeightMuzyka(this.imagesMuzyka);
     for ( let i = 1; i < 13; i++ ) {
-      this.imagesPolska.push('../../assets/img/polska/' + i + '.jpg');
+      this.imagesPolska.push('../../assets/img/polska/' + i );
     }
     this.setHeightPolska(this.imagesPolska);
     for ( let i = 1; i < 42; i++ ) {
-      this.imagesSport.push('../../assets/img/sport/' + i + '.jpg');
+      this.imagesSport.push('../../assets/img/sport/' + i );
     }
     this.setHeightSport(this.imagesSport);
     for ( let i = 1; i < 51; i++ ) {
-      this.imagesSwieta.push('../../assets/img/swieta/' + i + '.jpg');
+      this.imagesSwieta.push('../../assets/img/swieta/' + i);
     }
     this.setHeightSwieta(this.imagesSwieta);
     for ( let i = 1; i < 19; i++ ) {
-      this.imagesSzachy.push('../../assets/img/szachy/' + i + '.jpg');
+      this.imagesSzachy.push('../../assets/img/szachy/' + i);
     }
     this.setHeightSzachy(this.imagesSzachy);
     for ( let i = 1; i < 80; i++ ) {
-      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i + '.jpg');
+      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i);
     }
     this.setHeightZwierzeta(this.imagesZwierzeta);
     for ( let i = 1; i < 34; i++ ) {
-      this.imagesRosliny.push('../../assets/img/rosliny/' + i + '.jpg');
+      this.imagesRosliny.push('../../assets/img/rosliny/' + i);
     }
     this.setHeightRosliny(this.imagesRosliny);
 
     for ( let i = 1; i < 44; i++ ) {
-      this.imagesEmocje.push('../../assets/img/emocje/' + i + '.jpg');
+      this.imagesEmocje.push('../../assets/img/emocje/' + i);
     }
     this.setHeightEmocje(this.imagesEmocje);
     for ( let i = 1; i < 40; i++ ) {
-      this.imagesGeografia.push('../../assets/img/geografia/' + i + '.jpg');
+      this.imagesGeografia.push('../../assets/img/geografia/' + i );
     }
     this.setHeightGeografia(this.imagesGeografia);
     for ( let i = 1; i < 39; i++ ) {
-      this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.jpg');
+      this.imagesLiteratura.push('../../assets/img/literatura/' + i);
     }
     this.setHeightLiteratura(this.imagesLiteratura);
-    this._dataService.getTemplates()
+   /* this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].templates.length; i++) {
           this.coordinatesTemplate.push( tmp[0].templates[i] );
         }
-      });
+      });*/
     for ( let i = 1; i < 27; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
@@ -127,12 +127,12 @@ export class CreateComponent implements OnInit {
       this.frame2.push('../../assets/img/frame2/' + i + '.png');
     }
     this.createFramesArray(this.frame1, this.frame2);
-    this._dataService.getTemplates()
+    /*this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].fonts.length; i++) {
           this.arraySelectFontFamili.push( tmp[0].fonts[i] );
         }
-      });
+      });*/
   }
   MACblue = '#25408f';
   whiteColor = 'white';
@@ -223,6 +223,8 @@ export class CreateComponent implements OnInit {
   imageFrameWidthLandscape = 100;
   imageFrameWidthFix = 100;
   imageFrameWidthLandscapeFix = 100;
+  setTypeDisplay = 'block';
+  templateTypeDisplay = 'block';
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -805,6 +807,7 @@ export class CreateComponent implements OnInit {
     this.txtStyle = [];
     this.txtWeight = [];
     this.txtVariant  = [];
+    this.shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
     this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
     this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
     this.shadowSmall = '0px 0px';
@@ -1012,9 +1015,10 @@ export class CreateComponent implements OnInit {
       btnfrm.disabled = false;
       btn2frm.disabled = true;
       console.log(':::: ' + this.arrayScroll + ' : ' + this.bcgTemp.length);
+      console.log(':::: ' + this.arrayScroll + ' : ' + this.bcgTemp.length);
       if ( this.arrayScroll[2] === this.bcgTemp.length ||
         (this.arrayScroll[2]) > this.bcgTemp.length ||
-        (this.arrayScroll[2] -1 ) === this.bcgTemp.length) {
+        (this.arrayScroll[2] - 1 ) === this.bcgTemp.length) {
         console.log('.....' + this.arrayScroll[2] + ' : ' + this.bcgTemp.length);
         this.moveLeft();
       }
@@ -1722,78 +1726,42 @@ export class CreateComponent implements OnInit {
     if (name === 'Animal') {
       this.userImgBase64.push(this.imagesAnimal[n]);
     } else if (name === 'Sport') {
-      this._dataService.getSport2Img(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSport[n] + '.png');
+      this.add();
     } else if (name === 'Emocje') {
-      this._dataService.getSportImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
+          this.userImgBase64.push(this.imagesEmocje[n] + '.png');
           this.add();
-        });
     } else if (name === 'Geografia') {
-      this._dataService.getGeografiaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesGeografia[n] + '.png');
+      this.add();
     } else if (name === 'Literatura') {
-      this._dataService.getLiteraturaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
+      this.add();
     } else if (name === 'Matematyka') {
       /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
-      this._dataService.getMatematykaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesMatematyka[n] + '.png');
+      this.add();
     } else if (name === 'Muzyka') {
-      this._dataService.getMuzykaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesMuzyka[n] + '.png');
+      this.add();
     } else if (name === 'Rosliny') {
-      this._dataService.getRoslinyImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesRosliny[n] + '.png');
+      this.add();
     } else if (name === 'Polska') {
-      this._dataService.getPolskaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesPolska[n] + '.png');
+      this.add();
     } else if (name === 'Swieta') {
-      this._dataService.getSwietaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSwieta[n] + '.png');
+      this.add();
     } else if (name === 'Szachy') {
-      this._dataService.getSzachyImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSzachy[n] + '.png');
+      this.add();
     } else if (name === 'Zwierzeta') {
-      this._dataService.getZwierzetaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesZwierzeta[n] + '.png');
+      this.add();
     } else if (name === 'Literatura') {
-      this._dataService.getLiteraturaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
+      this.add();
     }
   }
   rotateBcgX() {
@@ -2028,5 +1996,13 @@ export class CreateComponent implements OnInit {
         this.imgLeft[this.currImg] = 0;
       }
     }
+  }
+  setType(displayBlank, displayTemplate) {
+    this.auth = displayBlank;
+    this.templateTypeDisplay = displayTemplate;
+    document.getElementById('setType').style.opacity = '0';
+    setTimeout(() => {
+      this.setTypeDisplay = 'none';
+    }, 600);
   }
 }
