@@ -5,6 +5,7 @@ import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
+import { templateCoordinates } from '../template.js';
 
 @Component({
   selector: 'app-template-type',
@@ -12,7 +13,9 @@ import {DataService} from '../data.service';
   styleUrls: ['./template-type.component.sass']
 })
 export class TemplateTypeComponent implements OnInit {
-  arraySelectFontFamili = [];
+  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
+    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
+    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   userImg =
     [];
   percentLeft = [100, 100, 100];
@@ -23,13 +26,10 @@ export class TemplateTypeComponent implements OnInit {
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
-  auth = 'block';
   bcgTemp = [];
   template: any;
   coordinatesTemplate = [];
   frames = [];
-  frame1 = [];
-  frame2 = [];
   bool = 'block';
   imagesAnimal = ['../../assets/img/animal/1.png',
     '../../assets/img/animal/2.png',
@@ -46,7 +46,6 @@ export class TemplateTypeComponent implements OnInit {
   imagesSwieta = [];
   imagesSzachy = [];
   imagesZwierzeta = [];
-  animalHeight = 11;
   emocjeHeight = 11;
   geografiaHeight = 11;
   literaturaHeight = 11;
@@ -58,52 +57,53 @@ export class TemplateTypeComponent implements OnInit {
   swietaHeight = 11;
   szachyHeight = 11;
   zwierzetaHeight = 11;
-  footer = 'bla bla';
+  textFieldArray = ['Pole 1', 'Pole 2', 'Pole 3', 'Pole 4', 'Pole 5'];
+  footer = '';
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     for ( let i = 1; i < 50; i++ ) {
-      this.imagesMatematyka.push('../../assets/img/matematyka/' + i + '.jpg');
+      this.imagesMatematyka.push('../../assets/img/matematyka/' + i);
     }
     this.setHeightMatematyka(this.imagesMatematyka);
     for ( let i = 1; i < 55; i++ ) {
-      this.imagesMuzyka.push('../../assets/img/muzyka/' + i + '.jpg');
+      this.imagesMuzyka.push('../../assets/img/muzyka/' + i );
     }
     this.setHeightMuzyka(this.imagesMuzyka);
     for ( let i = 1; i < 13; i++ ) {
-      this.imagesPolska.push('../../assets/img/polska/' + i + '.jpg');
+      this.imagesPolska.push('../../assets/img/polska/' + i );
     }
     this.setHeightPolska(this.imagesPolska);
     for ( let i = 1; i < 42; i++ ) {
-      this.imagesSport.push('../../assets/img/sport/' + i + '.jpg');
+      this.imagesSport.push('../../assets/img/sport/' + i );
     }
     this.setHeightSport(this.imagesSport);
     for ( let i = 1; i < 51; i++ ) {
-      this.imagesSwieta.push('../../assets/img/swieta/' + i + '.jpg');
+      this.imagesSwieta.push('../../assets/img/swieta/' + i);
     }
     this.setHeightSwieta(this.imagesSwieta);
     for ( let i = 1; i < 19; i++ ) {
-      this.imagesSzachy.push('../../assets/img/szachy/' + i + '.jpg');
+      this.imagesSzachy.push('../../assets/img/szachy/' + i);
     }
     this.setHeightSzachy(this.imagesSzachy);
     for ( let i = 1; i < 80; i++ ) {
-      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i + '.jpg');
+      this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i);
     }
     this.setHeightZwierzeta(this.imagesZwierzeta);
     for ( let i = 1; i < 34; i++ ) {
-      this.imagesRosliny.push('../../assets/img/rosliny/' + i + '.jpg');
+      this.imagesRosliny.push('../../assets/img/rosliny/' + i);
     }
     this.setHeightRosliny(this.imagesRosliny);
 
     for ( let i = 1; i < 44; i++ ) {
-      this.imagesEmocje.push('../../assets/img/emocje/' + i + '.jpg');
+      this.imagesEmocje.push('../../assets/img/emocje/' + i);
     }
     this.setHeightEmocje(this.imagesEmocje);
     for ( let i = 1; i < 40; i++ ) {
-      this.imagesGeografia.push('../../assets/img/geografia/' + i + '.jpg');
+      this.imagesGeografia.push('../../assets/img/geografia/' + i );
     }
     this.setHeightGeografia(this.imagesGeografia);
     for ( let i = 1; i < 39; i++ ) {
-      this.imagesLiteratura.push('../../assets/img/literatura/' + i + '.jpg');
+      this.imagesLiteratura.push('../../assets/img/literatura/' + i);
     }
     this.setHeightLiteratura(this.imagesLiteratura);
   }
@@ -111,6 +111,8 @@ export class TemplateTypeComponent implements OnInit {
   whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 80;
+  maxWidthTxtFieldTop = 80;
+  maxWidthTxtFieldRight = 80;
   currentBaseTemplate = -1;
   bcgBtnDisable = true;
   frmBtnDisable = true;
@@ -123,23 +125,17 @@ export class TemplateTypeComponent implements OnInit {
   arrayScroll = [1, 2, 3];
   arrayScrollFrame = [1, 2, 3];
   bcgColor = '#ffffff';
-  lastValue = 1;
-  lastValueFrame = 1;
   base64Tmp = '';
-  base64TmpFrame = '';
   base64 = '';
-  forWho = '\n';
-  forWhat = '\n';
-  sign1 = 'Dyrektor\n................';
-  sign2 = 'Wychowawca\n.......................';
-  sign3 = 'Katecheta\n  ..................';
-  title = 'Dyplom';
-  imgSrc = '../../assets/img/0.png';
+  forWho = '';
+  forWhat = '';
+  sign1 = '';
+  sign2 = '';
+  sign3 = '';
+  title = '';
   imgSrcFix = '../../assets/img/0.png';
   imgSrcFrame = '../../assets/img/0.png';
   paddingTop = 10;
-  paddingTopForWho = 20;
-  paddingTopForWhat = 30;
   marginLeft = [1, 0, 0, 0];
   marginRight = [0, 0, 0, 0];
   paddingTopFooter = 12;
@@ -166,14 +162,25 @@ export class TemplateTypeComponent implements OnInit {
   txt = [];
   txtShadow = [];
   txtShadowColor = [];
+  txtFieldColor = ['#000000', '#000000', '#000000', '#000000', '#000000'];
+  txtFieldFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+  txtFieldTop = [35, 35, 35, 35, 35];
+  txtFieldLeft = [0, 0, 0, 0, 0];
+  txtFieldRight = [0, 0, 0, 0, 0];
+  txtFieldSize = [3, 3, 3, 3, 3];
+  txtFieldStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  txtFieldWeight = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  txtFieldVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  txtFieldAlign = ['center', 'center', 'center', 'center', 'center'];
+  txtFieldShadow = [0, 0, 0, 0, 0];
+  txtFieldShadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
+  txtField = ['', '', '', '', ''];
   currentTxt = -1;
-  shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
   shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
   shadowSmall = '0% 0%';
   shadowSmallFix = '0% 0%';
   txtColor = [];
-  disp = 'block';
   txtColorText = '';
   txtFontFamili = [];
   bcgRotateX = 1;
@@ -182,7 +189,6 @@ export class TemplateTypeComponent implements OnInit {
   frmRotateY = 1;
   txtFontFamiliText = '';
   currentFontFamili = 0;
-  letterSpacing = 0;
   letterSpacingForWho = 0;
   fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
   fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
@@ -196,8 +202,6 @@ export class TemplateTypeComponent implements OnInit {
   imageFrameWidthLandscape = 100;
   imageFrameWidthFix = 100;
   imageFrameWidthLandscapeFix = 100;
-  setTypeDisplay = 'block';
-  templateTypeDisplay = 'block';
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -242,14 +246,6 @@ export class TemplateTypeComponent implements OnInit {
   ngOnInit() {
     this.setOnInitData();
     this.addScrollListener();
-    this.setPaddingAnchor();
-  }
-  setPaddingAnchor() {
-    setTimeout( () => {
-      this.checkWidth(0);
-      this.checkWidth(1);
-      this.checkWidth(2);
-    }, 300);
   }
   setDate() {
     const date = new Date();
@@ -280,6 +276,22 @@ export class TemplateTypeComponent implements OnInit {
       this.imageFrameWidthLandscapeFix = document.getElementById('pdfForLandscapeFix').offsetWidth * 0.1;
     }, 150);
     return this.multiple;
+  }
+  setTextFiledArray(n) {
+    this.textFieldArray = [];
+    let index;
+    for ( let i = 0; i < n; i++) {
+      index = i + 1;
+      this.textFieldArray.push('Pole ' + index);
+    }
+  }
+  setTextFiledText(n) {
+    this.txtField = [];
+    let index;
+    for ( let i = 0; i < n; i++) {
+      index = i + 1;
+      this.txtField.push('Pole ' + index);
+    }
   }
   generateHQualityPdf() {
     document.getElementById('spinner').style.display = 'block';
@@ -429,102 +441,18 @@ export class TemplateTypeComponent implements OnInit {
     try {
       this.resetSettings();
       /*const select = document.getElementById('selectTemplate') as HTMLSelectElement;*/
-      this.bcgColor = template.bcgColor;
       this.landscape = template.landscape;
       if (this.landscape === 'none') {
         this.landscapeOff(2);
       } else {
         this.landscapeOff(1);
       }
-      if ( template
-        .scheme === '30' ) {
-        this.setScheme(30);
-      } else {
-        this.setScheme(50);
-      }
-      this.paddingTop = template.paddingTop[0];
-      this.paddingTopForWho = template.paddingTop[1];
-      this.paddingTopForWhat = template.paddingTop[2];
-      this.marginLeft[0] = template.marginLeft[0];
-      this.marginLeft[1] = template.marginLeft[1];
-      this.marginLeft[2] = template.marginLeft[2];
-      this.marginLeft[3] = template.marginLeft[3];
-      this.marginRight[3] = template.marginRight[3];
-      this.marginRight[2] = template.marginRight[2];
-      this.marginRight[1] = template.marginRight[1];
-      this.marginRight[0] = template.marginRight[0];
-      this.shadowColor[0] =  template.shadowColor[0];
-      this.shadowColor[1] =  template.shadowColor[1];
-      this.shadowColor[2] =  template.shadowColor[2];
-      this.shadowColor[3] =  template.shadowColor[3];
-      this.shadowColor[4] =  template.shadowColor[4];
-      this.shadowLarge[0] =  template.shadowLarge[0];
-      this.shadowLarge[1] =  template.shadowLarge[1];
-      this.shadowLarge[2] =  template.shadowLarge[2];
-      this.shadowLarge[3] =  template.shadowLarge[3];
-      this.setShadowFix(template);
-      this.fontStyle[0] =  template.fontStyle[0];
-      this.fontStyle[1] =  template.fontStyle[1];
-      this.fontStyle[2] =  template.fontStyle[2];
-      this.fontStyle[3] =  template.fontStyle[3];
-      this.fontStyle[4] =  template.fontStyle[4];
-      this.fontWeight[0] =  template.fontWeight[0];
-      this.fontWeight[1] =  template.fontWeight[1];
-      this.fontWeight[2] =  template.fontWeight[2];
-      this.fontWeight[3] =  template.fontWeight[3];
-      this.fontWeight[4] =  template.fontWeight[4];
-      this.fontVariant[0] =  template.fontVariant[0];
-      this.fontVariant[1] =  template.fontVariant[1];
-      this.fontVariant[2] =  template.fontVariant[2];
-      this.fontVariant[3] =  template.fontVariant[3];
-      this.fontVariant[4] =  template.fontVariant[4];
-      try {
-        this.bcgRotateX = template.bcgRotateX;
-        this.bcgRotateY = template.bcgRotateY;
-        this.frmRotateX = template.frmRotateX;
-        this.frmRotateY = template.frmRotateY;
-      } catch (e) {
-        console.log('no rotate here');
-      }
-      try {
-        this.textAlign[0] = template.textAlign[0];
-        this.textAlign[1] = template.textAlign[1];
-        this.textAlign[2] = template.textAlign[2];
-        this.textAlign[3] = template.textAlign[3];
-        this.textAlign[4] = template.textAlign[4];
-      } catch (e) {
-        console.log('no text Aling here');
-      }
-      this.paddingTopFooter = template.paddingTopFooter;
-      this.shadowSmall =  template.shadowSmall;
-      this.letterSpacing = template.letterSpacing;
-      this.letterSpacingForWho = template.letterSpacingForWho;
-      this.bottom = template.bottom;
-      this.imgSrcFrame = template.frame;
-      if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
-        this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
-      }
       if ( template.img === '' || template.img === '../../assets/img/0.png') {
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
+        this.imgSrcFix = template.img;
       }
       this.base64Tmp = template.img;
-      for (let i = 0; i < template.arrayFontSize.length; i++ ) {
-        console.log(' ' + template.arrayFontSize[i]);
-        this.arrayFontSize[i] = template.arrayFontSize[i];
-      }
-      for (let i = 0; i < template.arrayFontColor.length; i++ ) {
-        this.arrayFontColor[i] =  template.arrayFontColor[i];
-      }
-      this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
-        template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
-      this.title =  template.title.replace('NEWLINE', '\n' );
-      this.forWho =  template.forWho.split('NEWLINE').join('\n');
-      this.forWhat =  template.forWhat.split('NEWLINE').join('\n');
-      this.sign1 =  template.sign1.split('NEWLINE').join('\n');
-      this.sign2 = template.sign2.split('NEWLINE').join('\n');
-      this.sign3 = template.sign3.split('NEWLINE').join('\n');
-      this.footer = template.footer.replace('NEWLINE', '\n' );
       if ( template.userBcgBase64.length > 0) {
         for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);
@@ -553,7 +481,24 @@ export class TemplateTypeComponent implements OnInit {
       } catch (e) {
         console.log('Old UserTxt Element');
       }
-      this.setAllButtonColor();
+      try {
+        this.txtFieldColor = template.txtFieldColor;
+        this.txtFieldFontFamili = template.txtFieldFontFamili;
+        this.txtFieldTop = template.txtFieldTop;
+        this.txtFieldLeft = template.txtFieldLeft;
+        this.txtFieldRight = template.txtFieldRight;
+        this.txtFieldSize = template.txtFieldSize;
+        this.txtFieldStyle = template.txtFieldStyle;
+        this.txtFieldWeight = template.txtFieldWeight;
+        this.txtFieldVariant  = template.txtFieldVariant;
+        this.txtFieldAlign = template.txtFieldAlign;
+        this.txtFieldShadow = template.txtFieldShadow;
+        this.txtFieldShadowColor = template.txtFieldShadowColor;
+        this.txtField = template.txtField;
+        this.setTextFiledArray(template.txtField.length);
+      } catch (e) {
+        console.log('Something goes wrong');
+      }
     } catch (err) {
       this.resetSettings();
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
@@ -572,58 +517,16 @@ export class TemplateTypeComponent implements OnInit {
     this.txtStyle = [];
     this.txtWeight = [];
     this.txtVariant  = [];
-    this.shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
-    this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
-    this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
-    this.shadowSmall = '0px 0px';
-    this.shadowSmallFix = '0px 0px';
-    this.bcgRotateX = 1;
-    this.bcgRotateY = 1;
-    this.frmRotateX = 1;
-    this.frmRotateY = 1;
     this.txtShadow = [];
     this.txtShadowColor = [];
     this.bcgBtnDisable = true;
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
-    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
-    this.letterSpacing = 0;
-    this.letterSpacingForWho = 0;
-    this.bcgColor = '#ffffff';
     this.landscape = '';
     this.landscape = 'none';
-    this.setScheme(30);
-    this.paddingTopFooter = 12;
-    this.textAlign = ['center', 'center', 'center', 'center', 'center'];
-    this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
-    this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-    this.fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-    this.paddingTop = 0;
-    this.paddingTopForWho = 10;
-    this.paddingTopForWhat = 20;
-    this.marginLeft[0] = 1;
-    this.marginLeft[1] = 0;
-    this.marginLeft[2] = 0;
-    this.marginLeft[3] = 0;
-    this.marginRight[3] = 0;
-    this.marginRight[2] = 0;
-    this.marginRight[1] = 0;
-    this.marginRight[0] = 0;
-    this.bottom =  0;
     this.imgSrcFix =  '../../assets/img/0.png';
     this.base64Tmp = '';
-    this.arrayFontSize = [ 3, 0.9, 2, 0.8, 2];
-    this.arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
-    this.arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
-    this.title = 'Dyplom';
-    this.forWho =  '';
-    this.forWhat =  '';
-    this.sign1 =  'Dyrektor\n................';
-    this.sign2 = 'Wychowawca\n.......................';
-    this.sign3 = 'Katecheta\n  ..................';
-    this.footer = 'Kielce, dnia ';
-    this.setDate();
     this.userImg = [];
     this.rotate = [];
     this.imgWidth = [];
@@ -643,87 +546,6 @@ export class TemplateTypeComponent implements OnInit {
     this.txtFontFamili = [];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
-  }
-  moveLeft() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
-        document.getElementById('bcg' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
-        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
-          document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'none';
-        }
-        btn.disabled = false;
-      } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
-        btn2.disabled = true;
-      }
-      this.arrayScroll[i] = this.arrayScroll[i] - 3;
-    }
-    if ( this.arrayScroll[0] <= 1 ) {
-      btn2.disabled = true;
-    }
-  }
-  moveRight() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
-        btn2.disabled = false;
-        if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
-          document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
-          if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
-            document.getElementById('bcg' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
-          }
-        }
-      } else if (this.arrayScroll[i] > (this.bcgTemp.length + 1)) {
-        btn.disabled = true;
-      }
-      this.arrayScroll[i] = this.arrayScroll[i] + 3;
-    }
-    if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
-      btn.disabled = true;
-    }
-  }
-  moveLeftFrame() {
-    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScrollFrame[i] - 3 < (this.frames.length + 1)) && ((this.arrayScrollFrame[i] - 3 ) > 0)) {
-        document.getElementById('frmBox' + (this.arrayScrollFrame[i] - 3)).style.display = 'inline-block';
-        if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0 ) {
-          document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'none';
-        }
-        btn
-          .disabled = false;
-      } else if ((this.arrayScrollFrame[i] - 3 ) < 0 ) {
-        btn2.disabled = true;
-      }
-      this.arrayScrollFrame[i] = this.arrayScrollFrame[i] - 3;
-    }
-    if ( this.arrayScrollFrame[0] <= 1 ) {
-      btn2.disabled = true;
-    }
-  }
-  moveRightFrame() {
-    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0) {
-        btn2.disabled = false;
-        if ( (this.arrayScrollFrame[i] + 3) < (this.frames.length + 1 )) {
-          document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
-          if (((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) && (this.arrayScrollFrame[i] + 3) > 0) {
-            document.getElementById('frmBox' + (this.arrayScrollFrame[i] + 3)).style.display = 'inline-block';
-          }
-        }
-      } else if (this.arrayScrollFrame[i] > (this.frames.length + 1)) {
-        btn.disabled = true;
-      }
-      this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
-    }
-    if ( this.arrayScrollFrame[2] >= this.frames.length ) {
-      btn.disabled = true;
-    }
   }
   set0degress() {
     this.rotate[this.currImg] = 0;
@@ -777,39 +599,6 @@ export class TemplateTypeComponent implements OnInit {
       element.classList.remove('rotateInDownRight');
     }
   }
-  setScheme(n) {
-    if (n === 50) {
-      document.getElementById('centerLandscape').style.display = 'none';
-      document.getElementById('rightLandscape').style.width = n + '%';
-      document.getElementById('leftLandscape').style.width = n + '%';
-      document.getElementById('centerLandscapeFix').style.display = 'none';
-      document.getElementById('rightLandscapeFix').style.width = n + '%';
-      document.getElementById('leftLandscapeFix').style.width = n + '%';
-      document.getElementById('centerFix').style.display = 'none';
-      document.getElementById('rightFix').style.width = n + '%';
-      document.getElementById('leftFix').style.width = n + '%';
-      document.getElementById('center').style.display = 'none';
-      document.getElementById('right').style.width = n + '%';
-      document.getElementById('left').style.width = n + '%';
-      document.getElementById('sign3').style.display = 'none';
-      this.scheme = 50;
-    } else {
-      document.getElementById('centerLandscape').style.display = 'inline-block';
-      document.getElementById('rightLandscape').style.width = n + 2 + '%';
-      document.getElementById('leftLandscape').style.width = n + 2 + '%';
-      document.getElementById('centerLandscapeFix').style.display = 'inline-block';
-      document.getElementById('rightLandscapeFix').style.width = n + 2 + '%';
-      document.getElementById('leftLandscapeFix').style.width = n + 2 + '%';
-      document.getElementById('centerFix').style.display = 'inline-block';
-      document.getElementById('rightFix').style.width = n + 3 + '%';
-      document.getElementById('leftFix').style.width = n + 3 + '%';
-      document.getElementById('center').style.display = 'inline-block';
-      document.getElementById('right').style.width = n + 3 + '%';
-      document.getElementById('left').style.width = n + 3 + '%';
-      document.getElementById('sign3').style.display = 'inline-block';
-      this.scheme = 30;
-    }
-  }
   add() {
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
@@ -858,7 +647,7 @@ export class TemplateTypeComponent implements OnInit {
   }
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    const result = fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    const result = fileSaver.saveAs(blob, 'template' + date + '.MACtemplate');
     return result.readyState;
   }
   createTextToJSON(name): String {
@@ -875,62 +664,10 @@ export class TemplateTypeComponent implements OnInit {
   createFileToSave() {
     const txt = '{"arrayFontColor" : [ '
       + this.createTextToJSON(this.arrayFontColor) + '],'
-      + ' "arrayFontFamili" : [ '
-      + this.createTextToJSON(this.arrayFontFamili) + '],'
-      + ' "arrayFontSize" : ['
-      + this.createTextToJSON(this.arrayFontSize) + '],'
-      + '"bottom" : "' + this.bottom + '", '
-      + '"paddingTopFooter" : "' + this.paddingTopFooter + '", '
-      + '"bcgRotateX" : "' + this.bcgRotateX + '", '
-      + '"bcgRotateY" : "' + this.bcgRotateY + '", '
-      + '"frmRotateX" : "' + this.frmRotateX + '", '
-      + '"frmRotateY" : "' + this.frmRotateY + '", '
-      + '"marginLeft" : [ '
-      + this.createTextToJSON(this.marginLeft) + '],'
-      + '"marginRight" : [ '
-      + this.createTextToJSON(this.marginRight) + '],'
-      + '"shadowColor" : [ '
-      + this.createTextToJSON(this.shadowColor) + '],'
-      + '"shadowLarge" : [ '
-      + this.createTextToJSON(this.shadowLarge) + '],'
-      + '"fontStyle" : [ '
-      + this.createTextToJSON(this.fontStyle) + '],'
-      + '"fontWeight" : [ '
-      + this.createTextToJSON(this.fontWeight) + '],'
-      + '"fontVariant" : [ '
-      + this.createTextToJSON(this.fontVariant) + '],'
-      + '"textAlign" : [ '
-      + this.createTextToJSON(this.textAlign) + '],'
-      + '"shadowSmall" : "'
-      +  this.shadowSmall + '", '
-      + '"letterSpacing" : "'
-      + this.letterSpacing + '", '
-      + '"letterSpacingForWho" : "'
-      + this.letterSpacingForWho + '", '
-      + '"paddingTop" : [ "'
-      + this.paddingTop + '", "'
-      + this.paddingTopForWho + '", "'
-      + this.paddingTopForWhat + '" ], '
       + '"img" : "'
-      +  this.imgSrcFix.replace('jpg', 'png' ) + '", '
-      + '"bcgColor" : "'
-      + this.bcgColor + '", '
+      +  this.imgSrcFix + '", '
       + '"landscape" : "'
       + this.landscape + '", '
-      + '"title" : "'
-      + this.title.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '", '
-      + '"forWho" : "'
-      + this.forWho.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
-      + '"forWhat" : "'
-      + this.forWhat.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
-      + '"sign1" : "'
-      + this.sign1.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
-      + '"sign2" : "'
-      + this.sign2.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
-      + '"sign3" : "'
-      + this.sign3.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
-      + '"footer" : "'
-      + this.footer.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
       + '"userBcgBase64" : [ '
       + this.createTextToJSON(this.userImgBase64) + '],'
       + '"userImgRotate" : [ '
@@ -969,11 +706,34 @@ export class TemplateTypeComponent implements OnInit {
       + this.createTextToJSON(this.txtShadow) + '],'
       + '"txtShadowColor" : [ '
       + this.createTextToJSON(this.txtShadowColor) + '],'
-      + '"frame" : "'
-      + this.imgSrcFrame + '", '
-      + '"scheme" : "'
-      + this.scheme
-      + '" }';
+
+      + '"txtFieldTop" : [ '
+      + this.createTextToJSON(this.txtFieldTop) + '],'
+      + '"txtFieldLeft" : [ '
+      + this.createTextToJSON(this.txtFieldLeft) + '],'
+      + '"txtFieldRight" : [ '
+      + this.createTextToJSON(this.txtFieldRight) + '],'
+      + '"txtFieldSize" : [ '
+      + this.createTextToJSON(this.txtFieldSize) + '],'
+      + '"txtFieldStyle" : [ '
+      + this.createTextToJSON(this.txtFieldStyle) + '],'
+      + '"txtFieldWeight" : [ '
+      + this.createTextToJSON(this.txtFieldWeight) + '],'
+      + '"txtFieldVariant" : [ '
+      + this.createTextToJSON(this.txtFieldVariant) + '],'
+      + '"txtFieldAlign" : [ '
+      + this.createTextToJSON(this.txtFieldAlign) + '],'
+      + '"txtField" : [ '
+      + this.createTextToJSON(this.txtField) + '],'
+      + '"txtFieldColor" : [ '
+      + this.createTextToJSON(this.txtFieldColor) + '],'
+      + '"txtFieldFontFamili" : [ '
+      + this.createTextToJSON(this.txtFieldFontFamili) + '],'
+      + '"txtFieldShadow" : [ '
+      + this.createTextToJSON(this.txtFieldShadow) + '],'
+      + '"txtFieldShadowColor" : [ '
+      + this.createTextToJSON(this.txtFieldShadowColor) + ']'
+      + ' }';
     return txt;
   }
   onSelectFile(event) {
@@ -1051,6 +811,14 @@ export class TemplateTypeComponent implements OnInit {
     }
     return this.txtShadow[this.currentTxt];
   }
+  shadowOnOffForTextField(i): Number {
+    if ( this.txtFieldShadow[i] > 0) {
+      this.txtFieldShadow[i] = 0;
+    } else {
+      this.txtFieldShadow[i] = 4;
+    }
+    return this.txtFieldShadow[i];
+  }
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
       this.setWhiteColor('fontWeight5');
@@ -1094,71 +862,8 @@ export class TemplateTypeComponent implements OnInit {
   setFontFamili(n) {
     this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
   }
-  setFontFamiliForMainField(n, m) {
-    this.arrayFontFamili[m] = this.arraySelectFontFamili[n];
-    if (m === 3 ) {
-      this.arrayFontFamili[4] = this.arraySelectFontFamili[n];
-      this.arrayFontFamili[5] = this.arraySelectFontFamili[n];
-    }
-    setTimeout( () => {
-      if (n === 0) {
-        this.checkWidthWithCenter(0);
-      } else if (n === 1) {
-        this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
-        this.checkWidthWithCenter(2);
-      }
-    }, 300);
-  }
-  shadowOnOff(n, m) {
-    if ( m === 0 ) {
-      if ( this.shadowLarge[n] === '4px 4px 4px' ) {
-        this.shadowLarge[n] = '0px 0px';
-        this.shadowLargeFix[n] = '0px 0px';
-      } else {
-        this.shadowLarge[n] = '4px 4px 4px';
-        this.shadowLargeFix[n] = '20px 20px 20px';
-      }
-    } else {
-      if ( this.shadowSmall === '2px 2px 2px' ) {
-        this.shadowSmall = '0px 0px';
-        this.shadowSmallFix = '0px 0px';
-      } else {
-        this.shadowSmall = '2px 2px 2px';
-        this.shadowSmallFix = '10px 10px 10px';
-      }
-    }
-  }
-  setShadowFix(temp) {
-    for (let i = 0; i < temp.shadowLarge.length; i++ ) {
-      if ( temp.shadowLarge[i] === '4px 4px 4px' ) {
-        this.shadowLargeFix[i] = '20px 20px 20px';
-      } else {
-        this.shadowLargeFix[i] = '0px 0px';
-      }
-    }
-    if ( temp.shadowSmall === '2px 2px 2px' ) {
-      this.shadowSmallFix = '10px 10px 10px';
-    } else {
-      this.shadowSmallFix = '0px 0px';
-    }
-  }
-  setFontStyle(n) {
-    if (this.fontStyle[n] === 'italic') {
-      this.fontStyle[n] = 'normal';
-    } else {
-      this.fontStyle[n] = 'italic';
-    }
-    this.setButtonColor('fontStyle' + n);
-    setTimeout( () => {
-      if (n === 0) {
-        this.checkWidthWithCenter(0);
-      } else if (n === 1) {
-        this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
-        this.checkWidthWithCenter(2);
-      }
-    }, 300);
+  setFontFamiliForTxtField(n, i) {
+    this.txtFieldFontFamili[i] = this.arraySelectFontFamili[n];
   }
   setTxtStyle() {
     if (this.txtStyle[this.currentTxt] === 'italic') {
@@ -1168,6 +873,33 @@ export class TemplateTypeComponent implements OnInit {
     }
     this.setButtonColor('fontStyle5');
     this.setMaxWidthForUserTxt();
+  }
+  setTxtFieldStyle(n) {
+    if (this.txtFieldStyle[n] === 'italic') {
+      this.txtFieldStyle[n] = 'normal';
+    } else {
+      this.txtFieldStyle[n] = 'italic';
+    }
+    this.setButtonColor('fontStyle6' + n);
+    this.setMaxWidthForTxtField(n);
+  }
+  setTxtFieldWeight(n) {
+    if (this.txtFieldWeight[n] === 'bold') {
+      this.txtFieldWeight[n] = 'normal';
+    } else {
+      this.txtFieldWeight[n] = 'bold';
+    }
+    this.setButtonColor('fontWeight6' + n);
+    this.setMaxWidthForTxtField(n);
+  }
+  setTxtFieldVariant(n) {
+    if (this.txtFieldVariant[n] === 'small-caps') {
+      this.txtFieldVariant[n] = 'normal';
+    } else {
+      this.txtFieldVariant[n] = 'small-caps';
+    }
+    this.setButtonColor('fontVariant6' + n);
+    this.setMaxWidthForTxtField(n);
   }
   setTxtWeight() {
     if (this.txtWeight[this.currentTxt] === 'bold') {
@@ -1217,6 +949,35 @@ export class TemplateTypeComponent implements OnInit {
       console.log(this.txtAlign[this.currentTxt]);
     }
   }
+  setTxtFieldAlign(value, i) {
+    if (value === 'left') {
+      this.txtFieldAlign[i] = 'left';
+      /*    this.txtLeft[this.currentTxt] = 0;*/
+      this.setWhiteColor('alignCenter6' + i);
+      this.setBlueColor('alignLeft6' + i);
+      this.setWhiteColor('alignRight6' + i);
+      this.txtFieldLeft[i] = 0;
+      this.txtFieldRight[i] = 0;
+      console.log(this.txtFieldAlign[i]);
+    } else if (value === 'right') {
+      this.txtFieldAlign[i] = 'right';
+      this.setWhiteColor('alignCenter6' + i);
+      this.setWhiteColor('alignLeft6' + i);
+      this.setBlueColor('alignRight6' + i);
+      this.txtFieldLeft[i] = 0;
+      this.txtFieldRight[i] = 0;
+      console.log(this.txtFieldAlign[i]);
+    } else {
+      this.txtFieldAlign[i] = 'center';
+      /*      this.txtLeft[this.currentTxt] = this.setMaxWidthForUserTxt() / 2;*/
+      this.setBlueColor('alignCenter6' + i);
+      this.setWhiteColor('alignLeft6' + i);
+      this.setWhiteColor('alignRight6' + i);
+      this.txtFieldLeft[i] = 0;
+      this.txtFieldRight[i] = 0;
+      console.log(this.txtFieldAlign[i]);
+    }
+  }
   setTxtAlignWithoutPossitionChange(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
@@ -1233,66 +994,6 @@ export class TemplateTypeComponent implements OnInit {
       this.setBlueColor('alignCenter5');
       this.setWhiteColor('alignLeft5');
       this.setWhiteColor('alignRight5');
-    }
-  }
-  setFontWeight(n) {
-    if (this.fontWeight[n] === 'bold') {
-      this.fontWeight[n] = 'normal';
-    } else {
-      this.fontWeight[n] = 'bold';
-    }
-    this.setButtonColor('fontWeight' + n);
-    setTimeout( () => {
-      if (n === 0) {
-        this.checkWidthWithCenter(0);
-      } else if (n === 1) {
-        this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
-        this.checkWidthWithCenter(2);
-      }
-    }, 300);
-  }
-  setFontVariant(n) {
-    if (this.fontVariant[n] === 'small-caps') {
-      this.fontVariant[n] = 'normal';
-    } else {
-      this.fontVariant[n] = 'small-caps';
-    }
-    this.setButtonColor('fontVariant' + n);
-    setTimeout( () => {
-      if (n === 0) {
-        this.checkWidthWithCenter(0);
-      } else if (n === 1) {
-        this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
-        this.checkWidthWithCenter(2);
-      }
-    }, 300);
-  }
-  setTextAlignLeft(n) {
-    this.textAlign[n] = 'left';
-    this.setWhiteColor('alignRight' + n);
-    this.setWhiteColor('alignCenter' + n);
-    this.setBlueColor('alignLeft' + n);
-    if ( n === 2 ) {
-      this.checkWidth(2);
-    } else if ( n === 1) {
-      this.checkWidth(1);
-    } else if ( n === 0) {
-      this.checkWidth(0);
-    }
-  }
-  setTextAlignCenter(n) {
-    this.textAlign[n] = 'center';
-    this.setWhiteColor('alignRight' + n);
-    this.setWhiteColor('alignLeft' + n);
-    this.setBlueColor('alignCenter' + n);
-    if ( n === 2 ) {
-      this.checkWidth(2);
-    } else if ( n === 1 ) {
-      this.checkWidth(1);
-    } else if ( n === 0 ) {
-      this.checkWidth(0);
     }
   }
   setButtonColor(n) {
@@ -1346,20 +1047,6 @@ export class TemplateTypeComponent implements OnInit {
       }
     }
   }
-
-  setTextAlignRight(n) {
-    this.textAlign[n] = 'right';
-    this.setWhiteColor('alignCenter' + n);
-    this.setWhiteColor('alignLeft' + n);
-    this.setBlueColor('alignRight' + n);
-    if ( n === 2 ) {
-      this.checkWidth(2);
-    } else if ( n === 1) {
-      this.checkWidth(1);
-    } else if ( n === 0) {
-      this.checkWidth(0);
-    }
-  }
   setProportion() {
     const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
     let prop =  img.naturalWidth;
@@ -1382,95 +1069,71 @@ export class TemplateTypeComponent implements OnInit {
     if (name === 'Animal') {
       this.userImgBase64.push(this.imagesAnimal[n]);
     } else if (name === 'Sport') {
-      this._dataService.getSport2Img(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSport[n] + '.png');
+      this.add();
     } else if (name === 'Emocje') {
-      this._dataService.getSportImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesEmocje[n] + '.png');
+      this.add();
     } else if (name === 'Geografia') {
-      this._dataService.getGeografiaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesGeografia[n] + '.png');
+      this.add();
     } else if (name === 'Literatura') {
-      this._dataService.getLiteraturaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
+      this.add();
     } else if (name === 'Matematyka') {
       /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
-      this._dataService.getMatematykaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesMatematyka[n] + '.png');
+      this.add();
     } else if (name === 'Muzyka') {
-      this._dataService.getMuzykaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesMuzyka[n] + '.png');
+      this.add();
     } else if (name === 'Rosliny') {
-      this._dataService.getRoslinyImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesRosliny[n] + '.png');
+      this.add();
     } else if (name === 'Polska') {
-      this._dataService.getPolskaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesPolska[n] + '.png');
+      this.add();
     } else if (name === 'Swieta') {
-      this._dataService.getSwietaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSwieta[n] + '.png');
+      this.add();
     } else if (name === 'Szachy') {
-      this._dataService.getSzachyImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesSzachy[n] + '.png');
+      this.add();
     } else if (name === 'Zwierzeta') {
-      this._dataService.getZwierzetaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesZwierzeta[n] + '.png');
+      this.add();
     } else if (name === 'Literatura') {
-      this._dataService.getLiteraturaImg(n)
-        .subscribe(sport => {
-          this.userImgBase64.push(sport);
-          this.add();
-        });
+      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
+      this.add();
     }
   }
-  rotateBcgX() {
-    this.bcgRotateX = this.bcgRotateX * -1;
+  resetTxtField() {
+    this.textFieldArray = ['Pole 1', 'Pole 2', 'Pole 3', 'Pole 4', 'Pole 5'];
+    this.txtFieldColor = ['#000000', '#000000', '#000000', '#000000', '#000000'];
+    this.txtFieldFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+    this.txtFieldTop = [35, 35, 35, 35, 35];
+    this.txtFieldLeft = [0, 0, 0, 0, 0];
+    this.txtFieldRight = [0, 0, 0, 0, 0];
+    this.txtFieldSize = [3, 3, 3, 3, 3];
+    this.txtFieldStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.txtFieldWeight = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.txtFieldVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.txtFieldAlign = ['center', 'center', 'center', 'center', 'center'];
+    this.txtFieldShadow = [0, 0, 0, 0, 0];
+    this.txtFieldShadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
+    this.txtField = ['', '', '', '', ''];
   }
-  rotateBcgY() {
-    this.bcgRotateY = this.bcgRotateY * -1;
-  }
-  rotateFrmX() {
-    this.frmRotateX = this.frmRotateX * -1;
-  }
-  rotateFrmY() {
-    this.frmRotateY = this.frmRotateY * -1;
-  }
-  baseTemplate(n) {
+  baseTemplate(n, landscape, field) {
+    this.resetTxtField();
+    this.setTextFiledArray(field);
+    this.setTextFiledText(field);
     document.getElementById('spinner').style.display = 'block';
     try {
+      this.landscapeOff(landscape);
+      this.txtFieldTop = templateCoordinates[n - 1][0];
+      this.txtFieldRight = templateCoordinates[n - 1][2];
+      this.txtFieldLeft = templateCoordinates[n - 1][1];
+      this.txtFieldSize = templateCoordinates[n - 1][3];
       this.imgSrcFix = '../../assets/baseData/' + n + '.png';
       if ( this.currentBaseTemplate !== -1 ) {
         document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
@@ -1489,9 +1152,6 @@ export class TemplateTypeComponent implements OnInit {
     }
     document.getElementById('spinner').style.display = 'none';
   }
-  /*setCookies() {
-    document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-  }*/
   public checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {
@@ -1590,6 +1250,30 @@ export class TemplateTypeComponent implements OnInit {
     }
     return Math.round(percent - 1);
   }
+  setMaxWidthForTxtField(n) {
+    let percent = 100 - ( document.getElementById('fontField1' + n).offsetWidth /
+      document.getElementById('toPdf100').offsetWidth * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percent = 100 - ( document.getElementById('fontField2' + n).offsetWidth /
+        document.getElementById('toPdf100Landscape').offsetWidth * 100);
+    }
+    let percentTop = 100 - ( document.getElementById('fontField1' + n).offsetHeight /
+      document.getElementById('toPdf100').offsetHeight * 100);
+    if ( (this.landscape === 'inline-block') ) {
+      percentTop = 100 - ( document.getElementById('fontField2' + n).offsetHeight /
+        document.getElementById('toPdf100Landscape').offsetHeight * 100);
+    }
+    console.log(document.getElementById('fontField1' + n).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
+    this.maxWidthTxtFieldTop = Math.round(percentTop - 1);
+    this.maxWidthTxtFieldRight = Math.round(percent / 2 - 1);
+    console.log('margines' + this.maxWidthTxtFieldTop );
+    console.log('txtR: ' +  this.txtFieldLeft[n] + ' max: ' +  this.maxWidthTxtFieldRight);
+    if ( this.txtFieldLeft[n] > this.maxWidthTxtFieldRight) {
+      console.log('txtR: ' +  this.txtFieldLeft[n] + ' max: ' +  this.maxWidthTxtFieldRight);
+      this.txtFieldLeft[n] = 0;
+    }
+    return Math.round(percent - 1);
+  }
   setUserImgFrame(n) {
     for (let i = 0; i <  this.imgTop.length; i ++ ) {
       if (i === n) {
@@ -1607,7 +1291,7 @@ export class TemplateTypeComponent implements OnInit {
   checkDirectButtonValue(n, stepperIndex) {
     console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
-    if ( stepperIndex === 5 ) {
+    if ( stepperIndex === 3 ) {
       this.btnDirectRightDisabled = true;
       document.getElementById('btnDirectRight').style.right = '-200px';
       document.getElementById('btnDirectRight').style.opacity = '0';

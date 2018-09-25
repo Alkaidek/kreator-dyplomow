@@ -17,7 +17,9 @@ import {DataService} from '../data.service';
     ]
 })
 export class CreateComponent implements OnInit {
-  arraySelectFontFamili = [];
+  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
+    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
+    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   userImg =
     [];
   percentLeft = [100, 100, 100];
