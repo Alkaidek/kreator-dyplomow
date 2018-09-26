@@ -653,10 +653,18 @@ export class TemplateTypeComponent implements OnInit {
   landscapeOff(n) {
     if (n === 2) {
       this.landscape = 'none';
+      const width = document.getElementById('toPdf100').offsetWidth;
+      console.log(': ' + ( 2480 / width) );
+      this.multiple = (2480 / width );
       this.resetSettings();
     } else {
       this.resetSettings();
       this.landscape = 'inline-block';
+      setTimeout( () => {
+        const width = document.getElementById('toPdf100Landscape').offsetHeight;
+        console.log(': ' + ( 2480 / width) );
+        this.multiple = (2480 / width );
+      }, 100);
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
     }
