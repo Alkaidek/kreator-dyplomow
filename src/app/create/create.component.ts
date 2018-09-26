@@ -67,6 +67,7 @@ export class CreateComponent implements OnInit {
   szachyHeight = 11;
   zwierzetaHeight = 11;
   footer = 'Kielce, dnia ';
+  onLoadBool = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     for ( let i = 1; i < 50; i++ ) {
@@ -226,8 +227,6 @@ export class CreateComponent implements OnInit {
   imageFrameWidthLandscape = 100;
   imageFrameWidthFix = 100;
   imageFrameWidthLandscapeFix = 100;
-  setTypeDisplay = 'block';
-  templateTypeDisplay = 'block';
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -286,8 +285,6 @@ export class CreateComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.cookies();
-    /*this.session();*/
     this.setOnInitData();
     this.addScrollListener();
     this.setPaddingAnchor();
@@ -314,46 +311,6 @@ export class CreateComponent implements OnInit {
   }
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);
-  }
-  session() {
-    if (typeof(Storage) !== 'undefined') {
-      console.log('ok');
-      /*localStorage*/
-      console.log('sesja:bofore: ' + localStorage.getItem('key'));
-      if ( localStorage.getItem('key') === null ) {
-        console.log('Fail!');
-      }
-      localStorage.setItem(
-        'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'LocalStorage' + Math.floor(Math.random() * 999 ) + 1 );
-      console.log('sesja:after: ' + localStorage.getItem('key'));
-      /*sessionStorage*/
-      console.log('sesja:before: ' + sessionStorage.getItem('key'));
-      if ( localStorage.getItem('key') === 'null' ) {
-        console.log('Fail!');
-      }
-      sessionStorage.setItem(
-        'key', 'MaBla93' + Math.floor(Math.random() * 999 ) + 1 + 'SessionStorage' + Math.floor(Math.random() * 999 ) + 1 );
-      console.log('sesja:after: ' + sessionStorage.getItem('key'));
-    } else {
-      console.log('sorry');
-    }
-  }
-  cookies() {
-    /*console.log('ciasteczka: ' + document.cookie);*/
-    /*const d = new Date();
-    d.setTime(d.getTime() + ( 2 * 60 * 1000));
-    const expires = 'expires=' + d.toUTCString();
-    document.cookie = 'email=' + this.email + ';' + expires + ';path=/';
-    console.log('email=' + this.email + ';' + expires + ';path=/');*/
-    const value = '; ' + document.cookie;
-    if ( value.search('mac-cookie') !== -1 ) {
-
-    }
-    const parts = value.split('; CookiesPrivagles=');
-    if ( parts.length === 2 ) {
-      this.disp = parts.pop().split(';').shift();
-    }
-    console.log('ciasteczka: ' + document.cookie);
   }
   setOnInitData() {
     setTimeout( () => {
@@ -871,6 +828,7 @@ export class CreateComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
+    this.onLoadBool = false;
     this.txtAlign = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
@@ -1791,6 +1749,7 @@ export class CreateComponent implements OnInit {
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   setImg(n, name) {
+    this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
     if (name === 'Animal') {
@@ -2068,19 +2027,22 @@ export class CreateComponent implements OnInit {
     }
   }
   chcekProportions() {
-    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-    let prop =  img.naturalWidth;
-    prop = prop / img.naturalHeight;
-    let multipleHeight;
-    let multipleWidth;
-    if ( (this.landscape === 'inline-block') ) {
-      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
-      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
-    } else {
-      multipleHeight = document.getElementById('pdfFor').offsetHeight;
-      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    if ( this.onLoadBool ) {
+      console.log('check' + this.onLoadBool);
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      let multipleHeight;
+      let multipleWidth;
+      if ( (this.landscape === 'inline-block') ) {
+        multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+        multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+      } else {
+        multipleHeight = document.getElementById('pdfFor').offsetHeight;
+        multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      }
+      const propPdfFor = multipleWidth / multipleHeight;
+      this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }
-    const propPdfFor = multipleWidth / multipleHeight;
-    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
 }

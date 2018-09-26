@@ -26,10 +26,7 @@ export class TemplateTypeComponent implements OnInit {
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
-  bcgTemp = [];
   template: any;
-  coordinatesTemplate = [];
-  frames = [];
   bool = 'block';
   imagesAnimal = ['../../assets/img/animal/1.png',
     '../../assets/img/animal/2.png',
@@ -59,6 +56,7 @@ export class TemplateTypeComponent implements OnInit {
   zwierzetaHeight = 11;
   textFieldArray = ['Pole 1', 'Pole 2', 'Pole 3', 'Pole 4', 'Pole 5'];
   footer = '';
+  onLoadBool = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     for ( let i = 1; i < 50; i++ ) {
@@ -122,8 +120,6 @@ export class TemplateTypeComponent implements OnInit {
   actualTxt = '';
   landscape = 'inline-block';
   currentStep = 0;
-  arrayScroll = [1, 2, 3];
-  arrayScrollFrame = [1, 2, 3];
   bcgColor = '#ffffff';
   base64Tmp = '';
   base64 = '';
@@ -177,9 +173,7 @@ export class TemplateTypeComponent implements OnInit {
   txtField = ['', '', '', '', ''];
   currentTxt = -1;
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
-  shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
   shadowSmall = '0% 0%';
-  shadowSmallFix = '0% 0%';
   txtColor = [];
   txtColorText = '';
   txtFontFamili = [];
@@ -562,6 +556,7 @@ export class TemplateTypeComponent implements OnInit {
         this.txtFieldShadowColor = template.txtFieldShadowColor;
         this.txtField = template.txtField;
         this.setTextFiledArray(template.txtField.length);
+        this.setAllButtonColor();
       } catch (e) {
         console.log('Something goes wrong');
       }
@@ -578,6 +573,7 @@ export class TemplateTypeComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
+    this.onLoadBool = false;
     this.txtAlign = [];
     this.tmpBtnDisable = true;
     this.txtStyle = [];
@@ -1081,35 +1077,35 @@ export class TemplateTypeComponent implements OnInit {
     document.getElementById(n).style.color = 'white';
   }
   setAllButtonColor() {
-    for (let i = 0; i < this.fontStyle.length; i++) {
-      if (this.fontStyle[i] === 'normal') {
-        this.setWhiteColor('fontStyle' + i);
+    for (let i = 0; i < this.txtField.length; i++) {
+      if (this.txtFieldStyle[i] === 'normal') {
+        this.setWhiteColor('fontStyle6' + i);
       } else {
-        this.setBlueColor('fontStyle' + i);
+        this.setBlueColor('fontStyle6' + i);
       }
-      if (this.fontWeight[i] === 'normal') {
-        this.setWhiteColor('fontWeight' + i);
+      if (this.txtFieldWeight[i] === 'normal') {
+        this.setWhiteColor('fontWeight6' + i);
       } else {
-        this.setBlueColor('fontWeight' + i);
+        this.setBlueColor('fontWeight6' + i);
       }
-      if (this.fontVariant[i] === 'normal') {
-        this.setWhiteColor('fontVariant' + i);
+      if (this.txtFieldVariant[i] === 'normal') {
+        this.setWhiteColor('fontVariant6' + i);
       } else {
-        this.setBlueColor('fontVariant' + i);
+        this.setBlueColor('fontVariant6' + i);
       }
       if (i < 4) {
-        if (this.textAlign[i] === 'center') {
-          this.setWhiteColor('alignLeft' + i);
-          this.setWhiteColor('alignRight' + i);
-          this.setBlueColor('alignCenter' + i);
-        } else if (this.textAlign[i] === 'left' ) {
-          this.setBlueColor('alignLeft' + i);
-          this.setWhiteColor('alignRight' + i);
-          this.setWhiteColor('alignCenter' + i);
+        if (this.txtFieldAlign[i] === 'center') {
+          this.setWhiteColor('alignLeft6' + i);
+          this.setWhiteColor('alignRight6' + i);
+          this.setBlueColor('alignCenter6' + i);
+        } else if (this.txtFieldAlign[i] === 'left' ) {
+          this.setBlueColor('alignLeft6' + i);
+          this.setWhiteColor('alignRight6' + i);
+          this.setWhiteColor('alignCenter6' + i);
         } else {
-          this.setWhiteColor('alignLeft' + i);
-          this.setBlueColor('alignRight' + i);
-          this.setWhiteColor('alignCenter' + i);
+          this.setWhiteColor('alignLeft6' + i);
+          this.setBlueColor('alignRight6' + i);
+          this.setWhiteColor('alignCenter6' + i);
         }
       }
     }
@@ -1131,6 +1127,7 @@ export class TemplateTypeComponent implements OnInit {
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   setImg(n, name) {
+    this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
     if (name === 'Animal') {
@@ -1437,19 +1434,22 @@ export class TemplateTypeComponent implements OnInit {
     }
   }
   chcekProportions() {
-    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-    let prop =  img.naturalWidth;
-    prop = prop / img.naturalHeight;
-    let multipleHeight;
-    let multipleWidth;
-    if ( (this.landscape === 'inline-block') ) {
-      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
-      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
-    } else {
-      multipleHeight = document.getElementById('pdfFor').offsetHeight;
-      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    if ( this.onLoadBool ) {
+      console.log('check');
+      const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+      let prop =  img.naturalWidth;
+      prop = prop / img.naturalHeight;
+      let multipleHeight;
+      let multipleWidth;
+      if ( (this.landscape === 'inline-block') ) {
+        multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+        multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+      } else {
+        multipleHeight = document.getElementById('pdfFor').offsetHeight;
+        multipleWidth = document.getElementById('pdfFor').offsetWidth;
+      }
+      const propPdfFor = multipleWidth / multipleHeight;
+      this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }
-    const propPdfFor = multipleWidth / multipleHeight;
-    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
 }

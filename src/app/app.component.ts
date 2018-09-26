@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const value = '; ' + document.cookie;
     console.log (document.referrer);
-    if ((value.search('mac-cookie') !== -1) /*&& (document.referrer.search('localhost') !== -1)*/) {
+    /*ODBLOKOWAĆ PRZED WYPUSZCZENIEM !!! sprawdzanie odwołania!!!*/
+    if ((value.search('mac-cookie') !== -1) /*&& (document.referrer.search('mac') !== -1)*/) {
       this.auth = 'block';
       this.err = 'none';
     }
