@@ -433,7 +433,7 @@
           </mat-expansion-panel-header>
           <div class="dataContainer">
             <div class="dataContainer"
-                 style="height: 490px; background-color: white; text-align: center; padding-top: 0vh">
+                 style="height: 550px; background-color: white; text-align: center; padding-top: 0vh">
               <div class="leftCont"
                    style="background-color: white;
              height: 510px">
@@ -1320,7 +1320,8 @@
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
+           [style.top]="imgTop[usr]+'%'"
+           (load)="chcekProportions()"/>
       <div *ngFor="let txt of userTxt; let i = index"
                   class="userTxt"
                   style="position: absolute; z-index: 1; width: 100%;"
@@ -1403,7 +1404,8 @@
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
+           [style.top]="imgTop[usr]+'%'"
+           (load)="chcekProportions()"/>
       <div *ngFor="let txt of userTxt; let i = index" class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
            [style.top]="txtTop[i]+'%'">

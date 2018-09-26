@@ -2445,7 +2445,8 @@
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
+           [style.top]="imgTop[usr]+'%'"
+           (load)="chcekProportions()"/>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
@@ -2609,7 +2610,8 @@
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"/>
+           [style.top]="imgTop[usr]+'%'"
+           (load)="chcekProportions()"/>
       <div *ngFor="let txt of userTxt; let i = index" class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
            [style.top]="txtTop[i]+'%'">

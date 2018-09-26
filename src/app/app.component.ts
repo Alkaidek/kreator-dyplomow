@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
   disp = false;
-  err = 'inline-block';
-  auth = 'none';
+  /*zmienic przed wypuszczeniem!! na inline-block*/
+  err = 'none';
+  /*zmienic przed wypuszczeniem!! na none*/
+  auth = 'block';
   templateTypeDisplay = false;
   setTypeDisplay = 'block';
   ngOnInit() {

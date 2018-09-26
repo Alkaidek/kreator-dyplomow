@@ -365,6 +365,13 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.emocjeHeight = Math.round(divide) * 10 + Math.round(divide);
+    console.log('w: ' + window.screen.width);
+    if ( window.screen.width < 1300) {
+      this.emocjeHeight = this.emocjeHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.emocjeHeight = this.emocjeHeight + 5;
+    }
   }
   setHeightMuzyka(array) {
     let divide = array.length / 5;
@@ -372,6 +379,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.muzykaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.muzykaHeight = this.muzykaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.muzykaHeight = this.muzykaHeight + 5;
+    }
   }
   setHeightRosliny(array) {
     let divide = array.length / 5;
@@ -379,6 +392,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.roslinyHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.roslinyHeight = this.roslinyHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.roslinyHeight = this.roslinyHeight + 5;
+    }
   }
   setHeightZwierzeta(array) {
     let divide = array.length / 5;
@@ -386,6 +405,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.zwierzetaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.zwierzetaHeight = this.zwierzetaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.zwierzetaHeight = this.zwierzetaHeight + 5;
+    }
   }
   setHeightSwieta(array) {
     let divide = array.length / 5;
@@ -393,6 +418,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.swietaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.swietaHeight = this.swietaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.swietaHeight = this.swietaHeight + 5;
+    }
   }
   setHeightSport(array) {
     let divide = array.length / 5;
@@ -400,6 +431,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.sportHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.sportHeight = this.sportHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.sportHeight = this.sportHeight + 5;
+    }
   }
   setHeightPolska(array) {
     let divide = array.length / 5;
@@ -407,14 +444,25 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.polskaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.polskaHeight = this.polskaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.polskaHeight = this.polskaHeight + 5;
+    }
   }
-
   setHeightGeografia(array) {
     let divide = array.length / 5;
     if ( divide > Math.round(divide)) {
       divide = divide + 0.5;
     }
     this.geografiaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.geografiaHeight = this.geografiaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.geografiaHeight = this.geografiaHeight + 5;
+    }
   }
   setHeightSzachy(array) {
     let divide = array.length / 5;
@@ -422,6 +470,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.szachyHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.szachyHeight = this.szachyHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.szachyHeight = this.szachyHeight + 5;
+    }
   }
   setHeightMatematyka(array) {
     let divide = array.length / 5;
@@ -429,6 +483,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.matematykaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.matematykaHeight = this.matematykaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.matematykaHeight = this.matematykaHeight + 5;
+    }
   }
   setHeightLiteratura(array) {
     let divide = array.length / 5;
@@ -436,6 +496,12 @@ export class TemplateTypeComponent implements OnInit {
       divide = divide + 0.5;
     }
     this.literaturaHeight = Math.round(divide) * 10 + Math.round(divide);
+    if ( window.screen.width < 1300) {
+      this.literaturaHeight = this.literaturaHeight + 7;
+    }
+    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      this.literaturaHeight = this.literaturaHeight + 5;
+    }
   }
   setUserData(template) {
     try {
@@ -600,6 +666,7 @@ export class TemplateTypeComponent implements OnInit {
     }
   }
   add() {
+    this.openSnackBar('Edytor obrazka znajduje się na dole strony!', 'ok');
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
@@ -624,7 +691,7 @@ export class TemplateTypeComponent implements OnInit {
       }
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
-    }, 50 );
+    }, 200 );
   }
   removeImg() {
     this.userImg.pop();
@@ -1368,5 +1435,21 @@ export class TemplateTypeComponent implements OnInit {
         this.imgLeft[this.currImg] = 0;
       }
     }
+  }
+  chcekProportions() {
+    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+    let prop =  img.naturalWidth;
+    prop = prop / img.naturalHeight;
+    let multipleHeight;
+    let multipleWidth;
+    if ( (this.landscape === 'inline-block') ) {
+      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+    } else {
+      multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    }
+    const propPdfFor = multipleWidth / multipleHeight;
+    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
 }
