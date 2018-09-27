@@ -62,48 +62,48 @@ export class TemplateTypeComponent implements OnInit {
     for ( let i = 1; i < 50; i++ ) {
       this.imagesMatematyka.push('../../assets/img/matematyka/' + i);
     }
-    this.setHeightMatematyka(this.imagesMatematyka);
+    this.matematykaHeight = this.setHeightElement(this.imagesMatematyka);
     for ( let i = 1; i < 55; i++ ) {
       this.imagesMuzyka.push('../../assets/img/muzyka/' + i );
     }
-    this.setHeightMuzyka(this.imagesMuzyka);
+    this.muzykaHeight = this.setHeightElement(this.imagesMuzyka);
     for ( let i = 1; i < 13; i++ ) {
       this.imagesPolska.push('../../assets/img/polska/' + i );
     }
-    this.setHeightPolska(this.imagesPolska);
+    this.polskaHeight = this.setHeightElement(this.imagesPolska);
     for ( let i = 1; i < 42; i++ ) {
       this.imagesSport.push('../../assets/img/sport/' + i );
     }
-    this.setHeightSport(this.imagesSport);
+    this.sportHeight = this.setHeightElement(this.imagesSport);
     for ( let i = 1; i < 51; i++ ) {
       this.imagesSwieta.push('../../assets/img/swieta/' + i);
     }
-    this.setHeightSwieta(this.imagesSwieta);
+    this.swietaHeight = this.setHeightElement(this.imagesSwieta);
     for ( let i = 1; i < 19; i++ ) {
       this.imagesSzachy.push('../../assets/img/szachy/' + i);
     }
-    this.setHeightSzachy(this.imagesSzachy);
+    this.szachyHeight = this.setHeightElement(this.imagesSzachy);
     for ( let i = 1; i < 80; i++ ) {
       this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i);
     }
-    this.setHeightZwierzeta(this.imagesZwierzeta);
+    this.zwierzetaHeight = this.setHeightElement(this.imagesZwierzeta);
     for ( let i = 1; i < 34; i++ ) {
       this.imagesRosliny.push('../../assets/img/rosliny/' + i);
     }
-    this.setHeightRosliny(this.imagesRosliny);
+    this.roslinyHeight = this.setHeightElement(this.imagesRosliny);
 
     for ( let i = 1; i < 44; i++ ) {
       this.imagesEmocje.push('../../assets/img/emocje/' + i);
     }
-    this.setHeightEmocje(this.imagesEmocje);
+    this.emocjeHeight = this.setHeightElement(this.imagesEmocje);
     for ( let i = 1; i < 40; i++ ) {
       this.imagesGeografia.push('../../assets/img/geografia/' + i );
     }
-    this.setHeightGeografia(this.imagesGeografia);
+    this.geografiaHeight = this.setHeightElement(this.imagesGeografia);
     for ( let i = 1; i < 39; i++ ) {
       this.imagesLiteratura.push('../../assets/img/literatura/' + i);
     }
-    this.setHeightLiteratura(this.imagesLiteratura);
+    this.literaturaHeight = this.setHeightElement(this.imagesLiteratura);
   }
   MACblue = '#25408f';
   whiteColor = 'white';
@@ -285,6 +285,9 @@ export class TemplateTypeComponent implements OnInit {
     for ( let i = 0; i < n; i++) {
       index = i + 1;
       this.txtField.push('Pole ' + index);
+      setTimeout(  () => {
+        this.setMaxWidthForTxtField(i);
+      }, 100);
     }
   }
   generateHQualityPdf() {
@@ -353,149 +356,19 @@ export class TemplateTypeComponent implements OnInit {
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
-  setHeightEmocje(array) {
+  setHeightElement(array) {
     let divide = array.length / 5;
+    let varibleHeight;
     if ( divide > Math.round(divide)) {
       divide = divide + 0.5;
     }
-    this.emocjeHeight = Math.round(divide) * 10 + Math.round(divide);
-    console.log('w: ' + window.screen.width);
+    varibleHeight = Math.round(divide) * 10 + Math.round(divide);
     if ( window.screen.width < 1300) {
-      this.emocjeHeight = this.emocjeHeight + 7;
+      varibleHeight = varibleHeight + 7;
+    } else if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+      varibleHeight = varibleHeight;
     }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.emocjeHeight = this.emocjeHeight + 5;
-    }
-  }
-  setHeightMuzyka(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.muzykaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.muzykaHeight = this.muzykaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.muzykaHeight = this.muzykaHeight + 5;
-    }
-  }
-  setHeightRosliny(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.roslinyHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.roslinyHeight = this.roslinyHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.roslinyHeight = this.roslinyHeight + 5;
-    }
-  }
-  setHeightZwierzeta(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.zwierzetaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.zwierzetaHeight = this.zwierzetaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.zwierzetaHeight = this.zwierzetaHeight + 5;
-    }
-  }
-  setHeightSwieta(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.swietaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.swietaHeight = this.swietaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.swietaHeight = this.swietaHeight + 5;
-    }
-  }
-  setHeightSport(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.sportHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.sportHeight = this.sportHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.sportHeight = this.sportHeight + 5;
-    }
-  }
-  setHeightPolska(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.polskaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.polskaHeight = this.polskaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.polskaHeight = this.polskaHeight + 5;
-    }
-  }
-  setHeightGeografia(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.geografiaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.geografiaHeight = this.geografiaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.geografiaHeight = this.geografiaHeight + 5;
-    }
-  }
-  setHeightSzachy(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.szachyHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.szachyHeight = this.szachyHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.szachyHeight = this.szachyHeight + 5;
-    }
-  }
-  setHeightMatematyka(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.matematykaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.matematykaHeight = this.matematykaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.matematykaHeight = this.matematykaHeight + 5;
-    }
-  }
-  setHeightLiteratura(array) {
-    let divide = array.length / 5;
-    if ( divide > Math.round(divide)) {
-      divide = divide + 0.5;
-    }
-    this.literaturaHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
-      this.literaturaHeight = this.literaturaHeight + 7;
-    }
-    if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
-      this.literaturaHeight = this.literaturaHeight + 5;
-    }
+    return varibleHeight;
   }
   setUserData(template) {
     try {

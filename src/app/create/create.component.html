@@ -118,7 +118,7 @@
              [style.font-variant]="fontVariant[0]"
              [style.font-weight]="fontWeight[0]"
              [style.text-shadow]="shadowLargeFix[0] + ' ' + shadowColor[0]"
-             [style.font-size]="(arrayFontSize[0]* (multiple +  1.4)) + 'vw'"
+             [style.font-size]="(arrayFontSize[0]* (multiple)) + 'vw'"
              [style.color]="arrayFontColor[0]"
              style="z-index: 8;">
             {{title}}
@@ -133,7 +133,7 @@
            [style.text-align]="textAlign[1]"
       >
         <s id="sForLandscapeFix" [style.letter-spacing]="(letterSpacingForWho* (multiple))+'vw'"
-           [style.font-size]="(arrayFontSize[2] * (multiple +  1.4)) + 'vw'"
+           [style.font-size]="(arrayFontSize[2] * (multiple)) + 'vw'"
            [style.font-family]="arrayFontFamili[1]"
            [style.font-variant]="fontVariant[1]"
            [style.font-style]="fontStyle[1]"
@@ -149,7 +149,7 @@
            [style.padding-left]="marginLeft[2] + '%'"
            [style.padding-right]="marginRight[2] + '%'"
            [style.text-align]="textAlign[2]">
-        <s id="txtForWhatLandscapeFix" [style.font-size]="(arrayFontSize[4]* (multiple +  1.4)) + 'vw'"
+        <s id="txtForWhatLandscapeFix" [style.font-size]="(arrayFontSize[4]* (multiple)) + 'vw'"
            [style.font-family]="arrayFontFamili[2]"
            [style.font-style]="fontStyle[2]"
            [style.font-variant]="fontVariant[2]"
@@ -160,11 +160,11 @@
           {{forWhat}}
         </s>
       </div>
-      <div class="signature" id="signLandscapeFix" [style.bottom]="(bottom * multiple * 1.4) + 'px'"
+      <div class="signature" id="signLandscapeFix" [style.bottom]="(bottom ) + '%'"
            [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%;" style="z-index: 7;">
         <p id="leftLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple + 0.8) ) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple) ) + 'vw'"
            [style.font-family]="arrayFontFamili[3]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -174,7 +174,7 @@
           {{sign1}}
         </p>
         <p id="centerLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple +  0.8)) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple)) + 'vw'"
            [style.font-family]="arrayFontFamili[4]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -184,7 +184,7 @@
           {{sign3}}
         </p>
         <p id="rightLandscapeFix"
-           [style.font-size]="(arrayFontSize[1]* (multiple + 0.8) ) + 'vw'"
+           [style.font-size]="(arrayFontSize[1]* (multiple) ) + 'vw'"
            [style.font-family]="arrayFontFamili[5]"
            [style.font-style]="fontStyle[3]"
            [style.font-weight]="fontWeight[3]"
@@ -195,7 +195,7 @@
         </p>
       </div>
       <div class="signature"
-           [style.text-align]="textAlign[3]" [style.bottom]="(bottom * multiple * 1.5) + 'px'"
+           [style.text-align]="textAlign[3]" [style.bottom]="(bottom ) + '%'"
            [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%;" style="z-index: 7;" [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscapeFix"
@@ -204,7 +204,7 @@
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
            [style.font-weight]="fontWeight[4]"
-           [style.font-size]="(arrayFontSize[3]* (multiple + 1.1)) + 'vw'"
+           [style.font-size]="(arrayFontSize[3]* (multiple )) + 'vw'"
            [style.color]="arrayFontColor[3]">
           {{footer}}
         </p>
@@ -308,7 +308,7 @@
         </s>
       </div>
 
-      <div class="signature" id="signFix" [style.bottom]="(bottom*multiple) + 'px'"
+      <div class="signature" id="signFix" [style.bottom]="(bottom) + '%'"
            [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%;" style="z-index: 7;">
         <p id="leftFix"
@@ -340,7 +340,7 @@
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.text-align]="textAlign[3]" [style.bottom]="(bottom*multiple) + 'px'"
+      <div class="signature" [style.text-align]="textAlign[3]" [style.bottom]="(bottom) + '%'"
            [style.padding-top]="paddingTopFooter + '%'" [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
         <p id="smallTxtFix" [style.text-shadow]="shadowSmallFix + ' ' + shadowColor[4]"
@@ -1432,8 +1432,8 @@
                         Dolny margines
                       </p>
                       <input type="range"
-                             min="-100"
-                             max="300"
+                             min="-10"
+                             max="70"
                              [value]="bottom"
                              (input)="bottom = $event.target.value"
                              class="slider50 fadeInLeft"
@@ -1608,11 +1608,11 @@
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
                       <p class="fadeInTop">
-                        Dolny margines
+                        Dolny margines {{bottom}}
                       </p>
                       <input type="range"
-                             min="-100"
-                             max="300"
+                             min="-10"
+                             max="70"
                              [value]="bottom"
                              (input)="bottom = $event.target.value"
                              class="slider50 fadeInLeft"
@@ -2541,7 +2541,7 @@
       </div>
 
       <div class="signature" id="sign"
-           [style.bottom]="bottom + 'px'"
+           [style.bottom]="bottom + '%'"
            [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%; z-index: 7;" >
@@ -2576,7 +2576,7 @@
       </div>
       <div class="signature"
            [style.text-align]="textAlign[3]"
-           [style.bottom]="bottom + 'px'"
+           [style.bottom]="bottom + '%'"
            [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'" style="min-width:100%; z-index: 7; "
            [style.padding-top]="paddingTopFooter + '%'">
@@ -2702,7 +2702,7 @@
         </s>
       </div>
       <div class="signature" id="signLandscape"
-           [style.bottom]="bottom + 'px'"
+           [style.bottom]="bottom + '%'"
            [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%; z-index: 7;">
@@ -2739,7 +2739,7 @@
       </div>
       <div class="signature"
            [style.text-align]="textAlign[3]"
-           [style.bottom]="bottom + 'px'"
+           [style.bottom]="bottom + '%'"
            [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%; z-index: 7"
