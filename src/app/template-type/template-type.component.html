@@ -293,7 +293,7 @@
   </div>
   <div id="directBcg">
   </div>
-  <mat-horizontal-stepper linear="false" #stepper class="stepper" style="margin-top: 10vh"
+  <mat-horizontal-stepper #stepper class="stepper" linear="false" style="margin-top: 10vh"
                           (selectionChange)="checkDirectButtonValue(-1, $event.selectedIndex)">
     <mat-step stepControl="false">
 
@@ -412,14 +412,14 @@
         </div>
       </div>
     </mat-step>
-    <mat-step stepControl="false">
+    <mat-step stepControl="false" >
       <ng-template matStepLabel>Drugi krok</ng-template>
       <div id="txtContainter">
         <div class="textBox">
           <h3 class="fadeInTop">Wpisz dane</h3>
         </div>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let txtFieldFor of textFieldArray; let i = index">
+          <mat-expansion-panel *ngFor="let txtFieldFor of textFieldArray; let i = index" [disabled]="tmpBtnDisable">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Pole {{i + 1}}
@@ -873,7 +873,7 @@
         </div>
       </div>
     </mat-step>
-    <mat-step stepControl="false">
+    <mat-step stepControl="false" >
       <ng-template matStepLabel>
         Ostatni krok
       </ng-template>

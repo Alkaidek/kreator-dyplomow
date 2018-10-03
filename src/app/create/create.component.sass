@@ -750,6 +750,22 @@ s
   width: 100%
   position: absolute
   bottom: 0%
+  -ms-word-wrap: break-spaces
+  word-break: keep-all
+  white-space: pre-wrap
+
+#leftLandscapeFix,
+#centerLandscapeFix,
+#rightLandscapeFix,
+#leftFix,
+#centerFix,
+#rightFix
+  -ms-overflow-wrap: normal
+  -ms-word-break: keep-all
+  -ms-word-wrap: break-spaces
+  word-wrap: break-spaces
+  white-space: pre-wrap
+  word-break: keep-all
 
 #smallTxt,
 #smallTxtFix,
@@ -757,6 +773,7 @@ s
 #smallTxtLandscapeFix
   font-weight: lighter
   font-size: 120%
+  word-break: keep-all
 
 #largeTxt,
 #largeTxtFix,

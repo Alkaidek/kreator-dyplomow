@@ -54,7 +54,7 @@ export class TemplateTypeComponent implements OnInit {
   swietaHeight = 11;
   szachyHeight = 11;
   zwierzetaHeight = 11;
-  textFieldArray = ['Pole 1', 'Pole 2', 'Pole 3', 'Pole 4', 'Pole 5'];
+  textFieldArray = ['', '', '', '', ''];
   footer = '';
   onLoadBool = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
@@ -184,10 +184,6 @@ export class TemplateTypeComponent implements OnInit {
   txtFontFamiliText = '';
   currentFontFamili = 0;
   letterSpacingForWho = 0;
-  fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
-  fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-  fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-  textAlign = ['center', 'center', 'center', 'center', 'center'];
   btnDirectLeftDisabled = true;
   btnDirectRightDisabled = false;
   checkboxSizeAttach = true;
@@ -249,7 +245,7 @@ export class TemplateTypeComponent implements OnInit {
     if ( date.getDate() < 10) {
       day = '0' + day;
     }
-    if ( (date.getMonth() )  < 10) {
+    if ( (date.getMonth() + 1 )  < 10) {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
@@ -446,6 +442,9 @@ export class TemplateTypeComponent implements OnInit {
     } catch (err) {
       console.log('no element');
     }
+    this.setTextFiledArray(0);
+    this.setTextFiledText(0);
+    this.textFieldArray = ['', '', '', '', ''];
     this.onLoadBool = false;
     this.txtAlign = [];
     this.tmpBtnDisable = true;
@@ -1069,12 +1068,12 @@ export class TemplateTypeComponent implements OnInit {
     this.txtField = ['', '', '', '', ''];
   }
   baseTemplate(n, landscape, field) {
+    this.landscapeOff(landscape);
     this.resetTxtField();
     this.setTextFiledArray(field);
     this.setTextFiledText(field);
     document.getElementById('spinner').style.display = 'block';
     try {
-      this.landscapeOff(landscape);
       this.txtFieldTop = templateCoordinates[n - 1][0];
       this.txtFieldRight = templateCoordinates[n - 1][2];
       this.txtFieldLeft = templateCoordinates[n - 1][1];

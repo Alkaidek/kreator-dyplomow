@@ -6,6 +6,7 @@ import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
 import { coordinates } from '../coordinates.js';
+import {tryCatch} from 'rxjs/internal-compatibility';
 
 
 @Component({
@@ -203,7 +204,9 @@ export class CreateComponent implements OnInit {
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
   shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
   shadowSmall = '0% 0%';
+  shadowSmallFooter = '0% 0%';
   shadowSmallFix = '0% 0%';
+  shadowSmallFixFooter = '0% 0%';
   txtColor = [];
   disp = 'block';
   txtColorText = '';
@@ -301,11 +304,11 @@ export class CreateComponent implements OnInit {
     const date = new Date();
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
-    let monthStr = '';
+    let monthStr = month + '';
     if ( date.getDate() < 10) {
       day = '0' + day;
     }
-    if ( (date.getMonth() )  < 10) {
+    if ( (date.getMonth() + 1 )  < 10) {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
@@ -599,6 +602,7 @@ export class CreateComponent implements OnInit {
       }
       this.paddingTopFooter = template.paddingTopFooter;
       this.shadowSmall =  template.shadowSmall;
+      this.shadowSmallFooter =  template.shadowSmallFooter;
       this.letterSpacing = template.letterSpacing;
       this.letterSpacingForWho = template.letterSpacingForWho;
       this.bottom = template.bottom;
@@ -709,7 +713,9 @@ export class CreateComponent implements OnInit {
     this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
     this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
     this.shadowSmall = '0px 0px';
+    this.shadowSmallFooter = '0px 0px';
     this.shadowSmallFix = '0px 0px';
+    this.shadowSmallFixFooter = '0px 0px';
     this.bcgRotateX = 1;
     this.bcgRotateY = 1;
     this.frmRotateX = 1;
@@ -1113,6 +1119,8 @@ export class CreateComponent implements OnInit {
       + this.createTextToJSON(this.textAlign) + '],'
       + '"shadowSmall" : "'
       +  this.shadowSmall + '", '
+      + '"shadowSmallFooter" : "'
+      +  this.shadowSmallFooter + '", '
       + '"letterSpacing" : "'
       + this.letterSpacing + '", '
       + '"letterSpacingForWho" : "'
@@ -1371,12 +1379,22 @@ export class CreateComponent implements OnInit {
         this.shadowLargeFix[n] = '20px 20px 20px';
       }
     } else {
-      if ( this.shadowSmall === '2px 2px 2px' ) {
-        this.shadowSmall = '0px 0px';
-        this.shadowSmallFix = '0px 0px';
+      if ( n === 1 ) {
+        if ( this.shadowSmallFooter === '2px 2px 2px' ) {
+          this.shadowSmallFooter = '0px 0px';
+          this.shadowSmallFixFooter = '0px 0px';
+        } else {
+          this.shadowSmallFooter = '2px 2px 2px';
+          this.shadowSmallFixFooter = '10px 10px 10px';
+        }
       } else {
-        this.shadowSmall = '2px 2px 2px';
-        this.shadowSmallFix = '10px 10px 10px';
+        if ( this.shadowSmall === '2px 2px 2px' ) {
+          this.shadowSmall = '0px 0px';
+          this.shadowSmallFix = '0px 0px';
+        } else {
+          this.shadowSmall = '2px 2px 2px';
+          this.shadowSmallFix = '10px 10px 10px';
+        }
       }
     }
   }
@@ -1392,6 +1410,15 @@ export class CreateComponent implements OnInit {
       this.shadowSmallFix = '10px 10px 10px';
     } else {
       this.shadowSmallFix = '0px 0px';
+    }
+    try {
+      if ( temp.shadowSmallFooter === '2px 2px 2px' ) {
+        this.shadowSmallFixFooter = '10px 10px 10px';
+      } else {
+        this.shadowSmallFixFooter = '0px 0px';
+      }
+    } catch (e) {
+      console.log('no Shadow');
     }
   }
   setFontStyle(n) {
@@ -1684,34 +1711,6 @@ export class CreateComponent implements OnInit {
   rotateFrmY() {
     this.frmRotateY = this.frmRotateY * -1;
   }
-  baseTemplate(n) {
-    document.getElementById('spinner').style.display = 'block';
-    try {
-      const request = new XMLHttpRequest();
-      request.open('GET', '../../assets/data/' + n + '.MACproject', false);
-      request.send(null);
-      const obj = JSON.parse(request.responseText);
-      this.setUserData(obj);
-      if ( this.currentBaseTemplate !== -1 ) {
-        document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
-        document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
-        document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
-        document.getElementById('base' + n).style.filter = 'grayscale(0%)';
-      } else {
-        document.getElementById( 'base' + n ).style.transform = 'scale(1,1)';
-        document.getElementById('base' + n).style.filter = 'grayscale(0%)';
-      }
-      this.currentBaseTemplate = n;
-      this.tmpBtnDisable = false;
-    } catch (err) {
-      this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niekomaptybilny, uszkodzony lub przestarzały!', 'ok');
-    }
-    document.getElementById('spinner').style.display = 'none';
-  }
-  /*setCookies() {
-    document.cookie = 'CookiesPrivagles=none; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-  }*/
   public checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {

@@ -199,7 +199,7 @@
            [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'"
            style="min-width:100%;" style="z-index: 7;" [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscapeFix"
-           [style.text-shadow]="shadowSmallFix + ' ' + shadowColor[4]"
+           [style.text-shadow]="shadowSmallFixFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
@@ -343,7 +343,7 @@
       <div class="signature" [style.text-align]="textAlign[3]" [style.bottom]="(bottom) + '%'"
            [style.padding-top]="paddingTopFooter + '%'" [style.padding-left]="marginLeft[3] + '%'"
            [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
-        <p id="smallTxtFix" [style.text-shadow]="shadowSmallFix + ' ' + shadowColor[4]"
+        <p id="smallTxtFix" [style.text-shadow]="shadowSmallFixFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
@@ -1552,7 +1552,7 @@
                 <br/><br/>
                 <button mat-button
                         color="accent"
-                        (click)="shadowOnOff(0, 1)"
+                        (click)="shadowOnOff(1, 1)"
                         style="margin-bottom: 10px">
                   <i class="material-icons">
                     highlight
@@ -1608,7 +1608,7 @@
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
                       <p class="fadeInTop">
-                        Dolny margines {{bottom}}
+                        Dolny margines
                       </p>
                       <input type="range"
                              min="-10"
@@ -2581,7 +2581,7 @@
            [style.padding-right]="marginRight[3] + '%'" style="min-width:100%; z-index: 7; "
            [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxt"
-           [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]"
+           [style.text-shadow]="shadowSmallFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
@@ -2745,7 +2745,7 @@
            style="min-width:100%; z-index: 7"
            [style.padding-top]="paddingTopFooter + '%'">
         <p id="smallTxtLandscape"
-           [style.text-shadow]="shadowSmall + ' ' + shadowColor[4]"
+           [style.text-shadow]="shadowSmallFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
            [style.font-family]="arrayFontFamili[6]"
            [style.font-style]="fontStyle[4]"
