@@ -1,13 +1,17 @@
 <div [style.display]="auth">
   <div class="setType" id="setType" [style.display]="setTypeDisplay">
+    <img src="../../assets/img/macLogo2.png" style="width: 5%"/> <br/>
+    <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
+    <span style='margin-left: 20px'></span>
+    <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
     <h1 class="fadeInTop">Wybierz co Cię interesuje</h1>
     <br/>
-    <div class="setTypeBox" id="setTypeBoxLeft">
+    <div class="setTypeBox fadeInTop" id="setTypeBoxLeft">
       <img src="../../assets/img/type/type_blank.png" (click)="setType(true, false)"/>
       <p>Pusty projekt<br>
         <s></s></p>
     </div>
-    <div class="setTypeBox" id="setTypeBoxRight">
+    <div class="setTypeBox fadeInTop" id="setTypeBoxRight">
       <img src="../../assets/img/type/type_template.png" (click)="setType(false, true)"/>
       <p>Gotowe szablony</p>
     </div>

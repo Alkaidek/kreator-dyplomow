@@ -577,6 +577,7 @@
                class="fadeInTop"
                [value]="bcgColor"
                (input)="bcgColor = $event.target.value"
+               (click)="setDefaultBcg()"
                style="width: 60%">
       </div>
     </mat-step>

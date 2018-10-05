@@ -1265,7 +1265,7 @@ export class CreateComponent implements OnInit {
     this.base64Tmp = '';
     this.bcgColor = '#ffffff';
     document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.7,0.7)';
     document.getElementById('img' + (this.lastValue ) ).style.border = '1px solid #959895';
   }
   resetFrame() {
@@ -1922,5 +1922,13 @@ export class CreateComponent implements OnInit {
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }
+  }
+  setDefaultBcg() {
+    this.imgSrc = '../../assets/img/0.png';
+    this.imgSrcFix = '../../assets/img/0.png';
+    this.base64Tmp = '';
+    document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.7,0.7)';
+    document.getElementById('img' + (this.lastValue ) ).style.border = '1px solid #959895';
   }
 }

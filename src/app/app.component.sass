@@ -26,7 +26,6 @@ $basicFont: 'Open Sans', sans-serif
   z-index: 20
   transition: .6s
   text-align: center
-  padding-top: 10%
 
 .setType
   .setTypeBox
@@ -48,3 +47,66 @@ $basicFont: 'Open Sans', sans-serif
     padding-right: 20%
   h1
     text-align: center
+
+.fadeInLeft,
+.fadeInTop,
+.fadeInRight
+  animation-name: fadeInLeft
+  animation-duration: .6s
+  animation-iteration-count: 1
+  animation-timing-function: linear
+  animation-fill-mode: forwards
+
+.fadeInTop
+  animation-name: fadeInTop
+
+.fadeInRight
+  animation-name: show
+
+@keyframes fadeInLeft
+  0%
+    margin-left: -50%
+    opacity: 0
+  100%
+    margin-left: 0%
+    opacity: 1
+
+@keyframes fadeInTop
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@keyframes show
+  0%
+    margin-left: 5%
+    opacity: 0
+  100%
+    margin-left: 0%
+    opacity: 1
+
+.setType
+  span
+    display: inline-block
+    animation-fill-mode: backwards
+    animation-iteration-count: infinite
+    animation-duration: 10s
+    animation-name: logoSpan
+    font-family: $basicFont
+    font-size: 6vh
+    font-weight: bolder
+    padding-bottom: 5%
+
+@keyframes logoSpan
+  0%
+    color: white
+  5%
+    color: $MACorange
+  15%
+    color: white
+  100%
+    color: white
+
+@for $i from 1 through 18
+  .setType span:nth-child(#{$i})
+    animation-delay: $i * 0.10s
