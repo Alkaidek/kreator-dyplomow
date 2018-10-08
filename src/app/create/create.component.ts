@@ -6,7 +6,6 @@ import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
 import { coordinates } from '../coordinates.js';
-import {tryCatch} from 'rxjs/internal-compatibility';
 
 
 @Component({
@@ -33,10 +32,8 @@ export class CreateComponent implements OnInit {
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
-  auth = 'block';
   bcgTemp = [];
   template: any;
-  coordinatesTemplate = [];
   frames = [];
   frame1 = [];
   frame2 = [];
@@ -56,7 +53,6 @@ export class CreateComponent implements OnInit {
   imagesSwieta = [];
   imagesSzachy = [];
   imagesZwierzeta = [];
-  animalHeight = 11;
   emocjeHeight = 11;
   geografiaHeight = 11;
   literaturaHeight = 11;
@@ -72,6 +68,10 @@ export class CreateComponent implements OnInit {
   onLoadBool = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
+    /*stworzenie tablic zawierających odniesienia do kolejnych obrazków.
+    * element tablicy[i] = ../../assets/img/[kategoria],
+    * z roz. jpg to miniaturki,
+    * z .png to orginały (full HD)*/
     for ( let i = 1; i < 50; i++ ) {
       this.imagesMatematyka.push('../../assets/img/matematyka/' + i);
     }
@@ -123,15 +123,18 @@ export class CreateComponent implements OnInit {
           this.coordinatesTemplate.push( tmp[0].templates[i] );
         }
       });*/
+   /*stworzenie tablicy zawierającej odniesienia do obrazków będących tłami dyplomu*/
     for ( let i = 1; i < 27; i++ ) {
       this.bcgTemp.push('../../assets/img/bcg/' + i );
     }
+    /*stworzenie tablicy zawierajacej odniesienia do obrazków będących ramkami dyplmu (PIONOWE!)*/
     for ( let i = 1; i < 37; i++ ) {
       this.frame1.push('../../assets/img/frame/' + i + '.png');
     }
     for ( let i = 37; i < 61; i++ ) {
       this.frame2.push('../../assets/img/frame2/' + i + '.png');
     }
+    /*stworzenie tablicy zawierajacej odniesienia do obrazków będących ramkami dyplmu (POZIOME!)*/
     this.createFramesArray(this.frame1, this.frame2);
     /*this._dataService.getTemplates()
       .subscribe(tmp => {
@@ -231,6 +234,10 @@ export class CreateComponent implements OnInit {
   imageFrameWidthLandscape = 100;
   imageFrameWidthFix = 100;
   imageFrameWidthLandscapeFix = 100;
+  /*scroll event,
+  * kiedy zmienia się windows.scrollY automatycznie zmienia sie wielkość 'menu'
+   * scrollY > 50 zm niejsza
+   * scrollY = 0 powrót do stanu startowego*/
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
@@ -288,6 +295,10 @@ export class CreateComponent implements OnInit {
       }
     }
   }
+  /*funkcje/dane niezbedne podczas inicjalizacji komponentu
+  * -ustawienie maksymalnych wartości dla Sliderów
+  * -ustawienie Scroll Listener'a
+  * -data, i podstawowe elementy*/
   ngOnInit() {
     this.setOnInitData();
     this.addScrollListener();
@@ -300,6 +311,7 @@ export class CreateComponent implements OnInit {
       this.checkWidth(2);
     }, 300);
   }
+  /*ustawienie wartości dla footer, dzisiejsza data */
   setDate() {
     const date = new Date();
     let day = '' + date.getDate();
@@ -316,6 +328,8 @@ export class CreateComponent implements OnInit {
   addScrollListener() {
     window.addEventListener('scroll', this.scroll, true);
   }
+  /*wyróźnienie aktywnego elementu 'scheme30', tzn schematu zawierającego 3 pola na podpisy
+  * ustalenie wartości dla zmiennej multiple - określa stosunek wysokości okna przeglądarki do elemntu z którego generowany będzie pdf*/
   setOnInitData() {
     setTimeout( () => {
       document.getElementById('scheme30').style.transform = 'scale(1,1)';
@@ -334,12 +348,15 @@ export class CreateComponent implements OnInit {
     }, 150);
     return this.multiple;
   }
+  /*Tworzy tablice zawierajacej odniesienia do ramek, wywołane podczas zmiany orientacji
+  * jej zadaniem jest zmiana elementów w tablicy z ramek pionowych na poziome i odwrotnie.*/
   createFramesArray(array, array2) {
     this.frames = [];
     for ( let i = 0; i < array.length; i++ ) {
       this.frames.push(array[i]);
     }
   }
+  /*Podświelta(wyróżnia) element (tło) określny jako parametr o id 'img'imgSrc*/
   highlightBcg(imgSrc) {
     try {
       this.lastValue = imgSrc;
@@ -351,6 +368,7 @@ export class CreateComponent implements OnInit {
       console.log('higlightbcg');
     }
   }
+  /*wycisza wyróżnienie, elementu (tła), określony jako paramet, parametrem powinien być Number*/
   downgradeBcg(imgSrc) {
     try {
       console.log('down' + this.lastValue);
@@ -361,6 +379,7 @@ export class CreateComponent implements OnInit {
       console.log('no bcg');
     }
   }
+  /*Podświelta(wyróżnia) element (ramka) określny jako parametr o id 'frm'imgSrc*/
   highlightFrame(imgSrc) {
     try {
       this.lastValueFrame = imgSrc;
@@ -372,6 +391,7 @@ export class CreateComponent implements OnInit {
       console.log('highligntframe');
     }
   }
+  /*wycisza wyróżnienie, elementu (ramki), określony jako paramet, parametrem powinien być Number*/
   downgradeFrame() {
     try {
       console.log('down' + this.lastValueFrame);
@@ -383,6 +403,7 @@ export class CreateComponent implements OnInit {
       console.log('no frm');
     }
   }
+  /*podświetla wybrany element (tło) oraz wycisza podświetlnie poptrzedniego elementu*/
   takeBcg(imgSrc) {
     try {
       this.bcgBtnDisable = false;
@@ -403,6 +424,8 @@ export class CreateComponent implements OnInit {
     }
 
   }
+  /*podświetla wybrany element (ramka) oraz wycisza podświetlnie poptrzedniego elementu
+  * dodatkowo pobiera dane z pliku coordinates.js i ustawia marginasy na wartości bazowe dla wybranej ramki*/
   takeFrame(imgSrc) {
     try {
       this.frmBtnDisable = false;
@@ -450,10 +473,12 @@ export class CreateComponent implements OnInit {
         console.log('no right coordintaes');
       }
   }
+  /*sprawia że spinner staje się widoczny, oraz wywołuje funkcję generatePdf()*/
   generateHQualityPdf() {
     document.getElementById('spinner').style.display = 'block';
     this.generatePdf();
   }
+  /*generuje pdf zależnie od ustawienia strony (pion/poziom)*/
   generatePdf() {
     if (this.landscape !== 'inline-block') {
       const data =  document.getElementById('toPdf100Fix');
@@ -489,6 +514,10 @@ export class CreateComponent implements OnInit {
       });
     }
   }
+  /*przygotowuje plik który zostanie pobrany jako szablon dyplomu
+  * wywołuje funkcje saveData()
+  * przygotowuje nazwę pliku
+  * pokazuje odpowieni komunikat jako snackBar*/
   createArrayToSend() {
     const date = new Date();
     let day = '' + date
@@ -516,6 +545,8 @@ export class CreateComponent implements OnInit {
     this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
     this.saveData( msg );
   }
+  /*zwraca wysokość na podstawie tablicy
+  * jej zadabaniem jest dynamiczne nadanie wysokości dla kontenerów prezechowujących miniaturki obrazków*/
   setHeightElement(array) {
     let divide = array.length / 5;
     let varibleHeight;
@@ -530,6 +561,7 @@ export class CreateComponent implements OnInit {
     }
     return varibleHeight;
   }
+  /*ustawia dane na podstawie parametru template, używana głównie od wczytania zapisanego wcześniej szbalonu*/
   setUserData(template) {
     try {
       this.resetSettings();
@@ -696,6 +728,7 @@ export class CreateComponent implements OnInit {
     }
     document.getElementById('spinner').style.display = 'none';
   }
+  /*resetuje wartości zmniennych i elementów widoku do wartości bazowych*/
   resetSettings() {
     try {
       document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
@@ -787,6 +820,7 @@ export class CreateComponent implements OnInit {
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
   }
+  /*obsługa karuzeli z tłami, 'przejscie w lewo'*/
   moveLeft() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
     const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
@@ -806,6 +840,7 @@ export class CreateComponent implements OnInit {
       btn2.disabled = true;
     }
   }
+  /*obsługa karuzeli z tłami, 'przejscie w prawo'*/
   moveRight() {
     const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
     const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
@@ -827,6 +862,7 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
+  /*obsługa karuzeli z ramkami, 'przejscie w lewo'*/
   moveLeftFrame() {
     const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
     const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
@@ -847,6 +883,7 @@ export class CreateComponent implements OnInit {
       btn2.disabled = true;
     }
   }
+  /*obsługa karuzeli z ramkami, 'przejscie w prawo'*/
   moveRightFrame() {
     const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
     const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
@@ -868,9 +905,11 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
+  /*resetuje obrót obrazka (wczytanego przez użytkownika)*/
   set0degress() {
     this.rotate[this.currImg] = 0;
   }
+  /*resetuje obrzek wczytany przez uzytkownika do wartości bazowych*/
   resetImg() {
     this.rotate[this.currImg] = 0;
     this.imgLeft[this.currImg] = 0;
@@ -878,6 +917,7 @@ export class CreateComponent implements OnInit {
     this.imgWidth[this.currImg] = 10;
     this.imgHeight[this.currImg] = 10;
   }
+  /*obsługa przejścia w 'prawo' (nastepny krok)*/
   right(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
     const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
@@ -893,6 +933,7 @@ export class CreateComponent implements OnInit {
       btn2.disabled = true;
     }
   }
+  /*obsługa przejścia w 'lewo' (poprzedni krok)*/
   left(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
     const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
@@ -908,6 +949,7 @@ export class CreateComponent implements OnInit {
       btn.disabled = true;
     }
   }
+  /*zresetowanie elementów niezbednych do poprawnego wyświetlania karuzel z tłami i ramkami po zmianie*/
   arrayScrollReset() {
     try {
       const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
@@ -945,6 +987,7 @@ export class CreateComponent implements OnInit {
         console.log('arrayScrollReset inline-block');
       }
   }
+  /*włącza jeśli parametr n =/= 2 orientację poziomą, wyłącza jeśli parametr = 2 orientację pionową*/
   landscapeOff(n) {
     if (n === 2) {
       this.landscape = 'none';
@@ -978,6 +1021,7 @@ export class CreateComponent implements OnInit {
       }, 100);
     }
   }
+  /*ustawia schemat dyplomu jeśli parametr n = 50 to 2 pola, jeśli nie to 3 pola*/
   setScheme(n) {
     if (n === 50) {
       document.getElementById('centerLandscape').style.display = 'none';
@@ -1025,6 +1069,7 @@ export class CreateComponent implements OnInit {
       this.scheme = 30;
     }
   }
+  /*dodaje obrazek i jego parametry*/
   add() {
     this.openSnackBar('Edytor obrazka znajduje się na dole strony!', 'ok');
     this.boolDisableUserImgFields = false;
@@ -1053,6 +1098,7 @@ export class CreateComponent implements OnInit {
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }, 200 );
   }
+  /*usuwa aktualnie wybrany obrazek*/
   removeImg() {
     this.userImg.pop();
     this.userImgBase64.splice(this.currImg, 1);
@@ -1067,16 +1113,21 @@ export class CreateComponent implements OnInit {
       this.boolDisableUserImgFields = true;
     }
   }
+  /*wyświetla SnackBar'a
+  * message -> wiadomość
+  * action -> akcja np ok*/
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 5000,
     });
   }
+  /*zapisuje plik szablonu na dysku z rozszerzeniem MACproject*/
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
     const result = fileSaver.saveAs(blob, 'template' + date + '.MACproject');
     return result.readyState;
   }
+  /*na podstawie tablicy przekazanej jako argument tworzy fragment JSON'a*/
   createTextToJSON(name): String {
     let txt = '';
     for ( let i = 0; i < name.length; i ++) {
@@ -1088,6 +1139,7 @@ export class CreateComponent implements OnInit {
     }
     return txt;
   }
+  /*tworzy plik JSON, który zostanie zapisany jako szablon dyplomu*/
   createFileToSave() {
     const txt = '{"arrayFontColor" : [ '
       + this.createTextToJSON(this.arrayFontColor) + '],'
@@ -1194,6 +1246,7 @@ export class CreateComponent implements OnInit {
       + '" }';
     return txt;
   }
+  /*resetuje wartość tablicy zaweirającej odniesienia do ramek oraz tła do wartości bazowych*/
   resetBcgFrameArray() {
     this.bcgTemp = [];
     this.frame2 = [];
@@ -1209,6 +1262,7 @@ export class CreateComponent implements OnInit {
     }
     this.createFramesArray(this.frame1, this.frame2);
   }
+  /*wywoływana podczas wczytywania szablonu przez użytkownika*/
   onSelectFile(event) {
     try {
       const reader = new FileReader();
@@ -1230,6 +1284,7 @@ export class CreateComponent implements OnInit {
       this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
     }
   }
+  /*wywoływana podczas ładowania obrazka IMPORTOWANEGO przez uzytkownika*/
   fileUpload(event: any) {
     if (event.target.files[0].size / 1024 < 2049 && event.target.files) {
       const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
@@ -1246,6 +1301,7 @@ export class CreateComponent implements OnInit {
       this.openSnackBar('Plik jest za duży! Maksymalny rozmiar wynosi 2MB', 'ok');
     }
   }
+  /*funkcja parsuje tekstowy format do JSON'a który nastepnie przekazuje do funkcji setUserData(JSON)*/
   jsonToArray(txt) {
     try {
       const obj = JSON.parse(txt);
@@ -1256,6 +1312,8 @@ export class CreateComponent implements OnInit {
     }
     document.getElementById('spinner').style.display = 'none';
   }
+  /*resetuje tło
+  * ustawia obrót X/Y na wartość bazową wycisza wybrane wcześniej tło oraz usuwa tło/kolor z dyplomu*/
   resetBcg() {
     this.bcgRotateX = 1;
     this.bcgRotateY = 1;
@@ -1268,6 +1326,10 @@ export class CreateComponent implements OnInit {
     document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('img' + (this.lastValue ) ).style.border = '1px solid #959895';
   }
+  /*resetuje ramkę
+  * wycisza poprzednio wybraną ramkę
+  * resetuje wartości X oraz Y obrotu ramki
+  * ustawia jako ramkę element bazowy (czysty)*/
   resetFrame() {
     this.frmRotateX = 1;
     this.frmRotateY = 1;
@@ -1278,6 +1340,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
   }
+  /*funkcja uzupełnia tablice odpowienimi danymi, tworząc dodatkowe pole tekstowe*/
   addTxt() {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
@@ -1302,6 +1365,7 @@ export class CreateComponent implements OnInit {
     this.txtShadowColor.push('#8c8e91');
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
+  /*Włącza lub wyłącza cień pod elementem, zależne od aktualnej wartości każdego pola*/
   shadowOnOffForUserTextField(): Number {
     if ( this.txtShadow[this.currentTxt] > 0) {
       this.txtShadow[this.currentTxt] = 0;
@@ -1310,6 +1374,7 @@ export class CreateComponent implements OnInit {
     }
     return this.txtShadow[this.currentTxt];
   }
+  /*ustawia kolory pryzisków Pogrubienie/Pochylenie/... dla dodatkowych pól tekstowych*/
   setUserTxtFiledProperty(n) {
     if ( this.txtWeight[n] === 'normal' ) {
       this.setWhiteColor('fontWeight5');
@@ -1329,6 +1394,7 @@ export class CreateComponent implements OnInit {
     console.log('textAlign: ' + this.txtAlign + ' : ' + n);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[n]);
   }
+  /*dodaje pole tekstowe z wartościami podanymi jako argumenty*/
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align, shadow, shadowColor) {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
@@ -1350,9 +1416,12 @@ export class CreateComponent implements OnInit {
     this.txtShadowColor.push(shadowColor);
     this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
   }
+  /*ustawia czcionkę dla danego elementu
+  * parametr n określa czcionkę*/
   setFontFamili(n) {
     this.txtFontFamili[this.currentTxt] = this.arraySelectFontFamili[n];
   }
+  /*ustawia czcionkę dla jednego z głównego elementu (tytuł/dla kogo/za co/podpisy/stopka)*/
   setFontFamiliForMainField(n, m) {
     this.arrayFontFamili[m] = this.arraySelectFontFamili[n];
     if (m === 3 ) {
@@ -1369,6 +1438,7 @@ export class CreateComponent implements OnInit {
       }
     }, 300);
   }
+  /*włącza/wyłacza cień dla elementu głównego, zależne od poprzedniej wartości pola*/
   shadowOnOff(n, m) {
     if ( m === 0 ) {
       if ( this.shadowLarge[n] === '4px 4px 4px' ) {
@@ -1398,6 +1468,7 @@ export class CreateComponent implements OnInit {
       }
     }
   }
+  /*ustala na podstawie parametru temp cień dla elementu tytuł/dla kogo/za co/podpisy/stopka*/
   setShadowFix(temp) {
     for (let i = 0; i < temp.shadowLarge.length; i++ ) {
       if ( temp.shadowLarge[i] === '4px 4px 4px' ) {
@@ -1421,6 +1492,8 @@ export class CreateComponent implements OnInit {
       console.log('no Shadow');
     }
   }
+  /*ustawia pochylenie lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)
+  * zależy od aktualnego stanu elementu*/
   setFontStyle(n) {
     if (this.fontStyle[n] === 'italic') {
       this.fontStyle[n] = 'normal';
@@ -1438,6 +1511,8 @@ export class CreateComponent implements OnInit {
       }
     }, 300);
   }
+  /*ustawia pochylenie dla dodtakowego pola tekstowego
+  * zależy od aktualnego stanu elementu*/
   setTxtStyle() {
     if (this.txtStyle[this.currentTxt] === 'italic') {
       this.txtStyle[this.currentTxt] = 'normal';
@@ -1447,6 +1522,8 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontStyle5');
     this.setMaxWidthForUserTxt();
   }
+  /*ustawia pogróbienie dla dodtakowego pola tekstowego
+ * zależy od aktualnego stanu elementu*/
   setTxtWeight() {
     if (this.txtWeight[this.currentTxt] === 'bold') {
       this.txtWeight[this.currentTxt] = 'normal';
@@ -1456,6 +1533,8 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontWeight5');
     this.setMaxWidthForUserTxt();
   }
+  /*ustawia wariant dla dodtakowego pola tekstowego
+ * zależy od aktualnego stanu elementu*/
   setTxtVariant() {
     if (this.txtVariant[this.currentTxt] === 'small-caps') {
       this.txtVariant[this.currentTxt] = 'normal';
@@ -1465,6 +1544,7 @@ export class CreateComponent implements OnInit {
     this.setButtonColor('fontVariant5');
     this.setMaxWidthForUserTxt();
   }
+  /*ustawia połozenie dla dodtakowego pola tekstowego*/
   setTxtAlign(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
@@ -1495,6 +1575,7 @@ export class CreateComponent implements OnInit {
       console.log(this.txtAlign[this.currentTxt]);
     }
   }
+  /*ustawia połozenie lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)*/
   setTxtAlignWithoutPossitionChange(value) {
     if (value === 'left') {
       this.txtAlign[this.currentTxt] = 'left';
@@ -1513,6 +1594,8 @@ export class CreateComponent implements OnInit {
       this.setWhiteColor('alignRight5');
     }
   }
+  /*ustawia pogróbienie lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)
+  * zależy od aktualnego stanu elementu*/
   setFontWeight(n) {
     if (this.fontWeight[n] === 'bold') {
       this.fontWeight[n] = 'normal';
@@ -1530,6 +1613,8 @@ export class CreateComponent implements OnInit {
       }
     }, 300);
   }
+  /*ustawia variant lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)
+  * zależy od aktualnego stanu elementu*/
   setFontVariant(n) {
     if (this.fontVariant[n] === 'small-caps') {
       this.fontVariant[n] = 'normal';
@@ -1547,6 +1632,7 @@ export class CreateComponent implements OnInit {
       }
     }, 300);
   }
+  /*ustawia położenie (lewy) lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)*/
   setTextAlignLeft(n) {
     this.textAlign[n] = 'left';
     this.setWhiteColor('alignRight' + n);
@@ -1560,6 +1646,7 @@ export class CreateComponent implements OnInit {
       this.checkWidth(0);
     }
   }
+  /*ustawia położenie (wyśrodkowanie) lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)*/
   setTextAlignCenter(n) {
     this.textAlign[n] = 'center';
     this.setWhiteColor('alignRight' + n);
@@ -1573,6 +1660,8 @@ export class CreateComponent implements OnInit {
       this.checkWidth(0);
     }
   }
+  /*ustwia kolor pryzisku
+  * zależy od aktualnego koloru przycisku*/
   setButtonColor(n) {
     if ( document.getElementById(n).style.background === 'white' || document.getElementById(n).style.background === '') {
       document.getElementById(n).style.background = this.MACblue;
@@ -1582,14 +1671,17 @@ export class CreateComponent implements OnInit {
       document.getElementById(n).style.color = this.MACblue;
     }
   }
+  /*ustawia na biały kolor przycisku dla pryzciku przekazanego w parametrze*/
   setWhiteColor(n) {
     document.getElementById(n).style.background = 'white';
     document.getElementById(n).style.color = this.MACblue;
   }
+  /*ustawia na niebieski kolor przycisku dla pryzciku przekazanego w parametrze*/
   setBlueColor(n) {
     document.getElementById(n).style.background = this.MACblue;
     document.getElementById(n).style.color = 'white';
   }
+  /*ustawia kolor wszystkich przycisków (tylko dla elementów głównych)*/
   setAllButtonColor() {
     for (let i = 0; i < this.fontStyle.length; i++) {
       if (this.fontStyle[i] === 'normal') {
@@ -1624,7 +1716,7 @@ export class CreateComponent implements OnInit {
       }
     }
   }
-
+  /*ustawia położenie (prawo) lda elementu głównego (tytuł/dla kogo/za co/podpisy/stopka)*/
   setTextAlignRight(n) {
     this.textAlign[n] = 'right';
     this.setWhiteColor('alignCenter' + n);
@@ -1638,6 +1730,7 @@ export class CreateComponent implements OnInit {
       this.checkWidth(0);
     }
   }
+  /*ustawiwa wartości maksymalne dla slajderów*/
   setProportion() {
     const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
     let prop =  img.naturalWidth;
@@ -1654,6 +1747,7 @@ export class CreateComponent implements OnInit {
     const propPdfFor = multipleWidth / multipleHeight;
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
+  /*ustawia obrazek wybrany ze zbioru*/
   setImg(n, name) {
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
@@ -1699,18 +1793,23 @@ export class CreateComponent implements OnInit {
       this.add();
     }
   }
+  /*odbija tło (oś X)*/
   rotateBcgX() {
     this.bcgRotateX = this.bcgRotateX * -1;
   }
+  /*odbija tło (oś Y)*/
   rotateBcgY() {
     this.bcgRotateY = this.bcgRotateY * -1;
   }
+  /*odbija ramke (oś X)*/
   rotateFrmX() {
     this.frmRotateX = this.frmRotateX * -1;
   }
+  /*odbija ramke (oś Y)*/
   rotateFrmY() {
     this.frmRotateY = this.frmRotateY * -1;
   }
+  /*ustawia maksymalne wartości dla slajderów*/
   public checkWidth(n) {
     let percent;
     if ( (this.landscape === 'inline-block') ) {
@@ -1738,6 +1837,8 @@ export class CreateComponent implements OnInit {
     this.percentLeft[n] = Math.round(percent - 1);
     this.percentRight[n] = Math.round(percent - 1);
   }
+  /*ustawia maksymalne wartości dla slajderów, dodatkowo zawiera zabezpieczenie, które wyśrodkowuje pozycję
+  * wyśrodkowanie działa tylko w przypadku przepełnienia*/
   checkWidthWithCenter(n) {
     let percent;
     let i = 1;
@@ -1775,6 +1876,7 @@ export class CreateComponent implements OnInit {
     this.percentHeight[n] = Math.round(percent - 1);
     return i;
   }
+  /*ustaiwa wartości maksymalne slajderów odnoszące się do wysokości*/
   setHeightPercent(n) {
     let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
@@ -1785,6 +1887,7 @@ export class CreateComponent implements OnInit {
     this.percentHeight[n] = Math.round(percent - 1);
     this.percentHeight[n] = Math.round(percent - 1);
   }
+  /*ustawia wartości maksymalne dla slajderów odnoszących się do elementów dodatkowych pól tekstowych*/
   setMaxWidthForUserTxt() {
     let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
@@ -1823,6 +1926,7 @@ export class CreateComponent implements OnInit {
   test() {
     return 0;
   }
+  /*obsługa znikania i pojawiania się przycisków od przechodzenia między krokami*/
   checkDirectButtonValue(n, stepperIndex) {
     console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
@@ -1846,6 +1950,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('btnDirectLeft').style.opacity = '1';
     }
   }
+  /*obsługa zmiany szerokości obrazka z zachowaniem proporcji*/
   imageResizeWithProportionsWidth() {
     if ( this.checkboxSizeAttach ) {
       this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
@@ -1875,6 +1980,7 @@ export class CreateComponent implements OnInit {
       }
     }
   }
+  /*obsługa zmiany wysokości obrazka z zachowaniem proporcji*/
   imageResizeWithProportionsHeight() {
     if ( this.checkboxSizeAttach ) {
       this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
@@ -1904,6 +2010,8 @@ export class CreateComponent implements OnInit {
       }
     }
   }
+  /*służy do ustawienia proporcji obrazka
+  * wywoływany za pomoca dyrektywy (load)*/
   chcekProportions() {
     if ( this.onLoadBool ) {
       console.log('check' + this.onLoadBool);
