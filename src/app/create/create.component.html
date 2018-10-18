@@ -407,7 +407,7 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
+      matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu. Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
       matTooltipPosition="above"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
@@ -449,7 +449,7 @@
                           (selectionChange)="checkDirectButtonValue(-1, $event.selectedIndex)">
     <mat-step stepControl="false">
 
-      <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
+      <ng-template class="fontSegoe" matStepLabel>1 krok</ng-template>
       <div class="orientationBox" [style.display]="bcgDisplay[0]">
         <div class="orientationContent">
           <div class="textBox" style="height: 6vh">
@@ -460,14 +460,14 @@
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div matTooltip="Naciśnij aby wybrać orientację pozioma" matTooltipPosition="left"
+            <div matTooltip="Naciśnij aby wybrać orientację poziomą" matTooltipPosition="left"
                  class="orientationImgBox fadeInTop borderRight">
               <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(1)"/>
             </div>
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div class="orientationImgBox" matTooltip="Naciśnij aby wybrać orientację pozioma"
+            <div class="orientationImgBox" matTooltip="Naciśnij aby wybrać orientację pionową"
                  matTooltipPosition="right">
               <img id="imgO2" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(2)"/>
@@ -478,19 +478,27 @@
         </div>
         <div class="orientationContent">
           <div class="textBox">
-            <h3 class="fadeInTop">Wybierz schemat</h3>
+            <h3 class="fadeInTop">Wybierz ilość podpisów</h3>
           </div>
-          <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
+          <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white; height: 8vh;">
           </div>
-          <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left"
-                 class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>
+          <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white; height: 8vh;padding-top: 2vh;">
+            <button mat-button color="primary" class="fadeInRight" (click)="setScheme(30)" style="width: 60%"
+                    >
+              Trzy podpisy
+            </button>
+         <!--   <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left"
+                 class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>-->
           </div>
-          <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right"
-                 class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>
+          <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white; height: 8vh; padding-top: 2vh;">
+            <button mat-button color="primary" class="fadeInRight" (click)="setScheme(50)" style="width: 60%; "
+                    >
+              Dwa podpisy
+            </button>
+           <!-- <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right"
+                 class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>-->
           </div>
-          <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
+          <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white; height: 8vh; padding-top: 2vh;">
           </div>
         </div>
 
@@ -512,7 +520,7 @@
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>-->
-      <ng-template matStepLabel>Drugi krok</ng-template>
+      <ng-template matStepLabel>2 krok</ng-template>
       <div id="bcgContainter" [style.display]="bcgDisplay[1]">
         <div class="textBox">
           <h3 class="fadeInTop">Wybierz tło dyplomu</h3>
@@ -536,7 +544,7 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-button color="warn" class="fadeInRight" (click)="resetBcg()" style="width: 60%"
+          <button mat-button color="warn" class="fadeInRight" (click)="resetBcg()" style=""
                   [disabled]="bcgBtnDisable">
             <i class="material-icons">
               remove
@@ -545,21 +553,21 @@
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgX()" style="width: 60%"
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgX()" style=""
                   [disabled]="bcgBtnDisable">
             <i class="material-icons">
               swap_horiz
             </i>
-            Odbij w poziomie
+            Lustrzane odbicie w poziomie
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
-          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgY()" style="width: 60%"
+          <button mat-button color="primary" class="fadeInRight" (click)="rotateBcgY()" style=""
                   [disabled]="bcgBtnDisable">
             <i class="material-icons">
               swap_vert
             </i>
-            Odbij w pionie
+            Lustrzane odbicie w pionie
           </button>
         </div>
         <br/>
@@ -577,7 +585,8 @@
                class="fadeInTop"
                [value]="bcgColor"
                (input)="bcgColor = $event.target.value"
-               style="width: 60%">
+               style="width: 60%"
+               [disabled]="bcgColorDisabled">
       </div>
     </mat-step>
     <mat-step stepControl="false">
@@ -590,7 +599,7 @@
         </button>
       </div>-->
       <ng-template matStepLabel>
-        Trzeci krok
+        3 krok
       </ng-template>
       <div id="frameContainter"
            [style.display]="bcgDisplay[1]">
@@ -643,7 +652,7 @@
                   color="warn"
                   class="fadeInRight"
                   (click)="resetFrame()"
-                  style="width: 60%"
+                  style=""
                   [disabled]="frmBtnDisable">
             <i class="material-icons">
               remove
@@ -657,12 +666,12 @@
                   color="primary"
                   class="fadeInRight"
                   (click)="rotateFrmX()"
-                  style="width: 60%"
+                  style=""
                   [disabled]="frmBtnDisable">
             <i class="material-icons">
               swap_horiz
             </i>
-            Odbij w poziomie
+            Lustrzane odbicie w poziomie
           </button>
         </div>
         <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block">
@@ -670,12 +679,12 @@
                   color="primary"
                   class="fadeInRight"
                   (click)="rotateFrmY()"
-                  style="width: 60%"
+                  style=""
                   [disabled]="frmBtnDisable">
             <i class="material-icons">
               swap_vert
             </i>
-            Odbij w pionie
+            Lustrzane odbicie w pionie
           </button>
         </div>
         <!-- <button class="button btnDirect fadeInTop" (click)="moveRight()">></button> <br/>-->
@@ -690,7 +699,7 @@
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>-->
-      <ng-template matStepLabel>Czwarty krok</ng-template>
+      <ng-template matStepLabel>4 krok</ng-template>
       <div id="txtContainter">
         <div class="textBox">
           <h3 class="fadeInTop">Wpisz dane</h3>
@@ -702,7 +711,7 @@
                 Tytuł
               </mat-panel-title>
               <mat-panel-description>
-                Ustaw właściwości pola 'Tytuł'
+                Uzupełnij pole
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
@@ -719,7 +728,9 @@
                          (blur)="checkWidthWithCenter(0)">
                 </mat-form-field>
                 <p class="fadeInTop"
-                   style="margin-top: 10px">Wielkość czcionki</p>
+                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                >
+                  Wielkość czcionki</p>
                 <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">
                 <mat-slider thumbLabel class="fadeInTop" min="0" max="9" [(value)]="arrayFontSize[0]" class="example-full-width" step="0.01" tickInterval="0.01"></mat-slider>-->
                 <input type="range"
@@ -733,14 +744,19 @@
                        style="width: 80%; margin-left: 0%"
                        (click)="checkWidthWithCenter(0)"
                        (change)="checkWidthWithCenter(0)">
-                <p class="fadeInTop">Kolor czcionki</p>
+                <p class="fadeInTop"
+                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                >
+                  Kolor czcionki</p>
                 <input type="color"
                        [value]="arrayFontColor[0]"
                        (input)="arrayFontColor[0] = $event.target.value"
                        id="card000"
                        (blur)="checkWidthWithCenter(0)">
                 <br/>
-                <p class="fadeInTop">Czcionka</p>
+                <p class="fadeInTop"
+                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                >Czcionka</p>
                 <mat-form-field class="fadeInLeft"
                                 style="width: 80%; margin-top: 10px">
                   <mat-select placeholder="Wybierz czcionkę">
@@ -763,7 +779,10 @@
                   </i>
                   Cień
                 </button>
-                <p class="fadeInTop">Kolor cienia</p>
+                <p class="fadeInTop"
+                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                >
+                  Kolor cienia</p>
                 <input type="color"
                        [value]="shadowColor[0]"
                        (input)="shadowColor[0] = $event.target.value">
@@ -783,7 +802,7 @@
                           <p class="fadeInTop" >Górny margines</p>
                           <input type="range" min="0" max="50" [value]="paddingTop" (input)="paddingTop = $event.target.value" class="slider" style="width: 80%">
                           -->
-                          <p class="fadeInTop">Lewy margines</p>
+                          <p class="fadeInTop txtMargin">Lewy margines</p>
                           <!--<mat-slider thumbLabel  min="0" [max]="percentLeft[0]" (click)="checkWidth(0)" (change)="checkWidth(0)" [(value)]="marginLeft[0]" class="example-full-width"></mat-slider>-->
                           <input type="range"
                                  min="1"
@@ -795,7 +814,8 @@
                                  class="slider50 fadeInLeft"
                                  style="width: 80%; margin-left: 0%">
                           <br/>
-                          <p class="fadeInTop">Prawy margines</p>
+                          <p class="fadeInTop txtMargin"
+                          >Prawy margines</p>
                           <!--<mat-slider thumbLabel  min="0" [max]="percentRight[0]" (click)="checkWidth(0)"  (change)="checkWidth(0)" [(value)]="marginRight[0] " class="example-full-width"></mat-slider>-->
                           <input type="range"
                                  min="0"
@@ -806,7 +826,7 @@
                                  (input)="marginRight[0] = $event.target.value"
                                  class="slider50 fadeInLeft"
                                  style="width: 80%; margin-left: 0%">
-                          <p class="fadeInTop">Górny margines</p>
+                          <p class="fadeInTop txtMargin">Górny margines</p>
                           <!--<mat-slider thumbLabel  min="-1" max="80" [(value)]="paddingTop" class="example-full-width"></mat-slider>-->
                           <input type="range"
                                  min="0"
@@ -817,7 +837,7 @@
                                  (input)="paddingTop = $event.target.value"
                                  class="slider50 fadeInLeft"
                                  style="width: 80%; margin-left: 0%">
-                          <p class="fadeInTop">Odstęp między literami</p>
+                          <p class="fadeInTop txtMargin">Odstęp między literami</p>
                           <!--<mat-slider thumbLabel  min="0" max="3" step="0.1" [(value)]="letterSpacing" class="example-full-width"></mat-slider>-->
                           <input type="range"
                                  min="0"
@@ -904,7 +924,7 @@
                 Dla kogo?
               </mat-panel-title>
               <mat-panel-description>
-                Ustaw właściwości pola 'Dla kogo?'
+                Uzupełnij pole
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
@@ -923,7 +943,7 @@
 
                   </textarea>
                 </mat-form-field>
-                <p class="fadeInTop"
+                <p class="fadeInTop txtMargin"
                    style="margin-top: 10px">
                   Wielkość czcionki
                 </p>
@@ -940,15 +960,15 @@
                        (change)="checkWidthWithCenter(1)"
                        (input)="arrayFontSize[2] = $event.target.value"
                        step="0.01"
-                       class="slider50 fadeInLeft"
+                       class="slider50 fadeInLeft "
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop">Kolor czcionki</p>
+                <p class="fadeInTop txtMargin">Kolor czcionki</p>
                 <input type="color"
                        [value]="arrayFontColor[2]"
                        (input)="arrayFontColor[2] = $event.target.value"
                        id="card111">
                 <br/>
-                <p class="fadeInTop">Czcionka</p>
+                <p class="fadeInTop txtMargin">Czcionka</p>
                 <mat-form-field class="fadeInLeft"
                                 style="width: 80%; margin-top: 10px">
                   <mat-select placeholder="Wybierz czcionkę">
@@ -970,7 +990,7 @@
                   </i>
                   Cień
                 </button>
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor cienia
                 </p>
                 <input type="color"
@@ -990,7 +1010,7 @@
                       <p class="fadeInTop" >Górny margines</p>
                         <input type="range" min="0" max="50" [value]="paddingTopForWho" (input)="paddingTopForWho = $event.target.value" class="slider50" style="width:80%">
                       -->
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Lewy margines
                       </p>
                       <input type="range"
@@ -1002,7 +1022,7 @@
                              (input)="marginLeft[1] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Prawy margines
                       </p>
                       <input type="range"
@@ -1014,7 +1034,7 @@
                              (input)="marginRight[1] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Górny margines
                       </p>
                       <input type="range"
@@ -1025,7 +1045,7 @@
                              (input)="paddingTopForWho = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Odstęp między literami
                       </p>
                       <input type="range"
@@ -1122,7 +1142,7 @@
                 Za co?
               </mat-panel-title>
               <mat-panel-description>
-                Ustaw właściwości pola 'Za co?'
+                Uzupełnij pole
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
@@ -1140,8 +1160,8 @@
                             placeholder="Za co">
                   </textarea>
                 </mat-form-field>
-                <p class="fadeInTop"
-                   style="margin-top: 10px">
+                <p class="fadeInTop txtMargin"
+                >
                   Wielkość czcionki
                 </p>
                 <!--<input type="range" min="0.1" max="8" [value]="arrayFontSize[4]" (input)="arrayFontSize[4] = $event.target.value" class="sliderInput" step="0.1" id="card22">
@@ -1157,7 +1177,7 @@
                        step="0.01"
                        class="slider50 fadeInLeft"
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor czcionki
                 </p>
                 <input type="color"
@@ -1165,7 +1185,7 @@
                        (input)="arrayFontColor[4] = $event.target.value"
                        id="card222">
                 <br/>
-                <p class="fadeInTop">Czcionka</p>
+                <p class="fadeInTop txtMargin">Czcionka</p>
                 <mat-form-field class="fadeInLeft"
                                 style="width: 80%; margin-top: 10px">
                   <mat-select placeholder="Wybierz czcionkę">
@@ -1187,7 +1207,7 @@
                   </i>
                   Cień
                 </button>
-                <p class="fadeInTop">Kolor cienia</p>
+                <p class="fadeInTop txtMargin">Kolor cienia</p>
                 <input type="color"
                        [value]="shadowColor[2]"
                        (input)="shadowColor[2] = $event.target.value">
@@ -1207,7 +1227,7 @@
                       <p class="fadeInTop" >Górny margines</p>
                       <input type="range" min="15" max="50" [value]="paddingTopForWhat" (input)="paddingTopForWhat = $event.target.value" class="slider" style="width:80%">
                       -->
-                      <p class="fadeInTop">Lewy margines</p>
+                      <p class="fadeInTop txtMargin">Lewy margines</p>
                       <input type="range"
                              min="0"
                              max="{{percentLeft[2]}}"
@@ -1217,7 +1237,7 @@
                              (input)="marginLeft[2] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">Prawy margines</p>
+                      <p class="fadeInTop txtMargin">Prawy margines</p>
                       <input type="range"
                              min="0"
                              max="{{percentRight[2]}}"
@@ -1227,7 +1247,7 @@
                              (input)="marginRight[2] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">Górny margines</p>
+                      <p class="fadeInTop txtMargin">Górny margines</p>
                       <input type="range"
                              min="0"
                              max="{{percentHeight[2]}}"
@@ -1319,7 +1339,7 @@
                 Podpisy
               </mat-panel-title>
               <mat-panel-description>
-                Ustaw właściwości pola 'Podpisy'
+                Uzupełnij pole
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer" style="height: 670px">
@@ -1348,8 +1368,8 @@
                               placeholder="Podpis"></textarea>
                   </mat-form-field>
                 </form>
-                <p class="fadeInTop"
-                   style="margin-top: 10px">
+                <p class="fadeInTop txtMargin"
+                >
                   Wielkość czcionki
                 </p>
                 <!--<input type="range" min="0" max="3" [value]="arrayFontSize[1]" (input)="arrayFontSize[1] = $event.target.value" class="sliderInput" step="0.1" id="card44">-->
@@ -1364,7 +1384,7 @@
                        step="0.01"
                        class="slider50 fadeInLeft"
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor czcionki
                 </p>
                 <input type="color"
@@ -1372,7 +1392,7 @@
                        (input)="arrayFontColor[1] = $event.target.value"
                        id="card444">
                 <br/>
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Czcionka
                 </p>
                 <mat-form-field class="fadeInLeft"
@@ -1397,7 +1417,7 @@
                   </i>
                   Cień
                 </button>
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor cienia
                 </p>
                 <input type="color"
@@ -1410,7 +1430,7 @@
                   <div class="card-body">
                     <br/>
                     <div class="inputContainer">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Lewy margines
                       </p>
                       <input type="range"
@@ -1428,7 +1448,7 @@
                              (input)="marginRight[3] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Dolny margines
                       </p>
                       <input type="range"
@@ -1492,10 +1512,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Stopka
+                Miejsce i data
               </mat-panel-title>
               <mat-panel-description>
-                Ustaw właściwości pola 'Stopka'
+                Uzupełnij pole
               </mat-panel-description>
             </mat-expansion-panel-header>
 
@@ -1510,8 +1530,8 @@
                          [value]="footer"
                          (input)="footer = $event.target.value">
                 </mat-form-field>
-                <p class="fadeInTop"
-                   style="margin-top: 10px">
+                <p class="fadeInTop txtMargin"
+                >
                   Wielkość czcionki
                 </p>
                 <!--<input type="range" min="0" max="3" [value]="arrayFontSize[3]" (input)="arrayFontSize[3] = $event.target.value" class="sliderInput" step="0.1" id="card33">
@@ -1527,7 +1547,7 @@
                        step="0.01"
                        class="slider50 fadeInLeft"
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor czcionki
                 </p>
                 <input type="color"
@@ -1535,7 +1555,7 @@
                        (input)="arrayFontColor[3] = $event.target.value"
                        id="card333">
                 <br/>
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Czcionka
                 </p>
                 <mat-form-field class="fadeInLeft"
@@ -1559,7 +1579,7 @@
                   </i>
                   Cień
                 </button>
-                <p class="fadeInTop">
+                <p class="fadeInTop txtMargin">
                   Kolor cienia
                 </p>
                 <input type="color"
@@ -1579,7 +1599,7 @@
                 <p class="fadeInTop" >Dolny margines</p>
                 <input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">
 -->
-                      <p class="fadeInTop">Lewy margines</p>
+                      <p class="fadeInTop txtMargin">Lewy margines</p>
                       <input type="range"
                              min="0"
                              max="80"
@@ -1587,7 +1607,7 @@
                              (input)="marginLeft[3] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Prawy margines
                       </p>
                       <input type="range"
@@ -1597,7 +1617,7 @@
                              (input)="marginRight[3] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Górny margines
                       </p>
                       <input type="range"
@@ -1607,7 +1627,7 @@
                              (input)="paddingTopFooter = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop">
+                      <p class="fadeInTop txtMargin">
                         Dolny margines
                       </p>
                       <input type="range"
@@ -1701,10 +1721,217 @@
             </div>
 
           </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Za co?
+              </mat-panel-title>
+              <mat-panel-description>
+                Uzupełnij pole
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+              <div class="dataContainer"
+                   style="height: 590px; background-color: white; text-align: center; padding-top: 0vh">
+                <div class="leftCont"
+                     style="background-color: white;
+             height: 510px">
+                  <br/>
+                  <mat-form-field class="example-full-width fadeInRight">
+                    <input matInput
+                           (ngModelChange)="setMaxWidthForUserTxt();"
+                           (blur)="setMaxWidthForUserTxt()"
+                           [(ngModel)]="userTxt[currentTxt]"
+                           placeholder="Treść pola"
+                    >
+                  </mat-form-field>
+                  <p class="fadeInTop txtMargin"
+                     >
+                    Wielkość czcionki
+                  </p>
+                  <input type="range"
+                         min="0"
+                         max="8"
+                         step="0.1"
+                         (click)="setMaxWidthForUserTxt()"
+                         (change)="setMaxWidthForUserTxt()"
+                         [value]="txtSize[currentTxt]"
+                         (input)="txtSize[currentTxt] = $event.target.value"
+                         class="slider50 fadeInLeft"
+                         style="width: 80%; margin-left: 0%"
+                         >
+                  <p class="fadeInTop txtMargin" >
+                    Kolor czcionki
+                  </p>
+                  <input type="color"
+                         class="fadeInRight"
+                         [value]="txtColor[currentTxt]"
+                         (input)="txtColor[currentTxt] = $event.target.value"
+                         style="width: 80%;">
+                  <br/>
+                  <p class="fadeInTop txtMargin">
+                    Czcionka
+                  </p>
+                  <mat-form-field class="fadeInLeft"
+                                  style="width: 80%;">
+                    <mat-select placeholder="Wybierz czcionkę"
+                                [(value)]="currentFontFamili">
+                      <mat-option *ngFor="let fntFamili of arraySelectFontFamili;let i = index"
+                                  value="{{i}}"
+                                  (click)="setFontFamili(i)"
+                                  (click)="setMaxWidthForUserTxt()"
+                                  (change)="setMaxWidthForUserTxt()">
+                        {{fntFamili}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br/>
+                  <button mat-button
+                          color="accent"
+                          (click)="shadowOnOffForUserTextField()"
+                          style="margin-bottom: 10px">
+                    <i class="material-icons">
+                      highlight
+                    </i>
+                    Cień
+                  </button>
+                  <p class="fadeInTop txtMargin">
+                    Kolor cienia
+                  </p>
+                  <input type="color"
+                         class="fadeInRight"
+                         [value]="txtShadowColor[currentTxt]"
+                         (input)="txtShadowColor[currentTxt] = $event.target.value"
+                         style="width: 80%;">
+
+                </div>
+                <div class="rightCont "
+                     style="background-color: white; height: 510px">
+                  <br/>
+                  <br/>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="inputContainer">
+                        <br/>
+                        <p class="fadeInTop txtMargin">
+                          Górny margines
+                        </p>
+                        <input type="range"
+                               min="0"
+                               max="{{maxWidthUserTxtFieldTop}}"
+                               (click)="setMaxWidthForUserTxt()"
+                               (change)="setMaxWidthForUserTxt()" [value]="txtTop[currentTxt]"
+                               (input)="txtTop[currentTxt] = $event.target.value"
+                               class="slider50 fadeInLeft"
+                               style="width: 80%; margin-left: 0%"
+                        >
+                        <p class="fadeInTop txtMargin">Lewy margines</p>
+                        <input type="range"
+                               min="0"
+                               max="{{maxWidthUserTxtFieldRight}}"
+                               (click)="setMaxWidthForUserTxt()"
+                               (change)="setMaxWidthForUserTxt()"
+                               [value]="txtLeft[currentTxt]"
+                               (input)="txtLeft[currentTxt] = $event.target.value"
+                               class="slider50 fadeInLeft"
+                               style="width: 80%; margin-left: 0%"
+                        >
+                        <p class="fadeInTop txtMargin">
+                          Prawy margines
+                        </p>
+                        <input type="range"
+                               min="0"
+                               max="{{maxWidthUserTxtFieldRight}}"
+                               (click)="setMaxWidthForUserTxt()"
+                               (change)="setMaxWidthForUserTxt()"
+                               [value]="txtRight[currentTxt]"
+                               (input)="txtRight[currentTxt] = $event.target.value"
+                               class="slider50 fadeInLeft"
+                               style="width: 80%; margin-left: 0%"
+                        >
+                        <br/>
+                        <br/>
+                        <br/>
+                        <button mat-mini-fab
+                                color="primary"
+                                id="fontStyle5"
+                                (click)="setTxtStyle()"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.color]="MACblue"
+                               >
+                          <i class="material-icons">
+                            format_italic
+                          </i>
+                        </button>
+                        <button mat-mini-fab
+                                color="primary"
+                                id="fontWeight5"
+                                (click)="setTxtWeight()"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.color]="MACblue"
+                               >
+                          <i class="material-icons">
+                            format_bold
+                          </i>
+                        </button>
+                        <button mat-mini-fab
+                                color="primary"
+                                id="fontVariant5"
+                                (click)="setTxtVariant()"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.color]="MACblue"
+                                >
+                          <i class="material-icons">
+                            format_size
+                          </i>
+                        </button>
+                        <br/>
+                        <button mat-mini-fab
+                                color="primary"
+                                id="alignLeft5"
+                                (click)="setTxtAlign('left')"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.background-color]="MACblue"
+                                [style.color]="whiteColor"
+                        >
+                          <i class="material-icons">
+                            format_align_left
+                          </i>
+                        </button>
+                        <button mat-mini-fab
+                                color="accent"
+                                id="alignCenter5"
+                                color="primary"
+                                (click)="setTxtAlign('center')"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.color]="MACblue"
+                                >
+                          <i class="material-icons">
+                            format_align_center
+                          </i>
+                        </button>
+                        <button mat-mini-fab
+                                color="accent"
+                                id="alignRight5"
+                                color="primary"
+                                (click)="setTxtAlign('right')"
+                                style="margin-bottom: 10px; background-color: white;"
+                                [style.color]="MACblue"
+                        >
+                          <i class="material-icons">
+                            format_align_right
+                          </i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </mat-expansion-panel>
+
         </mat-accordion>
       </div>
     </mat-step>
-    <mat-step stepControl="false">
+   <!-- <mat-step stepControl="false">-->
       <!-- <div class="directButtonContainter">
          <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
            <mat-icon >navigate_before</mat-icon>
@@ -1713,8 +1940,8 @@
            <mat-icon >navigate_next</mat-icon>
          </button>
        </div>-->
-      <ng-template matStepLabel>
-        Piąty krok
+     <!-- <ng-template matStepLabel>
+        5 krok
       </ng-template>
       <div class="userTxtFields">
         <div class="textBox">
@@ -1722,7 +1949,7 @@
             Dodaj dodatkowe pola tekstowe
           </h3>
         </div>
-        <!--<div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
+        &lt;!&ndash;<div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
           <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">
             <i class="material-icons">
               text_fields
@@ -1767,7 +1994,7 @@
           <input type="range" min="0" max="{{maxWidthUserTxtFieldRight}}"  (click)="setMaxWidthForUserTxt()" (change)="setMaxWidthForUserTxt()"  [value]="txtLeft[currentTxt]" (input)="txtLeft[currentTxt] = $event.target.value" class="slider50 fadeInLeft" style="width: 80%; margin-left: 0%" [disabled]="hidebox">
         </div>
         <div id="hiddenBox" style="display: none; min-width: 100%; width: 100%">
-        </div>-->
+        </div>&ndash;&gt;
       </div>
       <div class="dataContainer"
            style="height: 490px; background-color: white; text-align: center; padding-top: 0vh">
@@ -1775,7 +2002,7 @@
              style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
           <button (click)="addTxt()"
                   mat-button color="primary"
-                  matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!"
+                  matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane"
                   matTooltipPosition="left">
             <i class="material-icons">
               text_fields
@@ -1836,7 +2063,7 @@
                  [disabled]="hidebox"
                  style="width: 80%;">
           <br/>
-          <p class="fadeInTop">
+          <p class="fadeInTop txtMargin">
             Czcionka
           </p>
           <mat-form-field class="fadeInLeft"
@@ -1995,7 +2222,7 @@
           </div>
         </div>
       </div>
-    </mat-step>
+    </mat-step>-->
     <mat-step stepControl="false">
       <!--<div class="directButtonContainter">
         <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
@@ -2003,7 +2230,7 @@
         </button>
       </div>-->
       <ng-template matStepLabel>
-        Ostatni krok
+        6 krok
       </ng-template>
       <div [style.display]="bcgDisplay[3]" id="bcgDisplay3"
            style="text-align: center; ">

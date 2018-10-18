@@ -66,6 +66,7 @@ export class CreateComponent implements OnInit {
   zwierzetaHeight = 11;
   footer = 'Kielce, dnia ';
   onLoadBool = false;
+  bcgColorDisabled = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     /*stworzenie tablic zawierających odniesienia do kolejnych obrazków.
@@ -166,9 +167,9 @@ export class CreateComponent implements OnInit {
   base64 = '';
   forWho = '\n';
   forWhat = '\n';
-  sign1 = 'Dyrektor\n................';
-  sign2 = 'Wychowawca\n.......................';
-  sign3 = 'Katecheta\n  ..................';
+  sign1 = 'Podpis 1\n...............\n';
+  sign2 = 'Podpis 2\n...............\n';
+  sign3 = 'Podpis 3\n...............\n';
   title = 'Dyplom';
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
@@ -300,9 +301,12 @@ export class CreateComponent implements OnInit {
   * -ustawienie Scroll Listener'a
   * -data, i podstawowe elementy*/
   ngOnInit() {
-    this.setOnInitData();
-    this.addScrollListener();
-    this.setPaddingAnchor();
+    setTimeout( ()=> {
+      this.setOnInitData();
+      this.addScrollListener();
+      this.setPaddingAnchor();
+      this.addTxt();
+    }, 300);
   }
   setPaddingAnchor() {
     setTimeout( () => {
@@ -332,10 +336,10 @@ export class CreateComponent implements OnInit {
   * ustalenie wartości dla zmiennej multiple - określa stosunek wysokości okna przeglądarki do elemntu z którego generowany będzie pdf*/
   setOnInitData() {
     setTimeout( () => {
-      document.getElementById('scheme30').style.transform = 'scale(1,1)';
+/*      document.getElementById('scheme30').style.transform = 'scale(1,1)';*/
       /*document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';*/
-      document.getElementById('scheme30').style.filter = 'grayscale(0%)';
-      document.getElementById('scheme30').style.opacity = '1';
+/*      document.getElementById('scheme30').style.filter = 'grayscale(0%)';
+      document.getElementById('scheme30').style.opacity = '1';*/
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
@@ -406,6 +410,8 @@ export class CreateComponent implements OnInit {
   /*podświetla wybrany element (tło) oraz wycisza podświetlnie poptrzedniego elementu*/
   takeBcg(imgSrc) {
     try {
+      this.bcgColorDisabled = true;
+      this.bcgColor = '#909090';
       this.bcgBtnDisable = false;
       document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.7,0.7)';
       document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.7,0.7)';
@@ -666,6 +672,8 @@ export class CreateComponent implements OnInit {
         const element = template.img;
         this.imgSrcFix = template.img.replace('png', 'jpg' );
         this.bcgBtnDisable = false;
+        this.bcgColor = '#ffffff';
+        this.bcgColorDisabled = true;
         for ( let i = 0; i < this.bcgTemp.length; i++ ) {
           if (element === this.bcgTemp[i] + '.png') {
             this.downgradeBcg(this.lastValue);
@@ -742,6 +750,7 @@ export class CreateComponent implements OnInit {
     this.txtStyle = [];
     this.txtWeight = [];
     this.txtVariant  = [];
+    this.bcgColorDisabled = false;
     this.shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
     this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
     this.shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
@@ -756,6 +765,7 @@ export class CreateComponent implements OnInit {
     this.txtShadow = [];
     this.txtShadowColor = [];
     this.bcgBtnDisable = true;
+    this.bcgColor = '#909090';
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
@@ -795,9 +805,9 @@ export class CreateComponent implements OnInit {
     this.title = 'Dyplom';
     this.forWho =  '';
     this.forWhat =  '';
-    this.sign1 =  'Dyrektor\n................';
-    this.sign2 = 'Wychowawca\n.......................';
-    this.sign3 = 'Katecheta\n  ..................';
+    this.sign1 = 'Podpis 1\n...............\n';
+    this.sign2 = 'Podpis 2\n...............\n';
+    this.sign3 = 'Podpis 3\n...............\n';
     this.footer = 'Kielce, dnia ';
     this.setDate();
     this.userImg = [];
@@ -1036,15 +1046,15 @@ export class CreateComponent implements OnInit {
       document.getElementById('center').style.display = 'none';
       document.getElementById('right').style.width = n + '%';
       document.getElementById('left').style.width = n + '%';
-      document.getElementById('scheme' + n).style.transform = 'scale(1,1)';
-      document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';
+      /*document.getElementById('scheme' + n).style.transform = 'scale(1,1)';*/
+      /*document.getElementById('scheme30').style.transform = 'scale(0.9,0.9)';*/
       document.getElementById('sign3').style.display = 'none';
       /*document.getElementById('scheme50').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';
       document.getElementById('scheme30').style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';*/
-      document.getElementById('scheme50').style.filter = 'grayscale(0%)';
+      /*document.getElementById('scheme50').style.filter = 'grayscale(0%)';
       document.getElementById('scheme30').style.filter = 'grayscale(100%)';
       document.getElementById('scheme50').style.opacity = '1';
-      document.getElementById('scheme30').style.opacity = '0.5';
+      document.getElementById('scheme30').style.opacity = '0.5';*/
       this.scheme = 50;
     } else {
       document.getElementById('centerLandscape').style.display = 'inline-block';
@@ -1059,13 +1069,13 @@ export class CreateComponent implements OnInit {
       document.getElementById('center').style.display = 'inline-block';
       document.getElementById('right').style.width = n + 3 + '%';
       document.getElementById('left').style.width = n + 3 + '%';
-      document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
-      document.getElementById('scheme30').style.transform = 'scale(1,1)';
+      /*document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
+      document.getElementById('scheme30').style.transform = 'scale(1,1)';*/
       document.getElementById('sign3').style.display = 'inline-block';
-      document.getElementById('scheme50').style.filter = 'grayscale(100%)';
+     /* document.getElementById('scheme50').style.filter = 'grayscale(100%)';
       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
       document.getElementById('scheme30').style.opacity = '1';
-      document.getElementById('scheme50').style.opacity = '0.5';
+      document.getElementById('scheme50').style.opacity = '0.5';*/
       this.scheme = 30;
     }
   }
@@ -1318,6 +1328,9 @@ export class CreateComponent implements OnInit {
     this.bcgRotateX = 1;
     this.bcgRotateY = 1;
     this.bcgBtnDisable = true;
+    this.bcgColor = '#909090';
+    this.bcgColorDisabled = false;
+    this.bcgColor = '#ffffff';
     this.imgSrc = '../../assets/img/0.png';
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
