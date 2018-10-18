@@ -339,8 +339,8 @@ export class CreateComponent implements OnInit {
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 2480 / width) );
-      this.multiple = (2480 / width );
+      console.log(': ' + ( 794 / width) );
+      this.multiple = (794 / width );
       this.imageFrameWidth = document.getElementById('pdfFor').offsetWidth * 0.14;
       this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
       this.imageFrameWidthFix = document.getElementById('pdfForFix').offsetWidth * 0.14;
@@ -996,8 +996,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 2480 / width) );
-      this.multiple = (2480 / width );
+      console.log(': ' + ( 794 / width) );
+      this.multiple = (794 / width );
       this.createFramesArray(this.frame1, this.frame2);
       this.arrayScrollReset();
       this.resetSettings();
@@ -1016,8 +1016,8 @@ export class CreateComponent implements OnInit {
       this.createFramesArray(this.frame2, this.frame1);
       setTimeout( () => {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
-        console.log(': ' + ( 2480 / width) );
-        this.multiple = (2480 / width );
+        console.log(': ' + ( 794 / width) );
+        this.multiple = (794 / width );
       }, 100);
     }
   }
