@@ -6,6 +6,7 @@ import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
 import { coordinates } from '../coordinates.js';
+import { createComponentStrings } from '../allText.js';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class CreateComponent implements OnInit {
     'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
   userImg =
     [];
+  createComponentStrings = createComponentStrings;
   percentLeft = [100, 100, 100];
   percentRight = [100, 100, 100];
   percentHeight = [80, 80, 80];
@@ -64,7 +66,7 @@ export class CreateComponent implements OnInit {
   swietaHeight = 11;
   szachyHeight = 11;
   zwierzetaHeight = 11;
-  footer = 'Kielce, dnia ';
+  footer = createComponentStrings.a88;
   onLoadBool = false;
   bcgColorDisabled = false;
   constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
@@ -167,10 +169,10 @@ export class CreateComponent implements OnInit {
   base64 = '';
   forWho = '\n';
   forWhat = '\n';
-  sign1 = 'Podpis 1\n...............\n';
-  sign2 = 'Podpis 2\n...............\n';
-  sign3 = 'Podpis 3\n...............\n';
-  title = 'Dyplom';
+  sign1 = createComponentStrings.a88;
+  sign2 = createComponentStrings.a89;
+  sign3 = createComponentStrings.a90;
+  title = createComponentStrings.a91;
   imgSrc = '../../assets/img/0.png';
   imgSrcFix = '../../assets/img/0.png';
   imgSrcFrame = '../../assets/img/0.png';
@@ -192,18 +194,18 @@ export class CreateComponent implements OnInit {
   imgTop = [];
   imgLeft = [];
   scheme = 0;
-  txtTop = [];
-  txtLeft = [];
-  txtRight = [];
-  txtSize = [];
-  txtStyle = [];
-  txtWeight = [];
-  txtVariant  = [];
-  txtAlign = [];
+  txtTop = [35];
+  txtLeft = [0];
+  txtRight = [0];
+  txtSize = [3];
+  txtStyle = ['normal'];
+  txtWeight = ['normal'];
+  txtVariant  = ['normal'];
+  txtAlign = ['center'];
   txt = [];
-  txtShadow = [];
-  txtShadowColor = [];
-  currentTxt = -1;
+  txtShadow = [0];
+  txtShadowColor = ['#8c8e91'];
+  currentTxt = 0;
   shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
   shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
   shadowLargeFix = ['0px 0px', '0px 0px', '0px 0px'];
@@ -211,10 +213,10 @@ export class CreateComponent implements OnInit {
   shadowSmallFooter = '0% 0%';
   shadowSmallFix = '0% 0%';
   shadowSmallFixFooter = '0% 0%';
-  txtColor = [];
+  txtColor = ['#000000'];
   disp = 'block';
   txtColorText = '';
-  txtFontFamili = [];
+  txtFontFamili = ['Arial'];
   bcgRotateX = 1;
   bcgRotateY = 1;
   frmRotateX = 1;
@@ -301,11 +303,11 @@ export class CreateComponent implements OnInit {
   * -ustawienie Scroll Listener'a
   * -data, i podstawowe elementy*/
   ngOnInit() {
-    setTimeout( ()=> {
+    setTimeout( () => {
       this.setOnInitData();
       this.addScrollListener();
       this.setPaddingAnchor();
-      this.addTxt();
+      this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
     }, 300);
   }
   setPaddingAnchor() {
@@ -499,7 +501,9 @@ export class CreateComponent implements OnInit {
         pdf.addPage(imgWidth, imgHeight);
         const position = 0;
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-        pdf.save('TwojDyplom.pdf');
+        pdf.autoPrint();
+        window.open(pdf.output('bloburl'), '_blank');
+        pdf.save(this.forWho + '' + this.getCurrentDate() + '.pdf');
         document.getElementById('spinner').style.display = 'none';
       });
     } else {
@@ -515,22 +519,20 @@ export class CreateComponent implements OnInit {
         pdf.addPage(imgWidth, imgHeight);
         const position = 0;
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-        pdf.save('TwojDyplom.pdf');
+        pdf.autoPrint();
+        window.open(pdf.output('bloburl'), '_blank');
+        pdf.save(this.forWho + '' + this.getCurrentDate() + '.pdf');
         document.getElementById('spinner').style.display = 'none';
       });
     }
   }
-  /*przygotowuje plik który zostanie pobrany jako szablon dyplomu
-  * wywołuje funkcje saveData()
-  * przygotowuje nazwę pliku
-  * pokazuje odpowieni komunikat jako snackBar*/
-  createArrayToSend() {
+  getCurrentDate() {
     const date = new Date();
     let day = '' + date
       .getDate();
     const month = date
       .getMonth() + 1;
-    let monthStr = '';
+    let monthStr = '' + month;
     let hours = '' + date
       .getHours();
     let min = '' + date
@@ -538,7 +540,7 @@ export class CreateComponent implements OnInit {
     if ( date.getDate() < 10) {
       day = '0' + day;
     }
-    if ( (date.getMonth() )  < 10) {
+    if ( (date.getMonth() + 1 )  < 10) {
       monthStr = '0' + month;
     }
     if ( (date.getHours() )  < 10) {
@@ -547,8 +549,16 @@ export class CreateComponent implements OnInit {
     if ( (date.getMinutes() )  < 10) {
       min = '0' + min;
     }
-    const msg =  ' ' + date.getFullYear() + '.' + monthStr + '.' + day  + ' ' +  hours + ':' + min;
-    this.openSnackBar( 'Twój szoblon został zapisany! Dodano go: ' + msg,  'ok' );
+    const msg =  '' + date.getFullYear() + '.' + monthStr + '.' + day + '_' + hours + ':' + min;
+    return msg;
+  }
+  /*przygotowuje plik który zostanie pobrany jako szablon dyplomu
+  * wywołuje funkcje saveData()
+  * przygotowuje nazwę pliku
+  * pokazuje odpowieni komunikat jako snackBar*/
+  createArrayToSend() {
+    const msg = this.getCurrentDate();
+    this.openSnackBar( createComponentStrings.a92 + msg,  'ok' );
     this.saveData( msg );
   }
   /*zwraca wysokość na podstawie tablicy
@@ -732,7 +742,7 @@ export class CreateComponent implements OnInit {
       this.setAllButtonColor();
     } catch (err) {
       this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+      this.openSnackBar(createComponentStrings.a93, 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
   }
@@ -747,9 +757,6 @@ export class CreateComponent implements OnInit {
     this.onLoadBool = false;
     this.txtAlign = [];
     this.tmpBtnDisable = true;
-    this.txtStyle = [];
-    this.txtWeight = [];
-    this.txtVariant  = [];
     this.bcgColorDisabled = false;
     this.shadowColor = ['#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91', '#8c8e91'];
     this.shadowLarge = ['0px 0px', '0px 0px', '0px 0px'];
@@ -818,15 +825,19 @@ export class CreateComponent implements OnInit {
     this.imgLeft = [];
     this.userImgBase64 = [];
     this.currImg = -1;
-    this.txtTop = [];
-    this.txtLeft = [];
-    this.txtRight = [];
-    this.txtSize = [];
-    this.currentTxt = -1;
-    this.txtColor = [];
-    this.txtColorText = '';
-    this.userTxt = [];
-    this.txtFontFamili = [];
+    this.txtTop = [35];
+    this.txtLeft = [0];
+    this.txtRight = [0];
+    this.txtSize = [3];
+    this.txtStyle = ['normal'];
+    this.txtWeight = ['normal'];
+    this.txtVariant  = ['normal'];
+    this.txtAlign = ['center'];
+    this.txtShadow = [0];
+    this.txtShadowColor = ['#8c8e91'];
+    this.currentTxt = 0;
+    this.userTxt = [''];
+    this.txtFontFamili = ['Arial'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
   }
@@ -1081,7 +1092,7 @@ export class CreateComponent implements OnInit {
   }
   /*dodaje obrazek i jego parametry*/
   add() {
-    this.openSnackBar('Edytor obrazka znajduje się na dole strony!', 'ok');
+    this.openSnackBar(createComponentStrings.a97, 'ok');
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
@@ -1134,7 +1145,7 @@ export class CreateComponent implements OnInit {
   /*zapisuje plik szablonu na dysku z rozszerzeniem MACproject*/
   saveData(date) {
     const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    const result = fileSaver.saveAs(blob, 'template' + date + '.MACproject');
+    const result = fileSaver.saveAs(blob, date + '_' + this.forWho +   '.MACproject');
     return result.readyState;
   }
   /*na podstawie tablicy przekazanej jako argument tworzy fragment JSON'a*/
@@ -1240,7 +1251,7 @@ export class CreateComponent implements OnInit {
       + '"txtAlign" : [ '
       + this.createTextToJSON(this.txtAlign) + '],'
       + '"txtUser" : [ '
-      + this.createTextToJSON(this.userTxt) + '],'
+      + this.createTextToJSON(this.userTxt).replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '],'
       + '"txtColor" : [ '
       + this.createTextToJSON(this.txtColor) + '],'
       + '"txtFontFamili" : [ '
@@ -1291,7 +1302,7 @@ export class CreateComponent implements OnInit {
       };
     } catch (err) {
       this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+      this.openSnackBar(createComponentStrings.a94, 'ok');
     }
   }
   /*wywoływana podczas ładowania obrazka IMPORTOWANEGO przez uzytkownika*/
@@ -1308,7 +1319,7 @@ export class CreateComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       }
     } else {
-      this.openSnackBar('Plik jest za duży! Maksymalny rozmiar wynosi 2MB', 'ok');
+      this.openSnackBar(createComponentStrings.a95, 'ok');
     }
   }
   /*funkcja parsuje tekstowy format do JSON'a który nastepnie przekazuje do funkcji setUserData(JSON)*/
@@ -1318,7 +1329,7 @@ export class CreateComponent implements OnInit {
       this.setUserData(obj);
     } catch (err) {
       this.resetSettings();
-      this.openSnackBar('Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!', 'ok');
+      this.openSnackBar(createComponentStrings.a96, 'ok');
     }
     document.getElementById('spinner').style.display = 'none';
   }
@@ -1359,7 +1370,7 @@ export class CreateComponent implements OnInit {
       this.hidebox = false;
     }
     this.actualTxt = '';
-    this.currentTxt = this.userTxt.length;
+    /*this.currentTxt = this.userTxt.length;*/
     this.userTxt.push(this.actualTxt);
     this.txtTop.push(35);
     this.txtLeft.push(0);
@@ -1412,8 +1423,7 @@ export class CreateComponent implements OnInit {
     if ( this.currentTxt === -1 ) {
       this.hidebox = false;
     }
-    this.actualTxt = actualTxt;
-    this.currentTxt = this.currentTxt + 1;
+    this.actualTxt = actualTxt.split('NEWLINE').join('\n');
     this.userTxt.push(this.actualTxt);
     this.txtTop.push(top);
     this.txtLeft.push(left);
@@ -1847,8 +1857,8 @@ export class CreateComponent implements OnInit {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
     }
-    this.percentLeft[n] = Math.round(percent - 1);
-    this.percentRight[n] = Math.round(percent - 1);
+    this.percentLeft[n] = Math.round(percent - 5);
+    this.percentRight[n] = Math.round(percent - 5);
   }
   /*ustawia maksymalne wartości dla slajderów, dodatkowo zawiera zabezpieczenie, które wyśrodkowuje pozycję
   * wyśrodkowanie działa tylko w przypadku przepełnienia*/
@@ -1862,8 +1872,8 @@ export class CreateComponent implements OnInit {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
         document.getElementById('toPdf100').offsetWidth * 100);
     }
-    this.percentLeft[n] = Math.round(percent - 1);
-    this.percentRight[n] = Math.round(percent - 1);
+    this.percentLeft[n] = Math.round(percent - 5);
+    this.percentRight[n] = Math.round(percent - 5);
     let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
@@ -1885,8 +1895,8 @@ export class CreateComponent implements OnInit {
       percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
         document.getElementById('toPdf100Landscape').offsetHeight * 100);
     }
-    this.percentHeight[n] = Math.round(percent - 1);
-    this.percentHeight[n] = Math.round(percent - 1);
+    this.percentHeight[n] = Math.round(percent - 5);
+    this.percentHeight[n] = Math.round(percent - 5);
     return i;
   }
   /*ustaiwa wartości maksymalne slajderów odnoszące się do wysokości*/
@@ -1902,6 +1912,7 @@ export class CreateComponent implements OnInit {
   }
   /*ustawia wartości maksymalne dla slajderów odnoszących się do elementów dodatkowych pól tekstowych*/
   setMaxWidthForUserTxt() {
+    console.log('font1' + this.currentTxt);
     let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
@@ -1916,8 +1927,9 @@ export class CreateComponent implements OnInit {
     }
     console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
-    this.maxWidthUserTxtFieldRight = Math.round(percent / 2 - 1);
+    this.maxWidthUserTxtFieldRight = Math.round(percent - 5);
     console.log('margines' + this.maxWidthUserTxtFieldTop );
+    console.log('' + this.currentTxt );
     console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
     if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
       console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);

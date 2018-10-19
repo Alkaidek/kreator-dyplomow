@@ -21,14 +21,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<p id="ie" style="display:none">Kreator Dyplomów nie jest obsługiwany w przegladarkach Internet Explorer oraz MS Edge!</p>
+<p id="ie" style="display:none">Kreator Dyplomów nie jest obsługiwany w przegladarkach Internet Explorer</p>
   <app-root id="notIE"></app-root>
 </body>
 <script>
   var isIE = /*@cc_on!@*/false || !!document.documentMode;
   var isEdge = !isIE && !!window.StyleMedia;
   console.log('ie: ' + isIE );
-  if( isIE || isEdge ) {
+  if( isIE ) {
     document.getElementById('ie').style.display = 'block';
     document.getElementById('notIE').style.display = 'none';
   }

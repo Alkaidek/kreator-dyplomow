@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { appComponentStrings } from 'src/app/allText.js';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
   disp = false;
+  appComponentStrings = appComponentStrings;
   /*zmienic przed wypuszczeniem!! na inline-block*/
   err = 'none';
   /*zmienic przed wypuszczeniem!! na none*/

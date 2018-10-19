@@ -8,16 +8,16 @@
 <div [style.display]="auth">
   <div class="setType" id="setType" [style.display]="setTypeDisplay">
     <img id="setTypeLogo" src="../../assets/img/macLogo2.png"/>
-    <h1 class="fadeInTop">Witamy w generatorze dyplomów</h1>
+    <h1 class="fadeInTop">{{appComponentStrings.appComponentHello}}</h1>
     <br/>
     <div class="setTypeBox" id="setTypeBoxLeft">
       <img src="../../assets/img/type/type_blank.png" (click)="setType(true, false)"/>
-      <p style="font-size: 150%">Tworzenie własnego <br/>projektu dyplomu od podstaw<br>
+      <p style="font-size: 150%">{{appComponentStrings.appComponentButton11}} <br/>{{appComponentStrings.appComponentButton12}}<br>
         <s></s></p>
     </div>
     <div class="setTypeBox" id="setTypeBoxRight">
       <img src="../../assets/img/type/type_template.png" (click)="setType(false, true)"/>
-      <p style="font-size: 150%">Tworzenie dyplomu <br/>z gotowego projektu</p>
+      <p style="font-size: 150%">{{appComponentStrings.appComponentButton21}} <br/>{{appComponentStrings.appComponentButton22}}</p>
     </div>
     <img src="../../assets/img/macLogo2.png" style="width: 5%; opacity: 0"/>
   </div>
@@ -33,9 +33,9 @@
   </a>
   <br/>
   <br/>
-  <p >Przepraszamy, ale strona nie może zostać załadowana!
+  <p >{{appComponentStrings.appComponnentError1}}
     <br/>
-    Pamiętaj, aby najpierw zalogować sie na swoje konto Mac.pl.
+    {{appComponentStrings.appComponnentError2}}
   </p>
 </div>
 

@@ -1,9 +1,9 @@
 <div class="curtain">
   <img src="../../assets/img/macLogo2.png"/>
-  <br/>
+  <!--<br/>
   <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
-  <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>
+  <span>D</span><span>Y</span><span>P</span><span>L</span><span>O</span><span>M</span><span>Ó</span><span>W</span>-->
 </div>
 <div
   id="mobile"
@@ -20,14 +20,14 @@
   <br/>
   <br/>
   <h1>
-    Kreator dyplomów nie działa na małych ekranach!
+    {{templateComponentStrings.a1}}
   </h1>
   <br/>
   <h5>
-    Jest to niezbędne dla zapewnienia najwyższej jakości doznań z użytkowania.
+    {{templateComponentStrings.a2}}
   </h5>
   <br/>
-  <h5>Przepraszamy za kłopot</h5>
+  <h5>{{templateComponentStrings.a3}}</h5>
 
 </div>
 <div
@@ -66,36 +66,26 @@
         [style.left]="imgLeft[usr]+'%'"
         [style.top]="imgTop[usr]+'%'"
       />
-      <div
-        *ngFor="let txt of userTxt; let i = index"
-        class="userTxt"
-        style="position: absolute;
-        z-index: 1;
-        width: 100%;"
-        [style.top]="txtTop[i]+'%'"
-      >
-        <p
-          style="position: absolute; width: 100%;"
-          [style.padding-left]="txtLeft[i]+'%'"
-          [style.padding-right]="txtRight[i]+'%'"
-          [style.text-align]="txtAlign[i]"
+      <div *ngFor="let txt of userTxt; let i = index"
+           class="userTxt"
+           style="position: absolute; z-index: 1; width: 100%;"
+           [style.top]="txtTop[i]+'%'"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.text-align]="txtAlign[i]">
+        <s id="font3{{i}}"
+           class="maxContent"
+           style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal"
+           [style.font-size]="txtSize[i] * multiple + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]"
+           [style.text-shadow]="txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple  + 'px ' + txtShadowColor[i]"
         >
-          <s
-            id="font3{{i}}" class="maxContent"
-            style="white-space: pre-wrap"
-            [style.margin-right]="txtRight[i]+'%'"
-            [style.margin-left]="txtLeft[i]+'%'"
-            [style.font-size]="txtSize[i] * multiple + 'vw'"
-            [style.font-family]="txtFontFamili[i]"
-            [style.color]="txtColor[i]"
-            [style.font-variant]="txtVariant[i]"
-            [style.font-style]="txtStyle[i]"
-            [style.font-weight]="txtWeight[i]"
-            [style.text-shadow]="txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadowColor[i]"
-          >
-            {{txt}}
-          </s>
-        </p>
+          {{txt}}
+        </s>
       </div>
       <div *ngFor="let txt of txtField; let i = index"
            class="userTxt"
@@ -149,28 +139,26 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
       />
-      <div *ngFor="let txt of userTxt; let i = index" class="userTxt"
+      <div *ngFor="let txt of userTxt; let i = index"
+           class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
-           [style.top]="txtTop[i]+'%'">
-        <p style="position: absolute; width: 100%;"
+           [style.top]="txtTop[i]+'%'"
            [style.padding-left]="txtLeft[i]+'%'"
            [style.padding-right]="txtRight[i]+'%'"
-           [style.text-align]="txtAlign[i]"
+           [style.text-align]="txtAlign[i]">
+        <s id="font4{{i}}"
+           class="maxContent"
+           style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal;"
+           [style.font-size]="txtSize[i] * multiple + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]"
+           [style.text-shadow]="txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple  + 'px ' + txtShadowColor[i]"
         >
-          <s id="font4{{i}}" class="maxContent" style="white-space: pre-wrap"
-             [style.margin-right]="txtRight[i]+'%'"
-             [style.margin-left]="txtLeft[i]+'%'"
-             [style.font-size]="txtSize[i] * multiple + 'vw'"
-             [style.font-family]="txtFontFamili[i]"
-             [style.color]="txtColor[i]"
-             [style.font-variant]="txtVariant[i]"
-             [style.font-style]="txtStyle[i]"
-             [style.font-weight]="txtWeight[i]"
-             [style.text-shadow]="txtShadow[i] * multiple  + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadow[i] * multiple + 'px ' + txtShadowColor[i]"
-          >
-            {{txt}}
-          </s>
-        </p>
+          {{txt}}
+        </s>
       </div>
       <div *ngFor="let txt of txtField; let i = index"
            class="userTxt"
@@ -239,12 +227,12 @@
       (click)="stepper.selectedIndex = 0" for="fileInput"
       id="fileInputLabel"
       class="fadeInLeft"
-      matTooltip="Domyślnie pliki szablonów znajdują zię w folderze Pobrane/Downloads pod nazwą 'template [data]'"
+      matTooltip="{{templateComponentStrings.a5}}"
       matTooltipPosition="above"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
-      WCZYTAJ SZABLON
+      {{templateComponentStrings.a4}}
     </label>
     <input
       id="fileInput"
@@ -255,11 +243,11 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="Naciśnięcie spowoduje zapisanie stworzonego przez Ciebie szablonu! Plik zostanie zapisany w folderze Pobrane/Downloads pod nazwą 'template [data]'"
+      matTooltip="{{templateComponentStrings.a6}}"
       matTooltipPosition="above"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
-      ZAPISZ SZABLON
+      {{templateComponentStrings.a7}}
     </button>
     <button
       mat-button
@@ -268,7 +256,7 @@
       (click)="generateHQualityPdf()"
       style="float: right; font-weight: bolder; width: 25%"
     >
-      GENERUJ DYPLOM
+      {{templateComponentStrings.a8}}
     </button>
   </div>
   <div
@@ -276,7 +264,7 @@
     id="directButtonContainter">
     <button
       id="btnDirectLeft"
-      matTooltip="Poprzedni krok"
+      matTooltip="{{templateComponentStrings.a10}}"
       matTooltipPosition="right"
       mat-mini-fab
       (click)="stepper.previous();"
@@ -286,7 +274,7 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="Następny krok" matTooltipPosition="left" mat-mini-fab
+    <button id="btnDirectRight" matTooltip="{{templateComponentStrings.a9}}" matTooltipPosition="left" mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>
@@ -297,7 +285,7 @@
                           (selectionChange)="checkDirectButtonValue(-1, $event.selectedIndex)">
     <mat-step stepControl="false">
 
-      <ng-template class="fontSegoe" matStepLabel>Pierwszy krok</ng-template>
+      <ng-template class="fontSegoe" matStepLabel>{{templateComponentStrings.a13}}</ng-template>
       <div class="orientationBox" [style.display]="bcgDisplay[0]">
         <div class="orientationContent" style="height: 94.8vh; max-height: 120vh;">
           <div class="textBox">
@@ -402,7 +390,7 @@
               <i class="material-icons">
                 remove
               </i>
-              Resetuj szablon
+              {{templateComponentStrings.a11}}
             </button>
           </div>
           <div class="boxReal33" style="height: 8vh; padding-top: 2vh; dispaly: inline-block;  margin-top: 1px">
@@ -413,19 +401,19 @@
       </div>
     </mat-step>
     <mat-step stepControl="false" >
-      <ng-template matStepLabel>Drugi krok</ng-template>
+      <ng-template matStepLabel>{{templateComponentStrings.a12}}</ng-template>
       <div id="txtContainter">
         <div class="textBox">
-          <h3 class="fadeInTop">Wpisz dane</h3>
+          <h3 class="fadeInTop">{{templateComponentStrings.a14}}</h3>
         </div>
         <mat-accordion>
           <mat-expansion-panel *ngFor="let txtFieldFor of textFieldArray; let i = index" [disabled]="tmpBtnDisable">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Pole {{i + 1}}
+              {{templateComponentStrings.a15}} {{i + 1}}
             </mat-panel-title>
             <mat-panel-description>
-              Właściwości pola {{i + 1}}.
+              {{templateComponentStrings.a16}} {{i + 1}}.
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="dataContainer">
@@ -443,7 +431,7 @@
                 </mat-form-field>
                 <p class="fadeInTop"
                    style="margin-top: 10px">
-                  Wielkość czcionki
+                  {{templateComponentStrings.a17}}
                 </p>
                 <input type="range"
                        min="0"
@@ -457,7 +445,7 @@
                        style="width: 80%; margin-left: 0%"
                        >
                 <p class="fadeInTop">
-                  Kolor czcionki
+                  {{templateComponentStrings.a18}}
                 </p>
                 <input type="color"
                        class="fadeInRight"
@@ -466,7 +454,7 @@
                        style="width: 80%;">
                 <br/>
                 <p class="fadeInTop">
-                  Czcionka
+                  {{templateComponentStrings.a19}}
                 </p>
                 <mat-form-field class="fadeInLeft"
                                 style="width: 80%; text-align: center">
@@ -491,10 +479,10 @@
                   <i class="material-icons">
                     highlight
                   </i>
-                  Cień
+                  {{templateComponentStrings.a20}}
                 </button>
                 <p class="fadeInTop">
-                  Kolor cienia
+                  {{templateComponentStrings.a21}}
                 </p>
                 <input type="color"
                        class="fadeInRight"
@@ -512,7 +500,7 @@
                     <div class="inputContainer">
                       <br/>
                       <p class="fadeInTop">
-                        Górny margines
+                        {{templateComponentStrings.a22}}
                       </p>
                       <input type="range"
                              min="0"
@@ -525,7 +513,7 @@
                              style="width: 80%; margin-left: 0%"
                              >
                       <p class="fadeInTop">
-                        Lewy margines
+                        {{templateComponentStrings.a23}}
                       </p>
                       <input type="range"
                              min="0"
@@ -538,7 +526,7 @@
                              style="width: 80%; margin-left: 0%"
                              >
                       <p class="fadeInTop">
-                        Prawy margines
+                        {{templateComponentStrings.a24}}
                       </p>
                       <input type="range"
                              min="0"
@@ -631,12 +619,220 @@
             </div>
           </div>
         </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{templateComponentStrings.a25}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{templateComponentStrings.a26}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="dataContainer"
+                 style="height: 590px; background-color: white; text-align: center; padding-top: 0vh">
+              <div class="leftCont"
+                   style="background-color: white;
+             height: 510px">
+                <br/>
+                <mat-form-field class="example-full-width fadeInRight">
+                    <textarea matInput
+                              (ngModelChange)="setMaxWidthForUserTxt();"
+                              (blur)="setMaxWidthForUserTxt()"
+                              [(ngModel)]="userTxt[0]"
+                              placeholder="Treść pola">
+                    </textarea>
+                </mat-form-field>
+                <p class="fadeInTop txtMargin"
+                >
+                  {{templateComponentStrings.a27}}
+                </p>
+                <input type="range"
+                       min="0"
+                       max="8"
+                       step="0.1"
+                       (click)="setMaxWidthForUserTxt()"
+                       (change)="setMaxWidthForUserTxt()"
+                       [value]="txtSize[0]"
+                       (input)="txtSize[0] = $event.target.value"
+                       class="slider50 fadeInLeft"
+                       style="width: 80%; margin-left: 0%"
+                >
+                <p class="fadeInTop txtMargin" >
+                  {{templateComponentStrings.a28}}
+                </p>
+                <input type="color"
+                       class="fadeInRight"
+                       [value]="txtColor[0]"
+                       (input)="txtColor[0] = $event.target.value"
+                       style="width: 80%;">
+                <br/>
+                <p class="fadeInTop txtMargin">
+                  {{templateComponentStrings.a29}}
+                </p>
+                <mat-form-field class="fadeInLeft"
+                                style="width: 80%;">
+                  <mat-select placeholder="Wybierz czcionkę"
+                              [(value)]="currentFontFamili">
+                    <mat-option *ngFor="let fntFamili of arraySelectFontFamili;let i = index"
+                                value="{{i}}"
+                                (click)="setFontFamili(i)"
+                                (click)="setMaxWidthForUserTxt()"
+                                (change)="setMaxWidthForUserTxt()">
+                      {{fntFamili}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br/>
+                <button mat-button
+                        color="accent"
+                        (click)="shadowOnOffForUserTextField()"
+                        style="margin-bottom: 10px">
+                  <i class="material-icons">
+                    highlight
+                  </i>
+                  {{templateComponentStrings.a20}}
+                </button>
+                <p class="fadeInTop txtMargin">
+                  {{templateComponentStrings.a21}}
+                </p>
+                <input type="color"
+                       class="fadeInRight"
+                       [value]="txtShadowColor[0]"
+                       (input)="txtShadowColor[0] = $event.target.value"
+                       style="width: 80%;">
+
+              </div>
+              <div class="rightCont "
+                   style="background-color: white; height: 510px">
+                <br/>
+                <br/>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="inputContainer">
+                      <br/>
+                      <p class="fadeInTop txtMargin">
+                        {{templateComponentStrings.a22}}
+                      </p>
+                      <input type="range"
+                             min="0"
+                             max="{{maxWidthUserTxtFieldTop}}"
+                             (click)="setMaxWidthForUserTxt()"
+                             (change)="setMaxWidthForUserTxt()" [value]="txtTop[0]"
+                             (input)="txtTop[0] = $event.target.value"
+                             class="slider50 fadeInLeft"
+                             style="width: 80%; margin-left: 0%"
+                      >
+                      <p class="fadeInTop txtMargin">{{templateComponentStrings.a23}} </p>
+                      <input type="range"
+                             min="0"
+                             max="{{maxWidthUserTxtFieldRight}}"
+                             (click)="setMaxWidthForUserTxt()"
+                             (change)="setMaxWidthForUserTxt()"
+                             [value]="txtLeft[0]"
+                             (input)="txtLeft[0] = $event.target.value"
+                             class="slider50 fadeInLeft"
+                             style="width: 80%; margin-left: 0%"
+                      >
+                      <p class="fadeInTop txtMargin">
+                        {{templateComponentStrings.a24}}
+                      </p>
+                      <input type="range"
+                             min="0"
+                             max="{{maxWidthUserTxtFieldRight}}"
+                             (click)="setMaxWidthForUserTxt()"
+                             (change)="setMaxWidthForUserTxt()"
+                             [value]="txtRight[0]"
+                             (input)="txtRight[0] = $event.target.value"
+                             class="slider50 fadeInLeft"
+                             style="width: 80%; margin-left: 0%"
+                      >
+                      <br/>
+                      <br/>
+                      <br/>
+                      <button mat-mini-fab
+                              color="primary"
+                              id="fontStyle5"
+                              (click)="setTxtStyle()"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue"
+                      >
+                        <i class="material-icons">
+                          format_italic
+                        </i>
+                      </button>
+                      <button mat-mini-fab
+                              color="primary"
+                              id="fontWeight5"
+                              (click)="setTxtWeight()"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue"
+                      >
+                        <i class="material-icons">
+                          format_bold
+                        </i>
+                      </button>
+                      <button mat-mini-fab
+                              color="primary"
+                              id="fontVariant5"
+                              (click)="setTxtVariant()"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue"
+                      >
+                        <i class="material-icons">
+                          format_size
+                        </i>
+                      </button>
+                      <br/>
+                      <button mat-mini-fab
+                              color="primary"
+                              id="alignLeft5"
+                              (click)="setTxtAlign('left')"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.background-color]="MACblue"
+                              [style.color]="whiteColor"
+                      >
+                        <i class="material-icons">
+                          format_align_left
+                        </i>
+                      </button>
+                      <button mat-mini-fab
+                              color="accent"
+                              id="alignCenter5"
+                              color="primary"
+                              (click)="setTxtAlign('center')"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue"
+                      >
+                        <i class="material-icons">
+                          format_align_center
+                        </i>
+                      </button>
+                      <button mat-mini-fab
+                              color="accent"
+                              id="alignRight5"
+                              color="primary"
+                              (click)="setTxtAlign('right')"
+                              style="margin-bottom: 10px; background-color: white;"
+                              [style.color]="MACblue"
+                      >
+                        <i class="material-icons">
+                          format_align_right
+                        </i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
         </mat-accordion>
       </div>
     </mat-step>
-    <mat-step stepControl="false">
+    <!--<mat-step stepControl="false">
       <ng-template matStepLabel>
-        Trzeci krok
+        3. krok
       </ng-template>
       <div class="userTxtFields">
         <div class="textBox">
@@ -872,26 +1068,26 @@
           </div>
         </div>
       </div>
-    </mat-step>
+    </mat-step>-->
     <mat-step stepControl="false" >
       <ng-template matStepLabel>
-        Ostatni krok
+        {{templateComponentStrings.a30}}
       </ng-template>
       <div [style.display]="bcgDisplay[3]" id="bcgDisplay3"
            style="text-align: center; ">
         <div class="textBox">
           <h3 class="fadeInTop">
-            Dodaj obrazek ze zbioru
+            {{templateComponentStrings.a31}}
           </h3>
         </div>
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Emocje
+                {{templateComponentStrings.a32}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Emocje
+                {{templateComponentStrings.a33}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -909,10 +1105,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Geografia
+                {{templateComponentStrings.a34}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Geografia
+                {{templateComponentStrings.a35}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -930,10 +1126,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Literatura
+                {{templateComponentStrings.a36}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Literatura
+                {{templateComponentStrings.a37}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -951,10 +1147,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Matematyka
+                {{templateComponentStrings.a38}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Matematyka
+                {{templateComponentStrings.a39}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -972,10 +1168,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Muzyka
+                {{templateComponentStrings.a40}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Muzyka
+                {{templateComponentStrings.a41}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -993,10 +1189,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Polska
+                {{templateComponentStrings.a42}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Polska
+                {{templateComponentStrings.a43}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1014,10 +1210,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Rośliny
+                {{templateComponentStrings.a44}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Rosliny
+                {{templateComponentStrings.a45}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1035,10 +1231,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Sport
+                {{templateComponentStrings.a46}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Sport
+                {{templateComponentStrings.a47}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1056,10 +1252,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Święta
+                {{templateComponentStrings.a48}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Święta
+                {{templateComponentStrings.a49}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1077,10 +1273,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Szachy i Multimedia
+                {{templateComponentStrings.a50}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Szachy i Multimedia
+                {{templateComponentStrings.a51}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1098,10 +1294,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Zwierzęta
+                {{templateComponentStrings.a52}}
               </mat-panel-title>
               <mat-panel-description>
-                Obrazki z kategorii Zwierzęta
+                {{templateComponentStrings.a53}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="scrollableMAC"
@@ -1120,7 +1316,7 @@
         </mat-accordion>
         <div class="textBox" style="margin-top: 1vh">
           <h3 class="fadeInTop">
-            Dodaj swój obrazek
+            {{templateComponentStrings.a54}}
           </h3>
         </div>
         <div class="box33border"
@@ -1133,7 +1329,8 @@
               <i class="material-icons">
                 add_photo_alternate
               </i>
-              Importuj obrazek</p>
+              {{templateComponentStrings.a55}}
+              </p>
           </label>
           <input id="file-upload"
                  class="fadeInRight"
@@ -1149,7 +1346,7 @@
               <mat-option *ngFor="let x of userImg; let i = index"
                           value="{{x}}"
                           (click)="setUserImgFrame(i)">
-                Obrazek nr. {{x + 1}}
+                {{templateComponentStrings.a56}} {{x + 1}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -1158,7 +1355,7 @@
              style="height: 110px; width: 40%;/* border-right: 1px solid #f2f2f2*/">
           <p style="/*float: left; */  padding-left: 5px">
             <b class="fadeInRight">
-              Szerokość obrazka
+              {{templateComponentStrings.a57}}
             </b>
           </p>
           <input
@@ -1178,7 +1375,7 @@
         <div class="box33" style="height: 110px; width: 20%;/* border-right: 1px solid #f2f2f2*/">
           <p style="/*float: left; */  padding-left: 5px">
             <b class="fadeInRight">
-              Zachowanie propocji
+              {{templateComponentStrings.a58}}
             </b>
           </p>
           <mat-checkbox class="example-margin"
@@ -1189,7 +1386,7 @@
              style="height: 110px; width: 40%;">
           <p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight">
-              Wysokość obrazka
+              {{templateComponentStrings.a59}}
             </b>
           </p>
           <input
@@ -1211,7 +1408,7 @@
           <p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight"
                style="">
-              Górny margines obrazka</b></p>
+              {{templateComponentStrings.a60}}</b></p>
           <input type="range"
                  min="0"
                  step="1"
@@ -1225,7 +1422,7 @@
         <div class="box33border"
              style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
           <p style="/*float: left;*/  padding-left: 5px">
-            <b class="fadeInRight">Lewy margines obrazka</b></p>
+            <b class="fadeInRight">{{templateComponentStrings.a61}}</b></p>
           <input type="range"
                  min="0"
                  step="1"
@@ -1238,7 +1435,7 @@
         </div>
         <div class="box33border"
              style="height: 110px;">
-          <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">Obrót obrazka</b></p>
+          <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">{{templateComponentStrings.a62}}</b></p>
           <input type="range"
                  id="inputImgRotate"
                  min="-360"
@@ -1261,7 +1458,7 @@
             <i class="material-icons">
               image
             </i>
-            Resetuj obrazek
+            {{templateComponentStrings.a63}}
           </button>
           <br/><br/>
         </div>
@@ -1277,7 +1474,7 @@
             <i class="material-icons">
               remove
             </i>
-            Usuń obrazek
+            {{templateComponentStrings.a64}}
           </button>
         </div>
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
@@ -1290,7 +1487,7 @@
             <i class="material-icons">
               crop_rotate
             </i>
-            Resetuj obrót
+            {{templateComponentStrings.a65}}
           </button>
           <br/>
         </div>
@@ -1320,19 +1517,15 @@
            [style.top]="imgTop[usr]+'%'"
            (load)="chcekProportions()"/>
       <div *ngFor="let txt of userTxt; let i = index"
-                  class="userTxt"
-                  style="position: absolute; z-index: 1; width: 100%;"
-                  [style.top]="txtTop[i]+'%'">
-      <p style="position: absolute; width: 100%;"
-         [style.padding-left]="txtLeft[i]+'%'"
-         [style.padding-right]="txtRight[i]+'%'"
-         [style.text-align]="txtAlign[i]"
-      >
+           class="userTxt"
+           style="position: absolute; z-index: 1; width: 100%;"
+           [style.top]="txtTop[i]+'%'"
+           [style.padding-left]="txtLeft[i]+'%'"
+           [style.padding-right]="txtRight[i]+'%'"
+           [style.text-align]="txtAlign[i]">
         <s id="font1{{i}}"
            class="maxContent"
-           style="white-space: pre-wrap"
-           [style.margin-right]="txtRight[i]+'%'"
-           [style.margin-left]="txtLeft[i]+'%'"
+           style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal"
            [style.font-size]="txtSize[i] + 'vw'"
            [style.font-family]="txtFontFamili[i]"
            [style.color]="txtColor[i]"
@@ -1343,8 +1536,7 @@
         >
           {{txt}}
         </s>
-      </p>
-    </div>
+      </div>
 
       <div *ngFor="let txt of txtField; let i = index"
            class="userTxt"
@@ -1403,28 +1595,26 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
            (load)="chcekProportions()"/>
-      <div *ngFor="let txt of userTxt; let i = index" class="userTxt"
+      <div *ngFor="let txt of userTxt; let i = index"
+           class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
-           [style.top]="txtTop[i]+'%'">
-        <p style="position: absolute; width: 100%;"
+           [style.top]="txtTop[i]+'%'"
            [style.padding-left]="txtLeft[i]+'%'"
            [style.padding-right]="txtRight[i]+'%'"
-           [style.text-align]="txtAlign[i]"
+           [style.text-align]="txtAlign[i]">
+        <s id="font2{{i}}"
+           class="maxContent"
+           style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal"
+           [style.font-size]="txtSize[i] + 'vw'"
+           [style.font-family]="txtFontFamili[i]"
+           [style.color]="txtColor[i]"
+           [style.font-variant]="txtVariant[i]"
+           [style.font-style]="txtStyle[i]"
+           [style.font-weight]="txtWeight[i]"
+           [style.text-shadow]="txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadowColor[i]"
         >
-          <s id="font2{{i}}" class="maxContent" style="white-space: pre-wrap"
-             [style.margin-right]="txtRight[i]+'%'"
-             [style.margin-left]="txtLeft[i]+'%'"
-             [style.font-size]="txtSize[i] + 'vw'"
-             [style.font-family]="txtFontFamili[i]"
-             [style.color]="txtColor[i]"
-             [style.font-variant]="txtVariant[i]"
-             [style.font-style]="txtStyle[i]"
-             [style.font-weight]="txtWeight[i]"
-             [style.text-shadow]="txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadow[i]  + 'px ' + txtShadowColor[i]"
-          >
-            {{txt}}
-          </s>
-        </p>
+          {{txt}}
+        </s>
       </div>
       <div *ngFor="let txt of txtField; let i = index"
            class="userTxt"
