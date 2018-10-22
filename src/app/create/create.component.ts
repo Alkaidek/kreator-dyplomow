@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit {
   percentRight = [100, 100, 100];
   percentHeight = [80, 80, 80];
   userImgBase64 = [];
-  userTxt = [];
+  userTxt = ['\n'];
   imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
@@ -836,7 +836,7 @@ export class CreateComponent implements OnInit {
     this.txtShadow = [0];
     this.txtShadowColor = ['#8c8e91'];
     this.currentTxt = 0;
-    this.userTxt = [''];
+    this.userTxt = ['\n'];
     this.txtFontFamili = ['Arial'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
@@ -1913,6 +1913,8 @@ export class CreateComponent implements OnInit {
   /*ustawia wartości maksymalne dla slajderów odnoszących się do elementów dodatkowych pól tekstowych*/
   setMaxWidthForUserTxt() {
     console.log('font1' + this.currentTxt);
+    const rightSlider = document.getElementById('additionalRight') as HTMLInputElement;
+    const leftSlider = document.getElementById('additionalLeft') as HTMLInputElement;
     let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
     if ( (this.landscape === 'inline-block') ) {
@@ -1928,6 +1930,8 @@ export class CreateComponent implements OnInit {
     console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
     this.maxWidthUserTxtFieldRight = Math.round(percent - 5);
+    rightSlider.max = '' + Math.round(percent - 5);
+    leftSlider.max = '' + Math.round(percent - 5);
     console.log('margines' + this.maxWidthUserTxtFieldTop );
     console.log('' + this.currentTxt );
     console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
@@ -1935,7 +1939,7 @@ export class CreateComponent implements OnInit {
       console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
       this.txtLeft[this.currentTxt] = 0;
     }
-    return Math.round(percent - 1);
+    return Math.round(percent - 5);
   }
   setUserImgFrame(n) {
     for (let i = 0; i <  this.imgTop.length; i ++ ) {

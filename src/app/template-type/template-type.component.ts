@@ -260,8 +260,8 @@ export class TemplateTypeComponent implements OnInit {
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 2480 / width) );
-      this.multiple = (2480 / width );
+      console.log(': ' + ( 794 / width) );
+      this.multiple = (794 / width );
       this.imageFrameWidth = document.getElementById('pdfFor').offsetWidth * 0.14;
       this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
       this.imageFrameWidthFix = document.getElementById('pdfForFix').offsetWidth * 0.14;
@@ -507,16 +507,16 @@ export class TemplateTypeComponent implements OnInit {
     if (n === 2) {
       this.landscape = 'none';
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 2480 / width) );
-      this.multiple = (2480 / width );
+      console.log(': ' + ( 794 / width) );
+      this.multiple = (794 / width );
       this.resetSettings();
     } else {
       this.resetSettings();
       this.landscape = 'inline-block';
       setTimeout( () => {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
-        console.log(': ' + ( 2480 / width) );
-        this.multiple = (2480 / width );
+        console.log(': ' + ( 794 / width) );
+        this.multiple = (794 / width );
       }, 100);
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');

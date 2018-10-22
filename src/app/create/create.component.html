@@ -1807,13 +1807,15 @@
                                min="0"
                                max="{{maxWidthUserTxtFieldTop}}"
                                (click)="setMaxWidthForUserTxt()"
-                               (change)="setMaxWidthForUserTxt()" [value]="txtTop[0]"
+                               (change)="setMaxWidthForUserTxt()"
+                               [value]="txtTop[0]"
                                (input)="txtTop[0] = $event.target.value"
                                class="slider50 fadeInLeft"
                                style="width: 80%; margin-left: 0%"
                         >
                         <p class="fadeInTop txtMargin">{{createComponentStrings.a35}}</p>
                         <input type="range"
+                               id="additionalLeft"
                                min="0"
                                max="{{maxWidthUserTxtFieldRight}} - 5"
                                (click)="setMaxWidthForUserTxt()"
@@ -1827,6 +1829,7 @@
                           {{createComponentStrings.a30}}
                         </p>
                         <input type="range"
+                               id="additionalRight"
                                min="0"
                                max="{{maxWidthUserTxtFieldRight}} - 5"
                                (click)="setMaxWidthForUserTxt()"
@@ -2674,7 +2677,7 @@
            [style.text-align]="txtAlign[i]">
           <s id="font1{{i}}"
              class="maxContent"
-             style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal"
+             style="white-space: pre-wrap; word-break: keep-all; word-wrap: break-spaces; overflow-wrap: normal;"
              [style.font-size]="txtSize[i] + 'vw'"
              [style.font-family]="txtFontFamili[i]"
              [style.color]="txtColor[i]"
