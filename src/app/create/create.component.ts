@@ -2072,5 +2072,19 @@ export class CreateComponent implements OnInit {
           console.log( tmp[0].fonts[i] );
         }
       });
+
+    /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
+    this._dataService.getSportImg(1)
+      .subscribe(sport => {
+        this.userImgBase64.push(sport);
+        this.add();
+      });
+
+    /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
+    this._dataService.getSportImg(2)
+      .subscribe(sport => {
+        this.userImgBase64.push(sport);
+        this.add();
+      });
   }
 }
