@@ -27,6 +27,7 @@ let response = {
 };
 router.get('/emocje/:element', (req, res) => {
   connection((db) => {
+    console.log('emocje');
     db.collection('images')
       .find()
       .toArray()
@@ -41,6 +42,7 @@ router.get('/emocje/:element', (req, res) => {
 });
 router.get('/geografia/:element', (req, res) => {
   connection((db) => {
+    console.log('geografia');
     db.collection('imagesGeografia')
       .find()
       .toArray()
@@ -55,6 +57,7 @@ router.get('/geografia/:element', (req, res) => {
 });
 router.get('/literatura/:element', (req, res) => {
   connection((db) => {
+    console.log('literatura');
     db.collection('imagesLiteratura')
       .find()
       .toArray()
@@ -69,6 +72,7 @@ router.get('/literatura/:element', (req, res) => {
 });
 router.get('/matematyka/:element', (req, res) => {
   connection((db) => {
+    console.log('matematyka');
     db.collection('imagesMatematyka')
       .find()
       .toArray()
@@ -83,6 +87,7 @@ router.get('/matematyka/:element', (req, res) => {
 });
 router.get('/muzyka/:element', (req, res) => {
   connection((db) => {
+    console.log('muzyka');
     db.collection('imagesMuzyka')
       .find()
       .toArray()
@@ -97,6 +102,7 @@ router.get('/muzyka/:element', (req, res) => {
 });
 router.get('/polska/:element', (req, res) => {
   connection((db) => {
+    console.log('polska');
     db.collection('imagesPolska')
       .find()
       .toArray()
@@ -111,6 +117,7 @@ router.get('/polska/:element', (req, res) => {
 });
 router.get('/rosliny/:element', (req, res) => {
   connection((db) => {
+    console.log('rosliny');
     db.collection('imagesRosliny')
       .find()
       .toArray()
@@ -125,6 +132,7 @@ router.get('/rosliny/:element', (req, res) => {
 });
 router.get('/sport/:element', (req, res) => {
   connection((db) => {
+    console.log('sport');
     db.collection('imagesSport')
       .find()
       .toArray()
@@ -139,6 +147,7 @@ router.get('/sport/:element', (req, res) => {
 });
 router.get('/swieta/:element', (req, res) => {
   connection((db) => {
+    console.log('swieta');
     db.collection('imagesSwieta')
       .find()
       .toArray()
@@ -153,6 +162,7 @@ router.get('/swieta/:element', (req, res) => {
 });
 router.get('/szachy/:element', (req, res) => {
   connection((db) => {
+    console.log('szachy');
     db.collection('imagesSzachy')
       .find()
       .toArray()
@@ -167,6 +177,7 @@ router.get('/szachy/:element', (req, res) => {
 });
 router.get('/zwierzeta/:element', (req, res) => {
   connection((db) => {
+    console.log('zwierzeta');
     db.collection('imagesZwierzeta')
       .find()
       .toArray()
@@ -181,6 +192,7 @@ router.get('/zwierzeta/:element', (req, res) => {
 });
 router.get('/base64Img', (req, res) => {
   connection((db) => {
+    console.log('base64');
     db.collection('base64')
       .find()
       .toArray()
@@ -210,6 +222,7 @@ router.get('/testMongo', (req, res) => {
 });
 router.get('/templates', (req, res) => {
   connection((db) => {
+    console.log('templates');
     db.collection('templates')
       .find()
       .toArray()
@@ -224,6 +237,7 @@ router.get('/templates', (req, res) => {
 });
 router.get('/font', (req, res) => {
   connection((db) => {
+    console.log('font');
     db.collection('font')
       .find()
       .toArray()

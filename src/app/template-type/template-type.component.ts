@@ -523,7 +523,7 @@ export class TemplateTypeComponent implements OnInit {
     }
   }
   add() {
-    this.openSnackBar(templateComponentStrings.a67, 'ok');
+    this.openSnackBar(templateComponentStrings.a66, 'ok');
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
@@ -1015,46 +1015,107 @@ export class TemplateTypeComponent implements OnInit {
   setImg(n, name) {
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+    console.log('name: ' + name);
     rmvBtn.disabled = false;
     if (name === 'Animal') {
       this.userImgBase64.push(this.imagesAnimal[n]);
     } else if (name === 'Sport') {
-      this.userImgBase64.push(this.imagesSport[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesSport[n] + '.png');
+      this.add();*/
+      this._dataService.getSport2Img(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Emocje') {
-      this.userImgBase64.push(this.imagesEmocje[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesEmocje[n] + '.png');
+      this.add();*/
+      this._dataService.getSportImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
     } else if (name === 'Geografia') {
-      this.userImgBase64.push(this.imagesGeografia[n] + '.png');
-      this.add();
+      /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
+      this._dataService.getGeografiaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Literatura') {
-      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesLiteratura[n] + '.png');*/
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Matematyka') {
       /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
-      this.userImgBase64.push(this.imagesMatematyka[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesMatematyka[n] + '.png');*/
+      this._dataService.getMatematykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Muzyka') {
-      this.userImgBase64.push(this.imagesMuzyka[n] + '.png');
-      this.add();
+      /*     this.userImgBase64.push(this.imagesMuzyka[n] + '.png');*/
+      this._dataService.getMuzykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /* this.add();*/
     } else if (name === 'Rosliny') {
-      this.userImgBase64.push(this.imagesRosliny[n] + '.png');
-      this.add();
+      /* this.userImgBase64.push(this.imagesRosliny[n] + '.png');*/
+      this._dataService.getRoslinyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Polska') {
-      this.userImgBase64.push(this.imagesPolska[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesPolska[n] + '.png');*/
+      this._dataService.getPolskaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Swieta') {
-      this.userImgBase64.push(this.imagesSwieta[n] + '.png');
-      this.add();
+      /*      this.userImgBase64.push(this.imagesSwieta[n] + '.png');*/
+      this._dataService.getSwietaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Szachy') {
-      this.userImgBase64.push(this.imagesSzachy[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesSzachy[n] + '.png');*/
+      this._dataService.getSzachyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Zwierzeta') {
-      this.userImgBase64.push(this.imagesZwierzeta[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesZwierzeta[n] + '.png');*/
+      this._dataService.getZwierzetaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
     } else if (name === 'Literatura') {
-      this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
-      this.add();
+      /*this.userImgBase64.push(this.imagesLiteratura[n] + '.png');*/
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      // this.add();
     }
   }
   resetTxtField() {

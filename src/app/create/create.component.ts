@@ -680,12 +680,12 @@ export class CreateComponent implements OnInit {
         this.imgSrcFix =  '../../assets/img/0.png';
       } else {
         const element = template.img;
-        this.imgSrcFix = template.img.replace('png', 'jpg' );
+        /*this.imgSrcFix = template.img.replace('png', 'jpg' );*/
         this.bcgBtnDisable = false;
         this.bcgColor = '#ffffff';
         this.bcgColorDisabled = true;
         for ( let i = 0; i < this.bcgTemp.length; i++ ) {
-          if (element === this.bcgTemp[i] + '.png') {
+          if (element === this.bcgTemp[i] /*+ '.png'*/) {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
             for ( let h = 0; h < Math.floor(i / 3); h++ ) {
@@ -1771,7 +1771,7 @@ export class CreateComponent implements OnInit {
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   /*ustawia obrazek wybrany ze zbioru*/
-  setImg(n, name) {
+  /*setImg(n, name) {
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     rmvBtn.disabled = false;
@@ -1790,7 +1790,7 @@ export class CreateComponent implements OnInit {
       this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
       this.add();
     } else if (name === 'Matematyka') {
-      /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
+      /!*this.userImgBase64.push(this.imagesMatematyka[n]);*!/
       this.userImgBase64.push(this.imagesMatematyka[n] + '.png');
       this.add();
     } else if (name === 'Muzyka') {
@@ -1814,6 +1814,112 @@ export class CreateComponent implements OnInit {
     } else if (name === 'Literatura') {
       this.userImgBase64.push(this.imagesLiteratura[n] + '.png');
       this.add();
+    }
+  }*/
+  setImg(n, name) {
+    this.onLoadBool = true;
+    const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
+    console.log('name: ' + name);
+    rmvBtn.disabled = false;
+    if (name === 'Animal') {
+      this.userImgBase64.push(this.imagesAnimal[n]);
+    } else if (name === 'Sport') {
+      /*this.userImgBase64.push(this.imagesSport[n] + '.png');
+      this.add();*/
+      this._dataService.getSport2Img(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+    } else if (name === 'Emocje') {
+      /*this.userImgBase64.push(this.imagesEmocje[n] + '.png');
+      this.add();*/
+      this._dataService.getSportImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+    } else if (name === 'Geografia') {
+      /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
+      this._dataService.getGeografiaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Literatura') {
+      /*this.userImgBase64.push(this.imagesLiteratura[n] + '.png');*/
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Matematyka') {
+      /*this.userImgBase64.push(this.imagesMatematyka[n]);*/
+      /*this.userImgBase64.push(this.imagesMatematyka[n] + '.png');*/
+      this._dataService.getMatematykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Muzyka') {
+      /*     this.userImgBase64.push(this.imagesMuzyka[n] + '.png');*/
+      this._dataService.getMuzykaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /* this.add();*/
+    } else if (name === 'Rosliny') {
+      /* this.userImgBase64.push(this.imagesRosliny[n] + '.png');*/
+      this._dataService.getRoslinyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Polska') {
+      /*this.userImgBase64.push(this.imagesPolska[n] + '.png');*/
+      this._dataService.getPolskaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Swieta') {
+      /*      this.userImgBase64.push(this.imagesSwieta[n] + '.png');*/
+      this._dataService.getSwietaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Szachy') {
+      /*this.userImgBase64.push(this.imagesSzachy[n] + '.png');*/
+      this._dataService.getSzachyImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Zwierzeta') {
+      /*this.userImgBase64.push(this.imagesZwierzeta[n] + '.png');*/
+      this._dataService.getZwierzetaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      /*this.add();*/
+    } else if (name === 'Literatura') {
+      /*this.userImgBase64.push(this.imagesLiteratura[n] + '.png');*/
+      this._dataService.getLiteraturaImg(n)
+        .subscribe(sport => {
+          this.userImgBase64.push(sport);
+          this.add();
+        });
+      // this.add();
     }
   }
   /*odbija tło (oś X)*/
