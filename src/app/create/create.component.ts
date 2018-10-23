@@ -2060,4 +2060,17 @@ export class CreateComponent implements OnInit {
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }
   }
+  getFont() {
+    /*this._dataService.testMongo()
+      .subscribe(tmp => {
+          console.log('test' + tmp);
+          console.log('test2' + tmp[0].testData);
+      });*/
+    this._dataService.getTemplates()
+      .subscribe(tmp => {
+        for (let i = 0; i < tmp[0].fonts.length; i++) {
+          console.log( tmp[0].fonts[i] );
+        }
+      });
+  }
 }

@@ -51,5 +51,7 @@ export class DataService {
   getFont() {
     return this._http.get('/api/font').pipe(map(result => this.result = result.json().data));
   }
-
+  testMongo() {
+    return this._http.get('/api/testMongo').pipe(map(result => this.result = result.json().data));
+  }
 }

@@ -4,7 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 // Connect
 const connection = (closure) => {
-  return MongoClient.connect('mongodb://admin123:admin123@localhost:27017/mean', (err, db) => {
+  //return MongoClient.connect('mongodb://admin123:admin123@localhost:27017/mean', (err, db) => {
+  return MongoClient.connect('mongodb://localhost:27017/mean', (err, db) => {
     //db.authenticate('admin123', 'admin123');
     if (err) return console.log(err);
     closure(db);
@@ -189,6 +190,21 @@ router.get('/base64Img', (req, res) => {
       })
       .catch((err) => {
          sendError(err, res);
+      });
+  });
+});
+router.get('/testMongo', (req, res) => {
+  connection((db) => {
+    console.log('dasda');
+    db.collection('testCol')
+      .find()
+      .toArray()
+      .then((templates) => {
+        response.data = templates;
+        res.json(response);
+      })
+      .catch((err) => {
+        sendError(err, res);
       });
   });
 });
