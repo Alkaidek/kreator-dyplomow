@@ -191,6 +191,8 @@ export class CreateComponent implements OnInit {
   rotate = [];
   imgWidth = [];
   imgHeight = [];
+  imgWidthDragAndDrop = [];
+  imgHeightDragAndDrop = [];
   imgTop = [];
   imgLeft = [];
   scheme = 0;
@@ -726,6 +728,8 @@ export class CreateComponent implements OnInit {
           this.imgHeight.push(template.userImgHeight[i]);
           this.imgTop.push(template.userImgTop[i]);
           this.imgLeft.push(template.userImgLeft[i]);
+          this.imgHeightDragAndDrop.push(template.userImgTop[i]);
+          this.imgWidthDragAndDrop.push(template.userImgLeft[i]);
           this.userImgBase64.push(template.userBcgBase64[i]);
           this.currImg = this.userImg.length - 1;
         }
@@ -1111,6 +1115,8 @@ export class CreateComponent implements OnInit {
     this.currImg = this.userImg.length - 1;
     this.imgHeight.push(10);
     this.imgWidth.push(10);
+    this.imgWidthDragAndDrop.push(0);
+    this.imgHeightDragAndDrop.push(0);
     setTimeout(() => {
       this.setUserImgFrame(this.currImg);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
@@ -1136,6 +1142,8 @@ export class CreateComponent implements OnInit {
     this.rotate.splice(this.currImg, 1);
     this.imgWidth.splice(this.currImg, 1);
     this.imgHeight.splice(this.currImg, 1);
+    this.imgHeightDragAndDrop.splice(this.currImg, 1);
+    this.imgWidthDragAndDrop.splice(this.currImg, 1);
     this.imgTop.splice(this.currImg, 1);
     this.imgLeft.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
@@ -1241,9 +1249,9 @@ export class CreateComponent implements OnInit {
       + '"userImgHeight" : [ '
       + this.createTextToJSON(this.imgHeight) + '],'
       + '"userImgLeft" : [ '
-      + this.createTextToJSON(this.imgLeft) + '],'
+      + this.createTextToJSON(this.imgWidthDragAndDrop) + '],'
       + '"userImgTop" : [ '
-      + this.createTextToJSON(this.imgTop) + '],'
+      + this.createTextToJSON(this.imgHeightDragAndDrop) + '],'
       + '"txtTop" : [ '
       + this.createTextToJSON(this.txtTop) + '],'
       + '"txtLeft" : [ '
@@ -2205,14 +2213,42 @@ export class CreateComponent implements OnInit {
   }
   testDragDrop(e, id) {
     let width = document.getElementById(e).getBoundingClientRect().left;
-    this.imgLeft[id] = width;
+   /* this.imgLeft[id] = width;*/
     width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
     console.log('l: ' + width);
     let height = document.getElementById(e).getBoundingClientRect().top;
-    this.imgTop[id] = height;
+    /*this.imgTop[id] = height;*/
     height = height -  document.getElementById('toPdf100').getBoundingClientRect().top;
     console.log('h: ' + height);
-    document.getElementById('imgToChange' + id)
-      .style.transform = 'translate3d(' + width * this.multiple + 'px, ' +  height * this.multiple + 'px, 0px)';
+    /*document.getElementById('imgToChange' + id)
+      .style.transform = 'translate3d(' + width * this.multiple + 'px, ' +  height * this.multiple + 'px, 0px)';*/
+    this.setDeragAndDropPercent(id);
+  }
+  changeZindex() {
+    for (let i = 0; i < this.imgWidth.length; i++) {
+      document.getElementById('imgToChange22' + i).style.zIndex = '25';
+      document.getElementById('imgToChange2' + i).style.zIndex = '25';
+    }
+  }
+  changeZindexDown() {
+    for (let i = 0; i < this.imgWidth.length; i++) {
+      document.getElementById('imgToChange22' + i).style.zIndex = '1';
+      document.getElementById('imgToChange2' + i).style.zIndex = '1';
+    }
+  }
+  setDeragAndDropPercent(id) {
+    let width = document.getElementById('imgToChange22' + id).getBoundingClientRect().left;
+    width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
+    width = (width / document.getElementById('toPdf100').getBoundingClientRect().width) * 100;
+    console.log('w%: ' + width);
+    this.imgWidthDragAndDrop[id] = width;
+    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
+    height = height - document.getElementById('toPdf100').getBoundingClientRect().top;
+    height = (height / document.getElementById('toPdf100').getBoundingClientRect().height) *  100;
+    console.log('eH ' + document.getElementById('imgToChange22' + id).getBoundingClientRect().top +
+      'topPdfH: ' +
+      document.getElementById('toPdf100').getBoundingClientRect().height +
+      ' h%: ' + height);
+    this.imgHeightDragAndDrop[id] = height;
   }
 }
