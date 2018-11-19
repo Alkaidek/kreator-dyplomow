@@ -4,6 +4,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
@@ -21,7 +22,7 @@ const firebase = {
   projectId: 'diploma-93bc1',
   storageBucket: 'diploma-93bc1.appspot.com',
   messagingSenderId: '739562136666'
-}
+};
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ const firebase = {
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    DragDropModule,
     HttpModule
   ],
   providers: [DataService],

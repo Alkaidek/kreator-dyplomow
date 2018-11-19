@@ -20,9 +20,9 @@ import { createComponentStrings } from '../allText.js';
     ]
 })
 export class CreateComponent implements OnInit {
-  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
-    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
-    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
+  arraySelectFontFamili = [ 'Abril Fatface', 'Aladin', 'Allura', 'Anton', 'Dancing Script', 'Lato',
+    'Merriweather', 'Montserrat', 'Open Sans', 'Oswald', 'Ranga', 'Roboto', 'Rubik', 'Ubuntu', 'Varela Round'
+    ];
   userImg =
     [];
   createComponentStrings = createComponentStrings;
@@ -179,14 +179,14 @@ export class CreateComponent implements OnInit {
   paddingTop = 10;
   paddingTopForWho = 20;
   paddingTopForWhat = 30;
-  marginLeft = [1, 0, 0, 0];
-  marginRight = [0, 0, 0, 0];
-  paddingTopFooter = 12;
+  marginLeft = [1, 0, 0, 0, 0];
+  marginRight = [0, 0, 0, 0, 0];
+  paddingTopFooter = -10;
   bottom = 0;
   multiple = 4.5;
   arrayFontSize = [3, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
-  arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+  arrayFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
   arrayFontColor = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000'];
   rotate = [];
   imgWidth = [];
@@ -216,7 +216,7 @@ export class CreateComponent implements OnInit {
   txtColor = ['#000000'];
   disp = 'block';
   txtColorText = '';
-  txtFontFamili = ['Arial'];
+  txtFontFamili = ['Open Sans'];
   bcgRotateX = 1;
   bcgRotateY = 1;
   frmRotateX = 1;
@@ -468,6 +468,11 @@ export class CreateComponent implements OnInit {
             this.marginLeft[3] = coordinates[imgSrc][1];
             this.marginRight[3] = coordinates[imgSrc][2];
             this.bottom = coordinates[imgSrc][3];
+            if ( this.landscape === 'inline-block' ) {
+              this.paddingTopFooter = coordinates[imgSrc][3] - 15;
+            } else {
+              this.paddingTopFooter = coordinates[imgSrc][3] - 7;
+            }
             break;
           default:
             this.paddingTop = 10;
@@ -602,6 +607,8 @@ export class CreateComponent implements OnInit {
       this.marginLeft[1] = template.marginLeft[1];
       this.marginLeft[2] = template.marginLeft[2];
       this.marginLeft[3] = template.marginLeft[3];
+      this.marginLeft[4] = template.marginLeft[4];
+      this.marginRight[4] = template.marginRight[4];
       this.marginRight[3] = template.marginRight[3];
       this.marginRight[2] = template.marginRight[2];
       this.marginRight[1] = template.marginRight[1];
@@ -787,7 +794,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
     document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
     this.setScheme(30);
-    this.paddingTopFooter = 12;
+    this.paddingTopFooter = -10;
     this.textAlign = ['center', 'center', 'center', 'center', 'center'];
     this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
@@ -799,6 +806,7 @@ export class CreateComponent implements OnInit {
     this.marginLeft[1] = 0;
     this.marginLeft[2] = 0;
     this.marginLeft[3] = 0;
+    this.marginLeft[4] = 0;
     this.marginRight[3] = 0;
     this.marginRight[2] = 0;
     this.marginRight[1] = 0;
@@ -807,7 +815,7 @@ export class CreateComponent implements OnInit {
     this.imgSrcFix =  '../../assets/img/0.png';
     this.base64Tmp = '';
     this.arrayFontSize = [ 3, 0.9, 2, 0.8, 2];
-    this.arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+    this.arrayFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
     this.arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
     this.title = 'Dyplom';
     this.forWho =  '';
@@ -837,7 +845,7 @@ export class CreateComponent implements OnInit {
     this.txtShadowColor = ['#8c8e91'];
     this.currentTxt = 0;
     this.userTxt = ['\n'];
-    this.txtFontFamili = ['Arial'];
+    this.txtFontFamili = ['Open Sans'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
   }
@@ -1035,6 +1043,8 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(.9, .9)';
       document.getElementById('imgO1').style.transform = 'scale(1, 1)';
       this.createFramesArray(this.frame2, this.frame1);
+      this.bottom = 14;
+      this.paddingTopFooter = -1;
       setTimeout( () => {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
         console.log(': ' + ( 794 / width) );
@@ -1377,7 +1387,7 @@ export class CreateComponent implements OnInit {
     this.txtRight.push(0);
     this.txtSize.push(3);
     this.txtColor.push('#000000');
-    this.txtFontFamili.push('Arial');
+    this.txtFontFamili.push('Open Sans');
     this.txtStyle.push('normal');
     this.txtWeight.push('normal');
     this.txtVariant.push('normal');
@@ -2192,5 +2202,17 @@ export class CreateComponent implements OnInit {
         this.userImgBase64.push(sport);
         this.add();
       });
+  }
+  testDragDrop(e, id) {
+    let width = document.getElementById(e).getBoundingClientRect().left;
+    this.imgLeft[id] = width;
+    width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
+    console.log('l: ' + width);
+    let height = document.getElementById(e).getBoundingClientRect().top;
+    this.imgTop[id] = height;
+    height = height -  document.getElementById('toPdf100').getBoundingClientRect().top;
+    console.log('h: ' + height);
+    document.getElementById('imgToChange' + id)
+      .style.transform = 'translate3d(' + width * this.multiple + 'px, ' +  height * this.multiple + 'px, 0px)';
   }
 }

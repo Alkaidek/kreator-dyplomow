@@ -14,9 +14,9 @@ import { templateComponentStrings } from '../allText.js';
   styleUrls: ['./template-type.component.sass']
 })
 export class TemplateTypeComponent implements OnInit {
-  arraySelectFontFamili = ['Arial', 'Century Gothic', 'AbrilFatface', 'Aladin', 'Allura', 'Georgia',
-    'Times New Roman', 'Comic Sans MS', 'Arial Black', 'Impact', 'Lucida Console', 'Lucida Sans Unicode',
-    'Courier New', 'Copperplate Gothic Light', 'Palatino Linotype', 'Tahoma', 'Trebuchet MS', 'Verdana'];
+  arraySelectFontFamili = [ 'Abril Fatface', 'Aladin', 'Allura', 'Anton', 'Dancing Script', 'Lato',
+    'Merriweather', 'Montserrat', 'Open Sans', 'Oswald', 'Ranga', 'Roboto', 'Rubik', 'Ubuntu', 'Varela Round'
+  ];
   userImg =
     [];
   templateComponentStrings = templateComponentStrings;
@@ -141,7 +141,7 @@ export class TemplateTypeComponent implements OnInit {
   multiple = 4.5;
   arrayFontSize = [3, 0.9, 2, 0.8, 2];
   arrayFontNameId = ['largeTxt', 'sFor', 'txtForWhat', 'smallTxt', 'left', 'right', 'center'];
-  arrayFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+  arrayFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
   arrayFontColor = ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000'];
   rotate = [];
   imgWidth = [];
@@ -162,7 +162,7 @@ export class TemplateTypeComponent implements OnInit {
   txtShadowColor = ['#8c8e91'];
   currentTxt = 0;
   txtFieldColor = ['#000000', '#000000', '#000000', '#000000', '#000000'];
-  txtFieldFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+  txtFieldFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
   txtFieldTop = [35, 35, 35, 35, 35];
   txtFieldLeft = [0, 0, 0, 0, 0];
   txtFieldRight = [0, 0, 0, 0, 0];
@@ -306,6 +306,7 @@ export class TemplateTypeComponent implements OnInit {
         pdf.addPage(imgWidth, imgHeight);
         const position = 0;
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.autoPrint();
         window.open(pdf.output('bloburl'), '_blank');
         pdf.save(this.getCurrentDate() + '.pdf');
         document.getElementById('spinner').style.display = 'none';
@@ -323,6 +324,7 @@ export class TemplateTypeComponent implements OnInit {
         pdf.addPage(imgWidth, imgHeight);
         const position = 0;
         pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.autoPrint();
         window.open(pdf.output('bloburl'), '_blank');
         pdf.save(this.getCurrentDate() + '.pdf');
         document.getElementById('spinner').style.display = 'none';
@@ -458,7 +460,7 @@ export class TemplateTypeComponent implements OnInit {
     this.txtShadowColor = ['#8c8e91'];
     this.currentTxt = 0;
     this.userTxt = [''];
-    this.txtFontFamili = ['Arial'];
+    this.txtFontFamili = ['Open Sans'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
   }
@@ -741,7 +743,7 @@ export class TemplateTypeComponent implements OnInit {
     this.txtRight.push(0);
     this.txtSize.push(3);
     this.txtColor.push('#000000');
-    this.txtFontFamili.push('Arial');
+    this.txtFontFamili.push('Open Sans');
     this.txtStyle.push('normal');
     this.txtWeight.push('normal');
     this.txtVariant.push('normal');
@@ -1121,7 +1123,7 @@ export class TemplateTypeComponent implements OnInit {
   resetTxtField() {
     this.textFieldArray = ['Pole 1', 'Pole 2', 'Pole 3', 'Pole 4', 'Pole 5'];
     this.txtFieldColor = ['#000000', '#000000', '#000000', '#000000', '#000000'];
-    this.txtFieldFontFamili = ['Arial', 'Arial', 'Arial', 'Arial', 'Arial'];
+    this.txtFieldFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
     this.txtFieldTop = [35, 35, 35, 35, 35];
     this.txtFieldLeft = [0, 0, 0, 0, 0];
     this.txtFieldRight = [0, 0, 0, 0, 0];

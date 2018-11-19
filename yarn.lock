@@ -97,11 +97,13 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cdk@^6.4.2":
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.4.2.tgz#e623cdbbe6258980b0fa93beafce0ea7c4e2c17b"
+"@angular/cdk@github:angular/cdk-builds":
+  version "7.0.3-6d7f417"
+  resolved "https://codeload.github.com/angular/cdk-builds/tar.gz/c03bad945cd68bea4c1deb649974d95ae25fa7d6"
   dependencies:
     tslib "^1.7.1"
+  optionalDependencies:
+    parse5 "^5.0.0"
 
 "@angular/cli@~6.0.8":
   version "6.0.8"
@@ -163,9 +165,9 @@
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-6.0.9.tgz#46663338185d321dc5cabeed72bec695775a104d"
 
-"@angular/material@^6.4.2":
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-6.4.2.tgz#f39529d56bad97f0470b886c3f30591b9d3a7d05"
+"@angular/material@6.4.7":
+  version "6.4.7"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-6.4.7.tgz#3c8f2d6a6a7904d97be29e06a84ffb62a8da6c16"
   dependencies:
     tslib "^1.7.1"
   optionalDependencies:
@@ -4911,8 +4913,8 @@ parse5@^4.0.0:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
 
 parse5@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.0.0.tgz#4d02710d44f3c3846197a11e205d4ef17842b81a"
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
 
 parsejson@0.0.3:
   version "0.0.3"

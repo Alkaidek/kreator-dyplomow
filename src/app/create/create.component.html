@@ -185,9 +185,9 @@
         </p>
       </div>
       <div class="signature"
-           [style.text-align]="textAlign[3]" [style.bottom]="(bottom ) + '%'"
-           [style.padding-left]="marginLeft[3] + '%'" [style.padding-right]="marginRight[3] + '%'"
-           style="min-width:100%;" style="z-index: 7;" [style.padding-top]="paddingTopFooter + '%'">
+           [style.text-align]="textAlign[3]"
+           [style.padding-left]="marginLeft[4] + '%'" [style.padding-right]="marginRight[4] + '%'"
+           style="min-width:100%;" style="z-index: 7;" [style.bottom]="paddingTopFooter + '%'">
         <p id="smallTxtLandscapeFix"
            [style.text-shadow]="shadowSmallFixFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
@@ -328,9 +328,11 @@
           {{sign2}}
         </p>
       </div>
-      <div class="signature" [style.text-align]="textAlign[3]" [style.bottom]="(bottom) + '%'"
-           [style.padding-top]="paddingTopFooter + '%'" [style.padding-left]="marginLeft[3] + '%'"
-           [style.padding-right]="marginRight[3] + '%'" style="min-width:100%;" style="z-index: 7;">
+      <div class="signature" [style.text-align]="textAlign[3]"
+           [style.bottom]="paddingTopFooter + '%'"
+           [style.padding-left]="marginLeft[4] + '%'"
+           [style.padding-right]="marginRight[4] + '%'"
+           style="min-width:100%; z-index: 7;">
         <p id="smallTxtFix" [style.text-shadow]="shadowSmallFixFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
            [style.font-family]="arrayFontFamili[6]"
@@ -1591,9 +1593,9 @@
                       <p class="fadeInTop txtMargin">{{createComponentStrings.a35}}</p>
                       <input type="range"
                              min="0"
-                             max="80"
-                             [value]="marginLeft[3]"
-                             (input)="marginLeft[3] = $event.target.value"
+                             max="40"
+                             [value]="marginLeft[4]"
+                             (input)="marginLeft[4] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
                       <p class="fadeInTop txtMargin">
@@ -1601,32 +1603,21 @@
                       </p>
                       <input type="range"
                              min="0"
-                             max="80"
-                             [value]="marginRight[3]"
-                             (input)="marginRight[3] = $event.target.value"
+                             max="40"
+                             [value]="marginRight[4]"
+                             (input)="marginRight[4] = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
                       <p class="fadeInTop txtMargin">
                         {{createComponentStrings.a31}}
                       </p>
                       <input type="range"
-                             min="10"
-                             max="25"
+                             min="-15"
+                             max="70"
                              [value]="paddingTopFooter"
                              (input)="paddingTopFooter = $event.target.value"
                              class="slider50 fadeInLeft"
                              style="width: 80%; margin-left: 0%">
-                      <p class="fadeInTop txtMargin">
-                        {{createComponentStrings.a38}}
-                      </p>
-                      <input type="range"
-                             min="-10"
-                             max="70"
-                             [value]="bottom"
-                             (input)="bottom = $event.target.value"
-                             class="slider50 fadeInLeft"
-                             style="width: 80%; margin-left: 0%">
-
                       <!--<p class="fadeInTop" >Górny margines</p>
                       &lt;!&ndash;<input type="range" min="0" max="50" [value]="bottom" (input)="bottom = $event.target.value" class="slider"  style="width: 80%">&ndash;&gt;
                       <mat-slider thumbLabel  min="10" max="50" [(value)]="paddingTopFooter" class="example-full-width"></mat-slider>
@@ -2659,16 +2650,16 @@
       <img src="{{imgSrcFrame}}"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
-      <img *ngFor="let usr of userImg; let i = index"
+      <img *ngFor="let usr of userImg; let i = index" class="userImg"
            id="imgToChange2{{usr}}"
            src="{{userImgBase64[i]}}"
-           style="background-size: cover; position: absolute; z-index: 1;"
+           style="background-size: cover; position: absolute; z-index: 19;"
            [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
-           (load)="chcekProportions()"/>
+           (load)="chcekProportions()" (mouseup)='testDragDrop("imgToChange2" + usr, usr)'  cdkDrag/>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
@@ -2753,7 +2744,6 @@
           {{forWhat}}
         </s>
       </div>
-
       <div class="signature" id="sign"
            [style.bottom]="bottom + '%'"
            [style.padding-left]="marginLeft[3] + '%'"
@@ -2790,10 +2780,9 @@
       </div>
       <div class="signature"
            [style.text-align]="textAlign[3]"
-           [style.bottom]="bottom + '%'"
-           [style.padding-left]="marginLeft[3] + '%'"
-           [style.padding-right]="marginRight[3] + '%'" style="min-width:100%; z-index: 7; "
-           [style.padding-top]="paddingTopFooter + '%'">
+           [style.padding-left]="marginLeft[4] + '%'"
+           [style.padding-right]="marginRight[4] + '%'" style="min-width:100%; z-index: 7; "
+           [style.bottom]="paddingTopFooter + '%'">
         <p id="smallTxt"
            [style.text-shadow]="shadowSmallFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
@@ -2951,11 +2940,10 @@
       </div>
       <div class="signature"
            [style.text-align]="textAlign[3]"
-           [style.bottom]="bottom + '%'"
-           [style.padding-left]="marginLeft[3] + '%'"
-           [style.padding-right]="marginRight[3] + '%'"
+           [style.padding-left]="marginLeft[4] + '%'"
+           [style.padding-right]="marginRight[4] + '%'"
            style="min-width:100%; z-index: 7"
-           [style.padding-top]="paddingTopFooter + '%'">
+           [style.bottom]="paddingTopFooter + '%'">
         <p id="smallTxtLandscape"
            [style.text-shadow]="shadowSmallFooter + ' ' + shadowColor[4]"
            [style.font-variant]="fontVariant[4]"
