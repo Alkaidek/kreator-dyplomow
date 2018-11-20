@@ -526,7 +526,7 @@ export class TemplateTypeComponent implements OnInit {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
         console.log(': ' + ( 794 / width) );
         this.multiple = (794 / width );
-      }, 100);
+      }, 300);
       const element = document.getElementById('toPdf100Landscape');
       element.classList.remove('rotateInDownRight');
     }
@@ -1493,7 +1493,7 @@ export class TemplateTypeComponent implements OnInit {
     const topPdf100 = document.getElementById(id).getBoundingClientRect().top;
     const botDaD = event.source.element.nativeElement.getBoundingClientRect().bottom;
     const botPdf100 = document.getElementById(id).getBoundingClientRect().bottom;
-    if ( ( leftDaD < leftPdf100 ) || ( rightDaD > rightPdf100 ) || ( topDaD < topPdf100 ) || (botDaD > botPdf100 ) ) {
+    if ( ( rightDaD < leftPdf100 ) || ( leftDaD > rightPdf100 ) || ( botDaD < topPdf100 ) || (topDaD > botPdf100 ) ) {
       this.dragEnd(event);
       return true;
     } else {
