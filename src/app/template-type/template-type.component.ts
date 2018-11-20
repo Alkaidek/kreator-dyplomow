@@ -108,6 +108,7 @@ export class TemplateTypeComponent implements OnInit {
     }
     this.literaturaHeight = this.setHeightElement(this.imagesLiteratura);
   }
+  editBoxShow = 'none';
   MACblue = '#25408f';
   whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
@@ -1317,15 +1318,16 @@ export class TemplateTypeComponent implements OnInit {
   checkDirectButtonValue(n, stepperIndex) {
     console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
-    if ( stepperIndex === 3 ) {
+    if ( stepperIndex === 2 ) {
       this.btnDirectRightDisabled = true;
       document.getElementById('btnDirectRight').style.right = '-200px';
       document.getElementById('btnDirectRight').style.opacity = '0';
-
+      this.editBoxShow = 'block';
     } else {
       this.btnDirectRightDisabled = false;
       document.getElementById('btnDirectRight').style.right = '0px';
       document.getElementById('btnDirectRight').style.opacity = '1';
+      this.editBoxShow = 'none';
     }
     if (  stepperIndex === 0 ) {
       this.btnDirectLeftDisabled = true;

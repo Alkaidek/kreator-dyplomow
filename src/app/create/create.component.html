@@ -380,6 +380,80 @@
 <div id="create" xmlns="">
   <!--<img src="../../assets/img/logoMAC.png" style="width: 11vh; height: 11vh; z-index: 15; top: 15px; left: 7px" />-->
 
+  <div class="footerEditor" [style.display]="editBoxShow">
+    <div class="boc33editor"
+         style="height: 110px; width: 40%;/* border-right: 1px solid #f2f2f2*/">
+      <p style="/*float: left; */  padding-left: 5px">
+        <b>
+          {{createComponentStrings.a68}}
+        </b>
+      </p>
+      <input
+        id="inputImgWidth"
+        type="range"
+        min="0"
+        max="{{100-imgWidthDragAndDrop[currImg]}}"
+        [disabled]="boolDisableUserImgFields"
+        [value]="imgWidth[currImg]"
+        (input)="imgWidth[currImg] = $event.target.value"
+        class="slider50 fadeInLeft"
+        step="1"
+        style="width: 80%; margin-left: 0%"
+        (change)="imageResizeWithProportionsWidth()"
+      >
+    </div>
+    <div class="boc33editor" style="height: 110px; width: 20%;/* border-right: 1px solid #f2f2f2*/">
+      <p style="/*float: left; */  padding-left: 5px">
+        <b>
+          {{createComponentStrings.a69}}
+        </b>
+      </p>
+      <mat-checkbox class="example-margin"
+                    [(ngModel)]="checkboxSizeAttach">
+      </mat-checkbox>
+    </div>
+    <div class="boc33editor"
+         style="height: 110px; width: 40%;">
+      <p style="/*float: left;*/  padding-left: 5px">
+        <b>
+          {{createComponentStrings.a70}}
+        </b>
+      </p>
+      <input
+        type="range"
+        min="0"
+        step="1"
+        max="{{100-imgHeightDragAndDrop[currImg]}}"
+        [value]="imgHeight[currImg]"
+        [disabled]="boolDisableUserImgFields"
+        (input)="imgHeight[currImg] = $event.target.value"
+        (change)="imageResizeWithProportionsHeight()"
+        class="slider50 fadeInLeft"
+        style="width: 80%; margin-left: 0%"
+      >
+      <br/>
+    </div>
+    <div class="box33editorBorder"
+         style="height: 110px; width:25% /*border-right: 1px solid #f2f2f2*/">
+    </div>
+    <div class="box33editorBorder"
+         style="height: 110px; width:50% /*border-right: 1px solid #f2f2f2*/">
+      <p style="/*float: left; */ padding-left: 5px"><b>{{createComponentStrings.a73}}</b></p>
+      <input type="range"
+             id="inputImgRotate"
+             min="-360"
+             max="360"
+             [value]="rotate[currImg]"
+             [disabled]="boolDisableUserImgFields"
+             (input)="rotate[currImg] = $event.target.value"
+             class="slider50 fadeInLeft"
+             style="width: 80%; margin-left: 0%"
+             step="45"> <br/>
+    </div>
+    <div class="box33editorBorder"
+         style="height: 110px; width:25%">
+    </div>
+  </div>
 
   <div
     class="footer">
@@ -389,7 +463,6 @@
       id="fileInputLabel"
       class="fadeInLeft"
       matTooltip="{{createComponentStrings.a77}}"
-      matTooltipPosition="above"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
@@ -405,7 +478,6 @@
       mat-button color="accent"
       (click)="createArrayToSend()"
       matTooltip="{{createComponentStrings.a78}}"
-      matTooltipPosition="above"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
       {{createComponentStrings.a5}}
@@ -426,7 +498,6 @@
     <button
       id="btnDirectLeft"
       matTooltip="{{createComponentStrings.a79}}"
-      matTooltipPosition="right"
       mat-mini-fab
       (click)="stepper.previous();"
       color="primary"
@@ -435,7 +506,7 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="{{createComponentStrings.a80}}" matTooltipPosition="left" mat-mini-fab
+    <button id="btnDirectRight" matTooltip="{{createComponentStrings.a80}}" mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>
@@ -457,7 +528,7 @@
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div matTooltip="{{createComponentStrings.a81}}" matTooltipPosition="left"
+            <div matTooltip="{{createComponentStrings.a81}}"
                  class="orientationImgBox fadeInTop borderRight">
               <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(1)"/>
@@ -465,7 +536,7 @@
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
             <div class="orientationImgBox" matTooltip="{{createComponentStrings.a82}}"
-                 matTooltipPosition="right">
+            >
               <img id="imgO2" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(2)"/>
             </div>
@@ -484,7 +555,7 @@
                     >
               {{createComponentStrings.a9}}
             </button>
-         <!--   <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami" matTooltipPosition="left"
+         <!--   <img id="scheme30" matTooltip="Naciśnij aby ustawić schamat z trzema podpisami"
                  class="schemeImg fadeInTop" src="../../assets/img/tmp1.png" (click)="setScheme(30)"/>-->
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white; height: 8vh; padding-top: 2vh;">
@@ -493,7 +564,7 @@
               {{createComponentStrings.a10}}
             </button>
 
-           <!-- <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami" matTooltipPosition="right"
+           <!-- <img id="scheme50" matTooltip="Naciśnij aby ustawić schamat z dwoma podpisami"
                  class="schemeImg fadeInTop" src="../../assets/img/tmp2.png" (click)="setScheme(50)"/>-->
           </div>
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white; height: 8vh; padding-top: 2vh;">
@@ -511,10 +582,10 @@
     </mat-step>
     <mat-step stepControl="false" >
       <!--<div class="directButtonContainter">
-        <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
+        <button  matTooltip="Poprzedni krok"  mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>
-        <button  matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab matStepperNext color="primary" style="float: right">
+        <button  matTooltip="Następny krok"  mat-mini-fab matStepperNext color="primary" style="float: right">
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>-->
@@ -524,7 +595,7 @@
           <h3 class="fadeInTop">{{createComponentStrings.a13}}</h3>
         </div>
         <div class="directBtn" style="padding-left: 1vh">
-          <button matTooltip="{{createComponentStrings.a83}}" matTooltipPosition="left" id="leftDirect" color="primary"
+          <button matTooltip="{{createComponentStrings.a83}}" id="leftDirect" color="primary"
                   class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
             <mat-icon aria-label="prev">arrow_back</mat-icon>
           </button>
@@ -536,7 +607,7 @@
           </div>
         </div>
         <div class="directBtn" style="padding-right: 1vh">
-          <button id="rightDirect" matTooltip="{{createComponentStrings.a84}}" matTooltipPosition="right" class="fadeInTop"
+          <button id="rightDirect" matTooltip="{{createComponentStrings.a84}}" class="fadeInTop"
                   color="primary" mat-mini-fab (click)="moveRight()">
             <mat-icon aria-label="next">arrow_forward</mat-icon>
           </button>
@@ -579,7 +650,6 @@
       <div class="box33block" style="height: 64px; padding-top: 16px; text-align: center">
         <input type="color"
                matTooltip="{{createComponentStrings.a85}}"
-               matTooltipPosition="below"
                class="fadeInTop"
                [value]="bcgColor"
                (input)="bcgColor = $event.target.value"
@@ -589,10 +659,10 @@
     </mat-step>
     <mat-step stepControl="false">
       <!--<div class="directButtonContainter">
-        <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
+        <button  matTooltip="Poprzedni krok" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>
-        <button  matTooltip="Następny krok" matTooltipPosition="left" (click)="setPaddingAnchor()" mat-mini-fab matStepperNext color="primary" style="float: right">
+        <button  matTooltip="Następny krok" (click)="setPaddingAnchor()" mat-mini-fab matStepperNext color="primary" style="float: right">
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>-->
@@ -610,7 +680,6 @@
         <div class="directBtn"
              style="padding-left: 1vh">
           <button matTooltip="{{createComponentStrings.a86}}"
-                  matTooltipPosition="left"
                   id="leftDirectFrame"
                   class="fadeInTop"
                   mat-mini-fab
@@ -635,7 +704,6 @@
              style="text-align: right; padding-right: 1vh">
           <button id="rightDirectFrame"
                   matTooltip="{{createComponentStrings.a87}}"
-                  matTooltipPosition="right"
                   class="fadeInTop"
                   mat-mini-fab
                   (click)="moveRightFrame()"
@@ -690,10 +758,10 @@
     </mat-step>
     <mat-step stepControl="false">
       <!--<div class="directButtonContainter">
-        <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
+        <button  matTooltip="Poprzedni krok" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>
-        <button  matTooltip="Następny krok" matTooltipPosition="left" mat-mini-fab matStepperNext color="primary" style="float: right">
+        <button  matTooltip="Następny krok" mat-mini-fab matStepperNext color="primary" style="float: right">
           <mat-icon >navigate_next</mat-icon>
         </button>
       </div>-->
@@ -1923,10 +1991,10 @@
     </mat-step>
    <!-- <mat-step stepControl="falt">-->
       <!-- <div class="directButtonContainter">
-         <button  matTooltip="Poprzedni krok" matTooltipPosition="right"  mat-mini-fab matStepperPrevious color="primary">
+         <button  matTooltip="Poprzedni krok"  mat-mini-fab matStepperPrevious color="primary">
            <mat-icon >navigate_before</mat-icon>
          </button>
-         <button  matTooltip="Następny krok" matTooltipPosition="left"  mat-mini-fab matStepperNext color="primary" class="fadeInTop" style="float: right">
+         <button  matTooltip="Następny krok"  mat-mini-fab matStepperNext color="primary" class="fadeInTop" style="float: right">
            <mat-icon >navigate_next</mat-icon>
          </button>
        </div>-->
@@ -1940,7 +2008,7 @@
           </h3>
         </div>
         &lt;!&ndash;<div class="box33border" style="height: 10vh; padding-top: 2.8vh; dispaly: inline-block">
-          <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!" matTooltipPosition="left">
+          <button (click)="addTxt()"  mat-button color="primary" matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane!">
             <i class="material-icons">
               text_fields
             </i>
@@ -1993,7 +2061,7 @@
           <button (click)="addTxt()"
                   mat-button color="primary"
                   matTooltip="Naciśniecie spowoduje dodanie nowego pola tekstowego, które może zostać dowolnie edytowane"
-                  matTooltipPosition="left">
+                 >
             <i class="material-icons">
               text_fields
             </i>
@@ -2215,7 +2283,7 @@
     </mat-step>-->
     <mat-step stepControl="false">
       <!--<div class="directButtonContainter">
-        <button  matTooltip="Poprzedni krok" matTooltipPosition="right" mat-mini-fab matStepperPrevious color="primary">
+        <button  matTooltip="Poprzedni krok" mat-mini-fab matStepperPrevious color="primary">
           <mat-icon >navigate_before</mat-icon>
         </button>
       </div>-->
@@ -2499,102 +2567,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="box33"
-             style="height: 110px; width: 40%;/* border-right: 1px solid #f2f2f2*/">
-          <p style="/*float: left; */  padding-left: 5px">
-            <b class="fadeInRight">
-              {{createComponentStrings.a68}}
-            </b>
-          </p>
-          <input
-            id="inputImgWidth"
-            type="range"
-            min="0"
-            max="{{100-imgWidthDragAndDrop[currImg]}}"
-            [disabled]="boolDisableUserImgFields"
-            [value]="imgWidth[currImg]"
-            (input)="imgWidth[currImg] = $event.target.value"
-            class="slider50 fadeInLeft"
-            step="1"
-            style="width: 80%; margin-left: 0%"
-            (change)="imageResizeWithProportionsWidth()"
-          >
-        </div>
-        <div class="box33" style="height: 110px; width: 20%;/* border-right: 1px solid #f2f2f2*/">
-          <p style="/*float: left; */  padding-left: 5px">
-            <b class="fadeInRight">
-              {{createComponentStrings.a69}}
-            </b>
-          </p>
-          <mat-checkbox class="example-margin"
-                        [(ngModel)]="checkboxSizeAttach">
-          </mat-checkbox>
-        </div>
-        <div class="box33"
-             style="height: 110px; width: 40%;">
-          <p style="/*float: left;*/  padding-left: 5px">
-            <b class="fadeInRight">
-              {{createComponentStrings.a70}}
-            </b>
-          </p>
-          <input
-            type="range"
-            min="0"
-            step="1"
-            max="{{100-imgHeightDragAndDrop[currImg]}}"
-            [value]="imgHeight[currImg]"
-            [disabled]="boolDisableUserImgFields"
-            (input)="imgHeight[currImg] = $event.target.value"
-            (change)="imageResizeWithProportionsHeight()"
-            class="slider50 fadeInLeft"
-            style="width: 80%; margin-left: 0%"
-          >
-          <br/>
-        </div>
-        <div class="box33border"
-             style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-         <!-- <p style="/*float: left;*/  padding-left: 5px">
-            <b class="fadeInRight"
-               style="">
-              {{createComponentStrings.a71}}</b></p>
-          <input type="range"
-                 min="0"
-                 step="1"
-                 max="{{100-imgHeight[currImg]}}"
-                 [value]="imgTop[currImg]"
-                 [disabled]="boolDisableUserImgFields"
-                 (input)="imgTop[currImg] = $event.target.value"
-                 class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%">-->
-        </div>
-        <div class="box33border"
-             style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-         <!-- <p style="/*float: left;*/  padding-left: 5px">
-            <b class="fadeInRight">{{createComponentStrings.a72}}</b></p>
-          <input type="range"
-                 min="0"
-                 step="1"
-                 max="{{100-imgWidth[currImg]}}"
-                 [value]="imgLeft[currImg]"
-                 [disabled]="boolDisableUserImgFields"
-                 (input)="imgLeft[currImg] = $event.target.value"
-                 class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%"><br/>-->
-          <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">{{createComponentStrings.a73}}</b></p>
-          <input type="range"
-                 id="inputImgRotate"
-                 min="-360"
-                 max="360"
-                 [value]="rotate[currImg]"
-                 [disabled]="boolDisableUserImgFields"
-                 (input)="rotate[currImg] = $event.target.value"
-                 class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%"
-                 step="45"> <br/>
-        </div>
-        <div class="box33border"
-             style="height: 110px;">
-        </div>
 
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button
@@ -2639,6 +2611,13 @@
           </button>
           <br/>
         </div>
+      </div>
+
+      <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
+      </div>
+      <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
+      </div>
+      <div class="box33border" style="height: 50px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
       </div>
     </mat-step>
   </mat-horizontal-stepper>

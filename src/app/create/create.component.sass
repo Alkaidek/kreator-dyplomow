@@ -919,7 +919,7 @@ input[type=color]:hover,
 ::-webkit-scrollbar-thumb:hover
   background: #216c9e
 
-.footer
+.footer, .footerEditor
   position: fixed
   background-color: white
   width: 60%
@@ -930,6 +930,12 @@ input[type=color]:hover,
   padding-right: 8%
   text-align: center
 //border-top: $border2pxSolid $MACblue
+
+.footerEditor
+  bottom: 36px
+  height: 220px
+  padding-left: 0
+  padding-right: 0
 
 .button
   -webkit-transition: all .7s
@@ -1184,6 +1190,16 @@ mat-horizontal-stepper
   border-top: $border2pxSolid $backgroundColor
   border-bottom: $border2pxSolid $backgroundColor
   padding-top: 5px
+
+.boc33editor, .box33editorBorder
+  width: 50%
+  background-color: white
+  display: inline-block
+  float: left
+  padding-top: 5px
+
+.box33editorBorder
+  border-bottom: 4px solid $backgroundColor
 
 .box33border
   width: 33.333333%

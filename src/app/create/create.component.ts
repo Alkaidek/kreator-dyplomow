@@ -147,6 +147,7 @@ export class CreateComponent implements OnInit {
         }
       });*/
   }
+  editBoxShow = 'none';
   MACblue = '#25408f';
   whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
@@ -2103,15 +2104,17 @@ export class CreateComponent implements OnInit {
   checkDirectButtonValue(n, stepperIndex) {
     console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
-    if ( stepperIndex === 5 ) {
+    if ( stepperIndex === 4 ) {
       this.btnDirectRightDisabled = true;
       document.getElementById('btnDirectRight').style.right = '-200px';
       document.getElementById('btnDirectRight').style.opacity = '0';
+      this.editBoxShow = 'block';
 
     } else {
       this.btnDirectRightDisabled = false;
       document.getElementById('btnDirectRight').style.right = '0px';
       document.getElementById('btnDirectRight').style.opacity = '1';
+      this.editBoxShow = 'none';
     }
     if (  stepperIndex === 0 ) {
       this.btnDirectLeftDisabled = true;
