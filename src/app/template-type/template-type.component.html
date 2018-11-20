@@ -55,17 +55,19 @@
     <div
       id="pdfForLandscapeFix"
     >
-      <img
-        *ngFor="let usr of userImg; let i = index"
-        id="imgToChange3{{usr}}"
-        src="{{userImgBase64[i]}}"
-        style="background-size: cover; position: absolute; z-index: 0;"
-        [style.transform]="'rotate('+rotate[usr]+'deg)'"
-        [style.width]="imgWidth[usr]+'%'"
-        [style.height]="imgHeight[usr]+'%'"
-        [style.left]="imgLeft[usr]+'%'"
-        [style.top]="imgTop[usr]+'%'"
-      />
+      <div *ngFor="let usr of userImg; let i = index"
+           id="imgToChange3{{usr}}"
+           [style.width]="imgWidth[usr]+'%'"
+           [style.height]="imgHeight[usr]+'%'"
+           style="background-size: cover; position: absolute; z-index: 1;"
+           [style.left]="imgWidthDragAndDrop[usr]+'%'"
+           [style.top]="imgHeightDragAndDrop[usr]+'%'"
+      >
+        <img class="userImg"
+             [style.transform]="'rotate('+rotate[usr]+'deg)'"
+             src="{{userImgBase64[i]}}"
+        />
+      </div>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
@@ -131,14 +133,19 @@
   <div id="toPdf100Fix" [style.background-color]="bcgColor">
     <img src="{{imgSrcFix}}" [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'" id="imgPdf100Fix"/>
     <div id="pdfForFix">
-      <img *ngFor="let usr of userImg; let i = index" id="imgToChange{{usr}}" src="{{userImgBase64[i]}}"
-           style="background-size: cover; position: absolute; z-index: 0;"
-           [style.transform]="'rotate('+rotate[usr]+'deg)'"
+      <div *ngFor="let usr of userImg; let i = index"
+           id="imgToChange{{usr}}"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
-           [style.left]="imgLeft[usr]+'%'"
-           [style.top]="imgTop[usr]+'%'"
-      />
+           style="background-size: cover; position: absolute; z-index: 1;"
+           [style.left]="imgWidthDragAndDrop[usr]+'%'"
+           [style.top]="imgHeightDragAndDrop[usr]+'%'"
+      >
+        <img class="userImg"
+             [style.transform]="'rotate('+rotate[usr]+'deg)'"
+             src="{{userImgBase64[i]}}"
+        />
+      </div>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
@@ -1362,7 +1369,7 @@
             id="inputImgWidth"
             type="range"
             min="0"
-            max="{{100-imgLeft[currImg]}}"
+            max="{{100-imgWidthDragAndDrop[currImg]}}"
             [disabled]="boolDisableUserImgFields"
             [value]="imgWidth[currImg]"
             (input)="imgWidth[currImg] = $event.target.value"
@@ -1393,7 +1400,7 @@
             type="range"
             min="0"
             step="1"
-            max="{{100-imgTop[currImg]}}"
+            max="{{100-imgHeightDragAndDrop[currImg]}}"
             [value]="imgHeight[currImg]"
             [disabled]="boolDisableUserImgFields"
             (input)="imgHeight[currImg] = $event.target.value"
@@ -1405,7 +1412,7 @@
         </div>
         <div class="box33border"
              style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-          <p style="/*float: left;*/  padding-left: 5px">
+          <!--<p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight"
                style="">
               {{templateComponentStrings.a60}}</b></p>
@@ -1417,11 +1424,11 @@
                  [disabled]="boolDisableUserImgFields"
                  (input)="imgTop[currImg] = $event.target.value"
                  class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%">
+                 style="width: 80%; margin-left: 0%">-->
         </div>
         <div class="box33border"
              style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-          <p style="/*float: left;*/  padding-left: 5px">
+          <!--<p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight">{{templateComponentStrings.a61}}</b></p>
           <input type="range"
                  min="0"
@@ -1431,10 +1438,7 @@
                  [disabled]="boolDisableUserImgFields"
                  (input)="imgLeft[currImg] = $event.target.value"
                  class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%"><br/>
-        </div>
-        <div class="box33border"
-             style="height: 110px;">
+                 style="width: 80%; margin-left: 0%"><br/>-->
           <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">{{templateComponentStrings.a62}}</b></p>
           <input type="range"
                  id="inputImgRotate"
@@ -1446,6 +1450,10 @@
                  class="slider50 fadeInLeft"
                  style="width: 80%; margin-left: 0%"
                  step="45"> <br/>
+        </div>
+        <div class="box33border"
+             style="height: 110px;">
+
         </div>
 
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
@@ -1505,17 +1513,26 @@
          [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
          id="imgPdf100"/>
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
-    <div id="pdfFor">
-      <img *ngFor="let usr of userImg; let i = index"
-           id="imgToChange2{{usr}}"
-           src="{{userImgBase64[i]}}"
-           style="background-size: cover; position: absolute; z-index: 0;"
-           [style.transform]="'rotate('+rotate[usr]+'deg)'"
+    <div id="pdfFor"
+         (mouseover)="changeZindex()"
+         (mouseout)="changeZindexDown()">
+      <div *ngFor="let usr of userImg; let i = index"
+           id="imgToChange22{{usr}}"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
+           style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
-           (load)="chcekProportions()"/>
+           (cdkDragEnded)="setDeragAndDropPercent('imgToChange22' + usr, usr, $event)"
+           cdkDrag>
+        <img class="userImg"
+             style="z-index: 1"
+             id="imgToChange2{{usr}}"
+             [style.transform]="'rotate('+rotate[usr]+'deg)'"
+             src="{{userImgBase64[i]}}"
+             (load)="chcekProportions()"
+        />
+      </div>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"
@@ -1586,15 +1603,26 @@
          [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
          id="imgPdf100Landscape"
          style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
-    <div id="pdfForlandscape">
-      <img *ngFor="let usr of userImg; let i = index" id="imgToChange4{{usr}}" src="{{userImgBase64[i]}}"
-           style="background-size: cover; position: absolute; z-index: 0;"
-           [style.transform]="'rotate('+rotate[usr]+'deg)'"
+    <div id="pdfForlandscape"
+         (mouseover)="changeZindex()"
+         (mouseout)="changeZindexDown()">
+      <div *ngFor="let usr of userImg; let i = index"
+           id="imgToChange44{{usr}}"
            [style.width]="imgWidth[usr]+'%'"
            [style.height]="imgHeight[usr]+'%'"
+           style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
-           (load)="chcekProportions()"/>
+           (cdkDragEnded)="setDeragAndDropPercent('imgToChange44' + usr, usr, $event)"
+           cdkDrag>
+        <img class="userImg"
+             style="z-index: 1"
+             id="imgToChange4{{usr}}"
+             [style.transform]="'rotate('+rotate[usr]+'deg)'"
+             src="{{userImgBase64[i]}}"
+             (load)="chcekProportions()"
+        />
+      </div>
       <div *ngFor="let txt of userTxt; let i = index"
            class="userTxt"
            style="position: absolute; z-index: 1; width: 100%;"

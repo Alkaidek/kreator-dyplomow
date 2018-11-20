@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
 import { templateCoordinates } from '../template.js';
 import { templateComponentStrings } from '../allText.js';
+import {CdkDragEnd} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-template-type',
@@ -146,6 +147,8 @@ export class TemplateTypeComponent implements OnInit {
   rotate = [];
   imgWidth = [];
   imgHeight = [];
+  imgWidthDragAndDrop = [];
+  imgHeightDragAndDrop = [];
   imgTop = [];
   imgLeft = [];
   scheme = 0;
@@ -374,6 +377,8 @@ export class TemplateTypeComponent implements OnInit {
           this.imgHeight.push(template.userImgHeight[i]);
           this.imgTop.push(template.userImgTop[i]);
           this.imgLeft.push(template.userImgLeft[i]);
+          this.imgHeightDragAndDrop.push(template.userImgTop[i]);
+          this.imgWidthDragAndDrop.push(template.userImgLeft[i]);
           this.userImgBase64.push(template.userBcgBase64[i]);
           this.currImg = this.userImg.length - 1;
         }
@@ -444,6 +449,8 @@ export class TemplateTypeComponent implements OnInit {
     this.rotate = [];
     this.imgWidth = [];
     this.imgHeight = [];
+    this.imgWidthDragAndDrop = [];
+    this.imgHeightDragAndDrop = [];
     this.imgTop = [];
     this.imgLeft = [];
     this.userImgBase64 = [];
@@ -534,6 +541,8 @@ export class TemplateTypeComponent implements OnInit {
     this.currImg = this.userImg.length - 1;
     this.imgHeight.push(10);
     this.imgWidth.push(10);
+    this.imgWidthDragAndDrop.push(0);
+    this.imgHeightDragAndDrop.push(0);
     setTimeout(() => {
       this.setUserImgFrame(this.currImg);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
@@ -560,6 +569,8 @@ export class TemplateTypeComponent implements OnInit {
     this.imgHeight.splice(this.currImg, 1);
     this.imgTop.splice(this.currImg, 1);
     this.imgLeft.splice(this.currImg, 1);
+    this.imgHeightDragAndDrop.splice(this.currImg, 1);
+    this.imgWidthDragAndDrop.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
     if ( this.currImg === -1 ) {
@@ -629,9 +640,9 @@ export class TemplateTypeComponent implements OnInit {
       + '"userImgHeight" : [ '
       + this.createTextToJSON(this.imgHeight) + '],'
       + '"userImgLeft" : [ '
-      + this.createTextToJSON(this.imgLeft) + '],'
+      + this.createTextToJSON(this.imgWidthDragAndDrop) + '],'
       + '"userImgTop" : [ '
-      + this.createTextToJSON(this.imgTop) + '],'
+      + this.createTextToJSON(this.imgHeightDragAndDrop) + '],'
       + '"txtTop" : [ '
       + this.createTextToJSON(this.txtTop) + '],'
       + '"txtLeft" : [ '
@@ -1350,9 +1361,23 @@ export class TemplateTypeComponent implements OnInit {
       } else {
         this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
       }
-      if ((Number(this.imgHeight[this.currImg]) + Number(this.imgTop[this.currImg]))  > 100 ) {
-        this.imgTop[this.currImg] = 0;
+      if ((Number(this.imgHeight[this.currImg]) + Number(this.imgHeightDragAndDrop[this.currImg]))  > 101 ) {
+        this.resetUserImgTransition();
       }
+    }
+  }
+  resetUserImgTransition() {
+    console.log('Reset!');
+    if (this.landscape === 'inline-block') {
+      document.getElementById('imgToChange44' + this.currImg).style.transform = 'none';
+      const source: any = document.getElementById('imgToChange44' + this.currImg);
+      source._passiveTransform = { x: 0, y: 0 };
+      this.setDeragAndDropPercent('imgToChange44', this.currImg);
+    } else {
+      document.getElementById('imgToChange22' + this.currImg).style.transform = 'none';
+      const source: any = document.getElementById('imgToChange22' + this.currImg);
+      source._passiveTransform = { x: 0, y: 0 };
+      this.setDeragAndDropPercent('imgToChange22', this.currImg);
     }
   }
   imageResizeWithProportionsHeight() {
@@ -1379,8 +1404,8 @@ export class TemplateTypeComponent implements OnInit {
       } else {
         this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
       }
-      if ((Number(this.imgWidth[this.currImg]) + Number(this.imgLeft[this.currImg]))  > 100 ) {
-        this.imgLeft[this.currImg] = 0;
+      if ((Number(this.imgWidth[this.currImg]) + Number(this.imgWidthDragAndDrop[this.currImg]))  > 101 ) {
+        this.resetUserImgTransition();
       }
     }
   }
@@ -1402,5 +1427,101 @@ export class TemplateTypeComponent implements OnInit {
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
     }
+  }
+  testDragDrop(e, id, event: CdkDragEnd) {
+    /*let width = document.getElementById(e).getBoundingClientRect().left;
+    this.imgLeft[id] = width;
+    width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
+    console.log('l: ' + width);
+    let height = document.getElementById(e).getBoundingClientRect().top;
+    this.imgTop[id] = height;
+    height = height -  document.getElementById('toPdf100').getBoundingClientRect().top;
+    console.log('h: ' + height);
+    document.getElementById('imgToChange' + id)
+      .style.transform = 'translate3d(' + width * this.multiple + 'px, ' +  height * this.multiple + 'px, 0px)';*/
+    this.setDeragAndDropPercent(e, id, event);
+  }
+  changeZindex() {
+    let id = 'imgToChange22';
+    let id2 = 'imgToChange2';
+    if ( (this.landscape === 'inline-block') ) {
+      id = 'imgToChange44';
+      id2 = 'imgToChange4';
+    }
+    for (let i = 0; i < this.imgWidth.length; i++) {
+      document.getElementById(id + i).style.zIndex = '25';
+      document.getElementById(id2 + i).style.zIndex = '25';
+    }
+  }
+  changeZindexDown() {
+    let id = 'imgToChange22';
+    let id2 = 'imgToChange2';
+    if ( (this.landscape === 'inline-block') ) {
+      id = 'imgToChange44';
+      id2 = 'imgToChange4';
+    }
+    for (let i = 0; i < this.imgWidth.length; i++) {
+      document.getElementById(id + i).style.zIndex = '1';
+      document.getElementById(id2 + i).style.zIndex = '1';
+    }
+  }
+  setDeragAndDropPercent(e, id, event?: CdkDragEnd) {
+    this.setDragAndDropPossition(id);
+    if ( event !== undefined ) {
+      if ( this.dragAndDropAssumptions(event) ) {
+        this.setDragAndDropPossition(id);
+      }
+    }
+    this.currImg = id;
+    this.setUserImgFrame(this.currImg);
+  }
+  dragEnd(event: CdkDragEnd) {
+    event.source.element.nativeElement.style.transform = 'none';
+    const source: any = event.source;
+    source._passiveTransform = { x: 0, y: 0 };
+  }
+  dragAndDropAssumptions(event: CdkDragEnd) {
+    let id = 'toPdf100';
+    if ( this.landscape === 'inline-block' ) {
+      id = 'toPdf100Landscape';
+    }
+    const leftDaD = event.source.element.nativeElement.getBoundingClientRect().left;
+    const leftPdf100 = document.getElementById(id).getBoundingClientRect().left;
+    const rightDaD = event.source.element.nativeElement.getBoundingClientRect().right;
+    const rightPdf100 = document.getElementById(id).getBoundingClientRect().right;
+    const topDaD = event.source.element.nativeElement.getBoundingClientRect().top;
+    const topPdf100 = document.getElementById(id).getBoundingClientRect().top;
+    const botDaD = event.source.element.nativeElement.getBoundingClientRect().bottom;
+    const botPdf100 = document.getElementById(id).getBoundingClientRect().bottom;
+    if ( ( leftDaD < leftPdf100 ) || ( rightDaD > rightPdf100 ) || ( topDaD < topPdf100 ) || (botDaD > botPdf100 ) ) {
+      this.dragEnd(event);
+      return true;
+    } else {
+      console.log('Assumptions OK');
+      return false;
+    }
+  }
+  setDragAndDropPossition(id) {
+    let width = document.getElementById('imgToChange22' + id).getBoundingClientRect().left;
+    if ( (this.landscape === 'inline-block') ) {
+      width = document.getElementById('imgToChange44' + id).getBoundingClientRect().left;
+      width = width - document.getElementById('toPdf100Landscape').getBoundingClientRect().left;
+      width = (width / document.getElementById('toPdf100Landscape').getBoundingClientRect().width) * 100;
+    } else {
+      width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
+      width = (width / document.getElementById('toPdf100').getBoundingClientRect().width) * 100;
+    }
+    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
+    if ( (this.landscape === 'inline-block') ) {
+      height = document.getElementById('imgToChange44' + id).getBoundingClientRect().top;
+      height = height - document.getElementById('toPdf100Landscape').getBoundingClientRect().top;
+      height = (height / document.getElementById('toPdf100Landscape').getBoundingClientRect().height) *  100;
+    } else {
+      height = height - document.getElementById('toPdf100').getBoundingClientRect().top;
+      height = (height / document.getElementById('toPdf100').getBoundingClientRect().height) *  100;
+    }
+    console.log('w: ' + width + ', h: ' + height);
+    this.imgWidthDragAndDrop[id] = width;
+    this.imgHeightDragAndDrop[id] = height;
   }
 }

@@ -67,7 +67,7 @@
            style="background-size: cover; position: absolute; z-index: 1;"
            [style.left]="imgWidthDragAndDrop[usr]+'%'"
            [style.top]="imgHeightDragAndDrop[usr]+'%'"
-           cdkDrag>
+           >
         <img class="userImg"
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
@@ -217,7 +217,7 @@
            style="background-size: cover; position: absolute; z-index: 1;"
            [style.left]="imgWidthDragAndDrop[usr]+'%'"
            [style.top]="imgHeightDragAndDrop[usr]+'%'"
-           cdkDrag>
+           >
         <img class="userImg"
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
@@ -2667,6 +2667,7 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
+           (cdkDragEnded)="setDeragAndDropPercent('imgToChange22' + usr, usr, $event)"
            cdkDrag>
        <!-- <div class="example-handle" cdkDragHandle >
           <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
@@ -2680,7 +2681,6 @@
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions()"
-             (mouseup)='testDragDrop("imgToChange22" + usr, usr)'
              />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"
@@ -2843,6 +2843,7 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
+           (cdkDragEnded)="setDeragAndDropPercent('imgToChange44' + usr, usr, $event)"
            cdkDrag>
         <img class="userImg"
              style="z-index: 1"
@@ -2850,7 +2851,6 @@
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions()"
-             (mouseup)='testDragDrop("imgToChange44" + usr, usr)'
         />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"
