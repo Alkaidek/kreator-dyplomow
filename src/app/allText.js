@@ -105,7 +105,7 @@ export const  createComponentStrings ={
   a94: 'Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!',
   a95: 'Plik jest za duży! Maksymalny rozmiar wynosi 2MB',
   a96: 'Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!',
-  a97: 'Edytor obrazka znajduje się na dole strony!'
+  a97: 'Obrazek został dodany!'
 };
 
 export const  templateComponentStrings ={
@@ -176,7 +176,7 @@ export const  templateComponentStrings ={
   a65: 'Resetuj obrót',
   a66: 'Twój szoblon został zapisany! Dodano go: ',
   a67: 'Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!',
-  a68: 'Edytor obrazka znajduje się na dole strony!',
+  a68: 'Obrazek został dodany!',
   a69: 'Nie udało się wczytać szablonu! Plik może być niepoprawny, uszkodzony lub niekompatybilny!',
   a70: 'Plik jest za duży! Maksymalny rozmiar wynosi 2MB'
 };

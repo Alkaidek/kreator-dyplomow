@@ -479,8 +479,23 @@ export class TemplateTypeComponent implements OnInit {
     this.rotate[this.currImg] = 0;
     this.imgLeft[this.currImg] = 0;
     this.imgTop[this.currImg] = 0;
-    this.imgWidth[this.currImg] = 10;
+    this.imgHeightDragAndDrop[this.currImg] = 0;
+    this.imgWidthDragAndDrop[this.currImg] = 0;
     this.imgHeight[this.currImg] = 10;
+    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+    let prop =  img.naturalWidth;
+    prop = prop / img.naturalHeight;
+    let multipleHeight;
+    let multipleWidth;
+    if ( (this.landscape === 'inline-block') ) {
+      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+    } else {
+      multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    }
+    const propPdfFor = multipleWidth / multipleHeight;
+    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   right(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
@@ -532,18 +547,25 @@ export class TemplateTypeComponent implements OnInit {
       element.classList.remove('rotateInDownRight');
     }
   }
-  add() {
+  add(top?, left?) {
     this.openSnackBar(templateComponentStrings.a66, 'ok');
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
-    this.imgTop.push(0);
-    this.imgLeft.push(0);
+    if (top !== undefined ) {
+      this.imgTop.push(top);
+      this.imgLeft.push(left);
+      this.imgWidthDragAndDrop.push(left);
+      this.imgHeightDragAndDrop.push(top);
+    } else {
+      this.imgTop.push(0);
+      this.imgLeft.push(0);
+      this.imgWidthDragAndDrop.push(0);
+      this.imgHeightDragAndDrop.push(0);
+    }
     this.currImg = this.userImg.length - 1;
     this.imgHeight.push(10);
     this.imgWidth.push(10);
-    this.imgWidthDragAndDrop.push(0);
-    this.imgHeightDragAndDrop.push(0);
     setTimeout(() => {
       this.setUserImgFrame(this.currImg);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
@@ -560,7 +582,7 @@ export class TemplateTypeComponent implements OnInit {
       }
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
-    }, 200 );
+    }, 300 );
   }
   removeImg() {
     this.userImg.pop();
@@ -568,10 +590,10 @@ export class TemplateTypeComponent implements OnInit {
     this.rotate.splice(this.currImg, 1);
     this.imgWidth.splice(this.currImg, 1);
     this.imgHeight.splice(this.currImg, 1);
-    this.imgTop.splice(this.currImg, 1);
-    this.imgLeft.splice(this.currImg, 1);
     this.imgHeightDragAndDrop.splice(this.currImg, 1);
     this.imgWidthDragAndDrop.splice(this.currImg, 1);
+    this.imgTop.splice(this.currImg, 1);
+    this.imgLeft.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
     if ( this.currImg === -1 ) {
@@ -1026,7 +1048,7 @@ export class TemplateTypeComponent implements OnInit {
     const propPdfFor = multipleWidth / multipleHeight;
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
-  setImg(n, name) {
+  setImg(n, name, top?, left?) {
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     console.log('name: ' + name);
@@ -1039,7 +1061,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getSport2Img(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
     } else if (name === 'Emocje') {
       /*this.userImgBase64.push(this.imagesEmocje[n] + '.png');
@@ -1047,14 +1073,22 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getSportImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
     } else if (name === 'Geografia') {
       /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
       this._dataService.getGeografiaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Literatura') {
@@ -1062,7 +1096,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Matematyka') {
@@ -1071,7 +1109,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getMatematykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Muzyka') {
@@ -1079,7 +1121,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getMuzykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /* this.add();*/
     } else if (name === 'Rosliny') {
@@ -1087,7 +1133,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getRoslinyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Polska') {
@@ -1095,7 +1145,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getPolskaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Swieta') {
@@ -1103,7 +1157,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getSwietaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Szachy') {
@@ -1111,7 +1169,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getSzachyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Zwierzeta') {
@@ -1127,7 +1189,11 @@ export class TemplateTypeComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       // this.add();
     }
@@ -1468,11 +1534,16 @@ export class TemplateTypeComponent implements OnInit {
     }
   }
   setDeragAndDropPercent(e, id, event?: CdkDragEnd) {
+    console.log(event);
     this.setDragAndDropPossition(id);
-    if ( event !== undefined ) {
+    if ( event === undefined ) {
+      console.log('no event');
+    } else {
+      console.log('event');
       if ( this.dragAndDropAssumptions(event) ) {
         this.setDragAndDropPossition(id);
       }
+      this.dragEnd(event);
     }
     this.currImg = id;
     this.setUserImgFrame(this.currImg);
@@ -1481,6 +1552,7 @@ export class TemplateTypeComponent implements OnInit {
     event.source.element.nativeElement.style.transform = 'none';
     const source: any = event.source;
     source._passiveTransform = { x: 0, y: 0 };
+    console.log('drag and drop: ' + source._passiveTransform.x + ' : ' + source._passiveTransform.y  );
   }
   dragAndDropAssumptions(event: CdkDragEnd) {
     let id = 'toPdf100';
@@ -1505,6 +1577,7 @@ export class TemplateTypeComponent implements OnInit {
   }
   setDragAndDropPossition(id) {
     let width = document.getElementById('imgToChange22' + id).getBoundingClientRect().left;
+    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
     if ( (this.landscape === 'inline-block') ) {
       width = document.getElementById('imgToChange44' + id).getBoundingClientRect().left;
       width = width - document.getElementById('toPdf100Landscape').getBoundingClientRect().left;
@@ -1513,7 +1586,6 @@ export class TemplateTypeComponent implements OnInit {
       width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
       width = (width / document.getElementById('toPdf100').getBoundingClientRect().width) * 100;
     }
-    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
     if ( (this.landscape === 'inline-block') ) {
       height = document.getElementById('imgToChange44' + id).getBoundingClientRect().top;
       height = height - document.getElementById('toPdf100Landscape').getBoundingClientRect().top;
@@ -1525,5 +1597,39 @@ export class TemplateTypeComponent implements OnInit {
     console.log('w: ' + width + ', h: ' + height);
     this.imgWidthDragAndDrop[id] = width;
     this.imgHeightDragAndDrop[id] = height;
+    this.imgLeft[id] = width;
+    this.imgTop[id] = height;
+  }
+  chceckDrop(id, name, e) {
+    const width = e.pageX;
+    const height = e.pageY;
+    if ( this.landscape === 'none' ) {
+      if ( e.pageX >  document.getElementById('toPdf100').getBoundingClientRect().left &&
+        (e.pageY > document.getElementById('toPdf100').getBoundingClientRect().top)) {
+        this.setImg(id,
+          name,
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[1],
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[0]);
+      } else {
+        console.log('exit code -1');
+      }
+    } else {
+      if ( (e.pageX >  document.getElementById('toPdf100Landscape').getBoundingClientRect().left)  &&
+        (e.pageY > document.getElementById('toPdf100Landscape').getBoundingClientRect().top) &&
+        (e.pageY < document.getElementById('toPdf100Landscape').getBoundingClientRect().bottom)) {
+        this.setImg(id, name,
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[1],
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[0]);
+      } else {
+        console.log('exit code -1');
+      }
+    }
+  }
+  setDragAndDropHeightAndWidthArray(width, height, id: string) {
+    width = width - document.getElementById(id).getBoundingClientRect().left;
+    width = (width / document.getElementById(id).getBoundingClientRect().width) * 100;
+    height = height - document.getElementById(id).getBoundingClientRect().top;
+    height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
+    return [width, height];
   }
 }

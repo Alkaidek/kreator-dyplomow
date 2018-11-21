@@ -310,7 +310,6 @@
       (click)="stepper.selectedIndex = 0" for="fileInput"
       id="fileInputLabel"
       class="fadeInLeft"
-      matTooltip="{{templateComponentStrings.a5}}"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
@@ -325,7 +324,6 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="{{templateComponentStrings.a6}}"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
       {{templateComponentStrings.a7}}
@@ -345,7 +343,6 @@
     id="directButtonContainter">
     <button
       id="btnDirectLeft"
-      matTooltip="{{templateComponentStrings.a10}}"
       mat-mini-fab
       (click)="stepper.previous();"
       color="primary"
@@ -354,7 +351,8 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="{{templateComponentStrings.a9}}" mat-mini-fab
+    <button id="btnDirectRight"
+            mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>
@@ -939,7 +937,8 @@
                    (click)="setImg(i, 'Emocje')">
                 <img id="imgEmocje{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Emocje', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -960,7 +959,8 @@
                    (click)="setImg(i, 'Geografia')">
                 <img id="imgGeografia{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Geografia', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -981,7 +981,8 @@
                    (click)="setImg(i, 'Literatura')">
                 <img id="imgLiteratura{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Literatura', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1002,7 +1003,8 @@
                    (click)="setImg(i, 'Matematyka')">
                 <img id="imgMatematyka{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Matematyka', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1023,7 +1025,8 @@
                    (click)="setImg(i, 'Muzyka')">
                 <img id="imgMuzyka{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Muzyka', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1044,7 +1047,8 @@
                    (click)="setImg(i, 'Polska')">
                 <img id="imgPolska{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Polska', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1065,7 +1069,8 @@
                    (click)="setImg(i, 'Rosliny')">
                 <img id="imgRosliny{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Rosliny', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1086,7 +1091,8 @@
                    (click)="setImg(i, 'Sport')">
                 <img id="imgSport{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Sport', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1107,7 +1113,8 @@
                    (click)="setImg(i, 'Swieta')">
                 <img id="imgSwieta{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Swieta', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1128,7 +1135,8 @@
                    (click)="setImg(i, 'Szachy')">
                 <img id="imgSzachy{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Szachy', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1149,7 +1157,8 @@
                    (click)="setImg(i, 'Zwierzeta')">
                 <img id="imgZwierzeta{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Zwierzeta', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -1250,7 +1259,8 @@
 <div id="view">
   <div id="toPdf100"
        class="rotateInDownRight"
-       [style.background-color]="bcgColor">
+       [style.background-color]="bcgColor"
+  dropzone>
     <img src="{{imgSrcFix}}"
          [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
          id="imgPdf100"/>
@@ -1347,7 +1357,8 @@
          style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"/>
     <div id="pdfForlandscape"
          (mouseover)="changeZindex()"
-         (mouseout)="changeZindexDown()">
+         (mouseout)="changeZindexDown()"
+         dropzone>
       <div *ngFor="let usr of userImg; let i = index"
            id="imgToChange44{{usr}}"
            [style.width]="imgWidth[usr]+'%'"

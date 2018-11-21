@@ -462,7 +462,6 @@
       (click)="stepper.selectedIndex = 0" for="fileInput"
       id="fileInputLabel"
       class="fadeInLeft"
-      matTooltip="{{createComponentStrings.a77}}"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
@@ -477,7 +476,6 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="{{createComponentStrings.a78}}"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
       {{createComponentStrings.a5}}
@@ -497,7 +495,6 @@
     id="directButtonContainter">
     <button
       id="btnDirectLeft"
-      matTooltip="{{createComponentStrings.a79}}"
       mat-mini-fab
       (click)="stepper.previous();"
       color="primary"
@@ -506,7 +503,7 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="{{createComponentStrings.a80}}" mat-mini-fab
+    <button id="btnDirectRight" mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>
@@ -528,14 +525,14 @@
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div matTooltip="{{createComponentStrings.a81}}"
+            <div
                  class="orientationImgBox fadeInTop borderRight">
               <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(1)"/>
             </div>
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div class="orientationImgBox" matTooltip="{{createComponentStrings.a82}}"
+            <div class="orientationImgBox"
             >
               <img id="imgO2" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(2)"/>
@@ -595,7 +592,7 @@
           <h3 class="fadeInTop">{{createComponentStrings.a13}}</h3>
         </div>
         <div class="directBtn" style="padding-left: 1vh">
-          <button matTooltip="{{createComponentStrings.a83}}" id="leftDirect" color="primary"
+          <button id="leftDirect" color="primary"
                   class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
             <mat-icon aria-label="prev">arrow_back</mat-icon>
           </button>
@@ -607,7 +604,7 @@
           </div>
         </div>
         <div class="directBtn" style="padding-right: 1vh">
-          <button id="rightDirect" matTooltip="{{createComponentStrings.a84}}" class="fadeInTop"
+          <button id="rightDirect" class="fadeInTop"
                   color="primary" mat-mini-fab (click)="moveRight()">
             <mat-icon aria-label="next">arrow_forward</mat-icon>
           </button>
@@ -649,7 +646,6 @@
       </div>
       <div class="box33block" style="height: 64px; padding-top: 16px; text-align: center">
         <input type="color"
-               matTooltip="{{createComponentStrings.a85}}"
                class="fadeInTop"
                [value]="bcgColor"
                (input)="bcgColor = $event.target.value"
@@ -679,7 +675,7 @@
         </div>
         <div class="directBtn"
              style="padding-left: 1vh">
-          <button matTooltip="{{createComponentStrings.a86}}"
+          <button
                   id="leftDirectFrame"
                   class="fadeInTop"
                   mat-mini-fab
@@ -703,7 +699,6 @@
         <div class="directBtn"
              style="text-align: right; padding-right: 1vh">
           <button id="rightDirectFrame"
-                  matTooltip="{{createComponentStrings.a87}}"
                   class="fadeInTop"
                   mat-mini-fab
                   (click)="moveRightFrame()"
@@ -2315,7 +2310,9 @@
                    (click)="setImg(i, 'Emocje')">
                 <img id="imgEmocje{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Emocje', $event)"
+                />
               </div>
             </div>
           </mat-expansion-panel>
@@ -2336,7 +2333,8 @@
                    (click)="setImg(i, 'Geografia')">
                 <img id="imgGeografia{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Geografia', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2357,7 +2355,8 @@
                    (click)="setImg(i, 'Literatura')">
                 <img id="imgLiteratura{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Literatura', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2378,7 +2377,8 @@
                    (click)="setImg(i, 'Matematyka')">
                 <img id="imgMatematyka{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Matematyka', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2399,7 +2399,8 @@
                    (click)="setImg(i, 'Muzyka')">
                 <img id="imgMuzyka{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Muzyka', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2420,7 +2421,8 @@
                    (click)="setImg(i, 'Polska')">
                 <img id="imgPolska{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Polska', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2441,7 +2443,8 @@
                    (click)="setImg(i, 'Rosliny')">
                 <img id="imgRosliny{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Rosliny', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2462,7 +2465,8 @@
                    (click)="setImg(i, 'Sport')">
                 <img id="imgSport{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Sport', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2483,7 +2487,8 @@
                    (click)="setImg(i, 'Swieta')">
                 <img id="imgSwieta{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Swieta', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2504,7 +2509,8 @@
                    (click)="setImg(i, 'Szachy')">
                 <img id="imgSzachy{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                     (dragend)="chceckDrop(i, 'Szachy', $event)"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2522,10 +2528,13 @@
               <div *ngFor="let tmp of imagesZwierzeta; let i = index"
                    class="imgToSet fadeInTop"
                    id="imgZwierzeta{{i + 1}}"
-                   (click)="setImg(i, 'Zwierzeta')">
+                   (click)="setImg(i, 'Zwierzeta')"
+                   >
                 <img id="imgZwierzeta{{i}}"
                      src="{{tmp}}.jpg"
-                     style="background-color: white"/>
+                     style="background-color: white"
+                (dragend)="chceckDrop(i, 'Zwierzeta', $event)"
+                (dragstart)="testApp()"/>
               </div>
             </div>
           </mat-expansion-panel>
@@ -2635,7 +2644,9 @@
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
     <div id="pdfFor"
          (mouseover)="changeZindex()"
-         (mouseout)="changeZindexDown()">
+         (mouseout)="changeZindexDown()"
+         dropzone
+    >
       <img src="{{imgSrcFrame}}"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>

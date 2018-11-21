@@ -7,7 +7,8 @@ import html2canvas from 'html2canvas';
 import {DataService} from '../data.service';
 import { coordinates } from '../coordinates.js';
 import { createComponentStrings } from '../allText.js';
-import {CdkDragEnd} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragEnd} from '@angular/cdk/drag-drop';
+import {docChanges} from 'angularfire2/firestore';
 
 
 @Component({
@@ -197,6 +198,8 @@ export class CreateComponent implements OnInit {
   imgHeightDragAndDrop = [];
   imgTop = [];
   imgLeft = [];
+  staticTransformX = [];
+  staticTransformY = [];
   scheme = 0;
   txtTop = [35];
   txtLeft = [0];
@@ -951,6 +954,8 @@ export class CreateComponent implements OnInit {
     this.rotate[this.currImg] = 0;
     this.imgLeft[this.currImg] = 0;
     this.imgTop[this.currImg] = 0;
+    this.imgHeightDragAndDrop[this.currImg] = 0;
+    this.imgWidthDragAndDrop[this.currImg] = 0;
     this.imgHeight[this.currImg] = 10;
     const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
     let prop =  img.naturalWidth;
@@ -960,13 +965,9 @@ export class CreateComponent implements OnInit {
     if ( (this.landscape === 'inline-block') ) {
       multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
       multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
-      document.getElementById('imgToChange44' + this.currImg).style.transform = 'translate3d(0px, 0px, 0px)';
-      this.setDeragAndDropPercent('imgToChange44', this.currImg);
     } else {
       multipleHeight = document.getElementById('pdfFor').offsetHeight;
       multipleWidth = document.getElementById('pdfFor').offsetWidth;
-      document.getElementById('imgToChange22' + this.currImg).style.transform = 'translate3d(0px, 0px, 0px)';
-      this.setDeragAndDropPercent('imgToChange22', this.currImg);
     }
     const propPdfFor = multipleWidth / multipleHeight;
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
@@ -1126,18 +1127,25 @@ export class CreateComponent implements OnInit {
     }
   }
   /*dodaje obrazek i jego parametry*/
-  add() {
+  add(top?, left?) {
     this.openSnackBar(createComponentStrings.a97, 'ok');
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
-    this.imgTop.push(0);
-    this.imgLeft.push(0);
+    if (top !== undefined ) {
+      this.imgTop.push(top);
+      this.imgLeft.push(left);
+      this.imgWidthDragAndDrop.push(left);
+      this.imgHeightDragAndDrop.push(top);
+    } else {
+      this.imgTop.push(0);
+      this.imgLeft.push(0);
+      this.imgWidthDragAndDrop.push(0);
+      this.imgHeightDragAndDrop.push(0);
+    }
     this.currImg = this.userImg.length - 1;
     this.imgHeight.push(10);
     this.imgWidth.push(10);
-    this.imgWidthDragAndDrop.push(0);
-    this.imgHeightDragAndDrop.push(0);
     setTimeout(() => {
       this.setUserImgFrame(this.currImg);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
@@ -1154,7 +1162,7 @@ export class CreateComponent implements OnInit {
       }
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
-    }, 200 );
+    }, 300 );
   }
   /*usuwa aktualnie wybrany obrazek*/
   removeImg() {
@@ -1167,6 +1175,16 @@ export class CreateComponent implements OnInit {
     this.imgWidthDragAndDrop.splice(this.currImg, 1);
     this.imgTop.splice(this.currImg, 1);
     this.imgLeft.splice(this.currImg, 1);
+    /*let img = document.getElementById('imgToChange22' + this.currImg);
+    for ( let i = this.currImg; i < this.staticTransformX.length - 1 ; i ++) {
+      console.log(i);
+      img = document.getElementById('imgToChange22' + i);
+      img.style.transform = 'translate3d(' + this.staticTransformX[i + 1] + 'px, ' + this.staticTransformY[i + 1] + 'px, 0px)';
+      const source: any = img;
+      source._passiveTransform = { x: this.staticTransformX[i + 1], y: this.staticTransformY[i + 1] };
+    }*/
+    this.staticTransformX.splice(this.currImg, 1);
+    this.staticTransformY.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
     if ( this.currImg === -1 ) {
@@ -1855,7 +1873,7 @@ export class CreateComponent implements OnInit {
       this.add();
     }
   }*/
-  setImg(n, name) {
+  setImg(n, name, top?, left?) {
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     console.log('name: ' + name);
@@ -1868,7 +1886,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getSport2Img(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
     } else if (name === 'Emocje') {
       /*this.userImgBase64.push(this.imagesEmocje[n] + '.png');
@@ -1876,14 +1898,22 @@ export class CreateComponent implements OnInit {
       this._dataService.getSportImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
     } else if (name === 'Geografia') {
       /*  this.userImgBase64.push(this.imagesGeografia[n] + '.png');*/
       this._dataService.getGeografiaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Literatura') {
@@ -1891,7 +1921,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Matematyka') {
@@ -1900,7 +1934,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getMatematykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Muzyka') {
@@ -1908,7 +1946,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getMuzykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /* this.add();*/
     } else if (name === 'Rosliny') {
@@ -1916,7 +1958,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getRoslinyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Polska') {
@@ -1924,7 +1970,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getPolskaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Swieta') {
@@ -1932,7 +1982,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getSwietaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Szachy') {
@@ -1940,7 +1994,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getSzachyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Zwierzeta') {
@@ -1956,7 +2014,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       // this.add();
     }
@@ -2087,13 +2149,21 @@ export class CreateComponent implements OnInit {
     return Math.round(percent - 5);
   }
   setUserImgFrame(n) {
-    for (let i = 0; i <  this.imgTop.length; i ++ ) {
+    for (let i = 0; i <  this.imgHeight.length; i ++ ) {
+      console.log(i);
+      console.log(n);
       if (i === n) {
-        document.getElementById('imgToChange4' + i).style.border = '2px solid red';
-        document.getElementById('imgToChange2' + i).style.border = '2px solid red';
+        if (this.landscape === 'none') {
+          document.getElementById('imgToChange22' + i).style.border = '2px solid red';
+        } else {
+          document.getElementById('imgToChange44' + i).style.border = '2px solid red';
+        }
       } else {
-        document.getElementById('imgToChange4' + i).style.border = 'none';
-        document.getElementById('imgToChange2' + i).style.border = 'none';
+        if (this.landscape === 'none') {
+          document.getElementById('imgToChange22' + i).style.border = 'none';
+        } else {
+          document.getElementById('imgToChange44' + i).style.border = 'none';
+        }
       }
     }
   }
@@ -2286,11 +2356,18 @@ export class CreateComponent implements OnInit {
     }
   }
   setDeragAndDropPercent(e, id, event?: CdkDragEnd) {
+    console.log(event);
     this.setDragAndDropPossition(id);
-    if ( event !== undefined ) {
+    if ( event === undefined ) {
+        console.log('no event');
+    } else {
+      console.log('event');
       if ( this.dragAndDropAssumptions(event) ) {
+        this.staticTransformX.push(1);
+        this.staticTransformY.push(1);
         this.setDragAndDropPossition(id);
       }
+      this.dragEnd(event);
     }
     this.currImg = id;
     this.setUserImgFrame(this.currImg);
@@ -2299,6 +2376,7 @@ export class CreateComponent implements OnInit {
     event.source.element.nativeElement.style.transform = 'none';
     const source: any = event.source;
     source._passiveTransform = { x: 0, y: 0 };
+    console.log('drag and drop: ' + source._passiveTransform.x + ' : ' + source._passiveTransform.y  );
   }
   dragAndDropAssumptions(event: CdkDragEnd) {
     let id = 'toPdf100';
@@ -2323,25 +2401,67 @@ export class CreateComponent implements OnInit {
   }
   setDragAndDropPossition(id) {
     let width = document.getElementById('imgToChange22' + id).getBoundingClientRect().left;
+    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
     if ( (this.landscape === 'inline-block') ) {
       width = document.getElementById('imgToChange44' + id).getBoundingClientRect().left;
       width = width - document.getElementById('toPdf100Landscape').getBoundingClientRect().left;
+      this.staticTransformX[id] = width;
       width = (width / document.getElementById('toPdf100Landscape').getBoundingClientRect().width) * 100;
     } else {
       width = width - document.getElementById('toPdf100').getBoundingClientRect().left;
+      this.staticTransformX[id] = width;
       width = (width / document.getElementById('toPdf100').getBoundingClientRect().width) * 100;
     }
-    let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
     if ( (this.landscape === 'inline-block') ) {
       height = document.getElementById('imgToChange44' + id).getBoundingClientRect().top;
       height = height - document.getElementById('toPdf100Landscape').getBoundingClientRect().top;
+      this.staticTransformY[id] = height;
       height = (height / document.getElementById('toPdf100Landscape').getBoundingClientRect().height) *  100;
     } else {
       height = height - document.getElementById('toPdf100').getBoundingClientRect().top;
+      this.staticTransformY[id] = height;
       height = (height / document.getElementById('toPdf100').getBoundingClientRect().height) *  100;
     }
+    console.log(this.staticTransformX[id] + ' : ' +  this.staticTransformY[id]);
     console.log('w: ' + width + ', h: ' + height);
     this.imgWidthDragAndDrop[id] = width;
     this.imgHeightDragAndDrop[id] = height;
+    this.imgLeft[id] = width;
+    this.imgTop[id] = height;
+  }
+  chceckDrop(id, name, e) {
+    const width = e.pageX;
+    const height = e.pageY;
+    if ( this.landscape === 'none' ) {
+      if ( e.pageX >  document.getElementById('toPdf100').getBoundingClientRect().left &&
+        (e.pageY > document.getElementById('toPdf100').getBoundingClientRect().top)) {
+        this.setImg(id,
+          name,
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[1],
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[0]);
+      } else {
+        console.log('exit code -1');
+      }
+    } else {
+      if ( (e.pageX >  document.getElementById('toPdf100Landscape').getBoundingClientRect().left)  &&
+        (e.pageY > document.getElementById('toPdf100Landscape').getBoundingClientRect().top) &&
+        (e.pageY < document.getElementById('toPdf100Landscape').getBoundingClientRect().bottom)) {
+        this.setImg(id, name,
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[1],
+          this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[0]);
+      } else {
+        console.log('exit code -1');
+      }
+    }
+  }
+  setDragAndDropHeightAndWidthArray(width, height, id: string) {
+    width = width - document.getElementById(id).getBoundingClientRect().left;
+    width = (width / document.getElementById(id).getBoundingClientRect().width) * 100;
+    height = height - document.getElementById(id).getBoundingClientRect().top;
+    height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
+    return [width, height];
+  }
+  testApp() {
+    console.log('eloszka');
   }
 }

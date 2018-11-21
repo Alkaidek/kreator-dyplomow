@@ -918,6 +918,19 @@ input[type=color]:hover,
   height: 220px
   padding-left: 0
   padding-right: 0
+  border-top: $border2pxSolid $backgroundColor
+  animation-name: showEdidtor
+  animation-duration: .5s
+  animation-iteration-count: 1
+  animation-fill-mode: forwards
+
+@keyframes showEdidtor
+  0%
+    bottom: 0px
+    opacity: .5
+  100%
+    bottom: 36px
+    opacity: 1
 
 .button
   -webkit-transition: all .7s
