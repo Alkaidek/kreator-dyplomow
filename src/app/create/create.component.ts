@@ -2006,7 +2006,11 @@ export class CreateComponent implements OnInit {
       this._dataService.getZwierzetaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          this.add();
+          if ( top !== undefined ) {
+            this.add(top, left);
+          } else {
+            this.add();
+          }
         });
       /*this.add();*/
     } else if (name === 'Literatura') {
@@ -2430,11 +2434,27 @@ export class CreateComponent implements OnInit {
     this.imgTop[id] = height;
   }
   chceckDrop(id, name, e) {
-    const width = e.pageX;
-    const height = e.pageY;
+    console.log(e);
+    let width = e.pageX;
+    let height = e.pageY -  window.scrollY;
+    if ( navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ) {
+      console.log('firefox');
+      const windowH = window.outerHeight - window.innerHeight;
+      const windowW = window.outerWidth - window.innerWidth;
+      console.log('windowW: ' + windowW);
+      console.log('screenX: ' +  window.screenX);
+      width = e.screenX - windowW  - window.screenX;
+      height = e.screenY - windowH;
+    }
+    console.log('X: ' + width);
+    console.log('Y: ' + height);
+    console.log('left: ' + document.getElementById('toPdf100').getBoundingClientRect().left);
+    console.log('top: ' + document.getElementById('toPdf100').getBoundingClientRect().top);
     if ( this.landscape === 'none' ) {
-      if ( e.pageX >  document.getElementById('toPdf100').getBoundingClientRect().left &&
-        (e.pageY > document.getElementById('toPdf100').getBoundingClientRect().top)) {
+      if ( width >  document.getElementById('toPdf100').getBoundingClientRect().left &&
+        (height > document.getElementById('toPdf100').getBoundingClientRect().top)) {
+        console.log('width: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[1]);
+        console.log('height: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[0]);
         this.setImg(id,
           name,
           this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[1],
@@ -2443,9 +2463,11 @@ export class CreateComponent implements OnInit {
         console.log('exit code -1');
       }
     } else {
-      if ( (e.pageX >  document.getElementById('toPdf100Landscape').getBoundingClientRect().left)  &&
-        (e.pageY > document.getElementById('toPdf100Landscape').getBoundingClientRect().top) &&
-        (e.pageY < document.getElementById('toPdf100Landscape').getBoundingClientRect().bottom)) {
+      if ( (width >  document.getElementById('toPdf100Landscape').getBoundingClientRect().left)  &&
+        (height > document.getElementById('toPdf100Landscape').getBoundingClientRect().top) &&
+        (height < document.getElementById('toPdf100Landscape').getBoundingClientRect().bottom)) {
+        console.log('width: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[1]);
+        console.log('height: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[0]);
         this.setImg(id, name,
           this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[1],
           this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[0]);
@@ -2460,8 +2482,5 @@ export class CreateComponent implements OnInit {
     height = height - document.getElementById(id).getBoundingClientRect().top;
     height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
     return [width, height];
-  }
-  testApp() {
-    console.log('eloszka');
   }
 }
