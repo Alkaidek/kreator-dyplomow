@@ -8,7 +8,6 @@ import {DataService} from '../data.service';
 import { coordinates } from '../coordinates.js';
 import { createComponentStrings } from '../allText.js';
 import {CdkDrag, CdkDragEnd} from '@angular/cdk/drag-drop';
-import {docChanges} from 'angularfire2/firestore';
 
 
 @Component({
@@ -1147,7 +1146,6 @@ export class CreateComponent implements OnInit {
     this.imgHeight.push(10);
     this.imgWidth.push(10);
     setTimeout(() => {
-      this.setUserImgFrame(this.currImg);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
       let prop =  img.naturalWidth;
       prop = prop / img.naturalHeight;
@@ -1162,6 +1160,9 @@ export class CreateComponent implements OnInit {
       }
       const propPdfFor = multipleWidth / multipleHeight;
       this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
+      setTimeout(() => {
+        this.setUserImgFrame(this.currImg);
+      }, 500);
     }, 300 );
   }
   /*usuwa aktualnie wybrany obrazek*/
@@ -1874,6 +1875,7 @@ export class CreateComponent implements OnInit {
     }
   }*/
   setImg(n, name, top?, left?) {
+    document.getElementById('spinner').style.display = 'block';
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     console.log('name: ' + name);
@@ -2482,5 +2484,8 @@ export class CreateComponent implements OnInit {
     height = height - document.getElementById(id).getBoundingClientRect().top;
     height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
     return [width, height];
+  }
+  spinnerOff() {
+    document.getElementById('spinner').style.display = 'none';
   }
 }

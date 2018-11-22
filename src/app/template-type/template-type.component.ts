@@ -1049,6 +1049,7 @@ export class TemplateTypeComponent implements OnInit {
     this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   setImg(n, name, top?, left?) {
+    document.getElementById('spinner').style.display = 'block';
     this.onLoadBool = true;
     const rmvBtn = document.getElementById('rmvImg') as HTMLButtonElement;
     console.log('name: ' + name);
@@ -1653,5 +1654,8 @@ export class TemplateTypeComponent implements OnInit {
     height = height - document.getElementById(id).getBoundingClientRect().top;
     height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
     return [width, height];
+  }
+  spinnerOff() {
+    document.getElementById('spinner').style.display = 'none';
   }
 }

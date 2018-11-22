@@ -1282,7 +1282,7 @@
              id="imgToChange2{{usr}}"
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
-             (load)="chcekProportions()"
+             (load)="chcekProportions(); spinnerOff()"
         />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"
@@ -1373,7 +1373,7 @@
              id="imgToChange4{{usr}}"
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
-             (load)="chcekProportions()"
+             (load)="chcekProportions(); spinnerOff()"
         />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"

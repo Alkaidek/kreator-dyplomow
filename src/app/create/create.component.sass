@@ -26,6 +26,9 @@ $backgroundColor: #f2f2f2
 $toPdfColor: white
 $border2pxSolid: 2px solid
 
+body
+  background-color: darkgray
+
 #create,
 #viewLandscape,
 #createTemplate
@@ -1451,3 +1454,19 @@ button
   width: 30px
   height: 30px
   color: green
+
+.userImg
+  animation-name: showImg
+  animation-duration: .5s
+  animation-delay: 0s
+  animation-iteration-count: 1
+  animation-timing-function: linear
+  animation-fill-mode: forwards
+
+@keyframes showImg
+  0%
+    opacity: 0
+    transform: scale(.1, .1)
+  100%
+    opacity: 1
+    transform: scale(1, 1)
