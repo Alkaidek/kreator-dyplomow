@@ -2485,7 +2485,7 @@ export class CreateComponent implements OnInit {
     height = (height / document.getElementById(id).getBoundingClientRect().height) * 100;
     return [width, height];
   }
-  //wyłącza spinnera
+  /*wyłącza spinnera*/
   spinnerOff() {
     document.getElementById('spinner').style.display = 'none';
   }
