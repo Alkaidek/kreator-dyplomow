@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
-import {AngularFireDatabase} from 'angularfire2/database';
 import {MatSnackBar} from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
@@ -70,7 +69,7 @@ export class CreateComponent implements OnInit {
   footer = createComponentStrings.a88;
   onLoadBool = false;
   bcgColorDisabled = false;
-  constructor(private db: AngularFireDatabase, public snackBar: MatSnackBar, private _dataService: DataService) {
+  constructor( public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     /*stworzenie tablic zawierających odniesienia do kolejnych obrazków.
     * element tablicy[i] = ../../assets/img/[kategoria],
@@ -261,14 +260,6 @@ export class CreateComponent implements OnInit {
         const element = buttonStepper[i] as HTMLElement;
         element.style.top = '7vh' ;
       }
-      /*document.getElementById('directButtonContainter').style.paddingLeft = '0.2%';
-      document.getElementById('directButtonContainter').style.paddingRight = '0.2%';*/
-      /*document.getElementById('fbLogo').style.height = '3vh';
-      document.getElementById('ytLogo').style.height = '3vh';
-      document.getElementById('fbLogo').style.width = '3vh';
-      document.getElementById('ytLogo').style.width = '3vh';
-      document.getElementById('fbLogo').style.marginTop = '10px';
-      document.getElementById('ytLogo').style.marginTop = '10px';*/
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
       const elements = document.getElementsByClassName('logoText') as any;
@@ -290,14 +281,6 @@ export class CreateComponent implements OnInit {
         const element = buttonStepper[i] as HTMLElement;
         element.style.top = '10vh' ;
       }
-      /*document.getElementById('directButtonContainter').style.paddingLeft = '3%';
-      document.getElementById('directButtonContainter').style.paddingRight = '3%';*/
-      /*document.getElementById('fbLogo').style.marginTop = '16px';
-      document.getElementById('ytLogo').style.marginTop = '16px';
-      document.getElementById('fbLogo').style.height = '4.5vh';
-      document.getElementById('ytLogo').style.height = '4.5vh';
-      document.getElementById('fbLogo').style.width = '4.5vh';
-      document.getElementById('ytLogo').style.width = '4.5vh';*/
       const elements = document.getElementsByClassName('logoText') as any;
       for ( let i = 0; i < elements.length; i++ ) {
         elements[i].style.marginTop = '10px';
@@ -316,6 +299,10 @@ export class CreateComponent implements OnInit {
       this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
     }, 300);
   }
+  /*funkcja ustawia maksymalne szerokości dla elmentów
+    *0 - pole tytuł,
+    *1 - pole dla kogo,
+    *2 - pole za co.*/
   setPaddingAnchor() {
     setTimeout( () => {
       this.checkWidth(0);
@@ -341,13 +328,10 @@ export class CreateComponent implements OnInit {
     window.addEventListener('scroll', this.scroll, true);
   }
   /*wyróźnienie aktywnego elementu 'scheme30', tzn schematu zawierającego 3 pola na podpisy
-  * ustalenie wartości dla zmiennej multiple - określa stosunek wysokości okna przeglądarki do elemntu z którego generowany będzie pdf*/
+  * ustalenie wartości dla zmiennej multiple - określa stosunek wysokości okna przeglądarki do elemntu z którego generowany będzie pdf
+  * nie radze dotykać tajmauta -> cykl angulara*/
   setOnInitData() {
     setTimeout( () => {
-/*      document.getElementById('scheme30').style.transform = 'scale(1,1)';*/
-      /*document.getElementById('scheme30').style.boxShadow = '0px 0px 40px #eb008b, 2px 2px 10px #c109ea, -2px -2px 10px #c109ea';*/
-/*      document.getElementById('scheme30').style.filter = 'grayscale(0%)';
-      document.getElementById('scheme30').style.opacity = '1';*/
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
@@ -368,7 +352,8 @@ export class CreateComponent implements OnInit {
       this.frames.push(array[i]);
     }
   }
-  /*Podświelta(wyróżnia) element (tło) określny jako parametr o id 'img'imgSrc*/
+  /*Podświelta(wyróżnia) element (tło) określny jako parametr o id 'img'imgSrc
+  * W przypadku błędu wywali na konsole 'higlightbcg'*/
   highlightBcg(imgSrc) {
     try {
       this.lastValue = imgSrc;
@@ -380,7 +365,8 @@ export class CreateComponent implements OnInit {
       console.log('higlightbcg');
     }
   }
-  /*wycisza wyróżnienie, elementu (tła), określony jako paramet, parametrem powinien być Number*/
+  /*wycisza wyróżnienie, elementu (tła), określony jako paramet, parametrem powinien być Number.
+  * Try catch jest potrzebny ze względu na stare JSON'y które posiadały inne grafiki*/
   downgradeBcg(imgSrc) {
     try {
       console.log('down' + this.lastValue);
@@ -537,7 +523,7 @@ export class CreateComponent implements OnInit {
       });
     }
   }
-  getCurrentDate() {
+  public getCurrentDate() {
     const date = new Date();
     let day = '' + date
       .getDate();
@@ -2173,7 +2159,7 @@ export class CreateComponent implements OnInit {
       }
     }
   }
-  test() {
+ public test() {
     return 0;
   }
   /*obsługa znikania i pojawiania się przycisków od przechodzenia między krokami*/

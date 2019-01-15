@@ -599,7 +599,8 @@
         </div>
         <div class="scroll fadeInTop" id="scrollable">
           <div *ngFor="let tmp of bcgTemp; let i = index" class="bcg boxReal33 fadeInTop" id="bcg{{i + 1}}"
-               (click)="takeBcg(i)">
+               (click)="takeBcg(i)"
+               (dragend)="takeBcg(i)">
             <img id="img{{i}}" src="{{tmp}}.png"/>
           </div>
         </div>
@@ -691,7 +692,8 @@
           <div *ngFor="let frame of frames; let i = index"
                class="frm boxReal33 fadeInTop"
                id="frmBox{{i + 1}}"
-               (click)="takeFrame(i)">
+               (click)="takeFrame(i)"
+               (dragend)="takeFrame(i)">
             <img id="frm{{i}}"
                  src="{{frame}}"/>
           </div>
@@ -816,10 +818,10 @@
                        (blur)="checkWidthWithCenter(0)">
                 <br/>
                 <p class="fadeInTop"
-                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                   style="margin-bottom: 0vh; margin-top:1.5vh"
                 >{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%; ">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -834,7 +836,7 @@
                 <button mat-button
                         color="accent"
                         (click)="shadowOnOff(0, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1029,9 +1031,9 @@
                        (input)="arrayFontColor[2] = $event.target.value"
                        id="card111">
                 <br/>
-                <p class="fadeInTop txtMargin">{{createComponentStrings.a27}}</p>
+                <p class="fadeInTop txtMargin0">{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1045,7 +1047,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(1, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1246,9 +1248,9 @@
                        (input)="arrayFontColor[4] = $event.target.value"
                        id="card222">
                 <br/>
-                <p class="fadeInTop txtMargin">{{createComponentStrings.a27}}</p>
+                <p class="fadeInTop txtMargin0">{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1262,7 +1264,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(2, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1453,11 +1455,11 @@
                        (input)="arrayFontColor[1] = $event.target.value"
                        id="card444">
                 <br/>
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a27}}
                 </p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1471,7 +1473,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(0, 1)"
-                        style="margin-bottom: 10px"
+                        style="margin-top: -10px">
                 >
                   <i class="material-icons">
                     highlight
@@ -1616,11 +1618,11 @@
                        (input)="arrayFontColor[3] = $event.target.value"
                        id="card333">
                 <br/>
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a27}}
                 </p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1634,7 +1636,7 @@
                 <button mat-button
                         color="accent"
                         (click)="shadowOnOff(1, 1)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1818,7 +1820,7 @@
                          (input)="txtColor[0] = $event.target.value"
                          style="width: 80%;">
                   <br/>
-                  <p class="fadeInTop txtMargin">
+                  <p class="fadeInTop txtMargin0">
                     {{createComponentStrings.a27}}
                   </p>
                   <mat-form-field class="fadeInLeft"
@@ -1838,7 +1840,7 @@
                   <button mat-button
                           color="accent"
                           (click)="shadowOnOffForUserTextField()"
-                          style="margin-bottom: 10px">
+                          style="margin-top: -10px">
                     <i class="material-icons">
                       highlight
                     </i>
