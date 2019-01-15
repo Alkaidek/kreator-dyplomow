@@ -388,8 +388,6 @@
       (click)="stepper.selectedIndex = 0" for="fileInput"
       id="fileInputLabel"
       class="fadeInLeft"
-      matTooltip="{{createComponentStrings.a77}}"
-      matTooltipPosition="above"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
@@ -404,8 +402,6 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="{{createComponentStrings.a78}}"
-      matTooltipPosition="above"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
       {{createComponentStrings.a5}}
@@ -425,8 +421,6 @@
     id="directButtonContainter">
     <button
       id="btnDirectLeft"
-      matTooltip="{{createComponentStrings.a79}}"
-      matTooltipPosition="right"
       mat-mini-fab
       (click)="stepper.previous();"
       color="primary"
@@ -435,7 +429,7 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="{{createComponentStrings.a80}}" matTooltipPosition="left" mat-mini-fab
+    <button id="btnDirectRight" mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>
@@ -457,15 +451,14 @@
           <div class="box33" style="width: 16.666666665%; border-left: white; border-right: white">
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div matTooltip="{{createComponentStrings.a81}}" matTooltipPosition="left"
+            <div
                  class="orientationImgBox fadeInTop borderRight">
               <img id="imgO1" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(1)"/>
             </div>
           </div>
           <div class="box33" style="width: 33.333333333%; border-left: white; border-right: white">
-            <div class="orientationImgBox" matTooltip="{{createComponentStrings.a82}}"
-                 matTooltipPosition="right">
+            <div class="orientationImgBox">
               <img id="imgO2" class="imgOrientation fadeInTop" src="../../assets/img/horiyontal2.png"
                    (click)="landscapeOff(2)"/>
             </div>
@@ -524,7 +517,7 @@
           <h3 class="fadeInTop">{{createComponentStrings.a13}}</h3>
         </div>
         <div class="directBtn" style="padding-left: 1vh">
-          <button matTooltip="{{createComponentStrings.a83}}" matTooltipPosition="left" id="leftDirect" color="primary"
+          <button  id="leftDirect" color="primary"
                   class="fadeInTop" mat-mini-fab (click)="moveLeft()" disabled>
             <mat-icon aria-label="prev">arrow_back</mat-icon>
           </button>
@@ -536,7 +529,7 @@
           </div>
         </div>
         <div class="directBtn" style="padding-right: 1vh">
-          <button id="rightDirect" matTooltip="{{createComponentStrings.a84}}" matTooltipPosition="right" class="fadeInTop"
+          <button id="rightDirect" class="fadeInTop"
                   color="primary" mat-mini-fab (click)="moveRight()">
             <mat-icon aria-label="next">arrow_forward</mat-icon>
           </button>
@@ -578,8 +571,6 @@
       </div>
       <div class="box33block" style="height: 64px; padding-top: 16px; text-align: center">
         <input type="color"
-               matTooltip="{{createComponentStrings.a85}}"
-               matTooltipPosition="below"
                class="fadeInTop"
                [value]="bcgColor"
                (input)="bcgColor = $event.target.value"
@@ -609,9 +600,7 @@
         </div>
         <div class="directBtn"
              style="padding-left: 1vh">
-          <button matTooltip="{{createComponentStrings.a86}}"
-                  matTooltipPosition="left"
-                  id="leftDirectFrame"
+          <button id="leftDirectFrame"
                   class="fadeInTop"
                   mat-mini-fab
                   (click)="moveLeftFrame()"
@@ -634,8 +623,6 @@
         <div class="directBtn"
              style="text-align: right; padding-right: 1vh">
           <button id="rightDirectFrame"
-                  matTooltip="{{createComponentStrings.a87}}"
-                  matTooltipPosition="right"
                   class="fadeInTop"
                   mat-mini-fab
                   (click)="moveRightFrame()"
@@ -753,10 +740,10 @@
                        (blur)="checkWidthWithCenter(0)">
                 <br/>
                 <p class="fadeInTop"
-                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                   style="margin-bottom: 0vh; margin-top:1.5vh"
                 >{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -771,7 +758,7 @@
                 <button mat-button
                         color="accent"
                         (click)="shadowOnOff(0, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -966,9 +953,9 @@
                        (input)="arrayFontColor[2] = $event.target.value"
                        id="card111">
                 <br/>
-                <p class="fadeInTop txtMargin">{{createComponentStrings.a27}}</p>
+                <p class="fadeInTop txtMargin0">{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -982,7 +969,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(1, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1183,9 +1170,9 @@
                        (input)="arrayFontColor[4] = $event.target.value"
                        id="card222">
                 <br/>
-                <p class="fadeInTop txtMargin">{{createComponentStrings.a27}}</p>
+                <p class="fadeInTop txtMargin0">{{createComponentStrings.a27}}</p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%; ">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1199,7 +1186,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(2, 0)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1390,11 +1377,11 @@
                        (input)="arrayFontColor[1] = $event.target.value"
                        id="card444">
                 <br/>
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a27}}
                 </p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1408,8 +1395,7 @@
                 <br/><br/>
                 <button mat-button color="accent"
                         (click)="shadowOnOff(0, 1)"
-                        style="margin-bottom: 10px"
-                >
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1553,11 +1539,11 @@
                        (input)="arrayFontColor[3] = $event.target.value"
                        id="card333">
                 <br/>
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a27}}
                 </p>
                 <mat-form-field class="fadeInLeft"
-                                style="width: 80%; margin-top: 10px">
+                                style="width: 80%;">
                   <mat-select placeholder="Wybierz czcionkę">
                     <mat-option *ngFor="let fntFamili of arraySelectFontFamili; let i = index"
                                 value="{{i}}"
@@ -1571,7 +1557,7 @@
                 <button mat-button
                         color="accent"
                         (click)="shadowOnOff(1, 1)"
-                        style="margin-bottom: 10px">
+                        style="margin-top: -10px">
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1755,7 +1741,7 @@
                          (input)="txtColor[0] = $event.target.value"
                          style="width: 80%;">
                   <br/>
-                  <p class="fadeInTop txtMargin">
+                  <p class="fadeInTop txtMargin0">
                     {{createComponentStrings.a27}}
                   </p>
                   <mat-form-field class="fadeInLeft"
@@ -1775,7 +1761,7 @@
                   <button mat-button
                           color="accent"
                           (click)="shadowOnOffForUserTextField()"
-                          style="margin-bottom: 10px">
+                          style="margin-top: -10px">
                     <i class="material-icons">
                       highlight
                     </i>
@@ -2553,7 +2539,7 @@
         </div>
         <div class="box33border"
              style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-         <!-- <p style="/*float: left;*/  padding-left: 5px">
+         <p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight"
                style="">
               {{createComponentStrings.a71}}</b></p>
@@ -2565,11 +2551,11 @@
                  [disabled]="boolDisableUserImgFields"
                  (input)="imgTop[currImg] = $event.target.value"
                  class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%">-->
+                 style="width: 80%; margin-left: 0%">
         </div>
         <div class="box33border"
              style="height: 110px; /*border-right: 1px solid #f2f2f2*/">
-         <!-- <p style="/*float: left;*/  padding-left: 5px">
+          <p style="/*float: left;*/  padding-left: 5px">
             <b class="fadeInRight">{{createComponentStrings.a72}}</b></p>
           <input type="range"
                  min="0"
@@ -2579,8 +2565,12 @@
                  [disabled]="boolDisableUserImgFields"
                  (input)="imgLeft[currImg] = $event.target.value"
                  class="slider50 fadeInLeft"
-                 style="width: 80%; margin-left: 0%"><br/>-->
-          <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">{{createComponentStrings.a73}}</b></p>
+                 style="width: 80%; margin-left: 0%"><br/>
+          
+        </div>
+        <div class="box33border"
+             style="height: 110px;">
+             <p style="/*float: left; */ padding-left: 5px"><b class="fadeInRight">{{createComponentStrings.a73}}</b></p>
           <input type="range"
                  id="inputImgRotate"
                  min="-360"
@@ -2591,9 +2581,6 @@
                  class="slider50 fadeInLeft"
                  style="width: 80%; margin-left: 0%"
                  step="45"> <br/>
-        </div>
-        <div class="box33border"
-             style="height: 110px;">
         </div>
 
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
@@ -2654,9 +2641,7 @@
          [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
          id="imgPdf100"/>
     <!--<canvas width="100" height="100" style="background: url('../../assets/img/macLogo2.png'); background-size: cover; position: absolute"></canvas>-->
-    <div id="pdfFor"
-         (mouseover)="changeZindex()"
-         (mouseout)="changeZindexDown()">
+    <div id="pdfFor">
       <img src="{{imgSrcFrame}}"
            [style.transform]="'scale(' + frmRotateX + ', ' + frmRotateY + ')'"
            style="background-size: cover; position: absolute; z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px"/>
@@ -2667,7 +2652,7 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
-           cdkDrag>
+           >
        <!-- <div class="example-handle" cdkDragHandle >
           <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
             <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
@@ -2680,7 +2665,6 @@
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions()"
-             (mouseup)='testDragDrop("imgToChange22" + usr, usr)'
              />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"
@@ -2825,8 +2809,7 @@
        class="rotateInDownRight"
        style="width: 94%; height: 50%; margin-left: 3%; margin-top:20%"
        [style.background-color]="bcgColor"
-       (mouseover)="changeZindex()"
-       (mouseout)="changeZindexDown()">
+      >
     <img src="{{imgSrcFix}}"
          [style.transform]="'scale(' + bcgRotateX + ', ' + bcgRotateY + ')'"
          id="imgPdf100Landscape"
@@ -2850,7 +2833,6 @@
              [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions()"
-             (mouseup)='testDragDrop("imgToChange44" + usr, usr)'
         />
       </div>
       <div *ngFor="let txt of userTxt; let i = index"

@@ -227,8 +227,6 @@
       (click)="stepper.selectedIndex = 0" for="fileInput"
       id="fileInputLabel"
       class="fadeInLeft"
-      matTooltip="{{templateComponentStrings.a5}}"
-      matTooltipPosition="above"
       style="padding-top: 6px; float: left"
     >
       <!--<img src="../../assets/img/ArrowIcon.png" style="width: 29px; height: 29px"/>-->
@@ -243,8 +241,6 @@
     <button
       mat-button color="accent"
       (click)="createArrayToSend()"
-      matTooltip="{{templateComponentStrings.a6}}"
-      matTooltipPosition="above"
       style="margin-left: 25%; font-weight: bolder; width: 25%"
     >
       {{templateComponentStrings.a7}}
@@ -264,8 +260,6 @@
     id="directButtonContainter">
     <button
       id="btnDirectLeft"
-      matTooltip="{{templateComponentStrings.a10}}"
-      matTooltipPosition="right"
       mat-mini-fab
       (click)="stepper.previous();"
       color="primary"
@@ -274,7 +268,7 @@
     >
       <mat-icon>navigate_before</mat-icon>
     </button>
-    <button id="btnDirectRight" matTooltip="{{templateComponentStrings.a9}}" matTooltipPosition="left" mat-mini-fab
+    <button id="btnDirectRight" mat-mini-fab
             (click)="stepper.next();" color="primary" style="float: right;" [disabled]="btnDirectRightDisabled">
       <mat-icon>navigate_next</mat-icon>
     </button>

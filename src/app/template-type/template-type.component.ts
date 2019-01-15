@@ -471,8 +471,21 @@ export class TemplateTypeComponent implements OnInit {
     this.rotate[this.currImg] = 0;
     this.imgLeft[this.currImg] = 0;
     this.imgTop[this.currImg] = 0;
-    this.imgWidth[this.currImg] = 10;
     this.imgHeight[this.currImg] = 10;
+    const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
+    let prop =  img.naturalWidth;
+    prop = prop / img.naturalHeight;
+    let multipleHeight;
+    let multipleWidth;
+    if ( (this.landscape === 'inline-block') ) {
+      multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
+      multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
+    } else {
+      multipleHeight = document.getElementById('pdfFor').offsetHeight;
+      multipleWidth = document.getElementById('pdfFor').offsetWidth;
+    }
+    const propPdfFor = multipleWidth / multipleHeight;
+    this.imgWidth[this.currImg] = 10 * (prop / propPdfFor);
   }
   right(n) {
     const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
