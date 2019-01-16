@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import * as fileSaver from 'file-saver';
 import html2canvas from 'html2canvas';
-import {DataService} from '../data.service';
+import { DataService } from '../data.service';
 import { coordinates } from '../coordinates.js';
 import { createComponentStrings } from '../allText.js';
-import {CdkDrag, CdkDragEnd} from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -20,9 +20,9 @@ import {CdkDrag, CdkDragEnd} from '@angular/cdk/drag-drop';
     ]
 })
 export class CreateComponent implements OnInit {
-  arraySelectFontFamili = [ 'Abril Fatface', 'Aladin', 'Allura', 'Anton', 'Dancing Script', 'Lato',
+  arraySelectFontFamili = ['Abril Fatface', 'Aladin', 'Allura', 'Anton', 'Dancing Script', 'Lato',
     'Merriweather', 'Montserrat', 'Open Sans', 'Oswald', 'Ranga', 'Roboto', 'Rubik', 'Ubuntu', 'Varela Round'
-    ];
+  ];
   userImg =
     [];
   createComponentStrings = createComponentStrings;
@@ -69,72 +69,72 @@ export class CreateComponent implements OnInit {
   footer = createComponentStrings.a88;
   onLoadBool = false;
   bcgColorDisabled = false;
-  constructor( public snackBar: MatSnackBar, private _dataService: DataService) {
+  constructor(public snackBar: MatSnackBar, private _dataService: DataService) {
     this.setDate();
     /*stworzenie tablic zawierających odniesienia do kolejnych obrazków.
     * element tablicy[i] = ../../assets/img/[kategoria],
     * z roz. jpg to miniaturki,
     * z .png to orginały (full HD)*/
-    for ( let i = 1; i < 50; i++ ) {
+    for (let i = 1; i < 50; i++) {
       this.imagesMatematyka.push('../../assets/img/matematyka/' + i);
     }
     this.matematykaHeight = this.setHeightElement(this.imagesMatematyka);
-    for ( let i = 1; i < 55; i++ ) {
-      this.imagesMuzyka.push('../../assets/img/muzyka/' + i );
+    for (let i = 1; i < 55; i++) {
+      this.imagesMuzyka.push('../../assets/img/muzyka/' + i);
     }
     this.muzykaHeight = this.setHeightElement(this.imagesMuzyka);
-    for ( let i = 1; i < 13; i++ ) {
-      this.imagesPolska.push('../../assets/img/polska/' + i );
+    for (let i = 1; i < 13; i++) {
+      this.imagesPolska.push('../../assets/img/polska/' + i);
     }
     this.polskaHeight = this.setHeightElement(this.imagesPolska);
-    for ( let i = 1; i < 42; i++ ) {
-      this.imagesSport.push('../../assets/img/sport/' + i );
+    for (let i = 1; i < 42; i++) {
+      this.imagesSport.push('../../assets/img/sport/' + i);
     }
     this.sportHeight = this.setHeightElement(this.imagesSport);
-    for ( let i = 1; i < 51; i++ ) {
+    for (let i = 1; i < 51; i++) {
       this.imagesSwieta.push('../../assets/img/swieta/' + i);
     }
     this.swietaHeight = this.setHeightElement(this.imagesSwieta);
-    for ( let i = 1; i < 19; i++ ) {
+    for (let i = 1; i < 19; i++) {
       this.imagesSzachy.push('../../assets/img/szachy/' + i);
     }
     this.szachyHeight = this.setHeightElement(this.imagesSzachy);
-    for ( let i = 1; i < 80; i++ ) {
+    for (let i = 1; i < 80; i++) {
       this.imagesZwierzeta.push('../../assets/img/zwierzeta/' + i);
     }
     this.zwierzetaHeight = this.setHeightElement(this.imagesZwierzeta);
-    for ( let i = 1; i < 34; i++ ) {
+    for (let i = 1; i < 34; i++) {
       this.imagesRosliny.push('../../assets/img/rosliny/' + i);
     }
     this.roslinyHeight = this.setHeightElement(this.imagesRosliny);
 
-    for ( let i = 1; i < 44; i++ ) {
+    for (let i = 1; i < 44; i++) {
       this.imagesEmocje.push('../../assets/img/emocje/' + i);
     }
     this.emocjeHeight = this.setHeightElement(this.imagesEmocje);
-    for ( let i = 1; i < 40; i++ ) {
-      this.imagesGeografia.push('../../assets/img/geografia/' + i );
+    for (let i = 1; i < 40; i++) {
+      this.imagesGeografia.push('../../assets/img/geografia/' + i);
     }
     this.geografiaHeight = this.setHeightElement(this.imagesGeografia);
-    for ( let i = 1; i < 39; i++ ) {
+    for (let i = 1; i < 39; i++) {
       this.imagesLiteratura.push('../../assets/img/literatura/' + i);
     }
     this.literaturaHeight = this.setHeightElement(this.imagesLiteratura);
-   /* this._dataService.getTemplates()
-      .subscribe(tmp => {
-        for (let i = 0; i < tmp[0].templates.length; i++) {
-          this.coordinatesTemplate.push( tmp[0].templates[i] );
-        }
-      });*/
-   /*stworzenie tablicy zawierającej odniesienia do obrazków będących tłami dyplomu*/
-    for ( let i = 1; i < 27; i++ ) {
-      this.bcgTemp.push('../../assets/img/bcg/' + i );
+    /* this._dataService.getTemplates()
+       .subscribe(tmp => {
+         for (let i = 0; i < tmp[0].templates.length; i++) {
+           this.coordinatesTemplate.push( tmp[0].templates[i] );
+         }
+       });*/
+    /*stworzenie tablicy zawierającej odniesienia do obrazków będących tłami dyplomu*/
+    for (let i = 1; i < 27; i++) {
+      this.bcgTemp.push('../../assets/img/bcg/' + i);
     }
     /*stworzenie tablicy zawierajacej odniesienia do obrazków będących ramkami dyplmu (PIONOWE!)*/
-    for ( let i = 1; i < 37; i++ ) {
+    for (let i = 1; i < 37; i++) {
       this.frame1.push('../../assets/img/frame/' + i + '.png');
     }
-    for ( let i = 37; i < 61; i++ ) {
+    for (let i = 37; i < 61; i++) {
       this.frame2.push('../../assets/img/frame2/' + i + '.png');
     }
     /*stworzenie tablicy zawierajacej odniesienia do obrazków będących ramkami dyplmu (POZIOME!)*/
@@ -205,7 +205,7 @@ export class CreateComponent implements OnInit {
   txtSize = [3];
   txtStyle = ['normal'];
   txtWeight = ['normal'];
-  txtVariant  = ['normal'];
+  txtVariant = ['normal'];
   txtAlign = ['center'];
   txt = [];
   txtShadow = [0];
@@ -231,8 +231,8 @@ export class CreateComponent implements OnInit {
   letterSpacing = 0;
   letterSpacingForWho = 0;
   fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
-  fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-  fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  fontWeight = ['normal', 'normal', 'normal', 'normal', 'normal'];
+  fontVariant = ['normal', 'normal', 'normal', 'normal', 'normal'];
   textAlign = ['center', 'center', 'center', 'center', 'center'];
   btnDirectLeftDisabled = true;
   btnDirectRightDisabled = false;
@@ -248,26 +248,26 @@ export class CreateComponent implements OnInit {
    * scrollY = 0 powrót do stanu startowego*/
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
-    if ( window.scrollY > 50 ) {
+    if (window.scrollY > 50) {
       imgMAClogo.style.width = '6.875vh';
       imgMAClogo.style.height = '5vh';
       document.getElementById('logoBox').style.height = '5vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
-      stepper.style.top = '5vh' ;
+      stepper.style.top = '5vh';
       const buttonStepper = document.getElementsByClassName('directButtonContainter');
       document.getElementById('directBcg').style.top = '5vh';
-      for ( let i = 0; i < buttonStepper.length; i++) {
+      for (let i = 0; i < buttonStepper.length; i++) {
         const element = buttonStepper[i] as HTMLElement;
-        element.style.top = '7vh' ;
+        element.style.top = '7vh';
       }
       document.getElementById('logoBox').style.fontSize = '1.3vh';
       document.getElementById('logoBox').style.paddingTop = '0.5vh';
       const elements = document.getElementsByClassName('logoText') as any;
-      for ( let i = 0; i < elements.length; i++ ) {
+      for (let i = 0; i < elements.length; i++) {
         elements[i].style.marginTop = '5px';
       }
     }
-    if ( window.scrollY === 0 ) {
+    if (window.scrollY === 0) {
       imgMAClogo.style.width = '11vh';
       imgMAClogo.style.height = '8vh';
       document.getElementById('logoBox').style.height = '8vh';
@@ -275,14 +275,14 @@ export class CreateComponent implements OnInit {
       document.getElementById('logoBox').style.paddingTop = '0vh';
       document.getElementById('directBcg').style.top = '8vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
-      stepper.style.top = '8vh' ;
+      stepper.style.top = '8vh';
       const buttonStepper = document.getElementsByClassName('directButtonContainter');
-      for ( let i = 0; i < buttonStepper.length; i++) {
+      for (let i = 0; i < buttonStepper.length; i++) {
         const element = buttonStepper[i] as HTMLElement;
-        element.style.top = '10vh' ;
+        element.style.top = '10vh';
       }
       const elements = document.getElementsByClassName('logoText') as any;
-      for ( let i = 0; i < elements.length; i++ ) {
+      for (let i = 0; i < elements.length; i++) {
         elements[i].style.marginTop = '10px';
       }
     }
@@ -292,7 +292,7 @@ export class CreateComponent implements OnInit {
   * -ustawienie Scroll Listener'a
   * -data, i podstawowe elementy*/
   ngOnInit() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.setOnInitData();
       this.addScrollListener();
       this.setPaddingAnchor();
@@ -304,22 +304,39 @@ export class CreateComponent implements OnInit {
     *1 - pole dla kogo,
     *2 - pole za co.*/
   setPaddingAnchor() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.checkWidth(0);
       this.checkWidth(1);
       this.checkWidth(2);
     }, 300);
   }
   /*ustawienie wartości dla footer, dzisiejsza data */
+  setBaseCoordinates() {
+    let n = 5;
+    if (this.landscape === 'inline-block') {
+      n = 38;
+    }
+    this.paddingTop = Number(coordinates[n][0]);
+    this.paddingTopForWho = Number(coordinates[n][0]) + 10;
+    this.paddingTopForWhat = Number(coordinates[n][0]) + 20;
+    this.marginLeft[3] = coordinates[n][1];
+    this.marginRight[3] = coordinates[n][2];
+    this.bottom = coordinates[n][3];
+    if (this.landscape === 'inline-block') {
+      this.paddingTopFooter = coordinates[n][3] - 15;
+    } else {
+      this.paddingTopFooter = coordinates[n][3] - 7;
+    }
+  }
   setDate() {
     const date = new Date();
     let day = '' + date.getDate();
     const month = date.getMonth() + 1;
     let monthStr = month + '';
-    if ( date.getDate() < 10) {
+    if (date.getDate() < 10) {
       day = '0' + day;
     }
-    if ( (date.getMonth() + 1 )  < 10) {
+    if ((date.getMonth() + 1) < 10) {
       monthStr = '0' + month;
     }
     this.footer = this.footer + day + '.' + monthStr + '.' + date.getFullYear() + ' r.';
@@ -331,16 +348,17 @@ export class CreateComponent implements OnInit {
   * ustalenie wartości dla zmiennej multiple - określa stosunek wysokości okna przeglądarki do elemntu z którego generowany będzie pdf
   * nie radze dotykać tajmauta -> cykl angulara*/
   setOnInitData() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.scheme = 30;
       this.landscapeOff(2);
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 794 / width) );
-      this.multiple = (794 / width );
+      console.log(': ' + (794 / width));
+      this.multiple = (794 / width);
       this.imageFrameWidth = document.getElementById('pdfFor').offsetWidth * 0.14;
       this.imageFrameWidthLandscape = document.getElementById('pdfForlandscape').offsetWidth * 0.1;
       this.imageFrameWidthFix = document.getElementById('pdfForFix').offsetWidth * 0.14;
       this.imageFrameWidthLandscapeFix = document.getElementById('pdfForLandscapeFix').offsetWidth * 0.1;
+      this.setBaseCoordinates();
     }, 150);
     return this.multiple;
   }
@@ -348,7 +366,7 @@ export class CreateComponent implements OnInit {
   * jej zadaniem jest zmiana elementów w tablicy z ramek pionowych na poziome i odwrotnie.*/
   createFramesArray(array, array2) {
     this.frames = [];
-    for ( let i = 0; i < array.length; i++ ) {
+    for (let i = 0; i < array.length; i++) {
       this.frames.push(array[i]);
     }
   }
@@ -358,9 +376,9 @@ export class CreateComponent implements OnInit {
     try {
       this.lastValue = imgSrc;
       console.log('up' + this.lastValue);
-      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.90,0.9)';
-      document.getElementById('img' + (this.lastValue) ).style.filter = 'grayscale(0%)';
+      document.getElementById('img' + (this.lastValue)).style.webkitTransform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (this.lastValue)).style.transform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (this.lastValue)).style.filter = 'grayscale(0%)';
     } catch (e) {
       console.log('higlightbcg');
     }
@@ -370,9 +388,9 @@ export class CreateComponent implements OnInit {
   downgradeBcg(imgSrc) {
     try {
       console.log('down' + this.lastValue);
-      document.getElementById('img' + (imgSrc) ).style.webkitTransform = 'scale(0.7,0.7)';
-      document.getElementById('img' + (imgSrc) ).style.transform = 'scale(0.7,0.7)';
-      document.getElementById('img' + (imgSrc ) ).style.filter = 'grayscale(60%)';
+      document.getElementById('img' + (imgSrc)).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (imgSrc)).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (imgSrc)).style.filter = 'grayscale(60%)';
     } catch (e) {
       console.log('no bcg');
     }
@@ -382,9 +400,9 @@ export class CreateComponent implements OnInit {
     try {
       this.lastValueFrame = imgSrc;
       console.log('light: ' + imgSrc);
-      document.getElementById('frm' + (imgSrc )).style.transform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (imgSrc ) ).style.webkitTransform = 'scale(0.9,0.9)';
-      document.getElementById('frm' + (imgSrc ) ).style.filter = 'grayscale(0%)';
+      document.getElementById('frm' + (imgSrc)).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc)).style.webkitTransform = 'scale(0.9,0.9)';
+      document.getElementById('frm' + (imgSrc)).style.filter = 'grayscale(0%)';
     } catch (e) {
       console.log('highligntframe');
     }
@@ -393,10 +411,10 @@ export class CreateComponent implements OnInit {
   downgradeFrame() {
     try {
       console.log('down' + this.lastValueFrame);
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.transform = 'scale(0.7,0.7)';
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.7,0.7)';
-      document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
-      document.getElementById('frm' + (this.lastValueFrame  ) ).style.filter = 'grayscale(60%)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('frm' + (this.lastValueFrame)).style.filter = 'grayscale(60%)';
     } catch (e) {
       console.log('no frm');
     }
@@ -407,18 +425,18 @@ export class CreateComponent implements OnInit {
       this.bcgColorDisabled = true;
       this.bcgColor = '#909090';
       this.bcgBtnDisable = false;
-      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.7,0.7)';
-      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.7,0.7)';
-      document.getElementById('img' + (this.lastValue) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-      document.getElementById('img' + (this.lastValue  ) ).style.filter = 'grayscale(60%)';
+      document.getElementById('img' + (this.lastValue)).style.transform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (this.lastValue)).style.webkitTransform = 'scale(0.7,0.7)';
+      document.getElementById('img' + (this.lastValue)).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+      document.getElementById('img' + (this.lastValue)).style.filter = 'grayscale(60%)';
       this.lastValue = imgSrc;
-      document.getElementById('img' + (this.lastValue) ).style.transform = 'scale(0.9,0.9)';
-      document.getElementById('img' + (this.lastValue) ).style.webkitTransform = 'scale(0.90,0.9)';
-      document.getElementById('img' + (this.lastValue  ) ).style.filter = 'grayscale(0%)';
+      document.getElementById('img' + (this.lastValue)).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('img' + (this.lastValue)).style.webkitTransform = 'scale(0.90,0.9)';
+      document.getElementById('img' + (this.lastValue)).style.filter = 'grayscale(0%)';
       this.base64Tmp = imgSrc;
       this.imgSrc = '' + (imgSrc + 1);
       this.imgSrcFix = this.bcgTemp[imgSrc] + '.jpg';
-      this.base64 = '../../assets/img/' + (imgSrc + 1 ) + '.png';
+      this.base64 = '../../assets/img/' + (imgSrc + 1) + '.png';
     } catch (e) {
       console.log('takebcg');
     }
@@ -446,37 +464,37 @@ export class CreateComponent implements OnInit {
     } catch (e) {
       console.log('takeframe up');
     }
-      try {
-        if (this.landscape !== 'none') {
-          imgSrc = imgSrc + 36;
-        }
-        switch ( imgSrc ) {
-          case imgSrc:
-            console.log('number' + imgSrc);
-            console.log('Array' + coordinates[imgSrc]);
-            this.paddingTop = Number(coordinates[imgSrc][0]);
-            this.paddingTopForWho = Number(coordinates[imgSrc][0]) + 10;
-            this.paddingTopForWhat = Number(coordinates[imgSrc][0]) + 20;
-            this.marginLeft[3] = coordinates[imgSrc][1];
-            this.marginRight[3] = coordinates[imgSrc][2];
-            this.bottom = coordinates[imgSrc][3];
-            if ( this.landscape === 'inline-block' ) {
-              this.paddingTopFooter = coordinates[imgSrc][3] - 15;
-            } else {
-              this.paddingTopFooter = coordinates[imgSrc][3] - 7;
-            }
-            break;
-          default:
-            this.paddingTop = 10;
-            this.paddingTopForWho = 20;
-            this.paddingTopForWhat = 30;
-            this.marginLeft[3] = 5;
-            this.marginRight[3] = 5;
-            this.bottom = 0;
-        }
-      } catch (e) {
-        console.log('no right coordintaes');
+    try {
+      if (this.landscape !== 'none') {
+        imgSrc = imgSrc + 36;
       }
+      switch (imgSrc) {
+        case imgSrc:
+          console.log('number' + imgSrc);
+          console.log('Array' + coordinates[imgSrc]);
+          this.paddingTop = Number(coordinates[imgSrc][0]);
+          this.paddingTopForWho = Number(coordinates[imgSrc][0]) + 10;
+          this.paddingTopForWhat = Number(coordinates[imgSrc][0]) + 20;
+          this.marginLeft[3] = coordinates[imgSrc][1];
+          this.marginRight[3] = coordinates[imgSrc][2];
+          this.bottom = coordinates[imgSrc][3];
+          if (this.landscape === 'inline-block') {
+            this.paddingTopFooter = coordinates[imgSrc][3] - 15;
+          } else {
+            this.paddingTopFooter = coordinates[imgSrc][3] - 7;
+          }
+          break;
+        default:
+          this.paddingTop = 10;
+          this.paddingTopForWho = 20;
+          this.paddingTopForWhat = 30;
+          this.marginLeft[3] = 5;
+          this.marginRight[3] = 5;
+          this.bottom = 0;
+      }
+    } catch (e) {
+      console.log('no right coordintaes');
+    }
   }
   /*sprawia że spinner staje się widoczny, oraz wywołuje funkcję generatePdf()*/
   generateHQualityPdf() {
@@ -486,7 +504,7 @@ export class CreateComponent implements OnInit {
   /*generuje pdf zależnie od ustawienia strony (pion/poziom)*/
   generatePdf() {
     if (this.landscape !== 'inline-block') {
-      const data =  document.getElementById('toPdf100Fix');
+      const data = document.getElementById('toPdf100Fix');
       html2canvas(data).then(canvas => {
         const imgWidth = 210;
         const pageHeight = 297;
@@ -504,7 +522,7 @@ export class CreateComponent implements OnInit {
         document.getElementById('spinner').style.display = 'none';
       });
     } else {
-      const data =  document.getElementById('toPdf100LandscapeFix');
+      const data = document.getElementById('toPdf100LandscapeFix');
       html2canvas(data).then(canvas => {
         const imgWidth = 297;
         const pageHeight = 210;
@@ -534,19 +552,19 @@ export class CreateComponent implements OnInit {
       .getHours();
     let min = '' + date
       .getMinutes();
-    if ( date.getDate() < 10) {
+    if (date.getDate() < 10) {
       day = '0' + day;
     }
-    if ( (date.getMonth() + 1 )  < 10) {
+    if ((date.getMonth() + 1) < 10) {
       monthStr = '0' + month;
     }
-    if ( (date.getHours() )  < 10) {
+    if ((date.getHours()) < 10) {
       hours = '0' + hours;
     }
-    if ( (date.getMinutes() )  < 10) {
+    if ((date.getMinutes()) < 10) {
       min = '0' + min;
     }
-    const msg =  '' + date.getFullYear() + '.' + monthStr + '.' + day + '_' + hours + ':' + min;
+    const msg = '' + date.getFullYear() + '.' + monthStr + '.' + day + '_' + hours + ':' + min;
     return msg;
   }
   /*przygotowuje plik który zostanie pobrany jako szablon dyplomu
@@ -555,21 +573,21 @@ export class CreateComponent implements OnInit {
   * pokazuje odpowieni komunikat jako snackBar*/
   createArrayToSend() {
     const msg = this.getCurrentDate();
-    this.openSnackBar( createComponentStrings.a92 + msg,  'ok' );
-    this.saveData( msg );
+    this.openSnackBar(createComponentStrings.a92 + msg, 'ok');
+    this.saveData(msg);
   }
   /*zwraca wysokość na podstawie tablicy
   * jej zadabaniem jest dynamiczne nadanie wysokości dla kontenerów prezechowujących miniaturki obrazków*/
   setHeightElement(array) {
     let divide = array.length / 5;
     let varibleHeight;
-    if ( divide > Math.round(divide)) {
+    if (divide > Math.round(divide)) {
       divide = divide + 0.5;
     }
     varibleHeight = Math.round(divide) * 10 + Math.round(divide);
-    if ( window.screen.width < 1300) {
+    if (window.screen.width < 1300) {
       varibleHeight = varibleHeight + 7;
-    } else if ( window.screen.width < 1600 && window.screen.width > 1300 ) {
+    } else if (window.screen.width < 1600 && window.screen.width > 1300) {
       varibleHeight = varibleHeight;
     }
     return varibleHeight;
@@ -586,8 +604,8 @@ export class CreateComponent implements OnInit {
       } else {
         this.landscapeOff(1);
       }
-      if ( template
-        .scheme === '30' ) {
+      if (template
+        .scheme === '30') {
         this.setScheme(30);
       } else {
         this.setScheme(50);
@@ -605,31 +623,31 @@ export class CreateComponent implements OnInit {
       this.marginRight[2] = template.marginRight[2];
       this.marginRight[1] = template.marginRight[1];
       this.marginRight[0] = template.marginRight[0];
-      this.shadowColor[0] =  template.shadowColor[0];
-      this.shadowColor[1] =  template.shadowColor[1];
-      this.shadowColor[2] =  template.shadowColor[2];
-      this.shadowColor[3] =  template.shadowColor[3];
-      this.shadowColor[4] =  template.shadowColor[4];
-      this.shadowLarge[0] =  template.shadowLarge[0];
-      this.shadowLarge[1] =  template.shadowLarge[1];
-      this.shadowLarge[2] =  template.shadowLarge[2];
-      this.shadowLarge[3] =  template.shadowLarge[3];
+      this.shadowColor[0] = template.shadowColor[0];
+      this.shadowColor[1] = template.shadowColor[1];
+      this.shadowColor[2] = template.shadowColor[2];
+      this.shadowColor[3] = template.shadowColor[3];
+      this.shadowColor[4] = template.shadowColor[4];
+      this.shadowLarge[0] = template.shadowLarge[0];
+      this.shadowLarge[1] = template.shadowLarge[1];
+      this.shadowLarge[2] = template.shadowLarge[2];
+      this.shadowLarge[3] = template.shadowLarge[3];
       this.setShadowFix(template);
-      this.fontStyle[0] =  template.fontStyle[0];
-      this.fontStyle[1] =  template.fontStyle[1];
-      this.fontStyle[2] =  template.fontStyle[2];
-      this.fontStyle[3] =  template.fontStyle[3];
-      this.fontStyle[4] =  template.fontStyle[4];
-      this.fontWeight[0] =  template.fontWeight[0];
-      this.fontWeight[1] =  template.fontWeight[1];
-      this.fontWeight[2] =  template.fontWeight[2];
-      this.fontWeight[3] =  template.fontWeight[3];
-      this.fontWeight[4] =  template.fontWeight[4];
-      this.fontVariant[0] =  template.fontVariant[0];
-      this.fontVariant[1] =  template.fontVariant[1];
-      this.fontVariant[2] =  template.fontVariant[2];
-      this.fontVariant[3] =  template.fontVariant[3];
-      this.fontVariant[4] =  template.fontVariant[4];
+      this.fontStyle[0] = template.fontStyle[0];
+      this.fontStyle[1] = template.fontStyle[1];
+      this.fontStyle[2] = template.fontStyle[2];
+      this.fontStyle[3] = template.fontStyle[3];
+      this.fontStyle[4] = template.fontStyle[4];
+      this.fontWeight[0] = template.fontWeight[0];
+      this.fontWeight[1] = template.fontWeight[1];
+      this.fontWeight[2] = template.fontWeight[2];
+      this.fontWeight[3] = template.fontWeight[3];
+      this.fontWeight[4] = template.fontWeight[4];
+      this.fontVariant[0] = template.fontVariant[0];
+      this.fontVariant[1] = template.fontVariant[1];
+      this.fontVariant[2] = template.fontVariant[2];
+      this.fontVariant[3] = template.fontVariant[3];
+      this.fontVariant[4] = template.fontVariant[4];
       try {
         this.bcgRotateX = template.bcgRotateX;
         this.bcgRotateY = template.bcgRotateY;
@@ -648,25 +666,25 @@ export class CreateComponent implements OnInit {
         console.log('no text Aling here');
       }
       this.paddingTopFooter = template.paddingTopFooter;
-      this.shadowSmall =  template.shadowSmall;
-      this.shadowSmallFooter =  template.shadowSmallFooter;
+      this.shadowSmall = template.shadowSmall;
+      this.shadowSmallFooter = template.shadowSmallFooter;
       this.letterSpacing = template.letterSpacing;
       this.letterSpacingForWho = template.letterSpacingForWho;
       this.bottom = template.bottom;
       this.imgSrcFrame = template.frame;
-      if ( this.imgSrcFrame === '../../assets/img/0.png' ) {
+      if (this.imgSrcFrame === '../../assets/img/0.png') {
         this.downgradeFrame();
-       /* this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';*/
+        /* this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';*/
       } else {
         /*this.imgMAClogoFrame = '../../assets/img/0.png';*/
         this.frmBtnDisable = false;
-        for ( let i = 0; i < this.frames.length; i++ ) {
+        for (let i = 0; i < this.frames.length; i++) {
           if (this.imgSrcFrame === this.frames[i]) {
             this.downgradeFrame();
             console.log('up: ' + i);
-            setTimeout( () => {
+            setTimeout(() => {
               this.highlightFrame(i);
-              for ( let h = 0; h < Math.floor(i / 3); h++ ) {
+              for (let h = 0; h < Math.floor(i / 3); h++) {
                 console.log('right: ' + h);
                 this.moveRightFrame();
               }
@@ -674,43 +692,43 @@ export class CreateComponent implements OnInit {
           }
         }
       }
-      if ( template.img === '' || template.img === '../../assets/img/0.png') {
+      if (template.img === '' || template.img === '../../assets/img/0.png') {
         this.downgradeBcg(this.lastValue);
-        this.imgSrcFix =  '../../assets/img/0.png';
+        this.imgSrcFix = '../../assets/img/0.png';
       } else {
         const element = template.img;
         /*this.imgSrcFix = template.img.replace('png', 'jpg' );*/
         this.bcgBtnDisable = false;
         this.bcgColor = '#ffffff';
         this.bcgColorDisabled = true;
-        for ( let i = 0; i < this.bcgTemp.length; i++ ) {
+        for (let i = 0; i < this.bcgTemp.length; i++) {
           if (element === this.bcgTemp[i] /*+ '.png'*/) {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
-            for ( let h = 0; h < Math.floor(i / 3); h++ ) {
+            for (let h = 0; h < Math.floor(i / 3); h++) {
               this.moveRight();
             }
           }
         }
       }
       this.base64Tmp = template.img;
-      for (let i = 0; i < template.arrayFontSize.length; i++ ) {
+      for (let i = 0; i < template.arrayFontSize.length; i++) {
         console.log(' ' + template.arrayFontSize[i]);
         this.arrayFontSize[i] = template.arrayFontSize[i];
       }
-      for (let i = 0; i < template.arrayFontColor.length; i++ ) {
-        this.arrayFontColor[i] =  template.arrayFontColor[i];
+      for (let i = 0; i < template.arrayFontColor.length; i++) {
+        this.arrayFontColor[i] = template.arrayFontColor[i];
       }
       this.arrayFontFamili = [template.arrayFontFamili[0], template.arrayFontFamili[1], template.arrayFontFamili[2],
-        template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
-      this.title =  template.title.replace('NEWLINE', '\n' );
-      this.forWho =  template.forWho.split('NEWLINE').join('\n');
-      this.forWhat =  template.forWhat.split('NEWLINE').join('\n');
-      this.sign1 =  template.sign1.split('NEWLINE').join('\n');
+      template.arrayFontFamili[3], template.arrayFontFamili[4], template.arrayFontFamili[5], template.arrayFontFamili[6]];
+      this.title = template.title.replace('NEWLINE', '\n');
+      this.forWho = template.forWho.split('NEWLINE').join('\n');
+      this.forWhat = template.forWhat.split('NEWLINE').join('\n');
+      this.sign1 = template.sign1.split('NEWLINE').join('\n');
       this.sign2 = template.sign2.split('NEWLINE').join('\n');
       this.sign3 = template.sign3.split('NEWLINE').join('\n');
-      this.footer = template.footer.replace('NEWLINE', '\n' );
-      if ( template.userBcgBase64.length > 0) {
+      this.footer = template.footer.replace('NEWLINE', '\n');
+      if (template.userBcgBase64.length > 0) {
         for (let i = 0; i < template.userBcgBase64.length; i++) {
           this.userImg.push(this.userImg.length);
           this.rotate.push(template.userImgRotate[i]);
@@ -726,15 +744,15 @@ export class CreateComponent implements OnInit {
         this.boolDisableUserImgFields = false;
         setTimeout(() => {
           this.setUserImgFrame(this.currImg);
-        }, 500 );
+        }, 500);
       }
       try {
-        if ( template.txtTop.length > 0) {
-          for ( let i = 0; i < template.txtTop.length; i++) {
+        if (template.txtTop.length > 0) {
+          for (let i = 0; i < template.txtTop.length; i++) {
             this.addTxtWithCustomValue(template.txtUser[i], template.txtTop[i],
               template.txtLeft[i], template.txtRight[i], template.txtSize[i], template.txtColor[i], template.txtFontFamili[i],
               template.txtStyle[i], template.txtWeight[i], template.txtVariant[i], template.txtAlign[i],
-              template.txtShadow[i],  template.txtShadowColor[i]);
+              template.txtShadow[i], template.txtShadowColor[i]);
           }
         }
       } catch (e) {
@@ -750,7 +768,7 @@ export class CreateComponent implements OnInit {
   /*resetuje wartości zmniennych i elementów widoku do wartości bazowych*/
   resetSettings() {
     try {
-      document.getElementById('base' + this.currentBaseTemplate ).style.transform = 'scale(0.9,0.9)';
+      document.getElementById('base' + this.currentBaseTemplate).style.transform = 'scale(0.9,0.9)';
       document.getElementById('base' + this.currentBaseTemplate).style.filter = 'grayscale(100%)';
     } catch (err) {
       console.log('no element');
@@ -791,8 +809,8 @@ export class CreateComponent implements OnInit {
     this.paddingTopFooter = -10;
     this.textAlign = ['center', 'center', 'center', 'center', 'center'];
     this.fontStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
-    this.fontWeight  = ['normal', 'normal', 'normal', 'normal', 'normal'];
-    this.fontVariant  = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.fontWeight = ['normal', 'normal', 'normal', 'normal', 'normal'];
+    this.fontVariant = ['normal', 'normal', 'normal', 'normal', 'normal'];
     this.paddingTop = 0;
     this.paddingTopForWho = 10;
     this.paddingTopForWhat = 20;
@@ -805,15 +823,15 @@ export class CreateComponent implements OnInit {
     this.marginRight[2] = 0;
     this.marginRight[1] = 0;
     this.marginRight[0] = 0;
-    this.bottom =  0;
-    this.imgSrcFix =  '../../assets/img/0.png';
+    this.bottom = 0;
+    this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
-    this.arrayFontSize = [ 3, 0.9, 2, 0.8, 2];
+    this.arrayFontSize = [3, 0.9, 2, 0.8, 2];
     this.arrayFontFamili = ['Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans', 'Open Sans'];
     this.arrayFontColor = ['black', 'black', 'black', 'black', 'black', 'black'];
     this.title = 'Dyplom';
-    this.forWho =  '';
-    this.forWhat =  '';
+    this.forWho = '';
+    this.forWhat = '';
     this.sign1 = 'Podpis 1\n...............\n';
     this.sign2 = 'Podpis 2\n...............\n';
     this.sign3 = 'Podpis 3\n...............\n';
@@ -835,7 +853,7 @@ export class CreateComponent implements OnInit {
     this.txtSize = [3];
     this.txtStyle = ['normal'];
     this.txtWeight = ['normal'];
-    this.txtVariant  = ['normal'];
+    this.txtVariant = ['normal'];
     this.txtAlign = ['center'];
     this.txtShadow = [0];
     this.txtShadowColor = ['#8c8e91'];
@@ -844,35 +862,36 @@ export class CreateComponent implements OnInit {
     this.txtFontFamili = ['Open Sans'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
+    this.setBaseCoordinates();
   }
   /*obsługa karuzeli z tłami, 'przejscie w lewo'*/
   moveLeft() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3 ) > 0)) {
+    const btn = document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 = document.getElementById('leftDirect') as HTMLButtonElement;
+    for (let i = 0; i < 3; i++) {
+      if ((this.arrayScroll[i] - 3 < (this.bcgTemp.length + 1)) && ((this.arrayScroll[i] - 3) > 0)) {
         document.getElementById('bcg' + (this.arrayScroll[i] - 3)).style.display = 'inline-block';
-        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0 ) {
+        if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
           document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'none';
         }
         btn.disabled = false;
-      } else if ((this.arrayScroll[i] - 3 ) < 0 ) {
+      } else if ((this.arrayScroll[i] - 3) < 0) {
         btn2.disabled = true;
       }
       this.arrayScroll[i] = this.arrayScroll[i] - 3;
     }
-    if ( this.arrayScroll[0] <= 1 ) {
+    if (this.arrayScroll[0] <= 1) {
       btn2.disabled = true;
     }
   }
   /*obsługa karuzeli z tłami, 'przejscie w prawo'*/
   moveRight() {
-    const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
+    const btn = document.getElementById('rightDirect') as HTMLButtonElement;
+    const btn2 = document.getElementById('leftDirect') as HTMLButtonElement;
+    for (let i = 0; i < 3; i++) {
       if ((this.arrayScroll[i] < (this.bcgTemp.length + 1)) && this.arrayScroll[i] > 0) {
         btn2.disabled = false;
-        if ( (this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1 )) {
+        if ((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) {
           document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
           if (((this.arrayScroll[i] + 3) < (this.bcgTemp.length + 1)) && (this.arrayScroll[i] + 3) > 0) {
             document.getElementById('bcg' + (this.arrayScroll[i] + 3)).style.display = 'inline-block';
@@ -883,39 +902,39 @@ export class CreateComponent implements OnInit {
       }
       this.arrayScroll[i] = this.arrayScroll[i] + 3;
     }
-    if ( this.arrayScroll[2] >= this.bcgTemp.length ) {
+    if (this.arrayScroll[2] >= this.bcgTemp.length) {
       btn.disabled = true;
     }
   }
   /*obsługa karuzeli z ramkami, 'przejscie w lewo'*/
   moveLeftFrame() {
-    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
-      if ((this.arrayScrollFrame[i] - 3 < (this.frames.length + 1)) && ((this.arrayScrollFrame[i] - 3 ) > 0)) {
+    const btn = document.getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 = document.getElementById('leftDirectFrame') as HTMLButtonElement;
+    for (let i = 0; i < 3; i++) {
+      if ((this.arrayScrollFrame[i] - 3 < (this.frames.length + 1)) && ((this.arrayScrollFrame[i] - 3) > 0)) {
         document.getElementById('frmBox' + (this.arrayScrollFrame[i] - 3)).style.display = 'inline-block';
-        if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0 ) {
+        if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0) {
           document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'none';
         }
         btn
           .disabled = false;
-      } else if ((this.arrayScrollFrame[i] - 3 ) < 0 ) {
+      } else if ((this.arrayScrollFrame[i] - 3) < 0) {
         btn2.disabled = true;
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] - 3;
     }
-    if ( this.arrayScrollFrame[0] <= 1 ) {
+    if (this.arrayScrollFrame[0] <= 1) {
       btn2.disabled = true;
     }
   }
   /*obsługa karuzeli z ramkami, 'przejscie w prawo'*/
   moveRightFrame() {
-    const btn =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-    const btn2 =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
-    for ( let i = 0; i < 3; i++ ) {
+    const btn = document.getElementById('rightDirectFrame') as HTMLButtonElement;
+    const btn2 = document.getElementById('leftDirectFrame') as HTMLButtonElement;
+    for (let i = 0; i < 3; i++) {
       if ((this.arrayScrollFrame[i] < (this.frames.length + 1)) && this.arrayScrollFrame[i] > 0) {
         btn2.disabled = false;
-        if ( (this.arrayScrollFrame[i] + 3) < (this.frames.length + 1 )) {
+        if ((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) {
           document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
           if (((this.arrayScrollFrame[i] + 3) < (this.frames.length + 1)) && (this.arrayScrollFrame[i] + 3) > 0) {
             document.getElementById('frmBox' + (this.arrayScrollFrame[i] + 3)).style.display = 'inline-block';
@@ -926,7 +945,7 @@ export class CreateComponent implements OnInit {
       }
       this.arrayScrollFrame[i] = this.arrayScrollFrame[i] + 3;
     }
-    if ( this.arrayScrollFrame[2] >= this.frames.length ) {
+    if (this.arrayScrollFrame[2] >= this.frames.length) {
       btn.disabled = true;
     }
   }
@@ -943,11 +962,11 @@ export class CreateComponent implements OnInit {
     this.imgWidthDragAndDrop[this.currImg] = 0;
     this.imgHeight[this.currImg] = 10;
     const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-    let prop =  img.naturalWidth;
+    let prop = img.naturalWidth;
     prop = prop / img.naturalHeight;
     let multipleHeight;
     let multipleWidth;
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
       multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
     } else {
@@ -959,8 +978,8 @@ export class CreateComponent implements OnInit {
   }
   /*obsługa przejścia w 'prawo' (nastepny krok)*/
   right(n) {
-    const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
-    const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
+    const btn = document.getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 = document.getElementById('btnRight') as HTMLButtonElement;
     this.bcgDisplay[n] = 'none';
     this.bcgDisplay[n + 1] = 'block';
     this.currentStep = this.currentStep + 1;
@@ -975,11 +994,11 @@ export class CreateComponent implements OnInit {
   }
   /*obsługa przejścia w 'lewo' (poprzedni krok)*/
   left(n) {
-    const btn =  document.getElementById('btnLeft') as HTMLButtonElement;
-    const btn2 =  document.getElementById('btnRight') as HTMLButtonElement;
+    const btn = document.getElementById('btnLeft') as HTMLButtonElement;
+    const btn2 = document.getElementById('btnRight') as HTMLButtonElement;
     this.bcgDisplay[n] = 'none';
     this.bcgDisplay[n - 1] = 'block';
-    this.currentStep = this.currentStep  - 1;
+    this.currentStep = this.currentStep - 1;
     if (n === 1) {
       this.bool = 'block';
     }
@@ -992,40 +1011,40 @@ export class CreateComponent implements OnInit {
   /*zresetowanie elementów niezbednych do poprawnego wyświetlania karuzel z tłami i ramkami po zmianie*/
   arrayScrollReset() {
     try {
-      const btn =  document.getElementById('rightDirect') as HTMLButtonElement;
-      const btn2 =  document.getElementById('leftDirect') as HTMLButtonElement;
-      const btnfrm =  document.getElementById('rightDirectFrame') as HTMLButtonElement;
-      const btn2frm =  document.getElementById('leftDirectFrame') as HTMLButtonElement;
+      const btn = document.getElementById('rightDirect') as HTMLButtonElement;
+      const btn2 = document.getElementById('leftDirect') as HTMLButtonElement;
+      const btnfrm = document.getElementById('rightDirectFrame') as HTMLButtonElement;
+      const btn2frm = document.getElementById('leftDirectFrame') as HTMLButtonElement;
       btn.disabled = false;
       btn2.disabled = true;
       btnfrm.disabled = false;
       btn2frm.disabled = true;
       console.log(':::: ' + this.arrayScroll + ' : ' + this.bcgTemp.length);
       console.log(':::: ' + this.arrayScroll + ' : ' + this.bcgTemp.length);
-      if ( this.arrayScroll[2] === this.bcgTemp.length ||
+      if (this.arrayScroll[2] === this.bcgTemp.length ||
         (this.arrayScroll[2]) > this.bcgTemp.length ||
-        (this.arrayScroll[2] - 1 ) === this.bcgTemp.length) {
+        (this.arrayScroll[2] - 1) === this.bcgTemp.length) {
         console.log('.....' + this.arrayScroll[2] + ' : ' + this.bcgTemp.length);
         this.moveLeft();
       }
-        for (let i = 0; i < 3; i++) {
-          document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
-          document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
-          console.log('b: ' + this.arrayScrollFrame[i]);
-        }
-      } catch (e) {
-        console.log('arrayScrollReset none');
+      for (let i = 0; i < 3; i++) {
+        document.getElementById('bcg' + this.arrayScroll[i]).style.display = 'none';
+        document.getElementById('frmBox' + this.arrayScrollFrame[i]).style.display = 'none';
+        console.log('b: ' + this.arrayScrollFrame[i]);
       }
-      try {
-        this.arrayScroll = [1, 2, 3];
-        this.arrayScrollFrame = [1, 2, 3];
-        for (let i = 0; i < 3; i++) {
-          document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'inline-block';
-          document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'inline-block';
-        }
-      } catch (e) {
-        console.log('arrayScrollReset inline-block');
+    } catch (e) {
+      console.log('arrayScrollReset none');
+    }
+    try {
+      this.arrayScroll = [1, 2, 3];
+      this.arrayScrollFrame = [1, 2, 3];
+      for (let i = 0; i < 3; i++) {
+        document.getElementById('bcg' + (this.arrayScroll[i])).style.display = 'inline-block';
+        document.getElementById('frmBox' + (this.arrayScrollFrame[i])).style.display = 'inline-block';
       }
+    } catch (e) {
+      console.log('arrayScrollReset inline-block');
+    }
   }
   /*włącza jeśli parametr n =/= 2 orientację poziomą, wyłącza jeśli parametr = 2 orientację pionową*/
   landscapeOff(n) {
@@ -1036,11 +1055,12 @@ export class CreateComponent implements OnInit {
       document.getElementById('imgO2').style.transform = 'rotate(90deg) scale(1, 1)';
       document.getElementById('imgO1').style.transform = 'scale(.9, .9)';
       const width = document.getElementById('toPdf100').offsetWidth;
-      console.log(': ' + ( 794 / width) );
-      this.multiple = (794 / width );
+      console.log(': ' + (794 / width));
+      this.multiple = (794 / width);
       this.createFramesArray(this.frame1, this.frame2);
       this.arrayScrollReset();
       this.resetSettings();
+      this.setBaseCoordinates();
     } else {
       this.arrayScrollReset();
       this.resetSettings();
@@ -1056,10 +1076,11 @@ export class CreateComponent implements OnInit {
       this.createFramesArray(this.frame2, this.frame1);
       this.bottom = 14;
       this.paddingTopFooter = -1;
-      setTimeout( () => {
+      this.setBaseCoordinates();
+      setTimeout(() => {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
-        console.log(': ' + ( 794 / width) );
-        this.multiple = (794 / width );
+        console.log(': ' + (794 / width));
+        this.multiple = (794 / width);
       }, 300);
     }
   }
@@ -1104,10 +1125,10 @@ export class CreateComponent implements OnInit {
       /*document.getElementById('scheme50').style.transform = 'scale(0.9,0.9)';
       document.getElementById('scheme30').style.transform = 'scale(1,1)';*/
       document.getElementById('sign3').style.display = 'inline-block';
-     /* document.getElementById('scheme50').style.filter = 'grayscale(100%)';
-      document.getElementById('scheme30').style.filter = 'grayscale(0%)';
-      document.getElementById('scheme30').style.opacity = '1';
-      document.getElementById('scheme50').style.opacity = '0.5';*/
+      /* document.getElementById('scheme50').style.filter = 'grayscale(100%)';
+       document.getElementById('scheme30').style.filter = 'grayscale(0%)';
+       document.getElementById('scheme30').style.opacity = '1';
+       document.getElementById('scheme50').style.opacity = '0.5';*/
       this.scheme = 30;
     }
   }
@@ -1117,7 +1138,7 @@ export class CreateComponent implements OnInit {
     this.boolDisableUserImgFields = false;
     this.userImg.push(this.userImg.length);
     this.rotate.push(0);
-    if (top !== undefined ) {
+    if (top !== undefined) {
       this.imgTop.push(top);
       this.imgLeft.push(left);
       this.imgWidthDragAndDrop.push(left);
@@ -1133,11 +1154,11 @@ export class CreateComponent implements OnInit {
     this.imgWidth.push(10);
     setTimeout(() => {
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-      let prop =  img.naturalWidth;
+      let prop = img.naturalWidth;
       prop = prop / img.naturalHeight;
       let multipleHeight;
       let multipleWidth;
-      if ( (this.landscape === 'inline-block') ) {
+      if ((this.landscape === 'inline-block')) {
         multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
         multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
       } else {
@@ -1149,7 +1170,7 @@ export class CreateComponent implements OnInit {
       setTimeout(() => {
         this.setUserImgFrame(this.currImg);
       }, 500);
-    }, 300 );
+    }, 300);
   }
   /*usuwa aktualnie wybrany obrazek*/
   removeImg() {
@@ -1174,7 +1195,7 @@ export class CreateComponent implements OnInit {
     this.staticTransformY.splice(this.currImg, 1);
     this.currImg = this.userImg.length - 1;
     this.setUserImgFrame(this.currImg);
-    if ( this.currImg === -1 ) {
+    if (this.currImg === -1) {
       this.boolDisableUserImgFields = true;
     }
   }
@@ -1188,14 +1209,14 @@ export class CreateComponent implements OnInit {
   }
   /*zapisuje plik szablonu na dysku z rozszerzeniem MACproject*/
   saveData(date) {
-    const blob = new Blob( [this.createFileToSave()], {type: 'text/json'});
-    const result = fileSaver.saveAs(blob, date + '_' + this.forWho +   '.MACproject');
+    const blob = new Blob([this.createFileToSave()], { type: 'text/json' });
+    const result = fileSaver.saveAs(blob, date + '_' + this.forWho + '.MACproject');
     return result.readyState;
   }
   /*na podstawie tablicy przekazanej jako argument tworzy fragment JSON'a*/
   createTextToJSON(name): String {
     let txt = '';
-    for ( let i = 0; i < name.length; i ++) {
+    for (let i = 0; i < name.length; i++) {
       if (i !== name.length - 1) {
         txt = txt + '"' + name[i] + '", ';
       } else {
@@ -1235,9 +1256,9 @@ export class CreateComponent implements OnInit {
       + '"textAlign" : [ '
       + this.createTextToJSON(this.textAlign) + '],'
       + '"shadowSmall" : "'
-      +  this.shadowSmall + '", '
+      + this.shadowSmall + '", '
       + '"shadowSmallFooter" : "'
-      +  this.shadowSmallFooter + '", '
+      + this.shadowSmallFooter + '", '
       + '"letterSpacing" : "'
       + this.letterSpacing + '", '
       + '"letterSpacingForWho" : "'
@@ -1247,13 +1268,13 @@ export class CreateComponent implements OnInit {
       + this.paddingTopForWho + '", "'
       + this.paddingTopForWhat + '" ], '
       + '"img" : "'
-      +  this.imgSrcFix.replace('jpg', 'png' ) + '", '
+      + this.imgSrcFix.replace('jpg', 'png') + '", '
       + '"bcgColor" : "'
       + this.bcgColor + '", '
       + '"landscape" : "'
       + this.landscape + '", '
       + '"title" : "'
-      + this.title.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '", '
+      + this.title.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
       + '"forWho" : "'
       + this.forWho.replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '", '
       + '"forWhat" : "'
@@ -1295,7 +1316,7 @@ export class CreateComponent implements OnInit {
       + '"txtAlign" : [ '
       + this.createTextToJSON(this.txtAlign) + '],'
       + '"txtUser" : [ '
-      + this.createTextToJSON(this.userTxt).replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE' ) + '],'
+      + this.createTextToJSON(this.userTxt).replace(/(\r\n\t|\n|\r\t)/gm, 'NEWLINE') + '],'
       + '"txtColor" : [ '
       + this.createTextToJSON(this.txtColor) + '],'
       + '"txtFontFamili" : [ '
@@ -1316,13 +1337,13 @@ export class CreateComponent implements OnInit {
     this.bcgTemp = [];
     this.frame2 = [];
     this.frame1 = [];
-    for ( let i = 1; i < 27; i++ ) {
-      this.bcgTemp.push('../../assets/img/bcg/' + i );
+    for (let i = 1; i < 27; i++) {
+      this.bcgTemp.push('../../assets/img/bcg/' + i);
     }
-    for ( let i = 1; i < 37; i++ ) {
+    for (let i = 1; i < 37; i++) {
       this.frame1.push('../../assets/img/frame/' + i + '.png');
     }
-    for ( let i = 37; i < 61; i++ ) {
+    for (let i = 37; i < 61; i++) {
       this.frame2.push('../../assets/img/frame2/' + i + '.png');
     }
     this.createFramesArray(this.frame1, this.frame2);
@@ -1334,11 +1355,11 @@ export class CreateComponent implements OnInit {
       reader.readAsText(event.target.files[0]);
       let txt: any;
       document.getElementById('spinner').style.display = 'block';
-      reader.onload = ()  => {
+      reader.onload = () => {
         this.downgradeFrame();
         this.downgradeBcg(this.lastValue);
         this.resetBcgFrameArray();
-        setTimeout( () => {
+        setTimeout(() => {
           this.arrayScrollReset();
           txt = reader.result;
           this.jsonToArray(txt);
@@ -1390,9 +1411,9 @@ export class CreateComponent implements OnInit {
     this.imgSrcFix = '../../assets/img/0.png';
     this.base64Tmp = '';
     this.bcgColor = '#ffffff';
-    document.getElementById('img' + (this.lastValue ) ).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
-    document.getElementById('img' + (this.lastValue ) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('img' + (this.lastValue ) ).style.border = '1px solid #959895';
+    document.getElementById('img' + (this.lastValue)).style.boxShadow = '0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('img' + (this.lastValue)).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('img' + (this.lastValue)).style.border = '1px solid #959895';
   }
   /*resetuje ramkę
   * wycisza poprzednio wybraną ramkę
@@ -1404,13 +1425,14 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = true;
     this.imgSrcFrame = '../../assets/img/0.png';
     /*this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';*/
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
-    document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    document.getElementById('frm' + (this.lastValueFrame)).style.webkitTransform = 'scale(0.8,0.8)';
+    document.getElementById('frm' + (this.lastValueFrame)).style.border = 'white 1px solid';
+    document.getElementById('frm' + (this.lastValueFrame)).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    this.setBaseCoordinates();
   }
   /*funkcja uzupełnia tablice odpowienimi danymi, tworząc dodatkowe pole tekstowe*/
   addTxt() {
-    if ( this.currentTxt === -1 ) {
+    if (this.currentTxt === -1) {
       this.hidebox = false;
     }
     this.actualTxt = '';
@@ -1435,7 +1457,7 @@ export class CreateComponent implements OnInit {
   }
   /*Włącza lub wyłącza cień pod elementem, zależne od aktualnej wartości każdego pola*/
   shadowOnOffForUserTextField(): Number {
-    if ( this.txtShadow[this.currentTxt] > 0) {
+    if (this.txtShadow[this.currentTxt] > 0) {
       this.txtShadow[this.currentTxt] = 0;
     } else {
       this.txtShadow[this.currentTxt] = 4;
@@ -1444,17 +1466,17 @@ export class CreateComponent implements OnInit {
   }
   /*ustawia kolory pryzisków Pogrubienie/Pochylenie/... dla dodatkowych pól tekstowych*/
   setUserTxtFiledProperty(n) {
-    if ( this.txtWeight[n] === 'normal' ) {
+    if (this.txtWeight[n] === 'normal') {
       this.setWhiteColor('fontWeight5');
     } else {
       this.setBlueColor('fontWeight5');
     }
-    if ( this.txtStyle[n] === 'normal' ) {
+    if (this.txtStyle[n] === 'normal') {
       this.setWhiteColor('fontStyle5');
     } else {
       this.setBlueColor('fontStyle5');
     }
-    if ( this.txtVariant[n] === 'normal' ) {
+    if (this.txtVariant[n] === 'normal') {
       this.setWhiteColor('fontVariant5');
     } else {
       this.setBlueColor('fontVariant5');
@@ -1464,7 +1486,7 @@ export class CreateComponent implements OnInit {
   }
   /*dodaje pole tekstowe z wartościami podanymi jako argumenty*/
   addTxtWithCustomValue(actualTxt, top, left, right, size, color, fontfamili, style, weight, variant, align, shadow, shadowColor) {
-    if ( this.currentTxt === -1 ) {
+    if (this.currentTxt === -1) {
       this.hidebox = false;
     }
     this.actualTxt = actualTxt.split('NEWLINE').join('\n');
@@ -1491,24 +1513,24 @@ export class CreateComponent implements OnInit {
   /*ustawia czcionkę dla jednego z głównego elementu (tytuł/dla kogo/za co/podpisy/stopka)*/
   setFontFamiliForMainField(n, m) {
     this.arrayFontFamili[m] = this.arraySelectFontFamili[n];
-    if (m === 3 ) {
+    if (m === 3) {
       this.arrayFontFamili[4] = this.arraySelectFontFamili[n];
       this.arrayFontFamili[5] = this.arraySelectFontFamili[n];
     }
-    setTimeout( () => {
+    setTimeout(() => {
       if (n === 0) {
         this.checkWidthWithCenter(0);
       } else if (n === 1) {
         this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
+      } else if (n === 2) {
         this.checkWidthWithCenter(2);
       }
     }, 300);
   }
   /*włącza/wyłacza cień dla elementu głównego, zależne od poprzedniej wartości pola*/
   shadowOnOff(n, m) {
-    if ( m === 0 ) {
-      if ( this.shadowLarge[n] === '4px 4px 4px' ) {
+    if (m === 0) {
+      if (this.shadowLarge[n] === '4px 4px 4px') {
         this.shadowLarge[n] = '0px 0px';
         this.shadowLargeFix[n] = '0px 0px';
       } else {
@@ -1516,8 +1538,8 @@ export class CreateComponent implements OnInit {
         this.shadowLargeFix[n] = '20px 20px 20px';
       }
     } else {
-      if ( n === 1 ) {
-        if ( this.shadowSmallFooter === '2px 2px 2px' ) {
+      if (n === 1) {
+        if (this.shadowSmallFooter === '2px 2px 2px') {
           this.shadowSmallFooter = '0px 0px';
           this.shadowSmallFixFooter = '0px 0px';
         } else {
@@ -1525,7 +1547,7 @@ export class CreateComponent implements OnInit {
           this.shadowSmallFixFooter = '10px 10px 10px';
         }
       } else {
-        if ( this.shadowSmall === '2px 2px 2px' ) {
+        if (this.shadowSmall === '2px 2px 2px') {
           this.shadowSmall = '0px 0px';
           this.shadowSmallFix = '0px 0px';
         } else {
@@ -1537,20 +1559,20 @@ export class CreateComponent implements OnInit {
   }
   /*ustala na podstawie parametru temp cień dla elementu tytuł/dla kogo/za co/podpisy/stopka*/
   setShadowFix(temp) {
-    for (let i = 0; i < temp.shadowLarge.length; i++ ) {
-      if ( temp.shadowLarge[i] === '4px 4px 4px' ) {
+    for (let i = 0; i < temp.shadowLarge.length; i++) {
+      if (temp.shadowLarge[i] === '4px 4px 4px') {
         this.shadowLargeFix[i] = '20px 20px 20px';
       } else {
         this.shadowLargeFix[i] = '0px 0px';
       }
     }
-    if ( temp.shadowSmall === '2px 2px 2px' ) {
+    if (temp.shadowSmall === '2px 2px 2px') {
       this.shadowSmallFix = '10px 10px 10px';
     } else {
       this.shadowSmallFix = '0px 0px';
     }
     try {
-      if ( temp.shadowSmallFooter === '2px 2px 2px' ) {
+      if (temp.shadowSmallFooter === '2px 2px 2px') {
         this.shadowSmallFixFooter = '10px 10px 10px';
       } else {
         this.shadowSmallFixFooter = '0px 0px';
@@ -1568,12 +1590,12 @@ export class CreateComponent implements OnInit {
       this.fontStyle[n] = 'italic';
     }
     this.setButtonColor('fontStyle' + n);
-    setTimeout( () => {
+    setTimeout(() => {
       if (n === 0) {
         this.checkWidthWithCenter(0);
       } else if (n === 1) {
         this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
+      } else if (n === 2) {
         this.checkWidthWithCenter(2);
       }
     }, 300);
@@ -1670,12 +1692,12 @@ export class CreateComponent implements OnInit {
       this.fontWeight[n] = 'bold';
     }
     this.setButtonColor('fontWeight' + n);
-    setTimeout( () => {
+    setTimeout(() => {
       if (n === 0) {
         this.checkWidthWithCenter(0);
       } else if (n === 1) {
         this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
+      } else if (n === 2) {
         this.checkWidthWithCenter(2);
       }
     }, 300);
@@ -1689,12 +1711,12 @@ export class CreateComponent implements OnInit {
       this.fontVariant[n] = 'small-caps';
     }
     this.setButtonColor('fontVariant' + n);
-    setTimeout( () => {
+    setTimeout(() => {
       if (n === 0) {
         this.checkWidthWithCenter(0);
       } else if (n === 1) {
         this.checkWidthWithCenter(1);
-      } else if (n === 2 ) {
+      } else if (n === 2) {
         this.checkWidthWithCenter(2);
       }
     }, 300);
@@ -1705,11 +1727,11 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignRight' + n);
     this.setWhiteColor('alignCenter' + n);
     this.setBlueColor('alignLeft' + n);
-    if ( n === 2 ) {
+    if (n === 2) {
       this.checkWidth(2);
-    } else if ( n === 1) {
+    } else if (n === 1) {
       this.checkWidth(1);
-    } else if ( n === 0) {
+    } else if (n === 0) {
       this.checkWidth(0);
     }
   }
@@ -1719,18 +1741,18 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignRight' + n);
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignCenter' + n);
-    if ( n === 2 ) {
+    if (n === 2) {
       this.checkWidth(2);
-    } else if ( n === 1 ) {
+    } else if (n === 1) {
       this.checkWidth(1);
-    } else if ( n === 0 ) {
+    } else if (n === 0) {
       this.checkWidth(0);
     }
   }
   /*ustwia kolor pryzisku
   * zależy od aktualnego koloru przycisku*/
   setButtonColor(n) {
-    if ( document.getElementById(n).style.background === 'white' || document.getElementById(n).style.background === '') {
+    if (document.getElementById(n).style.background === 'white' || document.getElementById(n).style.background === '') {
       document.getElementById(n).style.background = this.MACblue;
       document.getElementById(n).style.color = 'white';
     } else {
@@ -1771,7 +1793,7 @@ export class CreateComponent implements OnInit {
           this.setWhiteColor('alignLeft' + i);
           this.setWhiteColor('alignRight' + i);
           this.setBlueColor('alignCenter' + i);
-        } else if (this.textAlign[i] === 'left' ) {
+        } else if (this.textAlign[i] === 'left') {
           this.setBlueColor('alignLeft' + i);
           this.setWhiteColor('alignRight' + i);
           this.setWhiteColor('alignCenter' + i);
@@ -1789,22 +1811,22 @@ export class CreateComponent implements OnInit {
     this.setWhiteColor('alignCenter' + n);
     this.setWhiteColor('alignLeft' + n);
     this.setBlueColor('alignRight' + n);
-    if ( n === 2 ) {
+    if (n === 2) {
       this.checkWidth(2);
-    } else if ( n === 1) {
+    } else if (n === 1) {
       this.checkWidth(1);
-    } else if ( n === 0) {
+    } else if (n === 0) {
       this.checkWidth(0);
     }
   }
   /*ustawiwa wartości maksymalne dla slajderów*/
   setProportion() {
     const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-    let prop =  img.naturalWidth;
+    let prop = img.naturalWidth;
     prop = prop / img.naturalHeight;
     let multipleHeight;
     let multipleWidth;
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
       multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
     } else {
@@ -1874,7 +1896,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getSport2Img(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1886,7 +1908,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getSportImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1897,7 +1919,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getGeografiaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1909,7 +1931,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1922,7 +1944,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getMatematykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1934,7 +1956,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getMuzykaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1946,7 +1968,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getRoslinyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1958,7 +1980,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getPolskaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1970,7 +1992,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getSwietaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1982,7 +2004,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getSzachyImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -1994,7 +2016,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getZwierzetaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -2006,7 +2028,7 @@ export class CreateComponent implements OnInit {
       this._dataService.getLiteraturaImg(n)
         .subscribe(sport => {
           this.userImgBase64.push(sport);
-          if ( top !== undefined ) {
+          if (top !== undefined) {
             this.add(top, left);
           } else {
             this.add();
@@ -2034,25 +2056,25 @@ export class CreateComponent implements OnInit {
   /*ustawia maksymalne wartości dla slajderów*/
   public checkWidth(n) {
     let percent;
-    if ( (this.landscape === 'inline-block') ) {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+    if ((this.landscape === 'inline-block')) {
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     } else {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n]).offsetWidth /
         document.getElementById('toPdf100').offsetWidth * 100);
     }
-    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+    let width = (document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+    if ((this.landscape === 'inline-block')) {
+      width = (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     }
     console.log('margin l: ' + this.marginLeft +
-      ' Width: ' + width + '   percent: ' + percent + ' stete: ' + this.marginLeft[n] +  width);
+      ' Width: ' + width + '   percent: ' + percent + ' stete: ' + this.marginLeft[n] + width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
-    if ( (width) > 100 || widthRight > 100 ) {
+    if ((width) > 100 || widthRight > 100) {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
     }
@@ -2064,34 +2086,34 @@ export class CreateComponent implements OnInit {
   checkWidthWithCenter(n) {
     let percent;
     let i = 1;
-    if ( (this.landscape === 'inline-block') ) {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+    if ((this.landscape === 'inline-block')) {
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     } else {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n]).offsetWidth /
         document.getElementById('toPdf100').offsetWidth * 100);
     }
     this.percentLeft[n] = Math.round(percent - 5);
     this.percentRight[n] = Math.round(percent - 5);
-    let width  = ( document.getElementById(this.arrayFontNameId[n]).offsetWidth /
+    let width = (document.getElementById(this.arrayFontNameId[n]).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      width  = ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
+    if ((this.landscape === 'inline-block')) {
+      width = (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     }
-    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] +  width);
+    console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + this.marginLeft[n] + width);
     width = Number(this.marginLeft[n]) + width;
     const widthRight = Number(this.marginRight[n]) + width;
     console.log(this.marginLeft + ' : ' + width + '   % ' + percent + 'stete: ' + width);
-    if ( (width) > 98 || widthRight > 98 ) {
+    if ((width) > 98 || widthRight > 98) {
       this.marginLeft[n] = 0;
       this.marginRight[n] = 0;
       i = 0;
     }
-    percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+    percent = 100 - (document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+    if ((this.landscape === 'inline-block')) {
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
         document.getElementById('toPdf100Landscape').offsetHeight * 100);
     }
     this.percentHeight[n] = Math.round(percent - 5);
@@ -2100,10 +2122,10 @@ export class CreateComponent implements OnInit {
   }
   /*ustaiwa wartości maksymalne slajderów odnoszące się do wysokości*/
   setHeightPercent(n) {
-    let percent = 100 - ( document.getElementById(this.arrayFontNameId[n]).offsetHeight /
+    let percent = 100 - (document.getElementById(this.arrayFontNameId[n]).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      percent = 100 - ( document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
+    if ((this.landscape === 'inline-block')) {
+      percent = 100 - (document.getElementById(this.arrayFontNameId[n] + 'Landscape').offsetHeight /
         document.getElementById('toPdf100Landscape').offsetHeight * 100);
     }
     this.percentHeight[n] = Math.round(percent - 1);
@@ -2114,34 +2136,34 @@ export class CreateComponent implements OnInit {
     console.log('font1' + this.currentTxt);
     const rightSlider = document.getElementById('additionalRight') as HTMLInputElement;
     const leftSlider = document.getElementById('additionalLeft') as HTMLInputElement;
-    let percent = 100 - ( document.getElementById('font1' + this.currentTxt).offsetWidth /
+    let percent = 100 - (document.getElementById('font1' + this.currentTxt).offsetWidth /
       document.getElementById('toPdf100').offsetWidth * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      percent = 100 - ( document.getElementById('font2' + this.currentTxt).offsetWidth /
+    if ((this.landscape === 'inline-block')) {
+      percent = 100 - (document.getElementById('font2' + this.currentTxt).offsetWidth /
         document.getElementById('toPdf100Landscape').offsetWidth * 100);
     }
-    let percentTop = 100 - ( document.getElementById('font1' + this.currentTxt).offsetHeight /
+    let percentTop = 100 - (document.getElementById('font1' + this.currentTxt).offsetHeight /
       document.getElementById('toPdf100').offsetHeight * 100);
-    if ( (this.landscape === 'inline-block') ) {
-      percentTop = 100 - ( document.getElementById('font2' + this.currentTxt).offsetHeight /
+    if ((this.landscape === 'inline-block')) {
+      percentTop = 100 - (document.getElementById('font2' + this.currentTxt).offsetHeight /
         document.getElementById('toPdf100Landscape').offsetHeight * 100);
     }
-    console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' +  document.getElementById('toPdf100').offsetWidth);
+    console.log(document.getElementById('font1' + this.currentTxt).offsetWidth + ' : ' + document.getElementById('toPdf100').offsetWidth);
     this.maxWidthUserTxtFieldTop = Math.round(percentTop - 1);
     this.maxWidthUserTxtFieldRight = Math.round(percent - 5);
     rightSlider.max = '' + Math.round(percent - 5);
     leftSlider.max = '' + Math.round(percent - 5);
-    console.log('margines' + this.maxWidthUserTxtFieldTop );
-    console.log('' + this.currentTxt );
-    console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
-    if ( this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
-      console.log('txtR: ' +  this.txtLeft[this.currentTxt] + ' max: ' +  this.maxWidthUserTxtFieldRight);
+    console.log('margines' + this.maxWidthUserTxtFieldTop);
+    console.log('' + this.currentTxt);
+    console.log('txtR: ' + this.txtLeft[this.currentTxt] + ' max: ' + this.maxWidthUserTxtFieldRight);
+    if (this.txtLeft[this.currentTxt] > this.maxWidthUserTxtFieldRight) {
+      console.log('txtR: ' + this.txtLeft[this.currentTxt] + ' max: ' + this.maxWidthUserTxtFieldRight);
       this.txtLeft[this.currentTxt] = 0;
     }
     return Math.round(percent - 5);
   }
   setUserImgFrame(n) {
-    for (let i = 0; i <  this.imgHeight.length; i ++ ) {
+    for (let i = 0; i < this.imgHeight.length; i++) {
       console.log(i);
       console.log(n);
       if (i === n) {
@@ -2159,14 +2181,14 @@ export class CreateComponent implements OnInit {
       }
     }
   }
- public test() {
+  public test() {
     return 0;
   }
   /*obsługa znikania i pojawiania się przycisków od przechodzenia między krokami*/
   checkDirectButtonValue(n, stepperIndex) {
     console.log('stepperValue: ' + stepperIndex);
     console.log('n: ' + n);
-    if ( stepperIndex === 4 ) {
+    if (stepperIndex === 4) {
       this.btnDirectRightDisabled = true;
       document.getElementById('btnDirectRight').style.right = '-200px';
       document.getElementById('btnDirectRight').style.opacity = '0';
@@ -2178,7 +2200,7 @@ export class CreateComponent implements OnInit {
       document.getElementById('btnDirectRight').style.opacity = '1';
       this.editBoxShow = 'none';
     }
-    if (  stepperIndex === 0 ) {
+    if (stepperIndex === 0) {
       this.btnDirectLeftDisabled = true;
       document.getElementById('btnDirectLeft').style.left = '-200px';
       document.getElementById('btnDirectLeft').style.opacity = '0';
@@ -2190,14 +2212,14 @@ export class CreateComponent implements OnInit {
   }
   /*obsługa zmiany szerokości obrazka z zachowaniem proporcji*/
   imageResizeWithProportionsWidth() {
-    if ( this.checkboxSizeAttach ) {
+    if (this.checkboxSizeAttach) {
       this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-      let prop =  img.naturalHeight;
+      let prop = img.naturalHeight;
       prop = prop / img.naturalWidth;
       let multipleHeight;
       let multipleWidth;
-      if ( (this.landscape === 'inline-block') ) {
+      if ((this.landscape === 'inline-block')) {
         multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
         multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
       } else {
@@ -2205,15 +2227,15 @@ export class CreateComponent implements OnInit {
         multipleWidth = document.getElementById('pdfFor').offsetWidth;
       }
       const propPdfFor = multipleWidth / multipleHeight;
-      if ( this.imgWidth[this.currImg] * prop * propPdfFor > 100 ) {
+      if (this.imgWidth[this.currImg] * prop * propPdfFor > 100) {
         this.imgHeight[this.currImg] = 100;
-        prop =  img.naturalWidth;
+        prop = img.naturalWidth;
         prop = prop / img.naturalHeight;
         this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
       } else {
         this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
       }
-      if ((Number(this.imgHeight[this.currImg]) + Number(this.imgHeightDragAndDrop[this.currImg]))  > 101 ) {
+      if ((Number(this.imgHeight[this.currImg]) + Number(this.imgHeightDragAndDrop[this.currImg])) > 101) {
         this.resetUserImgTransition();
       }
     }
@@ -2234,14 +2256,14 @@ export class CreateComponent implements OnInit {
   }
   /*obsługa zmiany wysokości obrazka z zachowaniem proporcji*/
   imageResizeWithProportionsHeight() {
-    if ( this.checkboxSizeAttach ) {
+    if (this.checkboxSizeAttach) {
       this.checkboxSizeAttachValue = this.imgWidth[this.currImg] - 10;
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-      let prop =  img.naturalWidth;
+      let prop = img.naturalWidth;
       prop = prop / img.naturalHeight;
       let multipleHeight;
       let multipleWidth;
-      if ( (this.landscape === 'inline-block') ) {
+      if ((this.landscape === 'inline-block')) {
         multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
         multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
       } else {
@@ -2249,15 +2271,15 @@ export class CreateComponent implements OnInit {
         multipleWidth = document.getElementById('pdfFor').offsetWidth;
       }
       const propPdfFor = multipleWidth / multipleHeight;
-      if ( this.imgHeight[this.currImg] * prop / propPdfFor > 100) {
+      if (this.imgHeight[this.currImg] * prop / propPdfFor > 100) {
         this.imgWidth[this.currImg] = 100;
-        prop =  img.naturalHeight;
+        prop = img.naturalHeight;
         prop = prop / img.naturalWidth;
         this.imgHeight[this.currImg] = this.imgWidth[this.currImg] * prop * propPdfFor;
       } else {
         this.imgWidth[this.currImg] = this.imgHeight[this.currImg] * prop / propPdfFor;
       }
-      if ((Number(this.imgWidth[this.currImg]) + Number(this.imgWidthDragAndDrop[this.currImg]))  > 101 ) {
+      if ((Number(this.imgWidth[this.currImg]) + Number(this.imgWidthDragAndDrop[this.currImg])) > 101) {
         this.resetUserImgTransition();
       }
     }
@@ -2265,14 +2287,14 @@ export class CreateComponent implements OnInit {
   /*służy do ustawienia proporcji obrazka
   * wywoływany za pomoca dyrektywy (load)*/
   chcekProportions() {
-    if ( this.onLoadBool ) {
+    if (this.onLoadBool) {
       console.log('check' + this.onLoadBool);
       const img = document.getElementById('imgToChange2' + this.currImg) as HTMLImageElement;
-      let prop =  img.naturalWidth;
+      let prop = img.naturalWidth;
       prop = prop / img.naturalHeight;
       let multipleHeight;
       let multipleWidth;
-      if ( (this.landscape === 'inline-block') ) {
+      if ((this.landscape === 'inline-block')) {
         multipleHeight = document.getElementById('pdfForlandscape').offsetHeight;
         multipleWidth = document.getElementById('pdfForlandscape').offsetWidth;
       } else {
@@ -2292,7 +2314,7 @@ export class CreateComponent implements OnInit {
     this._dataService.getTemplates()
       .subscribe(tmp => {
         for (let i = 0; i < tmp[0].fonts.length; i++) {
-          console.log( tmp[0].fonts[i] );
+          console.log(tmp[0].fonts[i]);
         }
       });
 
@@ -2326,7 +2348,7 @@ export class CreateComponent implements OnInit {
   changeZindex() {
     let id = 'imgToChange22';
     let id2 = 'imgToChange2';
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       id = 'imgToChange44';
       id2 = 'imgToChange4';
     }
@@ -2338,7 +2360,7 @@ export class CreateComponent implements OnInit {
   changeZindexDown() {
     let id = 'imgToChange22';
     let id2 = 'imgToChange2';
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       id = 'imgToChange44';
       id2 = 'imgToChange4';
     }
@@ -2350,11 +2372,11 @@ export class CreateComponent implements OnInit {
   setDeragAndDropPercent(e, id, event?: CdkDragEnd) {
     console.log(event);
     this.setDragAndDropPossition(id);
-    if ( event === undefined ) {
-        console.log('no event');
+    if (event === undefined) {
+      console.log('no event');
     } else {
       console.log('event');
-      if ( this.dragAndDropAssumptions(event) ) {
+      if (this.dragAndDropAssumptions(event)) {
         this.staticTransformX.push(1);
         this.staticTransformY.push(1);
         this.setDragAndDropPossition(id);
@@ -2368,11 +2390,11 @@ export class CreateComponent implements OnInit {
     event.source.element.nativeElement.style.transform = 'none';
     const source: any = event.source;
     source._passiveTransform = { x: 0, y: 0 };
-    console.log('drag and drop: ' + source._passiveTransform.x + ' : ' + source._passiveTransform.y  );
+    console.log('drag and drop: ' + source._passiveTransform.x + ' : ' + source._passiveTransform.y);
   }
   dragAndDropAssumptions(event: CdkDragEnd) {
     let id = 'toPdf100';
-    if ( this.landscape === 'inline-block' ) {
+    if (this.landscape === 'inline-block') {
       id = 'toPdf100Landscape';
     }
     const leftDaD = event.source.element.nativeElement.getBoundingClientRect().left;
@@ -2383,7 +2405,7 @@ export class CreateComponent implements OnInit {
     const topPdf100 = document.getElementById(id).getBoundingClientRect().top;
     const botDaD = event.source.element.nativeElement.getBoundingClientRect().bottom;
     const botPdf100 = document.getElementById(id).getBoundingClientRect().bottom;
-    if ( ( rightDaD < leftPdf100 ) || ( leftDaD > rightPdf100 ) || ( botDaD < topPdf100 ) || (topDaD > botPdf100 ) ) {
+    if ((rightDaD < leftPdf100) || (leftDaD > rightPdf100) || (botDaD < topPdf100) || (topDaD > botPdf100)) {
       this.dragEnd(event);
       return true;
     } else {
@@ -2394,7 +2416,7 @@ export class CreateComponent implements OnInit {
   setDragAndDropPossition(id) {
     let width = document.getElementById('imgToChange22' + id).getBoundingClientRect().left;
     let height = document.getElementById('imgToChange22' + id).getBoundingClientRect().top;
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       width = document.getElementById('imgToChange44' + id).getBoundingClientRect().left;
       width = width - document.getElementById('toPdf100Landscape').getBoundingClientRect().left;
       this.staticTransformX[id] = width;
@@ -2404,17 +2426,17 @@ export class CreateComponent implements OnInit {
       this.staticTransformX[id] = width;
       width = (width / document.getElementById('toPdf100').getBoundingClientRect().width) * 100;
     }
-    if ( (this.landscape === 'inline-block') ) {
+    if ((this.landscape === 'inline-block')) {
       height = document.getElementById('imgToChange44' + id).getBoundingClientRect().top;
       height = height - document.getElementById('toPdf100Landscape').getBoundingClientRect().top;
       this.staticTransformY[id] = height;
-      height = (height / document.getElementById('toPdf100Landscape').getBoundingClientRect().height) *  100;
+      height = (height / document.getElementById('toPdf100Landscape').getBoundingClientRect().height) * 100;
     } else {
       height = height - document.getElementById('toPdf100').getBoundingClientRect().top;
       this.staticTransformY[id] = height;
-      height = (height / document.getElementById('toPdf100').getBoundingClientRect().height) *  100;
+      height = (height / document.getElementById('toPdf100').getBoundingClientRect().height) * 100;
     }
-    console.log(this.staticTransformX[id] + ' : ' +  this.staticTransformY[id]);
+    console.log(this.staticTransformX[id] + ' : ' + this.staticTransformY[id]);
     console.log('w: ' + width + ', h: ' + height);
     this.imgWidthDragAndDrop[id] = width;
     this.imgHeightDragAndDrop[id] = height;
@@ -2424,22 +2446,22 @@ export class CreateComponent implements OnInit {
   chceckDrop(id, name, e) {
     console.log(e);
     let width = e.pageX;
-    let height = e.pageY -  window.scrollY;
-    if ( navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ) {
+    let height = e.pageY - window.scrollY;
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
       console.log('firefox');
       const windowH = window.outerHeight - window.innerHeight;
       const windowW = window.outerWidth - window.innerWidth;
       console.log('windowW: ' + windowW);
-      console.log('screenX: ' +  window.screenX);
-      width = e.screenX - windowW  - window.screenX;
+      console.log('screenX: ' + window.screenX);
+      width = e.screenX - windowW - window.screenX;
       height = e.screenY - windowH;
     }
     console.log('X: ' + width);
     console.log('Y: ' + height);
     console.log('left: ' + document.getElementById('toPdf100').getBoundingClientRect().left);
     console.log('top: ' + document.getElementById('toPdf100').getBoundingClientRect().top);
-    if ( this.landscape === 'none' ) {
-      if ( width >  document.getElementById('toPdf100').getBoundingClientRect().left &&
+    if (this.landscape === 'none') {
+      if (width > document.getElementById('toPdf100').getBoundingClientRect().left &&
         (height > document.getElementById('toPdf100').getBoundingClientRect().top)) {
         console.log('width: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[1]);
         console.log('height: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100')[0]);
@@ -2451,7 +2473,7 @@ export class CreateComponent implements OnInit {
         console.log('exit code -1');
       }
     } else {
-      if ( (width >  document.getElementById('toPdf100Landscape').getBoundingClientRect().left)  &&
+      if ((width > document.getElementById('toPdf100Landscape').getBoundingClientRect().left) &&
         (height > document.getElementById('toPdf100Landscape').getBoundingClientRect().top) &&
         (height < document.getElementById('toPdf100Landscape').getBoundingClientRect().bottom)) {
         console.log('width: ' + this.setDragAndDropHeightAndWidthArray(width, height, 'toPdf100Landscape')[1]);
