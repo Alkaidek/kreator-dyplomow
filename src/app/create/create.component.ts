@@ -310,7 +310,25 @@ export class CreateComponent implements OnInit {
       this.addScrollListener();
       this.setPaddingAnchor();
       this.setTxtAlignWithoutPossitionChange(this.txtAlign[this.currentTxt]);
+      this.setBaseCoordinates();
     }, 300);
+  }
+  setBaseCoordinates() {
+    let n = 5;
+    if (this.landscape === 'inline-block') {
+      n = 38;
+    }
+    this.paddingTop = Number(coordinates[n][0]);
+    this.paddingTopForWho = Number(coordinates[n][0]) + 10;
+    this.paddingTopForWhat = Number(coordinates[n][0]) + 20;
+    this.marginLeft[3] = coordinates[n][1];
+    this.marginRight[3] = coordinates[n][2];
+    this.bottom = coordinates[n][3];
+    if (this.landscape === 'inline-block') {
+      this.paddingTopFooter = coordinates[n][3] - 15;
+    } else {
+      this.paddingTopFooter = coordinates[n][3] - 7;
+    }
   }
   setPaddingAnchor() {
     setTimeout( () => {
@@ -854,6 +872,7 @@ export class CreateComponent implements OnInit {
     this.txtFontFamili = ['Open Sans'];
     this.txtFontFamiliText = '';
     this.imgSrcFrame = '../../assets/img/0.png';
+    this.setBaseCoordinates();
   }
   /*obsługa karuzeli z tłami, 'przejscie w lewo'*/
   moveLeft() {
@@ -1068,6 +1087,7 @@ export class CreateComponent implements OnInit {
       this.createFramesArray(this.frame2, this.frame1);
       this.bottom = 14;
       this.paddingTopFooter = -1;
+      this.setBaseCoordinates();
       setTimeout( () => {
         const width = document.getElementById('toPdf100Landscape').offsetHeight;
         console.log(': ' + ( 794 / width) );
@@ -1400,6 +1420,7 @@ export class CreateComponent implements OnInit {
     document.getElementById('frm' + (this.lastValueFrame ) ).style.webkitTransform = 'scale(0.8,0.8)';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.border = 'white 1px solid';
     document.getElementById('frm' + (this.lastValueFrame ) ).style.boxShadow = ' 0px 0px rgba(0, 0, 15, 0.2)';
+    this.setBaseCoordinates();
   }
   /*funkcja uzupełnia tablice odpowienimi danymi, tworząc dodatkowe pole tekstowe*/
   addTxt() {
