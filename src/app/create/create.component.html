@@ -1,5 +1,5 @@
 <div class="curtain">
-  <img src="../../assets/img/macLogo2.png"/>
+  <img src="../../assets/img/mac_hi.png"/>
   <!--<br/>
   <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
@@ -66,10 +66,10 @@
            [style.height]="imgHeight[usr]+'%'"
            style="background-size: cover; position: absolute; z-index: 1;"
            [style.left]="imgWidthDragAndDrop[usr]+'%'"
+           [style.transform]="'rotate('+rotate[usr]+'deg)'"
            [style.top]="imgHeightDragAndDrop[usr]+'%'"
            >
         <img class="userImg"
-             [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
         />
       </div>
@@ -217,9 +217,9 @@
            style="background-size: cover; position: absolute; z-index: 1;"
            [style.left]="imgWidthDragAndDrop[usr]+'%'"
            [style.top]="imgHeightDragAndDrop[usr]+'%'"
+           [style.transform]="'rotate('+rotate[usr]+'deg)'"
            >
         <img class="userImg"
-             [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
         />
       </div>
@@ -357,11 +357,12 @@
 
 <div id="logoBox" class="logoBox" style="">
   <a href="https://www.mac.pl/">
-    <img id="MAClogo" src="../../assets/img/macl.png"
-         style="width: 11vh; height: 8vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left"/>
+    <img id="MAClogo" src="../../assets/img/macLogoBiale.png"
+         style="width: 7vh; margin-left: 0.5vh; margin-top: 0.5vh; height: 7vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left"/>
   </a>
-  <span class="logoText">K</span><span class="logoText">R</span><span class="logoText">E</span><span
-  class="logoText">A</span><span class="logoText">T</span><span class="logoText">O</span><span class="logoText">R</span>
+  <span class="logoText">G</span><span class="logoText">E</span><span class="logoText">N</span><span
+  class="logoText">E</span><span class="logoText">R</span><span class="logoText">A</span><span class="logoText">T</span>
+  <span class="logoText">O</span><span class="logoText">R</span>
   <span style='margin-left: 20px'></span>
   <span class="logoText">D</span><span class="logoText">Y</span><span class="logoText">P</span><span
   class="logoText">L</span><span class="logoText">O</span><span class="logoText">M</span><span class="logoText">Ó</span><span
@@ -434,10 +435,22 @@
       <br/>
     </div>
     <div class="box33editorBorder"
-         style="height: 110px; width:25% /*border-right: 1px solid #f2f2f2*/">
+         style="height: 110px; width:33% /*border-right: 1px solid #f2f2f2*/">
+         <p></p>
+         <button mat-button
+                  color="primary"
+                  class="fadeInLeft"
+                  [disabled]="boolDisableUserImgFields"
+                  (click)="resetImg()"
+                  style="width: 60%">
+            <i class="material-icons">
+              image
+            </i>
+            {{createComponentStrings.a74}}
+          </button>
     </div>
     <div class="box33editorBorder"
-         style="height: 110px; width:50% /*border-right: 1px solid #f2f2f2*/">
+         style="height: 110px; width:34% /*border-right: 1px solid #f2f2f2*/">
       <p style="/*float: left; */ padding-left: 5px"><b>{{createComponentStrings.a73}}</b></p>
       <input type="range"
              id="inputImgRotate"
@@ -451,7 +464,21 @@
              step="45"> <br/>
     </div>
     <div class="box33editorBorder"
-         style="height: 110px; width:25%">
+         style="height: 110px; width:33%">
+         <p></p>
+         <button id="rmvImg"
+                  mat-button
+                  color="warn"
+                  class="fadeInLeft"
+                  [disabled]="boolDisableUserImgFields"
+                  (click)="removeImg()"
+                  style="width: 60%"
+                  disabled>
+            <i class="material-icons">
+              remove
+            </i>
+            {{createComponentStrings.a75}}
+          </button>
     </div>
   </div>
 
@@ -778,7 +805,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
-                 style="height: 490px">
+                 style="height: 450px">
               <div class="leftCont">
                 <!--<p><b class="fadeInLeft">Nazwa: </b></p>
                  0
@@ -791,7 +818,7 @@
                          (blur)="checkWidthWithCenter(0)">
                 </mat-form-field>
                 <p class="fadeInTop"
-                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                   style="margin-bottom: 0vh; margin-top:1.5vh"
                 >
                   {{createComponentStrings.a25}}</p>
                 <!--<input type="range" min="0.1" max="9" [value]="arrayFontSize[0]" (input)="arrayFontSize[0] = $event.target.value" class="sliderInput" step="0.1" (click)="setPadding()" id="card00">
@@ -808,7 +835,7 @@
                        (click)="checkWidthWithCenter(0)"
                        (change)="checkWidthWithCenter(0)">
                 <p class="fadeInTop"
-                   style="margin-bottom: 0.6vh; margin-top:1.5vh"
+                   style="margin-bottom: 0vh; margin-top:1.5vh"
                 >
                   {{createComponentStrings.a26}}</p>
                 <input type="color"
@@ -991,7 +1018,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
-                 style="height: 520px">
+                 style="height: 480px">
               <div class="leftCont ">
                 <!--<p><b class="fadeInLeft">Dla kogo: </b></p>
                2
@@ -1006,7 +1033,7 @@
 
                   </textarea>
                 </mat-form-field>
-                <p class="fadeInTop txtMargin"
+                <p class="fadeInTop txtMargin0"
                    style="margin-top: 10px">
                   {{createComponentStrings.a25}}
                 </p>
@@ -1025,7 +1052,7 @@
                        step="0.01"
                        class="slider50 fadeInLeft "
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop txtMargin">{{createComponentStrings.a26}}</p>
+                <p class="fadeInTop txtMargin0">{{createComponentStrings.a26}}</p>
                 <input type="color"
                        [value]="arrayFontColor[2]"
                        (input)="arrayFontColor[2] = $event.target.value"
@@ -1053,7 +1080,7 @@
                   </i>
                   {{createComponentStrings.a28}}
                 </button>
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a29}}
                 </p>
                 <input type="color"
@@ -1209,7 +1236,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="dataContainer"
-                 style="height: 520px">
+                 style="height: 480px">
               <div class="leftCont ">
                 <!-- <p><b class="fadeInLeft">Za co:</b></p>
                  4
@@ -1223,7 +1250,7 @@
                             placeholder="Za co">
                   </textarea>
                 </mat-form-field>
-                <p class="fadeInTop txtMargin"
+                <p class="fadeInTop txtMargin0"
                 >
                   {{createComponentStrings.a25}}
                 </p>
@@ -1240,7 +1267,7 @@
                        step="0.01"
                        class="slider50 fadeInLeft"
                        style="width: 80%; margin-left: 0%">
-                <p class="fadeInTop txtMargin">
+                <p class="fadeInTop txtMargin0">
                   {{createComponentStrings.a26}}
                 </p>
                 <input type="color"
@@ -1405,7 +1432,7 @@
                 {{createComponentStrings.a24}}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="dataContainer" style="height: 670px">
+            <div class="dataContainer" style="height: 640px">
               <div class="leftCont ">
                 <!--<p><b class="fadeInLeft">Podpisy:</b></p>
                  1
@@ -1474,7 +1501,6 @@
                 <button mat-button color="accent"
                         (click)="shadowOnOff(0, 1)"
                         style="margin-top: -10px">
-                >
                   <i class="material-icons">
                     highlight
                   </i>
@@ -1583,7 +1609,7 @@
             </mat-expansion-panel-header>
 
             <div class="dataContainer"
-                 style="height: 490px">
+                 style="height: 470px">
               <div class="leftCont">
                 <!--  <p><b class="fadeInLeft">Stopka</b></p>
                 3
@@ -1783,7 +1809,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
               <div class="dataContainer"
-                   style="height: 590px; background-color: white; text-align: center; padding-top: 0vh">
+                   style="height: 500px; background-color: white; text-align: center; padding-top: 0vh">
                 <div class="leftCont"
                      style="background-color: white;
              height: 510px">
@@ -2534,6 +2560,7 @@
                    >
                 <img id="imgZwierzeta{{i}}"
                      src="{{tmp}}.jpg"
+                     class="dragCursor"
                      style="background-color: white"
                 (dragend)="chceckDrop(i, 'Zwierzeta', $event)"/>
               </div>
@@ -2577,50 +2604,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
-          <button mat-button
-                  color="primary"
-                  class="fadeInLeft"
-                  [disabled]="boolDisableUserImgFields"
-                  (click)="resetImg()"
-                  style="width: 60%">
-            <i class="material-icons">
-              image
-            </i>
-            {{createComponentStrings.a74}}
-          </button>
-          <br/><br/>
-        </div>
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
-          <button id="rmvImg"
-                  mat-button
-                  color="warn"
-                  class="fadeInLeft"
-                  [disabled]="boolDisableUserImgFields"
-                  (click)="removeImg()"
-                  style="width: 60%"
-                  disabled>
-            <i class="material-icons">
-              remove
-            </i>
-            {{createComponentStrings.a75}}
-          </button>
-        </div>
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
-          <button mat-button
-                  color="primary"
-                  class="fadeInRight"
-                  [disabled]="boolDisableUserImgFields"
-                  (click)="set0degress()"
-                  style="margin-bottom: 15px; width: 60%">
-            <i class="material-icons">
-              crop_rotate
-            </i>
-            {{createComponentStrings.a76}}
-          </button>
-          <br/>
-        </div>
       </div>
 
       <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
@@ -2658,7 +2641,9 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
+           [style.transform]="'rotate('+rotate[usr]+'deg)'"
            (cdkDragEnded)="setDeragAndDropPercent('imgToChange22' + usr, usr, $event)"
+           (mousedown)="set0degressByID(usr)"
            cdkDrag>
        <!-- <div class="example-handle" cdkDragHandle >
           <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
@@ -2669,7 +2654,6 @@
         <img class="userImg"
              style="z-index: 1"
              id="imgToChange2{{usr}}"
-             [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions(); spinnerOff()"
              />
@@ -2834,12 +2818,13 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
+           [style.transform]="'rotate('+rotate[usr]+'deg)'"
            (cdkDragEnded)="setDeragAndDropPercent('imgToChange44' + usr, usr, $event)"
+           (mousedown)="set0degressByID(usr)"
            cdkDrag>
         <img class="userImg"
              style="z-index: 1"
              id="imgToChange4{{usr}}"
-             [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions(); spinnerOff()"
         />

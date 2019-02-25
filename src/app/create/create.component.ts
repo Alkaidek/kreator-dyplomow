@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
   percentHeight = [80, 80, 80];
   userImgBase64 = [];
   userTxt = ['\n'];
-  imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+  imgMAClogoFrame = '../../assets/img/macLogo2.png';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   bcgTemp = [];
@@ -147,7 +147,7 @@ export class CreateComponent implements OnInit {
       });*/
   }
   editBoxShow = 'none';
-  MACblue = '#25408f';
+  MACblue = '#0054a3';
   whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 80;
@@ -249,8 +249,9 @@ export class CreateComponent implements OnInit {
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if (window.scrollY > 50) {
-      imgMAClogo.style.width = '6.875vh';
-      imgMAClogo.style.height = '5vh';
+      imgMAClogo.style.width = '4.5vh';
+      imgMAClogo.style.height = '4.5vh';
+      imgMAClogo.style.marginTop = '0.3vh';
       document.getElementById('logoBox').style.height = '5vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '5vh';
@@ -268,8 +269,6 @@ export class CreateComponent implements OnInit {
       }
     }
     if (window.scrollY === 0) {
-      imgMAClogo.style.width = '11vh';
-      imgMAClogo.style.height = '8vh';
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
@@ -277,6 +276,9 @@ export class CreateComponent implements OnInit {
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '8vh';
       const buttonStepper = document.getElementsByClassName('directButtonContainter');
+      imgMAClogo.style.width = '7vh';
+      imgMAClogo.style.height = '7vh';
+      imgMAClogo.style.marginTop = '0.5vh';
       for (let i = 0; i < buttonStepper.length; i++) {
         const element = buttonStepper[i] as HTMLElement;
         element.style.top = '10vh';
@@ -697,12 +699,12 @@ export class CreateComponent implements OnInit {
         this.imgSrcFix = '../../assets/img/0.png';
       } else {
         const element = template.img;
-        /*this.imgSrcFix = template.img.replace('png', 'jpg' );*/
+        this.imgSrcFix = template.img.replace('png', 'jpg' );
         this.bcgBtnDisable = false;
         this.bcgColor = '#ffffff';
         this.bcgColorDisabled = true;
         for (let i = 0; i < this.bcgTemp.length; i++) {
-          if (element === this.bcgTemp[i] /*+ '.png'*/) {
+          if (element === this.bcgTemp[i] + '.png') {
             this.downgradeBcg(this.lastValue);
             this.highlightBcg(i);
             for (let h = 0; h < Math.floor(i / 3); h++) {
@@ -795,7 +797,7 @@ export class CreateComponent implements OnInit {
     this.frmBtnDisable = true;
     this.boolDisableUserImgFields = true;
     this.hidebox = true;
-    this.imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+    this.imgMAClogoFrame = '../../assets/img/macLogo2.png';
     this.letterSpacing = 0;
     this.letterSpacingForWho = 0;
     this.bcgColor = '#ffffff';
@@ -2168,15 +2170,15 @@ export class CreateComponent implements OnInit {
       console.log(n);
       if (i === n) {
         if (this.landscape === 'none') {
-          document.getElementById('imgToChange22' + i).style.border = '2px solid red';
+          document.getElementById('imgToChange2' + i).style.border = '2px solid red';
         } else {
-          document.getElementById('imgToChange44' + i).style.border = '2px solid red';
+          document.getElementById('imgToChange4' + i).style.border = '2px solid red';
         }
       } else {
         if (this.landscape === 'none') {
-          document.getElementById('imgToChange22' + i).style.border = 'none';
+          document.getElementById('imgToChange2' + i).style.border = 'none';
         } else {
-          document.getElementById('imgToChange44' + i).style.border = 'none';
+          document.getElementById('imgToChange4' + i).style.border = 'none';
         }
       }
     }
@@ -2357,6 +2359,9 @@ export class CreateComponent implements OnInit {
       document.getElementById(id2 + i).style.zIndex = '25';
     }
   }
+  set0degressByID(ID) {
+    this.rotate[ID] = 0;
+  }
   changeZindexDown() {
     let id = 'imgToChange22';
     let id2 = 'imgToChange2';
@@ -2370,6 +2375,7 @@ export class CreateComponent implements OnInit {
     }
   }
   setDeragAndDropPercent(e, id, event?: CdkDragEnd) {
+    this.rotate[this.currImg] = 0;
     console.log(event);
     this.setDragAndDropPossition(id);
     if (event === undefined) {

@@ -1,5 +1,5 @@
 <div class="curtain">
-  <img src="../../assets/img/macLogo2.png"/>
+  <img src="../../assets/img/mac_hi.png"/>
   <!--<br/>
   <span>K</span><span>R</span><span>E</span><span>A</span><span>T</span><span>O</span><span>R</span>
   <span style='margin-left: 20px'></span>
@@ -206,11 +206,12 @@
 
 <div id="logoBox" class="logoBox" style="">
   <a href="https://www.mac.pl/">
-    <img id="MAClogo" src="../../assets/img/macl.png"
-         style="width: 11vh; height: 8vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left"/>
+    <img id="MAClogo" src="../../assets/img/macLogoBiale.png"
+    style="width: 7vh; margin-left: 0.5vh; margin-top: 0.5vh; height: 7vh; z-index: 15; left: 7px; transition: all linear 0.3s; float: left"/>
   </a>
-  <span class="logoText">K</span><span class="logoText">R</span><span class="logoText">E</span><span
-  class="logoText">A</span><span class="logoText">T</span><span class="logoText">O</span><span class="logoText">R</span>
+  <span class="logoText">G</span><span class="logoText">E</span><span class="logoText">N</span><span
+  class="logoText">E</span><span class="logoText">R</span><span class="logoText">A</span><span class="logoText">T</span>
+  <span class="logoText">O</span><span class="logoText">R</span>
   <span style='margin-left: 20px'></span>
   <span class="logoText">D</span><span class="logoText">Y</span><span class="logoText">P</span><span
   class="logoText">L</span><span class="logoText">O</span><span class="logoText">M</span><span class="logoText">Ó</span><span
@@ -283,6 +284,18 @@
     </div>
     <div class="box33editorBorder"
          style="height: 110px; width:25% /*border-right: 1px solid #f2f2f2*/">
+         <p></p>
+         <button mat-button
+                color="primary"
+                class="fadeInLeft"
+                [disabled]="boolDisableUserImgFields"
+                (click)="resetImg()"
+                style="width: 60%">
+          <i class="material-icons">
+            image
+          </i>
+          {{templateComponentStrings.a63}}
+        </button>
     </div>
     <div class="box33editorBorder"
          style="height: 110px; width:50% /*border-right: 1px solid #f2f2f2*/">
@@ -300,6 +313,20 @@
     </div>
     <div class="box33editorBorder"
          style="height: 110px; width:25%">
+         <p></p>
+         <button id="rmvImg"
+                mat-button
+                color="warn"
+                class="fadeInLeft"
+                [disabled]="boolDisableUserImgFields"
+                (click)="removeImg()"
+                style="width: 60%"
+                disabled>
+          <i class="material-icons">
+            remove
+          </i>
+          {{templateComponentStrings.a64}}
+        </button>
     </div>
   </div>
 
@@ -1217,7 +1244,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
+        <!-- <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button
                   color="primary"
                   class="fadeInLeft"
@@ -1245,8 +1272,8 @@
             </i>
             {{templateComponentStrings.a64}}
           </button>
-        </div>
-        <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
+        </div> -->
+        <!-- <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block">
           <button mat-button
                   color="primary"
                   class="fadeInRight"
@@ -1259,7 +1286,7 @@
             {{templateComponentStrings.a65}}
           </button>
           <br/>
-        </div>
+        </div> -->
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
         </div>
         <div class="box33border" style="height: 100px; padding-top: 27px; display: inline-block; width: 100%; background-color: #f2f2f2">
@@ -1291,12 +1318,13 @@
            style="background-size: cover; position: absolute; z-index: 5"
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
+           [style.transform]="'rotate('+rotate[usr]+'deg)'"
            (cdkDragEnded)="setDeragAndDropPercent('imgToChange22' + usr, usr, $event)"
+           (mousedown)="set0degressByID(usr)"
            cdkDrag>
         <img class="userImg"
              style="z-index: 1"
              id="imgToChange2{{usr}}"
-             [style.transform]="'rotate('+rotate[usr]+'deg)'"
              src="{{userImgBase64[i]}}"
              (load)="chcekProportions(); spinnerOff()"
         />
@@ -1383,6 +1411,7 @@
            [style.left]="imgLeft[usr]+'%'"
            [style.top]="imgTop[usr]+'%'"
            (cdkDragEnded)="setDeragAndDropPercent('imgToChange44' + usr, usr, $event)"
+           (mousedown)="set0degressByID(usr)"
            cdkDrag>
         <img class="userImg"
              style="z-index: 1"

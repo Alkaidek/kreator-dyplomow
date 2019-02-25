@@ -26,7 +26,7 @@ export class TemplateTypeComponent implements OnInit {
   percentHeight = [80, 80, 80];
   userImgBase64 = [];
   userTxt = [];
-  imgMAClogoFrame = '../../assets/img/MAClogoFrame.jpg';
+  imgMAClogoFrame = '../../assets/img/macLogo2.png';
   currImg = -1;
   bcgDisplay = ['block', 'block', 'block', 'block'];
   template: any;
@@ -109,7 +109,7 @@ export class TemplateTypeComponent implements OnInit {
     this.literaturaHeight = this.setHeightElement(this.imagesLiteratura);
   }
   editBoxShow = 'none';
-  MACblue = '#25408f';
+  MACblue = '#0054a3';
   whiteColor = 'white';
   maxWidthUserTxtFieldTop = 80;
   maxWidthUserTxtFieldRight = 30;
@@ -201,8 +201,9 @@ export class TemplateTypeComponent implements OnInit {
   scroll = (): void => {
     const imgMAClogo = document.getElementById('MAClogo') as HTMLImageElement;
     if ( window.scrollY > 50 ) {
-      imgMAClogo.style.width = '6.875vh';
-      imgMAClogo.style.height = '5vh';
+      imgMAClogo.style.width = '4.5vh';
+      imgMAClogo.style.height = '4.5vh';
+      imgMAClogo.style.marginTop = '0.3vh';
       document.getElementById('logoBox').style.height = '5vh';
       const stepper = document.querySelector('.mat-horizontal-stepper-header-container') as HTMLElement;
       stepper.style.top = '5vh' ;
@@ -220,8 +221,9 @@ export class TemplateTypeComponent implements OnInit {
       }
     }
     if ( window.scrollY === 0 ) {
-      imgMAClogo.style.width = '11vh';
-      imgMAClogo.style.height = '8vh';
+      imgMAClogo.style.width = '7vh';
+      imgMAClogo.style.height = '7vh';
+      imgMAClogo.style.marginTop = '0.5vh';
       document.getElementById('logoBox').style.height = '8vh';
       document.getElementById('logoBox').style.fontSize = '2vh';
       document.getElementById('logoBox').style.paddingTop = '0vh';
@@ -474,6 +476,9 @@ export class TemplateTypeComponent implements OnInit {
   }
   set0degress() {
     this.rotate[this.currImg] = 0;
+  }
+  set0degressByID(ID) {
+    this.rotate[ID] = 0;
   }
   resetImg() {
     this.rotate[this.currImg] = 0;
